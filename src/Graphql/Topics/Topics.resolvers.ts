@@ -1,0 +1,1 @@
+import { Resolver, Query, Mutation } from 'type-graphql';
