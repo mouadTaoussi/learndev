@@ -1,4 +1,5 @@
-import { UserModel } from './Authentication.models'
+import { UserModel } from './Authentication.models';
+import { UserBody, UserUpdate } from './Authentication.typedefinitions';
 
 class UserService implements UserService {
 
@@ -16,11 +17,11 @@ class UserService implements UserService {
 			status : 500, saved : false, message  : 'something went wrong! Try again.', user : null }
 		}
 	}
-	public async findUser(options : {id:string | undefined, email:string | undefined})
+	public async findUser(options : {id:string | undefined, email:string | undefined, at_provider_id: string | undefined})
 	:Promise<{status:number, found:boolean, message:string | null, user:any}> 
 	{
 		try {
-			if (options.id == undefined && options.email != undefined) {
+			if (options.id == undefined && options.email != undefined && options.at_provider_id == undefined) {
 
 				const user = await UserModel.findOne({email: options.email});
 
@@ -30,7 +31,7 @@ class UserService implements UserService {
 				return {
 				status : 200, found : true, message: null, user  : user }
 			}
-			else if (options.id != undefined && options.email == undefined) {
+			else if (options.id != undefined && options.email == undefined && options.at_provider_id == undefined) {
 
 				const user = await UserModel.findById(options.id);
 
@@ -40,7 +41,17 @@ class UserService implements UserService {
 				return {
 				status : 200, found : true, message: null, user  : user }
 			}
-			else if (options.id == undefined && options.email == undefined) {
+			else if (options.id == undefined && options.email == undefined && options.at_provider_id != undefined) {
+
+				const user = await UserModel.findOne({at_provider_id : options.at_provider_id});
+
+				if (user == null ) return {
+				status : 404, found : false, message : "user doesn't exists!", user: null };
+
+				return {
+				status : 200, found : true, message: null, user  : user }
+			}
+			else if (options.id == undefined && options.email == undefined && options.at_provider_id == undefined) {
 				// Get all users
 				const users = await UserModel.find();
 

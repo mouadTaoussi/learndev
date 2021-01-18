@@ -10,7 +10,8 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from "type-graphql";
 // Import resolvers
 import main_config from './main.config';
-// import {} from '';
+import AuthenticationRoutes from './Authentication/Authentication.routes';
+import './Authentication/Authentication.strategies';
 
 const app : Application = express();
 
@@ -42,7 +43,7 @@ async function runapp (){
 
 	// Ïnit passport app and routes
 	passport.initialize();
-	app.use('/auth',Authentication)
+	app.use('/auth', AuthenticationRoutes)
 }
 runapp();
 
