@@ -14,17 +14,17 @@ const TopicSchema = new Schema({
 });
 
 const DocsSchema = new Schema({
-// get metadata about the link in meta tags (image - title )
+// get metadata about the link in meta tags ( image - title )
 	user_id	 : {
 		type : String, required: true
 	},
 	topic_id : {
 		type : String, required: true
 	},
-	title : {
+	docs_title : {
 		type : String, required: true
 	},
-	link  : {
+	docs_link  : {
 		type : String, required: true
 	},
 
@@ -32,34 +32,34 @@ const DocsSchema = new Schema({
 });
 
 const CourseSchema = new Schema({
-// get metadata about the link in meta tags (image - title )
+// get metadata about the link in meta tags ( image - title )
 	user_id	 : {
 		type : String, required: true
 	},
 	topic_id : {
 		type : String, required: true
 	},
-	title : {
+	course_title : {
 		type : String, required: true
 	},
-	link  : {
+	course_link : {
 		type : String, required: true
 	},
 
 });
 
 const ArticleSchema = new Schema({
-// get metadata about the link in meta tags (image - title )
+// get metadata about the link in meta tags ( image - title )
 	user_id	 : {
 		type : String, required: true
 	},
 	topic_id : {
 		type : String, required: true
 	},
-	title : {
+	article_title : {
 		type : String, required: true
 	},
-	link  : {
+	article_link  : {
 		type : String, required: true
 	},
 
@@ -72,7 +72,7 @@ const ProjectIdeaSchema = new Schema({
 	topic_id: {
 		type : String, required: true
 	},
-	title : {
+	project_idea_title : {
 		type : String, required: true
 	}, 
 	description : {
@@ -82,10 +82,10 @@ const ProjectIdeaSchema = new Schema({
 
 // docs- courses- articles- projects ideas
 
-const TopicModel       = model('topics',TopicSchema);
-const DocsModel        = model('docs',DocsSchema);
-const CourseModel      = model('courses',CourseSchema);
-const ArticleModel     = model('articles',ArticleSchema);
-const ProjectIdeaModel = model('projectideas',ProjectIdeaSchema);
+const TopicModel       = model('topics',       TopicSchema);
+const DocsModel        = model('docs',         DocsSchema);
+const CourseModel      = model('courses',      CourseSchema);
+const ArticleModel     = model('articles',     ArticleSchema);
+const ProjectIdeaModel = model('projectideas', ProjectIdeaSchema);
 
-export { TopicModel };
+export { TopicModel, DocsModel, CourseModel, ArticleModel, ProjectIdeaModel };

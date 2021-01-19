@@ -23,7 +23,7 @@ const UserSchema = new Schema({
 	password : {
 		type: String, required: false
 	}
-})
+});
 
 
 const UserModel = model('users', UserSchema);

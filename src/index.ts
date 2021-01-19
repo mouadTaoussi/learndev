@@ -15,7 +15,6 @@ import './Authentication/Authentication.strategies';
 
 const app : Application = express();
 
-
 async function runapp (){
 	// create the connection to the mongodb
 	connect(main_config.mongodb,
