@@ -2,7 +2,7 @@ import { Request,Response, Router } from "express";
 import passport from 'passport';
 const router = Router();
 
-router.get('/login',(req,res)=>{
+router.get('/login',(req: Request,res: Response)=>{
 	res.send('Hello World');
 });
 router.get('/register');

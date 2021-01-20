@@ -12,6 +12,9 @@ import { buildSchema } from "type-graphql";
 import main_config from './main.config';
 import AuthenticationRoutes from './Authentication/Authentication.routes';
 import './Authentication/Authentication.strategies';
+import { 
+	topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver 
+} from './Graphql/Topics/Topics.resolvers';
 
 const app : Application = express();
 
@@ -27,14 +30,13 @@ async function runapp (){
 		}
 	});
 	// Run apollo server 
-	// const apollo = new ApolloServer({
-	// 	schema : await buildSchema({
-	// 		// resolvers : [1,2],
-	// 		// context: ({ req, res }) => ({ req, res }),
-	// 		// playground : true
-	// 	})
-		
-	// })
+	const apollo = new ApolloServer({
+		schema : await buildSchema({
+			resolvers : [topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver],
+		}),
+		context: ({ req, res }) => ({ req, res }),
+		playground : true
+	})
 
 	// Init body parser and helmet 
 	app.use(helmet());
