@@ -97,8 +97,6 @@ class TopicInput {
 	@Field( type => String )
 	topic_title : string;
 
-	@Field( type => String )
-	background_image : string;
 }
 
 @InputType()

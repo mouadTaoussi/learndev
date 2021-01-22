@@ -7,7 +7,7 @@ import passport from "passport";
 import { connect } from "mongoose";
 import "reflect-metadata";
 import { ApolloServer } from 'apollo-server-express';
-import { buildSchema } from "type-graphql";
+import { buildSchema, ResolverData } from "type-graphql";
 // Import resolvers
 import main_config from './main.config';
 import AuthenticationRoutes from './Authentication/Authentication.routes';
@@ -33,10 +33,12 @@ async function runapp (){
 	const apollo = new ApolloServer({
 		schema : await buildSchema({
 			resolvers : [topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver],
+			globalMiddlewares: [],
 		}),
 		context: ({ req, res }) => ({ req, res }),
 		playground : true
 	})
+	apollo.applyMiddleware({ app });
 
 	// Init body parser and helmet 
 	app.use(helmet());

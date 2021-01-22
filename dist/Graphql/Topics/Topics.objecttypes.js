@@ -143,10 +143,6 @@ __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
 ], TopicInput.prototype, "topic_title", void 0);
-__decorate([
-    type_graphql_1.Field(type => String),
-    __metadata("design:type", String)
-], TopicInput.prototype, "background_image", void 0);
 TopicInput = __decorate([
     type_graphql_1.InputType()
 ], TopicInput);

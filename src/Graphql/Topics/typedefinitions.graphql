@@ -1,0 +1,88 @@
+type Article {
+  user_id: String!
+  topic_id: String!
+  article_title: String!
+  article_link: String!
+}
+
+input ArticleInput {
+  user_id: String!
+  topic_id: String!
+  article_title: String!
+  article_link: String!
+}
+
+type Course {
+  user_id: String!
+  topic_id: String!
+  course_title: String!
+  course_link: String!
+}
+
+input CourseInput {
+  user_id: String!
+  topic_id: String!
+  course_title: String!
+  course_link: String!
+}
+
+type Docs {
+  user_id: String!
+  topic_id: String!
+  docs_title: String!
+  docs_link: String!
+}
+
+input DocsInput {
+  user_id: String!
+  topic_id: String!
+  docs_title: String!
+  docs_link: String!
+}
+
+type Mutation {
+  addTopic(new_topic: TopicInput!): String!
+  deleteTopic(topic_id: String!): String!
+  addDocs(new_docs: DocsInput!): Docs!
+  deleteDocs(docs_id: String!): String!
+  addCourse(new_course: CourseInput!): Course!
+  deleteCourse(course_id: String!): String!
+  addArticle(new_article: ArticleInput!): Article!
+  deleteArticle(article_id: String!): String!
+  addProjectIdea(new_project_idea: ProjectIdeaInput!): ProjectIdea!
+  deleteProjectIdea(project_idea_id: String!): String!
+}
+
+type ProjectIdea {
+  user_id: String!
+  topic_id: String!
+  project_idea_title: String!
+  description: String!
+}
+
+input ProjectIdeaInput {
+  user_id: String!
+  topic_id: String!
+  project_idea_title: String!
+  description: String!
+}
+
+type Query {
+  getTopic(topic_id: String!): Topic!
+  getTopics: [Topic!]!
+}
+
+type Topic {
+  user_id: String!
+  topic_title: String!
+  background_image: String!
+  docs: [Docs!]!
+  courses: [Course!]!
+  articles: [Article!]!
+  ProjectIdeas: [ProjectIdea!]!
+}
+
+input TopicInput {
+  user_id: String!
+  topic_title: String!
+}

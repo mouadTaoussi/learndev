@@ -16,16 +16,36 @@ exports.projectIdeaResolver = exports.articleResolver = exports.courseResolver =
 const type_graphql_1 = require("type-graphql");
 const Topics_objecttypes_1 = require("./Topics.objecttypes");
 let topicResolver = class topicResolver {
+    async searchQuery(search_term) {
+    }
     async getTopic(topic_id) {
+        return {
+            user_id: "vffff",
+            topic_title: topic_id,
+            background_image: "string",
+            docs: [{ user_id: "mouad", topic_id: topic_id, docs_title: "get data", docs_link: "ff" }],
+            courses: [{ user_id: "mouad", topic_id: topic_id, course_title: "get data", course_link: "ff" }],
+            articles: [{ user_id: "mouad", topic_id: topic_id, article_title: "get data", article_link: "ff" }],
+            ProjectIdeas: [{ user_id: "mouad", topic_id: topic_id, project_idea_title: "get data", description: "ff" }]
+        };
     }
     async getTopics() {
     }
-    async addTopic(new_topic) {
+    async addTopic(new_topic, context) {
+        console.log(context.session);
     }
-    async deleteTopic(topic_id) {
+    async deleteTopic(topic_id, context) {
         return "Deleted Successfully!";
+        console.log(context.session);
     }
 };
+__decorate([
+    type_graphql_1.Query(returns => [Topics_objecttypes_1.Topic], { description: "This query returns the topics by the search item" }),
+    __param(0, type_graphql_1.Arg('search_term')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], topicResolver.prototype, "searchQuery", null);
 __decorate([
     type_graphql_1.Query(returns => Topics_objecttypes_1.Topic, { description: "This query returns a topic" }),
     __param(0, type_graphql_1.Arg('topic_id')),
@@ -41,16 +61,16 @@ __decorate([
 ], topicResolver.prototype, "getTopics", null);
 __decorate([
     type_graphql_1.Mutation(returns => String, { description: "This query adds new topic" }),
-    __param(0, type_graphql_1.Arg('new_topic')),
+    __param(0, type_graphql_1.Arg('new_topic')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Topics_objecttypes_1.TopicInput]),
+    __metadata("design:paramtypes", [Topics_objecttypes_1.TopicInput, Object]),
     __metadata("design:returntype", Promise)
 ], topicResolver.prototype, "addTopic", null);
 __decorate([
     type_graphql_1.Mutation(returns => String, { description: "This query deletes a topic" }),
-    __param(0, type_graphql_1.Arg('topic_id')),
+    __param(0, type_graphql_1.Arg('topic_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], topicResolver.prototype, "deleteTopic", null);
 topicResolver = __decorate([
@@ -58,24 +78,24 @@ topicResolver = __decorate([
 ], topicResolver);
 exports.topicResolver = topicResolver;
 let docsResolver = class docsResolver {
-    async addDocs(new_docs) {
+    async addDocs(new_docs, context) {
     }
-    async deleteDocs(docs_id) {
+    async deleteDocs(docs_id, context) {
         return "Deleted Successfully!";
     }
 };
 __decorate([
     type_graphql_1.Mutation(returns => Topics_objecttypes_1.Docs, { description: "This query adds new docs" }),
-    __param(0, type_graphql_1.Arg('new_docs')),
+    __param(0, type_graphql_1.Arg('new_docs')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Topics_objecttypes_1.DocsInput]),
+    __metadata("design:paramtypes", [Topics_objecttypes_1.DocsInput, Object]),
     __metadata("design:returntype", Promise)
 ], docsResolver.prototype, "addDocs", null);
 __decorate([
     type_graphql_1.Mutation(returns => String, { description: "This query deletes a docs" }),
-    __param(0, type_graphql_1.Arg('docs_id')),
+    __param(0, type_graphql_1.Arg('docs_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], docsResolver.prototype, "deleteDocs", null);
 docsResolver = __decorate([
@@ -83,24 +103,24 @@ docsResolver = __decorate([
 ], docsResolver);
 exports.docsResolver = docsResolver;
 let courseResolver = class courseResolver {
-    async addCourse(new_course) {
+    async addCourse(new_course, context) {
     }
-    async deleteCourse(course_id) {
+    async deleteCourse(course_id, context) {
         return "Deleted Successfully!";
     }
 };
 __decorate([
     type_graphql_1.Mutation(returns => Topics_objecttypes_1.Course, { description: "This query adds new course" }),
-    __param(0, type_graphql_1.Arg('new_course')),
+    __param(0, type_graphql_1.Arg('new_course')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Topics_objecttypes_1.CourseInput]),
+    __metadata("design:paramtypes", [Topics_objecttypes_1.CourseInput, Object]),
     __metadata("design:returntype", Promise)
 ], courseResolver.prototype, "addCourse", null);
 __decorate([
     type_graphql_1.Mutation(returns => String, { description: "This query deletes a course" }),
-    __param(0, type_graphql_1.Arg('course_id')),
+    __param(0, type_graphql_1.Arg('course_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], courseResolver.prototype, "deleteCourse", null);
 courseResolver = __decorate([
@@ -108,24 +128,24 @@ courseResolver = __decorate([
 ], courseResolver);
 exports.courseResolver = courseResolver;
 let articleResolver = class articleResolver {
-    async addArticle(new_article) {
+    async addArticle(new_article, context) {
     }
-    async deleteArticle(article_id) {
+    async deleteArticle(article_id, context) {
         return "Deleted Successfully!";
     }
 };
 __decorate([
     type_graphql_1.Mutation(returns => Topics_objecttypes_1.Article, { description: "This query adds new course" }),
-    __param(0, type_graphql_1.Arg('new_article')),
+    __param(0, type_graphql_1.Arg('new_article')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Topics_objecttypes_1.ArticleInput]),
+    __metadata("design:paramtypes", [Topics_objecttypes_1.ArticleInput, Object]),
     __metadata("design:returntype", Promise)
 ], articleResolver.prototype, "addArticle", null);
 __decorate([
     type_graphql_1.Mutation(returns => String, { description: "This query deletes a course" }),
-    __param(0, type_graphql_1.Arg('article_id')),
+    __param(0, type_graphql_1.Arg('article_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], articleResolver.prototype, "deleteArticle", null);
 articleResolver = __decorate([
@@ -133,24 +153,24 @@ articleResolver = __decorate([
 ], articleResolver);
 exports.articleResolver = articleResolver;
 let projectIdeaResolver = class projectIdeaResolver {
-    async addProjectIdea(new_project_idea) {
+    async addProjectIdea(new_project_idea, context) {
     }
-    async deleteProjectIdea(project_idea_id) {
+    async deleteProjectIdea(project_idea_id, context) {
         return "Deleted Successfully!";
     }
 };
 __decorate([
     type_graphql_1.Mutation(returns => Topics_objecttypes_1.ProjectIdea, { description: "This query adds new Project Idea" }),
-    __param(0, type_graphql_1.Arg('new_project_idea')),
+    __param(0, type_graphql_1.Arg('new_project_idea')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Topics_objecttypes_1.ProjectIdeaInput]),
+    __metadata("design:paramtypes", [Topics_objecttypes_1.ProjectIdeaInput, Object]),
     __metadata("design:returntype", Promise)
 ], projectIdeaResolver.prototype, "addProjectIdea", null);
 __decorate([
     type_graphql_1.Mutation(returns => String, { description: "This query deletes a Project Idea" }),
-    __param(0, type_graphql_1.Arg('project_idea_id')),
+    __param(0, type_graphql_1.Arg('project_idea_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], projectIdeaResolver.prototype, "deleteProjectIdea", null);
 projectIdeaResolver = __decorate([
