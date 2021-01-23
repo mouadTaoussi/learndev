@@ -15,6 +15,7 @@ const main_config_1 = __importDefault(require("./main.config"));
 const Authentication_routes_1 = __importDefault(require("./Authentication/Authentication.routes"));
 require("./Authentication/Authentication.strategies");
 const Topics_resolvers_1 = require("./Graphql/Topics/Topics.resolvers");
+const cookie_session_1 = __importDefault(require("cookie-session"));
 const app = express_1.default();
 async function runapp() {
     mongoose_1.connect(main_config_1.default.mongodb, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true }, (error) => {
@@ -25,6 +26,11 @@ async function runapp() {
             console.log('Database up and running!');
         }
     });
+    app.use(cookie_session_1.default({
+        keys: ["IDFVBHNIOVFFBUE"],
+        name: 'DBDIUN',
+        secret: "IDFVBHNIOVFFBUE"
+    }));
     const apollo = new apollo_server_express_1.ApolloServer({
         schema: await type_graphql_1.buildSchema({
             resolvers: [Topics_resolvers_1.topicResolver, Topics_resolvers_1.docsResolver, Topics_resolvers_1.courseResolver, Topics_resolvers_1.articleResolver, Topics_resolvers_1.projectIdeaResolver],
@@ -36,7 +42,7 @@ async function runapp() {
     apollo.applyMiddleware({ app });
     app.use(helmet_1.default());
     app.use(body_parser_1.default.json());
-    passport_1.default.initialize();
+    app.use(passport_1.default.initialize());
     app.use('/auth', Authentication_routes_1.default);
 }
 runapp();

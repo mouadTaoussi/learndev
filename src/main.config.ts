@@ -7,7 +7,10 @@ interface config {
 	email   : string,
 	pass    : string,
 	port    : string,
-	mode    : string
+	mode    : string,
+	github_public_key   : string,
+	github_private_key  : string,
+	github_callback_url : string
 }
 
 const main_config : config = {
@@ -15,7 +18,11 @@ const main_config : config = {
 	email   : process.env.EMAIL!,
 	pass    : process.env.PASS!,
 	port    : process.env.PORT_DEV!,
-	mode    : process.env.MODE!
+	mode    : process.env.MODE!,
+	github_public_key   : process.env.GITHUB_PUBLIC_KEY!,
+	github_private_key  : process.env.GITHUB_PRIVATE_KEY!,
+	github_callback_url : process.env.GITHUB_CALLBACK_URL!
+
 }
 
 export default main_config;

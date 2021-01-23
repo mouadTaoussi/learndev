@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.projectIdeaResolver = exports.articleResolver = exports.courseResolver = exports.docsResolver = exports.topicResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const Topics_objecttypes_1 = require("./Topics.objecttypes");
+const middlewares_graphql_1 = require("../middlewares.graphql");
 let topicResolver = class topicResolver {
     async searchQuery(search_term) {
     }
@@ -48,6 +49,7 @@ __decorate([
 ], topicResolver.prototype, "searchQuery", null);
 __decorate([
     type_graphql_1.Query(returns => Topics_objecttypes_1.Topic, { description: "This query returns a topic" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('topic_id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -61,6 +63,7 @@ __decorate([
 ], topicResolver.prototype, "getTopics", null);
 __decorate([
     type_graphql_1.Mutation(returns => String, { description: "This query adds new topic" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('new_topic')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Topics_objecttypes_1.TopicInput, Object]),
@@ -68,6 +71,7 @@ __decorate([
 ], topicResolver.prototype, "addTopic", null);
 __decorate([
     type_graphql_1.Mutation(returns => String, { description: "This query deletes a topic" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('topic_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
@@ -86,6 +90,7 @@ let docsResolver = class docsResolver {
 };
 __decorate([
     type_graphql_1.Mutation(returns => Topics_objecttypes_1.Docs, { description: "This query adds new docs" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('new_docs')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Topics_objecttypes_1.DocsInput, Object]),
@@ -93,6 +98,7 @@ __decorate([
 ], docsResolver.prototype, "addDocs", null);
 __decorate([
     type_graphql_1.Mutation(returns => String, { description: "This query deletes a docs" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('docs_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
@@ -111,6 +117,7 @@ let courseResolver = class courseResolver {
 };
 __decorate([
     type_graphql_1.Mutation(returns => Topics_objecttypes_1.Course, { description: "This query adds new course" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('new_course')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Topics_objecttypes_1.CourseInput, Object]),
@@ -118,6 +125,7 @@ __decorate([
 ], courseResolver.prototype, "addCourse", null);
 __decorate([
     type_graphql_1.Mutation(returns => String, { description: "This query deletes a course" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('course_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
@@ -136,6 +144,7 @@ let articleResolver = class articleResolver {
 };
 __decorate([
     type_graphql_1.Mutation(returns => Topics_objecttypes_1.Article, { description: "This query adds new course" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('new_article')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Topics_objecttypes_1.ArticleInput, Object]),
@@ -143,6 +152,7 @@ __decorate([
 ], articleResolver.prototype, "addArticle", null);
 __decorate([
     type_graphql_1.Mutation(returns => String, { description: "This query deletes a course" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('article_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
@@ -161,6 +171,7 @@ let projectIdeaResolver = class projectIdeaResolver {
 };
 __decorate([
     type_graphql_1.Mutation(returns => Topics_objecttypes_1.ProjectIdea, { description: "This query adds new Project Idea" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('new_project_idea')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Topics_objecttypes_1.ProjectIdeaInput, Object]),
@@ -168,6 +179,7 @@ __decorate([
 ], projectIdeaResolver.prototype, "addProjectIdea", null);
 __decorate([
     type_graphql_1.Mutation(returns => String, { description: "This query deletes a Project Idea" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('project_idea_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),

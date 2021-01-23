@@ -2,13 +2,14 @@ import UserService from "./Authentication.service";
 import { UserBody } from "./Authentication.typedefinitions";
 import passport from 'passport';
 import GitHubStrategy from "passport-github2";
+import config from '.././main.config';
 
 const _user = new UserService();
 
 passport.use(new GitHubStrategy({
-	clientID     : "GITHUB_CLIENT_ID",
-	clientSecret : "GITHUB_CLIENT_SECRET",
-	callbackURL  : "http://127.0.0.1:3000/auth/github/callback"
+	clientID     : config.github_public_key,
+	clientSecret : config.github_private_key,
+	callbackURL  : config.github_callback_url
 	},
 	function(accessToken:string, refreshToken:string, profile:any, done:any) {
 

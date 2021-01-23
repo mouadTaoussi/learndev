@@ -10,6 +10,9 @@ const main_config = {
     email: process.env.EMAIL,
     pass: process.env.PASS,
     port: process.env.PORT_DEV,
-    mode: process.env.MODE
+    mode: process.env.MODE,
+    github_public_key: process.env.GITHUB_PUBLIC_KEY,
+    github_private_key: process.env.GITHUB_PRIVATE_KEY,
+    github_callback_url: process.env.GITHUB_CALLBACK_URL
 };
 exports.default = main_config;

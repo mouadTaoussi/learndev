@@ -15,6 +15,7 @@ import './Authentication/Authentication.strategies';
 import { 
 	topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver 
 } from './Graphql/Topics/Topics.resolvers';
+import cookieSession from 'cookie-session';
 
 const app : Application = express();
 
@@ -29,6 +30,15 @@ async function runapp (){
 			console.log('Database up and running!');
 		}
 	});
+
+	// Init cookie cookie-session
+	app.use(cookieSession({
+		keys : ["IDFVBHNIOVFFBUE"],
+		name : 'DBDIUN',
+		secret : "IDFVBHNIOVFFBUE"
+
+	}))
+
 	// Run apollo server 
 	const apollo = new ApolloServer({
 		schema : await buildSchema({
@@ -45,7 +55,7 @@ async function runapp (){
 	app.use(bodyParser.json());
 
 	// Ïnit passport app and routes
-	passport.initialize();
+	app.use(passport.initialize());
 	app.use('/auth', AuthenticationRoutes)
 }
 runapp();
