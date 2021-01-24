@@ -12,14 +12,20 @@ passport.use(new GitHubStrategy({
 	callbackURL  : config.github_callback_url
 	},
 	function(accessToken:string, refreshToken:string, profile:any, done:any) {
-
-		const user = _user.findUser({id:undefined, email:undefined, at_provider_id:profile})
-		return done(null, user);
+		// const user = _user.findUser({id:undefined, email:undefined, at_provider_id:profile})
+		console.log(profile)
+		return done(null, {name : profile.username,  email: profile.email, at_provider_id : profile.id});
 
 	}
 ));
 
 passport.serializeUser((user, done) => {
+	console.log('serializeUser fired');
+	console.log(user)
     done(null, user)
 });
+passport.deserializeUser(function(user, done) {
+	console.log('deserializeUser Fired!');
+	console.log(user)
+})
 // export 

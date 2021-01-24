@@ -16,6 +16,7 @@ import {
 	topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver 
 } from './Graphql/Topics/Topics.resolvers';
 import cookieSession from 'cookie-session';
+import expressSession from 'express-session';
 
 const app : Application = express();
 
@@ -38,11 +39,19 @@ async function runapp (){
 		secret : "IDFVBHNIOVFFBUE"
 
 	}))
+	// app.use(expressSession({
+	// 	secret: 'IDFVBHNIOVFFBUE',
+	// 	resave: false,
+	// 	saveUninitialized: true,
+	// 	cookie: { secure: true }
+	// }))
 
 	// Run apollo server 
 	const apollo = new ApolloServer({
 		schema : await buildSchema({
-			resolvers : [topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver],
+			resolvers : [
+				topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver
+			],
 			globalMiddlewares: [],
 		}),
 		context: ({ req, res }) => ({ req, res }),
@@ -56,6 +65,7 @@ async function runapp (){
 
 	// Ïnit passport app and routes
 	app.use(passport.initialize());
+	app.use(passport.session())
 	app.use('/auth', AuthenticationRoutes)
 }
 runapp();

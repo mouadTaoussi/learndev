@@ -13,9 +13,15 @@ passport_1.default.use(new passport_github2_1.default({
     clientSecret: main_config_1.default.github_private_key,
     callbackURL: main_config_1.default.github_callback_url
 }, function (accessToken, refreshToken, profile, done) {
-    const user = _user.findUser({ id: undefined, email: undefined, at_provider_id: profile });
-    return done(null, user);
+    console.log(profile);
+    return done(null, { name: profile.username, email: profile.email, at_provider_id: profile.id });
 }));
 passport_1.default.serializeUser((user, done) => {
+    console.log('serializeUser fired');
+    console.log(user);
     done(null, user);
+});
+passport_1.default.deserializeUser(function (user, done) {
+    console.log('deserializeUser Fired!');
+    console.log(user);
 });

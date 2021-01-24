@@ -33,7 +33,9 @@ async function runapp() {
     }));
     const apollo = new apollo_server_express_1.ApolloServer({
         schema: await type_graphql_1.buildSchema({
-            resolvers: [Topics_resolvers_1.topicResolver, Topics_resolvers_1.docsResolver, Topics_resolvers_1.courseResolver, Topics_resolvers_1.articleResolver, Topics_resolvers_1.projectIdeaResolver],
+            resolvers: [
+                Topics_resolvers_1.topicResolver, Topics_resolvers_1.docsResolver, Topics_resolvers_1.courseResolver, Topics_resolvers_1.articleResolver, Topics_resolvers_1.projectIdeaResolver
+            ],
             globalMiddlewares: [],
         }),
         context: ({ req, res }) => ({ req, res }),
@@ -43,6 +45,7 @@ async function runapp() {
     app.use(helmet_1.default());
     app.use(body_parser_1.default.json());
     app.use(passport_1.default.initialize());
+    app.use(passport_1.default.session());
     app.use('/auth', Authentication_routes_1.default);
 }
 runapp();

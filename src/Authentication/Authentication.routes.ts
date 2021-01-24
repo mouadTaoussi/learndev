@@ -1,17 +1,14 @@
 import { Request,Response, Router } from "express";
 import passport from 'passport';
+
 const router = Router();
 
-router.get('/login',(req: Request,res: Response)=>{
-	res.send('Hello World');
-});
+router.get('/login',(req: Request,res: Response)=>{ res.json(req.session) });
 router.get('/register');
 
-// router.get('/Oauth/login',    passport.authenticate());
-// router.get('/Oauth/register', passport.authenticate());
+router.get('/Oauth/login', passport.authenticate('github',{ scope: ["profile","email"] }));
 
-// router.get('/Oauth/callback', passport.authenticate());
-// router.get('/ Oauth/register');
+router.get('/Oauth/callback', passport.authenticate('github',{failureRedirect:'/login', successRedirect:"/graphql"}));
 
 router.get('/changePassword');
 router.get('/updateUser');
