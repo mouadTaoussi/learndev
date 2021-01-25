@@ -17,8 +17,16 @@ import {
 } from './Graphql/Topics/Topics.resolvers';
 import cookieSession from 'cookie-session';
 import expressSession from 'express-session';
+// const expGql = require("express-graphql");
 
 const app : Application = express();
+
+// Init cookie cookie-session
+app.use(cookieSession({
+	keys : ["IDFVBHNIOVFFBUE"],
+	name : 'DBDIUN',
+	secret : "IDFVBHNIOVFFBUE"
+}));
 
 async function runapp (){
 	// create the connection to the mongodb
@@ -32,19 +40,16 @@ async function runapp (){
 		}
 	});
 
-	// Init cookie cookie-session
-	app.use(cookieSession({
-		keys : ["IDFVBHNIOVFFBUE"],
-		name : 'DBDIUN',
-		secret : "IDFVBHNIOVFFBUE"
-
-	}))
+	// Ïnit passport app and routes
+	app.use(passport.initialize());
+	app.use(passport.session())
 	// app.use(expressSession({
 	// 	secret: 'IDFVBHNIOVFFBUE',
 	// 	resave: false,
-	// 	saveUninitialized: true,
+	// 	saveUninitialized: false,
 	// 	cookie: { secure: true }
-	// }))
+	// }))//+
+	app.use(function(req,res,next){console.log(req.session.passport);next()});
 
 	// Run apollo server 
 	const apollo = new ApolloServer({
@@ -54,19 +59,36 @@ async function runapp (){
 			],
 			globalMiddlewares: [],
 		}),
-		context: ({ req, res }) => ({ req, res }),
+		context: ({ req, res }) =>{
+			console.log("context")
+			console.log(req.session.passport) // cannot get session object then Get undefined 
+
+			return {
+				getUser: () => req.user,
+				logout: () => req.logout(),
+			}
+		},
 		playground : true
 	})
 	apollo.applyMiddleware({ app });
+
+	// OR Express graphql middleware
+	// app.use('/graphql',expGql({
+	// 	schema: await buildSchema({
+	// 		resolvers : [
+	// 			topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver
+	// 		],
+	// 		globalMiddlewares: [],
+	// 	}),
+	// 	graphqil : true
+	// }))
 
 	// Init body parser and helmet 
 	app.use(helmet());
 	app.use(bodyParser.json());
 
-	// Ïnit passport app and routes
-	app.use(passport.initialize());
-	app.use(passport.session())
 	app.use('/auth', AuthenticationRoutes)
+
 }
 runapp();
 
