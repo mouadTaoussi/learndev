@@ -23,8 +23,10 @@ class topicResolver implements topicResolver {
 
 	@Query(returns => Topic, { description: "This query returns a topic" })
 	@UseMiddleware(Authenticated)
-	public async getTopic(@Arg('topic_id') topic_id: string) : Promise<any> {
-		
+	public async getTopic(@Arg('topic_id') topic_id: string, @Ctx() context : any) : Promise<any> {
+		const user = context.req.user;
+
+		console.log(user)
 		return {
 			user_id : "vffff",
 			topic_title : topic_id,

@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const express_session_1 = __importDefault(require("express-session"));
+const redis_1 = __importDefault(require("redis"));
+const RedisStore = require('connect-redis')(express_session_1.default);
 const body_parser_1 = __importDefault(require("body-parser"));
 const helmet_1 = __importDefault(require("helmet"));
 const passport_1 = __importDefault(require("passport"));
@@ -17,37 +19,43 @@ const Authentication_routes_1 = __importDefault(require("./Authentication/Authen
 require("./Authentication/Authentication.strategies");
 const Topics_resolvers_1 = require("./Graphql/Topics/Topics.resolvers");
 const app = express_1.default();
+mongoose_1.connect(main_config_1.default.mongodb, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true }, (error) => {
+    if (error) {
+        console.log(error);
+    }
+    else {
+        console.log('Database up and running!');
+    }
+});
+const redisClient = redis_1.default.createClient({
+    host: main_config_1.default.redis_host,
+    port: main_config_1.default.redis_port,
+    password: main_config_1.default.redis_password
+});
 app.use(express_session_1.default({
     name: "GGHH",
     secret: 'IDFVBHNIOVFFBUE',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new RedisStore({
+        host: process.env.redis_host,
+        port: main_config_1.default.redis_port,
+        client: redisClient
+    }),
 }));
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
 async function runapp() {
-    mongoose_1.connect(main_config_1.default.mongodb, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true }, (error) => {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            console.log('Database up and running!');
-        }
-    });
     const apollo = new apollo_server_express_1.ApolloServer({
         schema: await type_graphql_1.buildSchema({
             resolvers: [
-                Topics_resolvers_1.topicResolver, Topics_resolvers_1.docsResolver, Topics_resolvers_1.courseResolver, Topics_resolvers_1.articleResolver, Topics_resolvers_1.projectIdeaResolver
+                Topics_resolvers_1.topicResolver, Topics_resolvers_1.docsResolver, Topics_resolvers_1.courseResolver,
+                Topics_resolvers_1.articleResolver, Topics_resolvers_1.projectIdeaResolver
             ],
             globalMiddlewares: []
         }),
         context: ({ req, res }) => {
-            console.log("context");
-            console.log(req.session);
-            return {
-                getUser: () => req.user,
-                logout: () => req.logout(),
-            };
+            return { req, res };
         },
         playground: false
     });

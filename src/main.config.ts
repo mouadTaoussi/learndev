@@ -10,7 +10,10 @@ interface config {
 	mode    : string,
 	github_public_key   : string,
 	github_private_key  : string,
-	github_callback_url : string
+	github_callback_url : string,
+	redis_host          : string,
+	redis_port          : string,
+	redis_password      : string,
 }
 
 const main_config : config = {
@@ -21,8 +24,10 @@ const main_config : config = {
 	mode    : process.env.MODE!,
 	github_public_key   : process.env.GITHUB_PUBLIC_KEY!,
 	github_private_key  : process.env.GITHUB_PRIVATE_KEY!,
-	github_callback_url : process.env.GITHUB_CALLBACK_URL!
-
+	github_callback_url : process.env.GITHUB_CALLBACK_URL!,
+	redis_host          : process.env.REDIS_LABS_HOST!,
+	redis_port          : process.env.REDIS_LABS_PORT!,
+	redis_password      : process.env.REDIS_LABS_PASSWORD!,
 }
 
 export default main_config;

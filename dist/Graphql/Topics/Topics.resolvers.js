@@ -19,7 +19,9 @@ const middlewares_graphql_1 = require("../middlewares.graphql");
 let topicResolver = class topicResolver {
     async searchQuery(search_term) {
     }
-    async getTopic(topic_id) {
+    async getTopic(topic_id, context) {
+        const user = context.req.user;
+        console.log(user);
         return {
             user_id: "vffff",
             topic_title: topic_id,
@@ -50,9 +52,9 @@ __decorate([
 __decorate([
     type_graphql_1.Query(returns => Topics_objecttypes_1.Topic, { description: "This query returns a topic" }),
     type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
-    __param(0, type_graphql_1.Arg('topic_id')),
+    __param(0, type_graphql_1.Arg('topic_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], topicResolver.prototype, "getTopic", null);
 __decorate([

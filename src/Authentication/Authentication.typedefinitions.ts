@@ -1,9 +1,19 @@
+import { Request, Response } from "express";
+
 interface UserService {
-	addUser(body : UserBody)                                              :Promise<{status:number, saved:boolean,user:any,message:string | null}>
+	addUser (body : UserBody)                                             :Promise<{status:number, saved:boolean,user:any,message:string | null}>
 	findUser(options : {id:string | undefined, email:string | undefined, at_provider_id: string | undefined}) :Promise<{status:number, found:boolean, message:string | null, user:any}> 
 	deleteUser(user_id: string)                                           :Promise<{status:number, deleted: boolean,message: string}>
 	updateUser(user_id: string, body: UserUpdate)                         :Promise<{status:number, updated:boolean,message:string}> 
 	changePassword(id: string, password: string)                          :Promise<{status:number, changed:boolean,message:string}>
+}
+
+interface Authentication {
+	 login   (req: Request, res: Response) :Promise<void>
+	 register(req: Request, res: Response) :Promise<void>
+	 resetPassword(req: Request, res: Response) :Promise<void>
+	 updateProfile(req: Request, res: Response) :Promise<void>
+	 deleteAccount(req: Request, res: Response) :Promise<void>
 }
 
 interface UserBody {
@@ -23,4 +33,4 @@ interface UserUpdate {
 	password       : string
 }
 
-export { UserService, UserBody, UserUpdate };
+export { UserService, Authentication, UserBody, UserUpdate };

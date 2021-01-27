@@ -1,10 +1,10 @@
-import UserService from "./Authentication.service";
+import __UserService__ from "./Authentication.service";
 import { UserBody } from "./Authentication.typedefinitions";
 import passport from 'passport';
 import GitHubStrategy from "passport-github2";
 import config from '.././main.config';
 
-const _user = new UserService();
+const _user = new __UserService__();
 
 passport.use(new GitHubStrategy({
 	clientID     : config.github_public_key,
