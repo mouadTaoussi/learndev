@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const express_session_1 = __importDefault(require("express-session"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const helmet_1 = __importDefault(require("helmet"));
 const passport_1 = __importDefault(require("passport"));
@@ -15,13 +16,15 @@ const main_config_1 = __importDefault(require("./main.config"));
 const Authentication_routes_1 = __importDefault(require("./Authentication/Authentication.routes"));
 require("./Authentication/Authentication.strategies");
 const Topics_resolvers_1 = require("./Graphql/Topics/Topics.resolvers");
-const cookie_session_1 = __importDefault(require("cookie-session"));
 const app = express_1.default();
-app.use(cookie_session_1.default({
-    keys: ["IDFVBHNIOVFFBUE"],
-    name: 'DBDIUN',
-    secret: "IDFVBHNIOVFFBUE"
+app.use(express_session_1.default({
+    name: "GGHH",
+    secret: 'IDFVBHNIOVFFBUE',
+    resave: true,
+    saveUninitialized: true
 }));
+app.use(passport_1.default.initialize());
+app.use(passport_1.default.session());
 async function runapp() {
     mongoose_1.connect(main_config_1.default.mongodb, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true }, (error) => {
         if (error) {
@@ -31,25 +34,22 @@ async function runapp() {
             console.log('Database up and running!');
         }
     });
-    app.use(passport_1.default.initialize());
-    app.use(passport_1.default.session());
-    app.use(function (req, res, next) { console.log(req.session.passport); next(); });
     const apollo = new apollo_server_express_1.ApolloServer({
         schema: await type_graphql_1.buildSchema({
             resolvers: [
                 Topics_resolvers_1.topicResolver, Topics_resolvers_1.docsResolver, Topics_resolvers_1.courseResolver, Topics_resolvers_1.articleResolver, Topics_resolvers_1.projectIdeaResolver
             ],
-            globalMiddlewares: [],
+            globalMiddlewares: []
         }),
         context: ({ req, res }) => {
             console.log("context");
-            console.log(req.session.passport);
+            console.log(req.session);
             return {
                 getUser: () => req.user,
                 logout: () => req.logout(),
             };
         },
-        playground: true
+        playground: false
     });
     apollo.applyMiddleware({ app });
     app.use(helmet_1.default());

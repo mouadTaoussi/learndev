@@ -22,7 +22,6 @@ passport.serializeUser((user, done) => {
     done(null, user)
 });
 passport.deserializeUser(function(user, done) {
-	console.log("Fired")
 	done(null, user)
-})
+});
 // export 

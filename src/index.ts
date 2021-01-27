@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from 'express';
+import express_session from 'express-session';
 import bodyParser from "body-parser"; 
 import helmet from "helmet";
 import xss from 'xss';
@@ -16,17 +17,27 @@ import {
 	topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver 
 } from './Graphql/Topics/Topics.resolvers';
 import cookieSession from 'cookie-session';
-import expressSession from 'express-session';
-// const expGql = require("express-graphql");
 
 const app : Application = express();
-
+ 
 // Init cookie cookie-session
-app.use(cookieSession({
-	keys : ["IDFVBHNIOVFFBUE"],
-	name : 'DBDIUN',
-	secret : "IDFVBHNIOVFFBUE"
-}));
+// app.use(cookieSession({
+// 	keys : ["IDFVBHNIOVFFBUE"],
+// 	name : 'DBDIUN',
+// 	secret : "IDFVBHNIOVFFBUE"
+// }));
+
+app.use(express_session({
+	name : "GGHH",
+	secret: 'IDFVBHNIOVFFBUE',
+	resave: true,
+	saveUninitialized: true
+	// cookie: { secure: true, maxAge : 60000 }
+}))
+
+// Ïnit passport app and routes
+app.use(passport.initialize());
+app.use(passport.session());
 
 async function runapp (){
 	// create the connection to the mongodb
@@ -40,48 +51,25 @@ async function runapp (){
 		}
 	});
 
-	// Ïnit passport app and routes
-	app.use(passport.initialize());
-	app.use(passport.session())
-	// app.use(expressSession({
-	// 	secret: 'IDFVBHNIOVFFBUE',
-	// 	resave: false,
-	// 	saveUninitialized: false,
-	// 	cookie: { secure: true }
-	// }))//+
-	app.use(function(req,res,next){console.log(req.session.passport);next()});
-
 	// Run apollo server 
 	const apollo = new ApolloServer({
 		schema : await buildSchema({
 			resolvers : [
 				topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver
 			],
-			globalMiddlewares: [],
+			globalMiddlewares: []
 		}),
 		context: ({ req, res }) =>{
 			console.log("context")
-			console.log(req.session.passport) // cannot get session object then Get undefined 
-
+			console.log(req.session) // cannot get session object then Get undefined 
 			return {
 				getUser: () => req.user,
 				logout: () => req.logout(),
 			}
 		},
-		playground : true
+		playground : false
 	})
 	apollo.applyMiddleware({ app });
-
-	// OR Express graphql middleware
-	// app.use('/graphql',expGql({
-	// 	schema: await buildSchema({
-	// 		resolvers : [
-	// 			topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver
-	// 		],
-	// 		globalMiddlewares: [],
-	// 	}),
-	// 	graphqil : true
-	// }))
 
 	// Init body parser and helmet 
 	app.use(helmet());
@@ -96,9 +84,3 @@ const PORT : string | undefined = process.env.PORT_DEV || process.env.PORT;
 const MODE : string | undefined = process.env.MODE;
 
 app.listen(PORT);
-
-
-
-
-
-

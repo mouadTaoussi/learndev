@@ -19,6 +19,5 @@ passport_1.default.serializeUser((user, done) => {
     done(null, user);
 });
 passport_1.default.deserializeUser(function (user, done) {
-    console.log("Fired");
     done(null, user);
 });

@@ -3,7 +3,7 @@ import passport from 'passport';
 
 const router = Router();
 
-router.get('/login',(req: Request,res: Response)=>{ res.json(req.user) });
+router.get('/login',(req: Request,res: Response)=>{ res.json(req.session) });
 router.get('/register');
 
 router.get('/Oauth/login', passport.authenticate('github',{ scope: ["profile","email"] }));
