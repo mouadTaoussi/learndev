@@ -1,5 +1,5 @@
 import { UserModel } from './Authentication.models';
-import { UserBody, UserUpdate } from './Authentication.typedefinitions';
+import { UserBody } from './Authentication.typedefinitions';
 
 class UserService implements UserService {
 
@@ -12,12 +12,11 @@ class UserService implements UserService {
 			status : 200, saved : true, message : null, user : new_user }
 		}
 		catch(error) {
-			console.log(error)
 			return {
 			status : 500, saved : false, message  : 'something went wrong! Try again.', user : null }
 		}
 	}
-	public async findUser(options : {id:string | undefined, email:string | undefined, at_provider_id: string | undefined})
+	public async findUser(options : {id?:string | undefined, email?:string | undefined, at_provider_id?: string | undefined})
 	:Promise<{status:number, found:boolean, message:string | null, user:any}> 
 	{
 		try {
@@ -67,7 +66,6 @@ class UserService implements UserService {
 			}
 		}
 		catch(error) {
-			console.log(error)
 			return {
 				status : 500, found : false, 
 				message  : 'something went wrong! Try again.', user : null
@@ -95,7 +93,6 @@ class UserService implements UserService {
 
 		}
 		catch(error) {
-			console.log(error)
 
 			return { 
 				status : 500, updated : false, message: 'something went wrong! Try again.' 
@@ -111,7 +108,6 @@ class UserService implements UserService {
 			}
 		}
 		catch(error) {
-			console.log(error)
 
 			return { status : 500, changed : false, message : 'something went wrong! Try again.' }
 		}

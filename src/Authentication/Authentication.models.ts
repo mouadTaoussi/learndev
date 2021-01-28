@@ -3,7 +3,10 @@ import { Schema, model } from 'mongoose';
 
 const UserSchema = new Schema({
 	at_provider_id : {
-		type: String, required: false
+		type: String, required: true, default : null
+	},
+	provider : { 
+		type: String, required: true, default : 'local'
 	},
 	fullname : {
 		type: String, required: true 
@@ -15,13 +18,10 @@ const UserSchema = new Schema({
 		type: String, required: true 
 	},
 	avatar : { 
-		type: String, required: true 
-	},
-	provider : { 
-		type: String, default : 'local'
+		type: String, required: true, default: null
 	},
 	password : {
-		type: String, required: false
+		type: String, required: false, default: null
 	}
 });
 
