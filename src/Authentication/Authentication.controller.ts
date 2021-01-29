@@ -19,7 +19,7 @@ class __Authentication__ implements Authentication {
 
 		// Check if the user exists
 		if ( userExists.found !== true ) {
-			res.status(401).send({ loggedin : false, message: "user not exists!" }); res.end(); return;
+			res.status(404).send({ loggedin : false, message: "user not exists!" }); res.end(); return;
 		};
 
 		// Check if the user signed in with oauth
@@ -38,6 +38,8 @@ class __Authentication__ implements Authentication {
 			// send it back to the frontend
 			req.session.local = { name : userExists.user.user_name,  email: email };
 
+			console.log(req.session)
+			
 			res.status(userExists.status).send({ loggedin : true, message : "Logged in!" });
 		}
 	}
@@ -60,14 +62,15 @@ class __Authentication__ implements Authentication {
 
 		// Save use in the database
 		const new_user = await _user.addUser(body);
-
+		console.log(new_user)
 		// Check whether saved or not
 		if (new_user.saved == true) {
 
-			// sign a token
+			// sign a session
 			req.session.local = { name : body.user_name,  email: body.email };
+
 			// send it back to the frontend			
-			res.status(new_user.status).send({ registered : true, message: "Registered successfully!", user_token:user_token  })
+			res.status(new_user.status).send({ registered : true, message: "Registered successfully!"})
 
 		}
 		else {		
@@ -115,7 +118,7 @@ class __Authentication__ implements Authentication {
 				from: '"Learndev Team" <mouadtaoussi0@gmail.com>',
 			    to: user.user.email,
 			    subject: 'Reset password request',
-			    text: 'Hey there, it’s your temporary password to log in and change it ;) ', 
+			    text: 'Hey there, it’s your temporary password to log in and change it ;) ' + password, 
 			    html: mailTemplate
 			});
 
@@ -134,7 +137,7 @@ class __Authentication__ implements Authentication {
 	public async updateProfile(req: Request, res: Response) :Promise<void>{
 		// Get the user by its session
 		const authenticated_user = req.session.passport || req.session.local;
-
+		console.log(authenticated_user);
 		if ( authenticated_user == undefined ) {
 			res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end(); return
 		}
@@ -161,24 +164,10 @@ class __Authentication__ implements Authentication {
 				})
 			}
 			else {
-				// IF THE EAMIL IS UNDEFINED THEN THE USER UPDATED SOMETHING IN THE SETTINGS
-				if ( body.email == undefined ){
-					// Update user
-					const updating: { 
-						status:number,updated:boolean,message:string } = await _user.updateUser(authenticated_user.id,body);
-
-					// Response back
-					res.status(updating.status).send({
-						updated : updating.updated,
-						message : updating.message
-					})
-				} 
-				else {
-					res.status(404).send({
-						updated : false,
-						message : "Email alreay provided!"
-					})
-				}
+				res.status(404).send({
+					updated : false,
+					message : "Email alreay provided!"
+				})
 			}
 		}
 		else {
@@ -195,7 +184,47 @@ class __Authentication__ implements Authentication {
 		}
 	}
 	public async deleteAccount(req: Request, res: Response) :Promise<void>{
-		res.send('Hello World')
+		// Get the user by its session
+		const authenticated_user = req.session.passport || req.session.local;
+		console.log(authenticated_user)
+
+		if ( authenticated_user == undefined ) {
+			res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end(); return
+		}
+
+		// Require password to change user data
+		// Get the password to authorize user to change his credentials
+		const { password } = req.query;
+
+		if (!password) {res.status(400).send({ message:"no password provided!" }); res.end()};
+
+		// Find user by its session
+		const user: any = await _user.findUser({ email: authenticated_user.email });
+
+		// if found then
+		if (user.found == true) {
+			// compare password
+			// Load hash from your password DB.
+			const matched: boolean = await compare(password, user.user.password);
+
+			// Check if the passwords matched
+			if (matched) {
+				// Delete user
+				const delete_user: any = await _user.deleteUser(user.user.id);
+				// @TODO Delete thier logs
+
+				res.status(delete_user.status).send({
+					deleted : delete_user.deleted, message : delete_user.message
+				})
+			}
+			else {
+			
+				res.status(401).send({ message : 'Not authorized' })
+			}
+		}
+		else {
+			res.status(401).send({ message : 'Not authorized' })
+		}
 	}
 }
 

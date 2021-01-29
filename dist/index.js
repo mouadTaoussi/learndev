@@ -15,6 +15,7 @@ require("reflect-metadata");
 const apollo_server_express_1 = require("apollo-server-express");
 const type_graphql_1 = require("type-graphql");
 const main_config_1 = __importDefault(require("./main.config"));
+const main_cors_1 = __importDefault(require("./main.cors"));
 const Authentication_routes_1 = __importDefault(require("./Authentication/Authentication.routes"));
 require("./Authentication/Authentication.strategies");
 const Topics_resolvers_1 = require("./Graphql/Topics/Topics.resolvers");
@@ -62,6 +63,7 @@ async function runapp() {
     apollo.applyMiddleware({ app });
     app.use(helmet_1.default());
     app.use(body_parser_1.default.json());
+    app.use(main_cors_1.default);
     app.use('/auth', Authentication_routes_1.default);
 }
 runapp();

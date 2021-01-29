@@ -84,7 +84,7 @@ class UserService implements UserService {
 			return { status : 500, deleted : false, message : 'something went wrong! Try again.' }
 		}
 	}
-	public async updateUser(user_id: string, body: UserUpdate):Promise<{status:number, updated:boolean,message:string}> 
+	public async updateUser(user_id: string, body: UserBody):Promise<{status:number, updated:boolean,message:string}> 
 	{
 		try {
 			const user = await UserModel.findByIdAndUpdate(user_id, body);

@@ -13,6 +13,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema, ResolverData } from "type-graphql";
 // Import resolvers
 import main_config from './main.config';
+import main_cors from './main.cors';
 import AuthenticationRoutes from './Authentication/Authentication.routes';
 import './Authentication/Authentication.strategies';
 import { 
@@ -80,9 +81,10 @@ async function runapp (){
 	})
 	apollo.applyMiddleware({ app });
 
-	// Init body parser and helmet 
+	// Init body parser and helmet and cors
 	app.use(helmet());
 	app.use(bodyParser.json());
+	app.use(main_cors);
 
 	app.use('/auth', AuthenticationRoutes)
 

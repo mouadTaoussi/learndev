@@ -11,7 +11,6 @@ class UserService {
             };
         }
         catch (error) {
-            console.log(error);
             return {
                 status: 500, saved: false, message: 'something went wrong! Try again.', user: null
             };
@@ -66,7 +65,6 @@ class UserService {
             }
         }
         catch (error) {
-            console.log(error);
             return {
                 status: 500, found: false,
                 message: 'something went wrong! Try again.', user: null
@@ -88,7 +86,6 @@ class UserService {
             return { status: 200, updated: true, message: 'user updated successfully!' };
         }
         catch (error) {
-            console.log(error);
             return {
                 status: 500, updated: false, message: 'something went wrong! Try again.'
             };
@@ -102,7 +99,6 @@ class UserService {
             };
         }
         catch (error) {
-            console.log(error);
             return { status: 500, changed: false, message: 'something went wrong! Try again.' };
         }
     }
