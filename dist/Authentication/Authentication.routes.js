@@ -8,6 +8,11 @@ const passport_1 = __importDefault(require("passport"));
 const Authentication_controller_1 = __importDefault(require("./Authentication.controller"));
 const router = express_1.Router();
 const auth = new Authentication_controller_1.default();
+router.get('/save_session', (req, res) => {
+    req.session.local = req.query;
+    console.log(req.session);
+    res.status(200).send({ loggedin: true, message: "Logged in!" });
+});
 router.get('/login', (req, res) => { res.json(req.session); console.log(req.session); });
 router.post('/login', auth.login);
 router.post('/register', auth.register);

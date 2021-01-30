@@ -41,6 +41,7 @@ const redisClient: unknown = redis.createClient({
 	password : main_config.redis_password
 });
 
+app.set('trustproxy', true)
 app.use(express_session({
 	name  : "GGHH",
 	secret: 'IDFVBHNIOVFFBUE',

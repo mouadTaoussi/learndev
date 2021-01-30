@@ -9,8 +9,8 @@ import { v4 } from "uuid";
 const _user = new __UserService__();
 
 class __Authentication__ implements Authentication {
-	public async login(req: Request, res: Response) :Promise<void>{
-
+	public async login(req: Request, res: Response) :Promise<any>{
+		// Check if the user is alreay logged in
 		// Get body data
 		const { email, password } : { email:string, password: string } = req.body;
 
@@ -35,15 +35,16 @@ class __Authentication__ implements Authentication {
 		if (matched != true) {res.status(404).send({ loggedin : false, message: "credentials aren't correct!" })}
 		else {
 			// sign a session
-			// send it back to the frontend
-			req.session.local = { name : userExists.user.user_name,  email: email };
-
-			console.log(req.session)
-			
-			res.status(userExists.status).send({ loggedin : true, message : "Logged in!" });
+			res.redirect(`/auth/save_session?name=${userExists.user.user_name}&email=${email}`);
+			// req.session.local = { name: userExists.user.user_name, email: email };
+			// req.session.save(function(err) {
+			// 	// session saved
+			// 	return res.status(userExists.status).send({ loggedin : true, message : "Logged in!" });
+			// })
 		}
 	}
 	public async register(req: Request, res: Response) :Promise<void>{
+		// Check if the user is alreay logged in
 		// Get user inputs
 		const body : UserBody = req.body;
 
@@ -68,6 +69,11 @@ class __Authentication__ implements Authentication {
 
 			// sign a session
 			req.session.local = { name : body.user_name,  email: body.email };
+
+			req.session.save(function(err) {
+			  // session saved
+			  if(err) console.log(err);
+			})
 
 			// send it back to the frontend			
 			res.status(new_user.status).send({ registered : true, message: "Registered successfully!"})
