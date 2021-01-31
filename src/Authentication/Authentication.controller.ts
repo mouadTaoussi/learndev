@@ -24,7 +24,7 @@ class __Authentication__ implements Authentication {
 
 		// Check if the user signed in with oauth
 		if ( userExists.user.provider !== "local" ) {
-			res.status(101).send({ loggedin : false, message: "sign up with the services available!" }); res.end(); return
+			res.status(404).send({ loggedin : false, message: "sign up with the services available!" }); res.end(); return
 		}
 
 		// compare password
@@ -34,11 +34,12 @@ class __Authentication__ implements Authentication {
 		// if compared then
 		if (matched != true) {res.status(404).send({ loggedin : false, message: "credentials aren't correct!" })}
 		else {
-			// sign a session
+			//////////////////////// sign a session
 			res.redirect(`/auth/save_session?name=${userExists.user.user_name}&email=${email}`);
-			// req.session.local = { name: userExists.user.user_name, email: email };
+			////////////////////////
+
 			// req.session.save(function(err) {
-			// 	// session saved
+			// // session saved
 			// 	return res.status(userExists.status).send({ loggedin : true, message : "Logged in!" });
 			// })
 		}
@@ -63,7 +64,7 @@ class __Authentication__ implements Authentication {
 
 		// Save use in the database
 		const new_user = await _user.addUser(body);
-		console.log(new_user)
+
 		// Check whether saved or not
 		if (new_user.saved == true) {
 
