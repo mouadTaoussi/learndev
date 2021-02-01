@@ -7,6 +7,9 @@ const TopicSchema = new Schema({
 	topic_title : {
 		type : String, required : true
 	},
+	level : {
+		type : String, required: true
+	},
 	// Search trough the web about an image that relevents to that topic
 	background_image : {
 		type : String, required : true
@@ -22,6 +25,9 @@ const DocsSchema = new Schema({
 		type : String, required: true
 	},
 	docs_title : {
+		type : String, required: true
+	},
+	level : {
 		type : String, required: true
 	},
 	docs_link  : {
@@ -42,6 +48,9 @@ const CourseSchema = new Schema({
 	course_title : {
 		type : String, required: true
 	},
+	level : {
+		type : String, required: true
+	},
 	course_link : {
 		type : String, required: true
 	},
@@ -57,6 +66,9 @@ const ArticleSchema = new Schema({
 		type : String, required: true
 	},
 	article_title : {
+		type : String, required: true
+	},
+	level : {
 		type : String, required: true
 	},
 	article_link  : {
@@ -75,6 +87,9 @@ const ProjectIdeaSchema = new Schema({
 	project_idea_title : {
 		type : String, required: true
 	}, 
+	level : {
+		type : String, required: true
+	},
 	description : {
 		type : String, required: true
 	}

@@ -38,6 +38,9 @@ class Docs {
 	@Field( type => String,{description: "docs_title field" } )
 	docs_title : string;
 
+	@Field( type => String,{description: "level field" } )
+	level : string;
+
 	@Field( type => String,{description: "docs_link field" } )
 	docs_link : string;
 
@@ -54,6 +57,9 @@ class Course {
 	@Field( type => String,{description: "course_title field" } )
 	course_title : string;
 
+	@Field( type => String,{description: "level field" } )
+	level : string;
+
 	@Field( type => String,{description: "course_link field" } )
 	course_link : string;
 }
@@ -68,6 +74,9 @@ class Article {
 
 	@Field( type => String,{ description: "article_title field" } )
 	article_title : string;
+
+	@Field( type => String,{description: "level field" } )
+	level : string;
 
 	@Field( type => String,{ description: "article_link field" } )
 	article_link : string;
@@ -84,6 +93,9 @@ class ProjectIdea {
 
 	@Field( type => String,  { description : "This one represents project_idea_title" } )
 	project_idea_title : string
+
+	@Field( type => String,{description: "level field" } )
+	level : string;
 
 	@Field( type => String , { description : "This one reqpresents description" } )
 	description : string;
@@ -111,6 +123,9 @@ class DocsInput {
 	docs_title : string;
 
 	@Field( type => String )
+	level : string;
+
+	@Field( type => String )
 	docs_link : string;
 
 }
@@ -125,6 +140,9 @@ class CourseInput {
 
 	@Field( type => String )
 	course_title : string;
+
+	@Field( type => String )
+	level : string;
 
 	@Field( type => String )
 	course_link : string;
@@ -142,6 +160,9 @@ class ArticleInput {
 	article_title : string;
 
 	@Field( type => String )
+	level : string;
+
+	@Field( type => String )
 	article_link : string;
 
 }
@@ -156,6 +177,9 @@ class ProjectIdeaInput {
 
 	@Field( type => String )
 	project_idea_title : string;
+
+	@Field( type => String )
+	level : string;
 
 	@Field( type => String )
 	description : string;

@@ -2,6 +2,7 @@ type Article {
   user_id: String!
   topic_id: String!
   article_title: String!
+  level: String!
   article_link: String!
 }
 
@@ -9,6 +10,7 @@ input ArticleInput {
   user_id: String!
   topic_id: String!
   article_title: String!
+  level: String!
   article_link: String!
 }
 
@@ -16,6 +18,7 @@ type Course {
   user_id: String!
   topic_id: String!
   course_title: String!
+  level: String!
   course_link: String!
 }
 
@@ -23,6 +26,7 @@ input CourseInput {
   user_id: String!
   topic_id: String!
   course_title: String!
+  level: String!
   course_link: String!
 }
 
@@ -30,6 +34,7 @@ type Docs {
   user_id: String!
   topic_id: String!
   docs_title: String!
+  level: String!
   docs_link: String!
 }
 
@@ -37,6 +42,7 @@ input DocsInput {
   user_id: String!
   topic_id: String!
   docs_title: String!
+  level: String!
   docs_link: String!
 }
 
@@ -57,6 +63,7 @@ type ProjectIdea {
   user_id: String!
   topic_id: String!
   project_idea_title: String!
+  level: String!
   description: String!
 }
 
@@ -64,6 +71,7 @@ input ProjectIdeaInput {
   user_id: String!
   topic_id: String!
   project_idea_title: String!
+  level: String!
   description: String!
 }
 
@@ -75,6 +83,7 @@ type Query {
 type Topic {
   user_id: String!
   topic_title: String!
+  # level: String!
   background_image: String!
   docs: [Docs!]!
   courses: [Course!]!

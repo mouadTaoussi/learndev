@@ -178,9 +178,12 @@ class __Authentication__ implements Authentication {
 		else {
 			// Update user
 			const updating: { 
-				status:number,updated:boolean,message:string } = await _user.updateUser(authenticated_user.id,body);
+				status:number,updated:boolean,message:string, user:any } = await _user.updateUser(authenticated_user.id,body);
 
 			// Response back
+			req.session.local = { 
+				id:updating.user._id, name: updating.user.name, email: updating.user.email, at_provider_id: null 
+			}
 			
 			res.status(updating.status).send({
 				updated : updating.updated,
