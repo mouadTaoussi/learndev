@@ -13,7 +13,7 @@ passport.use(new GitHubStrategy({
 	},
 	function(accessToken:string, refreshToken:string, profile:any, done:any) {
 		// const user = _user.findUser({id:undefined, email:undefined, at_provider_id:profile})
-		return done(null, {name : profile.username,  email: profile.email, at_provider_id : profile.id});
+		return done(null, {id: "", name : profile.username,  email: profile.email, at_provider_id : profile.id});
 
 	}
 ));

@@ -45,22 +45,27 @@
 		</div>
 	</section>
 </body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+	axios.defaults.withCredentials = true
+
+	// ffc34351-385e-432b-8bbe-41d2fcd30100
 	async function login(){
 		const data = {
 			email    : document.querySelector('#email').value,
 			password : document.querySelector('#password').value
 		}
-		 const response = await fetch("http://localhost:8000/auth/login", {
+		 const response = await axios({
+		 	url: "http://localhost:8000/auth/login",
 		    method: 'POST', // *GET, POST, PUT, DELETE, etc.
 		    // mode: 'cors', // no-cors, *cors, same-origin
 		    headers: {
-		      'Content-Type': 'application/json'
+				'Content-Type': 'application/json'
 		      // 'Content-Type': 'application/x-www-form-urlencoded',
 		    },
-		    body: JSON.stringify(data) // body data type must match "Content-Type" header
+		    data: JSON.stringify(data) // body data type must match "Content-Type" header
 		  });
-		  console.log(response.json()); // parses JSON response into native JavaScript objects
+		  console.log(response); // parses JSON response into native JavaScript objects
 	}
 	async function register(){
 		const data = {
@@ -70,31 +75,33 @@
 			password : document.querySelector('#password1').value
 		}
 		console.log(data)
-		 const response = await fetch("http://localhost:8000/auth/register", {
+		 const response = await axios({
+		 	url: "http://localhost:8000/auth/register",
 		    method: 'POST', // *GET, POST, PUT, DELETE, etc.
 		    // mode: 'cors', // no-cors, *cors, same-origin
 		    headers: {
 		      'Content-Type': 'application/json'
 		      // 'Content-Type': 'application/x-www-form-urlencoded',
 		    },
-		    body: JSON.stringify(data) // body data type must match "Content-Type" header
+		    data: JSON.stringify(data) // body data type must match "Content-Type" header
 		  });
-		  console.log(response.json()); // parses JSON response into native JavaScript objects
+		  console.log(response); // parses JSON response into native JavaScript objects
 	}
 	async function resetPassword(){
 		const data = {
 			email    : document.querySelector('#email2').value,
 		}
-		 const response = await fetch("http://localhost:8000/auth/resetPassword", {
+		 const response = await axios({
+		 	url: "http://localhost:8000/auth/resetPassword",
 		    method: 'POST', // *GET, POST, PUT, DELETE, etc.
 		    // mode: 'cors', // no-cors, *cors, same-origin
 		    headers: {
 		      'Content-Type': 'application/json'
 		      // 'Content-Type': 'application/x-www-form-urlencoded',
 		    },
-		    body: JSON.stringify(data) // body data type must match "Content-Type" header
+		    data: JSON.stringify(data) // body data type must match "Content-Type" header
 		  });
-		  console.log(response.json()); // parses JSON response into native JavaScript objects
+		  console.log(response); // parses JSON response into native JavaScript objects
 	}
 	// Needs to be authenticated
 	async function updateProfile(){
@@ -102,40 +109,43 @@
 			email    : document.querySelector('#email3').value,
 			fullname    : document.querySelector('#fullname3').value,
 			user_name    : document.querySelector('#user_name3').value,
-			password : document.querySelector('#password3').value
+			// password : document.querySelector('#password3').value
 		}
-		 const response = await fetch("http://localhost:8000/auth/updateUser", {
+		 const response = await axios({
+		 	url : "http://localhost:8000/auth/updateUser",
 		    method: 'PUT', // *GET, POST, PUT, DELETE, etc.
 		    // mode: 'cors', // no-cors, *cors, same-origin
 		    headers: {
 		      'Content-Type': 'application/json'
 		      // 'Content-Type': 'application/x-www-form-urlencoded',
 		    },
-		    body: JSON.stringify(data) // body data type must match "Content-Type" header
+		    data: JSON.stringify(data) // body data type must match "Content-Type" header
 		  });
-		  console.log(response.json()); // parses JSON response into native JavaScript objects
+		  console.log(response); // parses JSON response into native JavaScript objects
 	}
 	// Needs to be authenticated
 	async function deleteAccount(){
 		const data = {
 			password : document.querySelector('#password4').value
 		}
-		 const response = await fetch("http://localhost:8000/auth/deleteUser", {
+		 const response = await axios({
+		 	url : "http://localhost:8000/auth/deleteUser?password="+ data.password,
 		    method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
 		    // mode: 'cors', // no-cors, *cors, same-origin
 		    headers: {
 		      'Content-Type': 'application/json'
 		      // 'Content-Type': 'application/x-www-form-urlencoded',
 		    },
-		    body: JSON.stringify(data) // body data type must match "Content-Type" header
+		    data: JSON.stringify(data) // body data type must match "Content-Type" header
 		  });
 		  console.log(response.json()); // parses JSON response into native JavaScript objects
 	}
 	async function setSession(){
-		const res = await fetch('http://localhost:8000/auth/save_session',{
-			mathod:     "GET",
+		const res = await axios({
+			url : "http://localhost:8000/auth/save_session",
+			mathod:     "GET"
 		})
-		const data = res.json();
+		const data = res;
 		console.log(data);
 	}
 </script>

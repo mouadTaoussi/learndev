@@ -9,7 +9,7 @@ import { v4 } from "uuid";
 const _user = new __UserService__();
 
 class __Authentication__ implements Authentication {
-	public async login(req: Request, res: Response) :Promise<any>{
+	public async login(req: Request, res: Response) :Promise<void>{
 		// Check if the user is alreay logged in
 		// Get body data
 		const { email, password } : { email:string, password: string } = req.body;
@@ -23,7 +23,7 @@ class __Authentication__ implements Authentication {
 		};
 
 		// Check if the user signed in with oauth
-		if ( userExists.user.provider !== "local" ) {
+		if ( userExists.user.provider == "passport" ) {
 			res.status(404).send({ loggedin : false, message: "sign up with the services available!" }); res.end(); return
 		}
 
@@ -35,13 +35,13 @@ class __Authentication__ implements Authentication {
 		if (matched != true) {res.status(404).send({ loggedin : false, message: "credentials aren't correct!" })}
 		else {
 			//////////////////////// sign a session
-			res.redirect(`/auth/save_session?name=${userExists.user.user_name}&email=${email}`);
+			// res.redirect(`/auth/save_session?name=${userExists.user.user_name}&email=${email}`);
 			////////////////////////
-
-			// req.session.save(function(err) {
-			// // session saved
-			// 	return res.status(userExists.status).send({ loggedin : true, message : "Logged in!" });
-			// })
+			req.session.local = { 
+				id:userExists.user._id, name: userExists.user.name, email: userExists.user.email, at_provider_id: null 
+			}
+			
+			res.status(userExists.status).send({ loggedin : true, message : "Logged in!" });
 		}
 	}
 	public async register(req: Request, res: Response) :Promise<void>{
@@ -53,7 +53,7 @@ class __Authentication__ implements Authentication {
 		const isAlreadyExists = await _user.findUser({email: body.email});
 
 		if (isAlreadyExists.found == true ) {
-			res.status(404).send({ loggedin : false, message: "email exists!" }); res.end(); return;
+			res.status(404).send({ registered : false, message: "email exists!" }); res.end(); return;
 		}
 
 		// Hash password
@@ -69,12 +69,7 @@ class __Authentication__ implements Authentication {
 		if (new_user.saved == true) {
 
 			// sign a session
-			req.session.local = { name : body.user_name,  email: body.email };
-
-			req.session.save(function(err) {
-			  // session saved
-			  if(err) console.log(err);
-			})
+			req.session.local = { id:new_user.user._id, name : body.user_name,  email: body.email, at_provider_id: null };
 
 			// send it back to the frontend			
 			res.status(new_user.status).send({ registered : true, message: "Registered successfully!"})
@@ -144,7 +139,7 @@ class __Authentication__ implements Authentication {
 	public async updateProfile(req: Request, res: Response) :Promise<void>{
 		// Get the user by its session
 		const authenticated_user = req.session.passport || req.session.local;
-		console.log(authenticated_user);
+
 		if ( authenticated_user == undefined ) {
 			res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end(); return
 		}
@@ -161,10 +156,13 @@ class __Authentication__ implements Authentication {
 			if ( authenticated_user.email == body.email ) {
 				// Update user
 				const updating: { 
-					status:number,updated:boolean,message:string } = await _user.updateUser(authenticated_user.id,body);
+					status:number,updated:boolean,message:string,user:any } = await _user.updateUser(authenticated_user.id,body);
 
-				// Response back
-				
+				// Response backend
+				req.session.local = { 
+					id:updating.user._id, name: updating.user.name, email: updating.user.email, at_provider_id: null 
+				}
+
 				res.status(updating.status).send({
 					updated : updating.updated,
 					message : updating.message
@@ -193,7 +191,6 @@ class __Authentication__ implements Authentication {
 	public async deleteAccount(req: Request, res: Response) :Promise<void>{
 		// Get the user by its session
 		const authenticated_user = req.session.passport || req.session.local;
-		console.log(authenticated_user)
 
 		if ( authenticated_user == undefined ) {
 			res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end(); return
@@ -218,7 +215,9 @@ class __Authentication__ implements Authentication {
 			if (matched) {
 				// Delete user
 				const delete_user: any = await _user.deleteUser(user.user.id);
-				// @TODO Delete thier logs
+
+				// Remove session
+				req.session.local = undefined;
 
 				res.status(delete_user.status).send({
 					deleted : delete_user.deleted, message : delete_user.message

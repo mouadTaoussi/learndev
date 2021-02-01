@@ -20,7 +20,7 @@ const Authentication_routes_1 = __importDefault(require("./Authentication/Authen
 require("./Authentication/Authentication.strategies");
 const Topics_resolvers_1 = require("./Graphql/Topics/Topics.resolvers");
 const app = express_1.default();
-mongoose_1.connect(main_config_1.default.mongodb, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true }, (error) => {
+mongoose_1.connect(main_config_1.default.mongodb, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, (error) => {
     if (error) {
         console.log(error);
     }
@@ -38,7 +38,7 @@ app.use(express_session_1.default({
     name: "GGHH",
     secret: 'IDFVBHNIOVFFBUE',
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: new RedisStore({
         host: process.env.redis_host,
         port: main_config_1.default.redis_port,

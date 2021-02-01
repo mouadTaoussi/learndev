@@ -84,18 +84,16 @@ class UserService implements UserService {
 			return { status : 500, deleted : false, message : 'something went wrong! Try again.' }
 		}
 	}
-	public async updateUser(user_id: string, body: UserBody):Promise<{status:number, updated:boolean,message:string}> 
+	public async updateUser(user_id: string, body: UserBody):Promise<{status:number, updated:boolean,message:string, user:any}> 
 	{
 		try {
-			const user = await UserModel.findByIdAndUpdate(user_id, body);
-
-			return { status : 200, updated : true, message: 'user updated successfully!' }
-
+			const user = await UserModel.findByIdAndUpdate(user_id, body, {new : true});
+			return { status: 200, updated: true, message: 'user updated successfully!', user: user }
 		}
 		catch(error) {
 
 			return { 
-				status : 500, updated : false, message: 'something went wrong! Try again.' 
+				status: 500, updated: false, message: 'something went wrong! Try again.', user: null 
 			}			
 		}
 	} async changePassword(id: string, password: string):Promise<{status:number, changed:boolean,message:string}>

@@ -13,7 +13,7 @@ passport_1.default.use(new passport_github2_1.default({
     clientSecret: main_config_1.default.github_private_key,
     callbackURL: main_config_1.default.github_callback_url
 }, function (accessToken, refreshToken, profile, done) {
-    return done(null, { name: profile.username, email: profile.email, at_provider_id: profile.id });
+    return done(null, { id: "", name: profile.username, email: profile.email, at_provider_id: profile.id });
 }));
 passport_1.default.serializeUser((user, done) => {
     done(null, user);

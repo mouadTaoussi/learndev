@@ -25,7 +25,7 @@ const app : Application = express();
 
 // create the connection to the mongodb
 connect(main_config.mongodb,
-	{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true }
+	{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
 	,(error:any)=>{
 	if (error){
 		console.log(error);
@@ -46,7 +46,7 @@ app.use(express_session({
 	name  : "GGHH",
 	secret: 'IDFVBHNIOVFFBUE',
 	resave: true,
-	saveUninitialized: true,
+	saveUninitialized: false,
 	store : new RedisStore({ 
 		host: process.env.redis_host, 
 		port: main_config.redis_port, 
