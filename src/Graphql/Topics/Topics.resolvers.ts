@@ -4,6 +4,9 @@ import {
 	TopicInput, DocsInput, CourseInput, ArticleInput, ProjectIdeaInput 
 } from './Topics.objecttypes';
 import { Authenticated }  from '../middlewares.graphql';
+import TopicService from "../.././Topics/Topics.service";
+
+const _topicservice = new TopicService();
 
 interface topicResolver {
 	searchQuery(search_term: string) :Promise<any>

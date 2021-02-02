@@ -82,12 +82,12 @@ class UserService {
     }
     async updateUser(user_id, body) {
         try {
-            const user = await Authentication_models_1.UserModel.findByIdAndUpdate(user_id, body);
-            return { status: 200, updated: true, message: 'user updated successfully!' };
+            const user = await Authentication_models_1.UserModel.findByIdAndUpdate(user_id, body, { new: true });
+            return { status: 200, updated: true, message: 'user updated successfully!', user: user };
         }
         catch (error) {
             return {
-                status: 500, updated: false, message: 'something went wrong! Try again.'
+                status: 500, updated: false, message: 'something went wrong! Try again.', user: null
             };
         }
     }

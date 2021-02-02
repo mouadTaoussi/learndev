@@ -9,6 +9,9 @@ const TopicSchema = new mongoose_1.Schema({
     topic_title: {
         type: String, required: true
     },
+    level: {
+        type: String, required: true
+    },
     background_image: {
         type: String, required: true
     },
@@ -21,6 +24,9 @@ const DocsSchema = new mongoose_1.Schema({
         type: String, required: true
     },
     docs_title: {
+        type: String, required: true
+    },
+    level: {
         type: String, required: true
     },
     docs_link: {
@@ -37,6 +43,9 @@ const CourseSchema = new mongoose_1.Schema({
     course_title: {
         type: String, required: true
     },
+    level: {
+        type: String, required: true
+    },
     course_link: {
         type: String, required: true
     },
@@ -51,6 +60,9 @@ const ArticleSchema = new mongoose_1.Schema({
     article_title: {
         type: String, required: true
     },
+    level: {
+        type: String, required: true
+    },
     article_link: {
         type: String, required: true
     },
@@ -63,6 +75,9 @@ const ProjectIdeaSchema = new mongoose_1.Schema({
         type: String, required: true
     },
     project_idea_title: {
+        type: String, required: true
+    },
+    level: {
         type: String, required: true
     },
     description: {

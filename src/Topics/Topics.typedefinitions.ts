@@ -1,1 +1,5 @@
-export {};
+interface TopicService {
+
+}
+
+export { TopicService };

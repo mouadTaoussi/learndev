@@ -11,11 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.projectIdeaResolver = exports.articleResolver = exports.courseResolver = exports.docsResolver = exports.topicResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const Topics_objecttypes_1 = require("./Topics.objecttypes");
 const middlewares_graphql_1 = require("../middlewares.graphql");
+const Topics_service_1 = __importDefault(require("../.././Topics/Topics.service"));
+const _topicservice = new Topics_service_1.default();
 let topicResolver = class topicResolver {
     async searchQuery(search_term) {
     }
