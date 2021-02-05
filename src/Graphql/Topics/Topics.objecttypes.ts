@@ -3,8 +3,14 @@ import { ObjectType, InputType, Field }  from 'type-graphql';
 // docs- courses- articles- projects ideas
 @ObjectType({ description: 'This one represents topic' })
 class Topic {
+	@Field( type => String,{description: "id field" } )
+	_id : string;
+
 	@Field( type => String,{ description: "user_id field" } )
 	user_id : string;
+
+	@Field( type => String,{ description: "creator_name field" } )
+	creator_name : string;
 
 	@Field( type => String,{ description: "topic_title field" } )
 	topic_title : string;
@@ -29,8 +35,14 @@ class Topic {
 
 @ObjectType({ description: 'This one represents docs' })
 class Docs {
+	@Field( type => String,{description: "id field" } )
+	_id : string;
+
 	@Field( type => String,{description: "user_id field" } )
 	user_id : string;
+
+	@Field( type => String,{ description: "creator_name field" } )
+	creator_name : string;
 
 	@Field( type => String,{description: "topic_id field" } )
 	topic_id : string;
@@ -44,12 +56,21 @@ class Docs {
 	@Field( type => String,{description: "docs_link field" } )
 	docs_link : string;
 
+	@Field( type => String,{description: "upvotes field" } )
+	upvotes : string;
+
 }
 
 @ObjectType({ description : "This one represents course" })
 class Course {
+	@Field( type => String,{description: "id field" } )
+	_id : string;
+
 	@Field( type => String,{description: "user_id field" } )
 	user_id : string;
+
+	@Field( type => String,{ description: "creator_name field" } )
+	creator_name : string;
 
 	@Field( type => String,{description: "topic_id field" } )
 	topic_id : string;
@@ -62,12 +83,21 @@ class Course {
 
 	@Field( type => String,{description: "course_link field" } )
 	course_link : string;
+
+	@Field( type => String,{description: "upvotes field" } )
+	upvotes : string;
 }
 
 @ObjectType({ description: 'This one represents article' })
 class Article {
+	@Field( type => String,{description: "id field" } )
+	_id : string;
+
 	@Field( type => String,{ description: "user_id field" } )
 	user_id : string;
+
+	@Field( type => String,{ description: "creator_name field" } )
+	creator_name : string;
 
 	@Field( type => String,{ description: "topic_id field" } )
 	topic_id : string;
@@ -85,8 +115,14 @@ class Article {
 
 @ObjectType({ description : 'This one represents project idea' })
 class ProjectIdea {
+	@Field( type => String,{description: "id field" } )
+	_id : string;
+
 	@Field( type => String, { description: "user_id field" } )
 	user_id : string;
+
+	@Field( type => String,{ description: "creator_name field" } )
+	creator_name : string;
 
 	@Field( type => String, { description: "topic_id field" } )
 	topic_id : string;

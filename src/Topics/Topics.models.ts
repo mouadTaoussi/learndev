@@ -4,6 +4,9 @@ const TopicSchema = new Schema({
 	user_id : {
 		type : String, required : true
 	},
+	creator_name : {
+		type : String, required: true
+	},
 	topic_title : {
 		type : String, required : true
 	},
@@ -21,6 +24,9 @@ const DocsSchema = new Schema({
 	user_id	 : {
 		type : String, required: true
 	},
+	creator_name : {
+		type : String, required: true
+	},
 	topic_id : {
 		type : String, required: true
 	},
@@ -33,6 +39,9 @@ const DocsSchema = new Schema({
 	docs_link  : {
 		type : String, required: true
 	},
+	upvotes : {
+		type: Number, required: false, default : 0
+	}
 
 
 });
@@ -40,6 +49,9 @@ const DocsSchema = new Schema({
 const CourseSchema = new Schema({
 // get metadata about the link in meta tags ( image - title )
 	user_id	 : {
+		type : String, required: true
+	},
+	creator_name : {
 		type : String, required: true
 	},
 	topic_id : {
@@ -54,12 +66,18 @@ const CourseSchema = new Schema({
 	course_link : {
 		type : String, required: true
 	},
+	upvotes : {
+		type: Number, required: false, default : 0
+	}
 
 });
 
 const ArticleSchema = new Schema({
 // get metadata about the link in meta tags ( image - title )
 	user_id	 : {
+		type : String, required: true
+	},
+	creator_name : {
 		type : String, required: true
 	},
 	topic_id : {
@@ -74,11 +92,17 @@ const ArticleSchema = new Schema({
 	article_link  : {
 		type : String, required: true
 	},
+	upvotes : {
+		type: Number, required: false, default : 0
+	}
 
 });
 
 const ProjectIdeaSchema = new Schema({
 	user_id : {
+		type : String, required: true
+	},
+	creator_name : {
 		type : String, required: true
 	},
 	topic_id: {
@@ -92,6 +116,9 @@ const ProjectIdeaSchema = new Schema({
 	},
 	description : {
 		type : String, required: true
+	},
+	upvotes : {
+		type: Number, required: false, default : 0
 	}
 });
 

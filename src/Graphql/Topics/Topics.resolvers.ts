@@ -9,7 +9,8 @@ import TopicService from "../.././Topics/Topics.service";
 const _topicservice = new TopicService();
 
 interface topicResolver {
-	searchQuery(search_term: string) :Promise<any>
+	searchTopic(search_term: string) :Promise<any>
+	searchContentInTopics(search_term: string) :Promise<any>
 	getTopic(topic_id: string) :Promise<any>
 	getTopics(topic_id: string) :Promise<any>
 	addTopic(new_topic: TopicInput, context:any) :Promise<any>
@@ -20,18 +21,26 @@ interface topicResolver {
 class topicResolver implements topicResolver {
 
 	@Query(returns => [Topic], { description : "This query returns the topics by the search item"})
-	public async searchQuery(@Arg('search_term') search_term : string)  {
+	public async searchTopic(@Arg('search_term') search_term : string)  {
+
+	}
+
+	@Query(returns => [Topic], { description : "This query returns the contents in the topic by the search item"})
+	public async searchContentInTopics(@Arg('search_term') search_term : string)  {
 
 	}
 
 	@Query(returns => Topic, { description: "This query returns a topic" })
 	@UseMiddleware(Authenticated)
 	public async getTopic(@Arg('topic_id') topic_id: string, @Ctx() context : any) : Promise<any> {
+
 		const user = context.req.user;
 
 		console.log(user)
 		return {
+			_id : "vffff",
 			user_id : "vffff",
+			creator_name : "vffff",
 			topic_title : topic_id,
 			background_image : "string",
 			docs : [{user_id:"mouad",topic_id: topic_id, docs_title : "get data",docs_link: "ff"}],
