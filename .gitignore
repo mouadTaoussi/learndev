@@ -1,4 +1,5 @@
 .env
 node_modules
+/ld-front-end-2/node_modules
 /dist
-id-front-end/node_modules
+/id-front-end/node_modules
