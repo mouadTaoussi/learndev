@@ -3,19 +3,19 @@ import { ObjectType, InputType, Field }  from 'type-graphql';
 // docs- courses- articles- projects ideas
 @ObjectType({ description: 'This one represents topic' })
 class Topic {
-	@Field( type => String,{description: "id field" } )
+	@Field( type => String, {description: "id field" } )
 	_id : string;
 
-	@Field( type => String,{ description: "user_id field" } )
+	@Field( type => String, { description: "user_id field" } )
 	user_id : string;
 
-	@Field( type => String,{ description: "creator_name field" } )
+	@Field( type => String, { description: "creator_name field" } )
 	creator_name : string;
 
-	@Field( type => String,{ description: "topic_title field" } )
+	@Field( type => String, { description: "topic_title field" } )
 	topic_title : string;
 
-	@Field( type => String,{ description: "background_image field" } )
+	@Field( type => String, { description: "background_image field" } )
 	background_image : string;
 
 
@@ -41,7 +41,7 @@ class Docs {
 	@Field( type => String,{description: "user_id field" } )
 	user_id : string;
 
-	@Field( type => String,{ description: "creator_name field" } )
+	@Field( type => String,{description: "creator_name field" } )
 	creator_name : string;
 
 	@Field( type => String,{description: "topic_id field" } )
@@ -105,7 +105,7 @@ class Article {
 	@Field( type => String,{ description: "article_title field" } )
 	article_title : string;
 
-	@Field( type => String,{description: "level field" } )
+	@Field( type => String,{ description: "level field" } )
 	level : string;
 
 	@Field( type => String,{ description: "article_link field" } )

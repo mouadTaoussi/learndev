@@ -5,13 +5,13 @@ const TopicSchema = new Schema({
 		type : String, required : true
 	},
 	creator_name : {
-		type : String, required: true
+		type : String, required : true
 	},
 	topic_title : {
 		type : String, required : true
 	},
 	level : {
-		type : String, required: true
+		type : String, required : true
 	},
 	// Search trough the web about an image that relevents to that topic
 	background_image : {
@@ -20,7 +20,7 @@ const TopicSchema = new Schema({
 });
 
 const DocsSchema = new Schema({
-// get metadata about the link in meta tags ( image - title )
+	// get metadata about the link in meta tags ( image - title )
 	user_id	 : {
 		type : String, required: true
 	},
@@ -42,12 +42,10 @@ const DocsSchema = new Schema({
 	upvotes : {
 		type: Number, required: false, default : 0
 	}
-
-
 });
 
 const CourseSchema = new Schema({
-// get metadata about the link in meta tags ( image - title )
+	// get metadata about the link in meta tags ( image - title )
 	user_id	 : {
 		type : String, required: true
 	},
@@ -73,7 +71,7 @@ const CourseSchema = new Schema({
 });
 
 const ArticleSchema = new Schema({
-// get metadata about the link in meta tags ( image - title )
+	// get metadata about the link in meta tags ( image - title )
 	user_id	 : {
 		type : String, required: true
 	},
