@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Arg, Args, Ctx, UseMiddleware } from 'type-graphql';
 import { 
 	Topic,      Docs,      Course,      Article,      ProjectIdea,
-	TopicInput, DocsInput, CourseInput, ArticleInput, ProjectIdeaInput 
+	TopicInput, DocsInput, CourseInput, ArticleInput, ProjectIdeaInput, LoadMoreRules
 } from './Topics.objecttypes';
 import { Authenticated }  from '../middlewares.graphql';
 import TopicService from "../.././Topics/Topics.service";
@@ -10,9 +10,9 @@ const _topicservice = new TopicService();
 
 interface topicResolver {
 	searchTopic(search_term: string) :Promise<any>
-	searchContentInTopics(search_term: string) :Promise<any>
-	getTopic(topic_id: string) :Promise<any>
-	getTopics(topic_id: string) :Promise<any>
+	searchContentInTopic(search_term: string) :Promise<any>
+	getTopic(topic_id: string,context : any) :Promise<any>
+	getTopics(topic_id: string, loadmorerules: {limit:number,skip:number}) :Promise<any>
 	addTopic(new_topic: TopicInput, context:any) :Promise<any>
 	deleteTopic(topic_id: string, context:any) :Promise<any>
 }
@@ -26,7 +26,7 @@ class topicResolver implements topicResolver {
 	}
 
 	@Query(returns => [Topic], { description : "This query returns the contents in the topic by the search item"})
-	public async searchContentInTopics(@Arg('search_term') search_term : string)  {
+	public async searchContentInTopic(@Arg('search_term') search_term : string)  {
 
 	}
 
@@ -51,7 +51,7 @@ class topicResolver implements topicResolver {
 	}
 
 	@Query(returns => [Topic], { description: "This query returns available topics" })
-	public async getTopics() : Promise<any> {
+	public async getTopics(@Arg('new_course') loadmorerules: LoadMoreRules) : Promise<any> {
 
 	}
 

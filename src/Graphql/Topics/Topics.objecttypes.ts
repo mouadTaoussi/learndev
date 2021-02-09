@@ -221,7 +221,16 @@ class ProjectIdeaInput {
 	description : string;
 }
 
+@InputType()
+class LoadMoreRules {
+	@Field( type => Number )
+	limit : number;
+
+	@Field( type => Number )
+	skip : number;
+}
+
 export { 
 	Topic, Docs, Course, Article, ProjectIdea, 
-	TopicInput, DocsInput, CourseInput, ArticleInput, ProjectIdeaInput 
+	TopicInput, DocsInput, CourseInput, ArticleInput, ProjectIdeaInput, LoadMoreRules
 };

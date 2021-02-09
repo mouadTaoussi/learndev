@@ -38,9 +38,6 @@ const DocsSchema = new Schema({
 	},
 	docs_link  : {
 		type : String, required: true
-	},
-	upvotes : {
-		type: Number, required: false, default : 0
 	}
 });
 
@@ -63,11 +60,7 @@ const CourseSchema = new Schema({
 	},
 	course_link : {
 		type : String, required: true
-	},
-	upvotes : {
-		type: Number, required: false, default : 0
 	}
-
 });
 
 const ArticleSchema = new Schema({
@@ -89,9 +82,6 @@ const ArticleSchema = new Schema({
 	},
 	article_link  : {
 		type : String, required: true
-	},
-	upvotes : {
-		type: Number, required: false, default : 0
 	}
 
 });
@@ -114,9 +104,6 @@ const ProjectIdeaSchema = new Schema({
 	},
 	description : {
 		type : String, required: true
-	},
-	upvotes : {
-		type: Number, required: false, default : 0
 	}
 });
 

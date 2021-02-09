@@ -8,7 +8,7 @@ interface UserService {
 	changePassword(id: string, password: string)                          :Promise<{status:number, changed:boolean,message:string}>
 }
 
-interface Authentication {
+interface AuthenticationInt {
 	 login   (req: Request, res: Response) :Promise<void>
 	 register(req: Request, res: Response) :Promise<void>
 	 resetPassword(req: Request, res: Response) :Promise<void>
@@ -33,4 +33,4 @@ interface UserBody {
 // 	password       : string
 // }
 
-export { UserService, Authentication, UserBody };
+export { UserService, AuthenticationInt, UserBody };

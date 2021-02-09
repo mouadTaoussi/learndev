@@ -1,5 +1,5 @@
 import __UserService__ from "./Authentication.service";
-import { UserService, Authentication, UserBody } from './Authentication.typedefinitions';
+import { UserService, AuthenticationInt, UserBody } from './Authentication.typedefinitions';
 import { Request, Response } from "express";
 import { genSalt, hash, compare } from "bcrypt";
 import { createTransport } from "nodemailer";
@@ -8,7 +8,7 @@ import { v4 } from "uuid";
 
 const _user = new __UserService__();
 
-class __Authentication__ implements Authentication {
+class Authentication implements AuthenticationInt {
 	public async login(req: Request, res: Response) :Promise<void>{
 		// Check if the user is alreay logged in
 		// Get body data
@@ -237,4 +237,4 @@ class __Authentication__ implements Authentication {
 	}
 }
 
-export default __Authentication__;
+export default Authentication;
