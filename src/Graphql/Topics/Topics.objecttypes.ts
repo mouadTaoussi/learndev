@@ -3,7 +3,7 @@ import { ObjectType, InputType, Field }  from 'type-graphql';
 // docs- courses- articles- projects ideas
 @ObjectType({ description: 'This one represents topic' })
 class Topic {
-	@Field( type => String, {description: "id field" } )
+	@Field( type => String, { description: "id field" } )
 	_id : string;
 
 	@Field( type => String, { description: "user_id field" } )

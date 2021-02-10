@@ -1,13 +1,13 @@
 import { TopicModel, DocsModel, CourseModel, ArticleModel, ProjectIdeaModel } from './Topics.models';
-import { TopicServiceInt } from './Topics.typedefinitions';
+import { TopicServiceInt, Topic, Docs, Course, Article, ProjectIdea } from './Topics.typedefinitions';
 
 
 class TopicService implements TopicServiceInt {
-	public async searchTopic() :Promise<{message: string|null,found:boolean,data:any}>{
+	public async searchTopic(query: string[]) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
 
 			const topic = await TopicModel;
-			// 
+			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
 			return {
 				message : null ,
 				found : false,
@@ -22,11 +22,11 @@ class TopicService implements TopicServiceInt {
 			}
 		}
 	}
-	public async searchContentInTopic() :Promise<{message: string|null,found:boolean,data:any}>{
+	public async searchContentInTopic(query: string[]) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
 
 			const topic = await TopicModel;
-			//
+			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
 			return {
 				message : null ,
 				found : false,
@@ -42,14 +42,14 @@ class TopicService implements TopicServiceInt {
 		}
 
 	}
-	public async getTopic () :Promise<{message: string|null,found:boolean,data:any}>{
+	public async getTopic (item_id: string) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
-			const topic = await TopicModel;
+			const topic = await TopicModel.findById(item_id);
 			//
 			return {
 				message : null ,
 				found : false,
-				data : null
+				data : topic
 			}
 		}
 		catch(err){
@@ -80,14 +80,16 @@ class TopicService implements TopicServiceInt {
 		}
 
 	}
-	public async addTopic () :Promise<{message: string|null,added:boolean,data:any}>{
+	public async addTopic (topic: Topic) :Promise<{message: string|null,added:boolean,data:any}>{
 		try {
-			const addtopic = await TopicModel;
+			const addtopic = new TopicModel(topic);
+
+			await addtopic.save();
 			//
 			return {
 				message : null ,
 				added : false,
-				data : null
+				data : addtopic
 			}
 		}
 		catch(err){
@@ -99,48 +101,9 @@ class TopicService implements TopicServiceInt {
 		}
 
 	}
-	public async deleteTopic () :Promise<{message: string|null,deleted:boolean,data:any}>{
+	public async deleteTopic (item_id: string) :Promise<{message: string|null,deleted:boolean,data:any}>{
 		try {
-			const deletetopic = await TopicModel;
-			//
-			return {
-				message : null ,
-				deleted : false,
-				data : null
-			}
-		}
-		catch(err){
-			return {
-				message : null ,
-				deleted : false,
-				data : null
-			}
-		}
-
-	}
-
-	public async addDocs () :Promise<{message: string|null,added:boolean,data:any}>{
-		try {
-			const adddocs = await DocsModel;
-			//
-			return {
-				message : null ,
-				added : false,
-				data : null
-			}
-		}
-		catch(err){
-			return {
-				message : null ,
-				added : false,
-				data : null
-			}
-		}
-
-	}
-	public async deleteDocs () :Promise<{message: string|null,deleted:boolean,data:any}>{
-		try {
-			const deletedocs = await DocsModel;
+			const deletetopic = await TopicModel.findById(item_id).remove();
 			//
 			return {
 				message : null ,
@@ -158,14 +121,16 @@ class TopicService implements TopicServiceInt {
 
 	}
 
-	public async addCourse () :Promise<{message: string|null,added:boolean,data:any}>{
+	public async addDocs (docs : Docs) :Promise<{message: string|null,added:boolean,data:any}>{
 		try {
-			const addcourse = await CourseModel;
+			const adddocs = new DocsModel(docs);
+
+			await adddocs.save();
 			//
 			return {
 				message : null ,
 				added : false,
-				data : null
+				data : adddocs
 			}
 		}
 		catch(err){
@@ -177,9 +142,9 @@ class TopicService implements TopicServiceInt {
 		}
 
 	}
-	public async deleteCourse () :Promise<{message: string|null,deleted:boolean,data:any}>{
+	public async deleteDocs (item_id: string) :Promise<{message: string|null,deleted:boolean,data:any}>{
 		try {
-			const deletecourse = await CourseModel;
+			const deletedocs = await DocsModel.findById(item_id).remove();
 			//
 			return {
 				message : null ,
@@ -197,14 +162,16 @@ class TopicService implements TopicServiceInt {
 
 	}
 
-	public async addArticle () :Promise<{message: string|null,added:boolean,data:any}>{
+	public async addCourse (course: Course) :Promise<{message: string|null,added:boolean,data:any}>{
 		try {
-			const addarticle = await ArticleModel;
+			const addcourse = new CourseModel(course);
+
+			await addcourse.save();
 			//
 			return {
 				message : null ,
 				added : false,
-				data : null
+				data : addcourse
 			}
 		}
 		catch(err){
@@ -216,9 +183,50 @@ class TopicService implements TopicServiceInt {
 		}
 
 	}
-	public async deleteArticle () :Promise<{message: string|null,deleted:boolean,data:any}>{
+	public async deleteCourse (item_id: string) :Promise<{message: string|null,deleted:boolean,data:any}>{
 		try {
-			const dletearticle = await ArticleModel;
+			const deletecourse = await CourseModel.findById(item_id).remove();
+			//
+			return {
+				message : null ,
+				deleted : false,
+				data : null
+			}
+		}
+		catch(err){
+			return {
+				message : null ,
+				deleted : false,
+				data : null
+			}
+		}
+
+	}
+
+	public async addArticle (article: Article) :Promise<{message: string|null,added:boolean,data:any}>{
+		try {
+			const addarticle = new ArticleModel(article);
+
+			await addarticle.save();
+			//
+			return {
+				message : null ,
+				added : false,
+				data : addarticle
+			}
+		}
+		catch(err){
+			return {
+				message : null ,
+				added : false,
+				data : null
+			}
+		}
+
+	}
+	public async deleteArticle (item_id: string) :Promise<{message: string|null,deleted:boolean,data:any}>{
+		try {
+			const deletearticle = await ArticleModel.findById(item_id).remove();
 			// 
 			return {
 				message : null ,
@@ -236,14 +244,16 @@ class TopicService implements TopicServiceInt {
 
 	}
 
-	public async addProjectIdea () :Promise<{message: string|null,added:boolean,data:any}>{
+	public async addProjectIdea (projectIdea: ProjectIdea) :Promise<{message: string|null,added:boolean,data:any}>{
 		try {
-			const addprojectidea = await ProjectIdeaModel;
+			const addprojectidea = new ProjectIdeaModel(projectIdea);
+			
+			await addprojectidea.save();
 			//
 			return {
 				message : null ,
 				added : false,
-				data : null
+				data : addprojectidea
 			}
 		}
 		catch(err){
@@ -255,9 +265,9 @@ class TopicService implements TopicServiceInt {
 		}
 
 	}
-	public async deleteProjectIdea () :Promise<{message: string|null,deleted:boolean,data:any}>{
+	public async deleteProjectIdea (item_id: string) :Promise<{message: string|null,deleted:boolean,data:any}>{
 		try {
-			const deleteprojectidea = await ProjectIdeaModel;
+			const deleteprojectidea = await ProjectIdeaModel.findById(item_id).remove();
 			//
 			return {
 				message : null ,

@@ -22,12 +22,20 @@ class topicResolver implements topicResolver {
 
 	@Query(returns => [Topic], { description : "This query returns the topics by the search item"})
 	public async searchTopic(@Arg('search_term') search_term : string)  {
-
+		// Get the query 
+		// Split the query to array
+		// Delete logical tools (in-and...)
+		// Find the right documents
+		// Sort them by 
 	}
 
 	@Query(returns => [Topic], { description : "This query returns the contents in the topic by the search item"})
 	public async searchContentInTopic(@Arg('search_term') search_term : string)  {
-
+		// Get the query 
+		// Split the query to array
+		// Delete logical tools (in-and...)
+		// Find the right documents
+		// Sort them by
 	}
 
 	@Query(returns => Topic, { description: "This query returns a topic" })
