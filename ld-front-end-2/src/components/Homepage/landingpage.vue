@@ -10,7 +10,7 @@
 			    <!-- <router-link tag="a" class="list-item" to="/register">Search</router-link> -->
 			    <router-link tag="a" class="list-item" to="/about">About</router-link>
 			    <!-- <input class="list-item form-control" placeholder="Search" type="text"> -->
-			    <router-link tag="button" class="list-item btn btn-primary" to="/login">Contribute</router-link>
+			    <router-link tag="button" class="shadow list-item btn btn-primary" to="/login">Contribute</router-link>
 			    <!-- <router-link tag="button" class="btn btn-primary" to="/user">User</router-link> -->
 			</div>
 		</header>
@@ -19,8 +19,12 @@
 				<h1 class="main-title text-white">
 					Learn Development in a straight way!
 				</h1>
-				<button class="btn btn-primary m-2">Log in</button>
-				<button class="btn btn-primary m-2">Register</button>
+				<router-link to="/topics">
+					<button class="btn btn-primary m-2">Explore Topics</button>
+				</router-link>
+				<router-link to="/register">
+					<button class="btn btn-primary m-2">Contribute</button>
+				</router-link>
 			</div>
 			<p class="image-credit">
 				Photo by <a href="https://www.pexels.com/@neo-853421"><strong>Neo</strong></a> from Pexels</p>
@@ -52,6 +56,7 @@ export default {
 		background-origin: content-box;
 		background-size: cover;
 		background-position: center;
+		background-attachment: fixed;
 		width: 100%;
 		height: 600px;
 		position: relative;

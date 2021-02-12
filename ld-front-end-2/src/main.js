@@ -21,7 +21,7 @@ if (window.location.pathname) {
 			})
 		
 
-		}else if ( window.scrollY > 100 ) {
+		}else if ( window.scrollY > 500 ) {
 			document.querySelector('.header-landingpage').style.backgroundColor = 'white';
 			document.querySelector('.header-landingpage').classList.add('shadow');
 			

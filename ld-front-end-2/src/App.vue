@@ -8,11 +8,15 @@
 
 
 :root {
-
+    /*--primary-- :  #0652DD;*/
 }
-body {
+.btn {
     font-family: 'Changa', sans-serif;
     /*font-family: 'Poppins', sans-serif;*/
+}
+
+body {
+    font-family: 'Changa', sans-serif;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
