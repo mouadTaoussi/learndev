@@ -119,7 +119,7 @@
 		/*background-color: var(--primary--);*/
 		display: grid;
 		grid-template-columns: 2fr 3fr;
-		font-family: "Changa";
+		font-family: var(--font--);
 	}
 	.background-area {
 		background-image: url('../assets/Learndev.svg');

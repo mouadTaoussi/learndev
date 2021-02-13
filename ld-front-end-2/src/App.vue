@@ -8,15 +8,21 @@
 
 
 :root {
-    /*--primary-- :  #0652DD;*/
+    --primary-- :  #0652DD;
+    --font--    :'Changa', sans-serif;
 }
 .btn {
-    font-family: 'Changa', sans-serif;
+    font-family: var(--font--);
     /*font-family: 'Poppins', sans-serif;*/
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
 body {
-    font-family: 'Changa', sans-serif;
+    font-family: var(--font--);
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

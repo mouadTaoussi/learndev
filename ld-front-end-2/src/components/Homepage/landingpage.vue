@@ -1,55 +1,45 @@
 <template>
-	<section class="showcase-area">
-		<header class="header-landingpage">
-			<div class="brand-child"><p class="logo text-white">.learnDev()</p></div>
-			<div class="list-child">
-				<router-link tag="a" class="list-item" to="/">Discover Topics</router-link>
-			    <!-- <router-link to="/topics">Topics</router-link> -->
-			    <!-- <router-link to="/topic">Topic</router-link> -->
-			    <!-- <router-link to="/resetpassword">Reset Password</router-link> -->
-			    <!-- <router-link tag="a" class="list-item" to="/register">Search</router-link> -->
-			    <router-link tag="a" class="list-item" to="/about">About</router-link>
-			    <!-- <input class="list-item form-control" placeholder="Search" type="text"> -->
-			    <router-link tag="button" class="shadow list-item btn btn-primary" to="/login">Contribute</router-link>
-			    <!-- <router-link tag="button" class="btn btn-primary" to="/user">User</router-link> -->
-			</div>
-		</header>
-		<section>
-			<div class="content-area">
-				<h1 class="main-title text-white">
-					Learn Development in a straight way!
-				</h1>
-				<router-link to="/topics">
-					<button class="btn btn-primary m-2">Explore Topics</button>
-				</router-link>
-				<router-link to="/register">
-					<button class="btn btn-primary m-2">Contribute</button>
-				</router-link>
-			</div>
-			<p class="image-credit">
-				Photo by <a href="https://www.pexels.com/@neo-853421"><strong>Neo</strong></a> from Pexels</p>
+	<section>
+		<customHeader></customHeader>
+		<section class="showcase-area">
+			<!-- custom Header -->
+			<!-- custom Header -->
+			<section>
+				<div class="content-area">
+					<h1 class="main-title text-white">
+						Learn Development in a straight way!
+					</h1>
+					<router-link to="/topics">
+						<button class="btn btn-primary m-2">Explore Topics</button>
+					</router-link>
+					<router-link to="/register">
+						<button class="btn btn-primary m-2">Contribute</button>
+					</router-link>
+				</div>
+				<p class="image-credit">
+					Photo by <a href="https://www.pexels.com/@neo-853421"><strong>Neo</strong></a> from Pexels</p>
+			</section>
 		</section>
 	</section>
 </template>
 
 <script>
-export default {
+	import customHeader from ".././Header.vue"
+	export default {
 
-  name: 'landingpage',
+	  name: 'landingpage',
+	  components: {
+	  	customHeader
+	  },
+	  data () {
+	    return {
 
-  data () {
-    return {
-
-    }
-  }
-}
+	    }
+	  }
+	}
 </script>
 
 <style lang="css" scoped>
-	.btn {
-		color: white!important;
-		font-family: 'Changa', sans-serif;
-	}
 	.showcase-area {
 		background-image: url('../.././assets/pexels-neo-2653362.jpg');
 		background-repeat: no-repeat;
@@ -60,6 +50,7 @@ export default {
 		width: 100%;
 		height: 600px;
 		position: relative;
+		padding-top: 220px;
 	}		
 	.header-landingpage {
 		display: grid;
@@ -84,27 +75,18 @@ export default {
 		justify-self: end;
 	}
 	.logo {
-		font-family: 'Changa', sans-serif;
+		font-family: var(--font--);
 		/*font-size: 50px;*/
 	}
 	.main-title {
-		font-family: 'Changa', sans-serif;
+		font-family: var(--font--);
 		font-size: 50px;
-	}
-	.content-area {
-		position: absolute;
-		top: 220px;
-		left: 20%;
 	}
 	.image-credit {
 		color: white;
 		position: absolute;
 		bottom: 50px;
 		left: 50px;
-	}
-	a {
-		color: white;
-		text-decoration: none;
 	}
 
 	@media only screen and (max-width: 800px) {

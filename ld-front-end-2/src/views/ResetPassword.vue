@@ -40,7 +40,7 @@
 		height: 100vh;
 		padding-top: 120px;
 		background-color: var(--primary--);
-		font-family: "Changa";
+		font-family: var(--font--);
 	}
 	.resetpassword-components {
 		background-color: white;

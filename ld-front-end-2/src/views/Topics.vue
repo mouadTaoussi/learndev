@@ -1,19 +1,73 @@
 <template>
 	<section>
+		<!-- Custom Header -->
 		<costumHeader></costumHeader>
-		Topics
+		<!-- Custom Header -->
+		<section class="container search-and-filter-container">
+			<!-- Search And Filter -->
+			<SearchAndFilter></SearchAndFilter>
+			<!-- Search And Filter -->
+		</section>
+		<section class="container topics-container">
+			<Topic 
+				img="https://images.wallpaperscraft.com/image/code_text_programming_146694_1920x1080.jpg" 
+				title="Javascript" 
+				topic_id="fbgbggbf"></Topic>
+			<Topic 
+				img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Po2093NQhOs70WCOV5eBtQHaEK%26pid%3DApi&f=1" 
+				title="Typescript" 
+				topic_id="fbgbggbf"></Topic>
+			<Topic 
+				img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.pNzwj00Fd1YGH8DpD4bp-AHaEL%26pid%3DApi&f=1" 
+				title="Ruby" 
+				topic_id="fbgbggbf"></Topic>
+			<Topic 
+				img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP._DbjqYETkIJJ6B_v1d8flQHaEK%26pid%3DApi&f=1" 
+				title="C++" 
+				topic_id="fbgbggbf"></Topic>
+			<Topic 
+				img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.4vK181HqskjACRtwR7RgtgHaEK%26pid%3DApi&f=1" 
+				title="Java" 
+				topic_id="fbgbggbf"></Topic>
+			<Topic 
+				img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.JeDHfgDRRG98FRSFaycpdQHaEK%26pid%3DApi&f=1" 
+				title="Backend dev" 
+				topic_id="fbgbggbf"></Topic>
+			<Topic 
+				img="https://images.wallpaperscraft.com/image/code_text_programming_146694_1920x1080.jpg" 
+				title="Node.js" 
+				topic_id="fbgbggbf"></Topic>
+			<Topic 
+				img="https://images.wallpaperscraft.com/image/code_text_programming_146694_1920x1080.jpg" 
+				title="Internet of things" 
+				topic_id="fbgbggbf"></Topic>
+			<Topic 
+				img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.UJCFmFuv2SCYtSrng1qFFQHaEK%26pid%3DApi&f=1" 
+				title="Blockchain" 
+				topic_id="fbgbggbf"></Topic>
+		</section>
+		<button class="btn btn-light mt-4 mb-4">Load more</button>
+		<!-- Custom Footer -->
+		<costumFooter></costumFooter>
+		<!-- Custom Footer -->
 	</section>
 </template>
 
 <script>
 	import costumHeader from ".././components/Header.vue";
+	import Topic from ".././components/Topicspage/Topic.vue";
+	import SearchAndFilter from ".././components/Topicspage/SearchAndFilter.vue";
+	import costumFooter from ".././components/Footer.vue";
 
 	export default {
 
 	  name: 'Topics',
 
 	  components: {
-	  	costumHeader
+	  	costumHeader,
+	  	SearchAndFilter,
+	  	Topic,
+	  	costumFooter
 	  },
 
 	  data () {
@@ -25,4 +79,22 @@
 </script>
 
 <style lang="css" scoped>
+	.search-and-filter-container {
+		padding-top: 150px;
+	}
+	.topics-container {
+		display: grid;
+		grid-template-columns: 2fr 2fr 2fr;
+		grid-row-gap: 20px;
+		grid-column-gap: 20px;
+		margin-top: 20px;
+	}
+	@media only screen and (max-width: 800px) {
+		.topics-container {
+			display: grid;
+			grid-template-columns: 100%;
+			grid-gap: 20px;
+			width: 100%;
+		}
+	}
 </style>
