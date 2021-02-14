@@ -4,6 +4,7 @@
 		<costumHeader></costumHeader>
 		<!-- Custom Header -->
 		<section class="container search-and-filter-container">
+			<h1 class="text-left title">Some of the recommended Topics</h1>
 			<!-- Search And Filter -->
 			<SearchAndFilter></SearchAndFilter>
 			<!-- Search And Filter -->
@@ -46,7 +47,7 @@
 				title="Blockchain" 
 				topic_id="fbgbggbf"></Topic>
 		</section>
-		<button class="btn btn-light mt-4 mb-4">Load more</button>
+		<button class="btn btn-light shadow mt-4 mb-4">Load more</button>
 		<!-- Custom Footer -->
 		<costumFooter></costumFooter>
 		<!-- Custom Footer -->
@@ -80,7 +81,7 @@
 
 <style lang="css" scoped>
 	.search-and-filter-container {
-		padding-top: 150px;
+		padding-top: 100px;
 	}
 	.topics-container {
 		display: grid;
@@ -88,6 +89,11 @@
 		grid-row-gap: 20px;
 		grid-column-gap: 20px;
 		margin-top: 20px;
+	}
+	.title {
+		font-family: var(--font--);
+		margin-top: 20px;
+		margin-bottom: 20px;
 	}
 	@media only screen and (max-width: 800px) {
 		.topics-container {

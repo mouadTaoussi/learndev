@@ -12,7 +12,7 @@ interface topicResolver {
 	searchTopic(search_term: string) :Promise<any>
 	searchContentInTopic(search_term: string) :Promise<any>
 	getTopic(topic_id: string,context : any) :Promise<any>
-	getTopics(topic_id: string, loadmorerules: {limit:number,skip:number}) :Promise<any>
+	getTopics(topic_id: string, loadmorerules: LoadMoreRules) :Promise<any>
 	addTopic(new_topic: TopicInput, context:any) :Promise<any>
 	deleteTopic(topic_id: string, context:any) :Promise<any>
 }
@@ -26,7 +26,6 @@ class topicResolver implements topicResolver {
 		// Split the query to array
 		// Delete logical tools (in-and...)
 		// Find the right documents
-		// Sort them by 
 	}
 
 	@Query(returns => [Topic], { description : "This query returns the contents in the topic by the search item"})
@@ -35,7 +34,7 @@ class topicResolver implements topicResolver {
 		// Split the query to array
 		// Delete logical tools (in-and...)
 		// Find the right documents
-		// Sort them by
+		// Sort them by votes
 	}
 
 	@Query(returns => Topic, { description: "This query returns a topic" })

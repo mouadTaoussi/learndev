@@ -26,6 +26,10 @@ class TopicService implements TopicServiceInt {
 		try {
 
 			const topic = await TopicModel;
+			// Get from Docs 
+			// Get from Courses
+			// Get from Articles
+			// Get from ProjectIdea
 			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
 			return {
 				message : null ,
@@ -104,11 +108,15 @@ class TopicService implements TopicServiceInt {
 	public async deleteTopic (item_id: string) :Promise<{message: string|null,deleted:boolean,data:any}>{
 		try {
 			const deletetopic = await TopicModel.findById(item_id).remove();
-			//
+
+			// Delete all of it's content
+			const deletingDocs         = await DocsModel.deleteMany({topic_id:item_id});
+			const deletingCourses      = await CourseModel.deleteMany({topic_id:item_id});
+			const deletingArticles     = await ArticleModel.deleteMany({topic_id:item_id});
+			const deletingProjectIdeas = await ProjectIdeaModel.deleteMany({topic_id:item_id});
+
 			return {
-				message : null ,
-				deleted : false,
-				data : null
+				message : null ,deleted : false, data : null
 			}
 		}
 		catch(err){
