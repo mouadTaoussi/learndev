@@ -1,5 +1,5 @@
 <template>
-	<section class="header shadow">
+	<section class="header">
 	 	<header class="header-landingpage">
 	 		<div class="brand-child">
 		 		<router-link to="/">

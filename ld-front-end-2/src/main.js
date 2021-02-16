@@ -37,7 +37,7 @@ window.setInterval(()=>{
 	// Dont implement it 
 	else {
 		document.querySelector('.header-landingpage').style.backgroundColor = 'white';
-		document.querySelector('.header-landingpage').classList.add('shadow');
+		document.querySelector('.header-landingpage').classList.add('border');
 
 		document.querySelectorAll('.list-item').forEach((item)=>{
 			item.style.color = "black";
