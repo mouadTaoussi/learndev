@@ -22,13 +22,17 @@ const middlewares_graphql_1 = require("../middlewares.graphql");
 const Topics_service_1 = __importDefault(require("../.././Topics/Topics.service"));
 const _topicservice = new Topics_service_1.default();
 let topicResolver = class topicResolver {
-    async searchQuery(search_term) {
+    async searchTopic(search_term) {
+    }
+    async searchContentInTopic(search_term) {
     }
     async getTopic(topic_id, context) {
         const user = context.req.user;
         console.log(user);
         return {
+            _id: "vffff",
             user_id: "vffff",
+            creator_name: "vffff",
             topic_title: topic_id,
             background_image: "string",
             docs: [{ user_id: "mouad", topic_id: topic_id, docs_title: "get data", docs_link: "ff" }],
@@ -37,7 +41,7 @@ let topicResolver = class topicResolver {
             ProjectIdeas: [{ user_id: "mouad", topic_id: topic_id, project_idea_title: "get data", description: "ff" }]
         };
     }
-    async getTopics() {
+    async getTopics(loadmorerules) {
     }
     async addTopic(new_topic, context) {
         console.log(context.session);
@@ -53,7 +57,14 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], topicResolver.prototype, "searchQuery", null);
+], topicResolver.prototype, "searchTopic", null);
+__decorate([
+    type_graphql_1.Query(returns => [Topics_objecttypes_1.Topic], { description: "This query returns the contents in the topic by the search item" }),
+    __param(0, type_graphql_1.Arg('search_term')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], topicResolver.prototype, "searchContentInTopic", null);
 __decorate([
     type_graphql_1.Query(returns => Topics_objecttypes_1.Topic, { description: "This query returns a topic" }),
     type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
@@ -64,8 +75,9 @@ __decorate([
 ], topicResolver.prototype, "getTopic", null);
 __decorate([
     type_graphql_1.Query(returns => [Topics_objecttypes_1.Topic], { description: "This query returns available topics" }),
+    __param(0, type_graphql_1.Arg('new_course')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Topics_objecttypes_1.LoadMoreRules]),
     __metadata("design:returntype", Promise)
 ], topicResolver.prototype, "getTopics", null);
 __decorate([

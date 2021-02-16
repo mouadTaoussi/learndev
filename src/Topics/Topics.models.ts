@@ -20,7 +20,7 @@ const TopicSchema = new Schema({
 });
 
 const DocsSchema = new Schema({
-	// get metadata about the link in meta tags ( image - title )
+	
 	user_id	 : {
 		type : String, required: true
 	},
@@ -38,11 +38,15 @@ const DocsSchema = new Schema({
 	},
 	docs_link  : {
 		type : String, required: true
-	}
+	},
+	upvotes_count : {
+		type : Number, default: 0, required: false
+	},
+	upvotes : [{type: String}]
 });
 
 const CourseSchema = new Schema({
-	// get metadata about the link in meta tags ( image - title )
+	
 	user_id	 : {
 		type : String, required: true
 	},
@@ -60,11 +64,15 @@ const CourseSchema = new Schema({
 	},
 	course_link : {
 		type : String, required: true
-	}
+	},
+	upvotes_count : {
+		type : Number, default: 0, required: false
+	},
+	upvotes : [{type: String}]
 });
 
 const ArticleSchema = new Schema({
-	// get metadata about the link in meta tags ( image - title )
+	
 	user_id	 : {
 		type : String, required: true
 	},
@@ -82,7 +90,11 @@ const ArticleSchema = new Schema({
 	},
 	article_link  : {
 		type : String, required: true
-	}
+	},
+	upvotes_count : {
+		type : Number, default: 0, required: false
+	},
+	upvotes : [{type: String}]
 
 });
 
@@ -104,7 +116,11 @@ const ProjectIdeaSchema = new Schema({
 	},
 	description : {
 		type : String, required: true
-	}
+	},
+	upvotes_count : {
+		type : Number, default: 0, required: false
+	},
+	upvotes : [{type: String}]
 });
 
 // docs- courses- articles- projects ideas

@@ -6,6 +6,9 @@ const TopicSchema = new mongoose_1.Schema({
     user_id: {
         type: String, required: true
     },
+    creator_name: {
+        type: String, required: true
+    },
     topic_title: {
         type: String, required: true
     },
@@ -20,6 +23,9 @@ const DocsSchema = new mongoose_1.Schema({
     user_id: {
         type: String, required: true
     },
+    creator_name: {
+        type: String, required: true
+    },
     topic_id: {
         type: String, required: true
     },
@@ -32,9 +38,16 @@ const DocsSchema = new mongoose_1.Schema({
     docs_link: {
         type: String, required: true
     },
+    upvotes_count: {
+        type: Number, default: 0, required: false
+    },
+    upvotes: [{ type: String }]
 });
 const CourseSchema = new mongoose_1.Schema({
     user_id: {
+        type: String, required: true
+    },
+    creator_name: {
         type: String, required: true
     },
     topic_id: {
@@ -49,9 +62,16 @@ const CourseSchema = new mongoose_1.Schema({
     course_link: {
         type: String, required: true
     },
+    upvotes_count: {
+        type: Number, default: 0, required: false
+    },
+    upvotes: [{ type: String }]
 });
 const ArticleSchema = new mongoose_1.Schema({
     user_id: {
+        type: String, required: true
+    },
+    creator_name: {
         type: String, required: true
     },
     topic_id: {
@@ -66,9 +86,16 @@ const ArticleSchema = new mongoose_1.Schema({
     article_link: {
         type: String, required: true
     },
+    upvotes_count: {
+        type: Number, default: 0, required: false
+    },
+    upvotes: [{ type: String }]
 });
 const ProjectIdeaSchema = new mongoose_1.Schema({
     user_id: {
+        type: String, required: true
+    },
+    creator_name: {
         type: String, required: true
     },
     topic_id: {
@@ -82,7 +109,11 @@ const ProjectIdeaSchema = new mongoose_1.Schema({
     },
     description: {
         type: String, required: true
-    }
+    },
+    upvotes_count: {
+        type: Number, default: 0, required: false
+    },
+    upvotes: [{ type: String }]
 });
 const TopicModel = mongoose_1.model('topics', TopicSchema);
 exports.TopicModel = TopicModel;

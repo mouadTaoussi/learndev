@@ -1,14 +1,19 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+import axios from "axios";
+
+axios.defaults.withCredentials = true
 
 Vue.config.productionTip = false;
+Vue.prototype.$http = axios;
+
 
 new Vue({
   router,
   render: h => h(App)
 }).$mount("#app");
-
+console.log(window.location.pathname !== "/login")
 
 window.setInterval(()=>{
 	//Implement animation when in the home page
@@ -35,7 +40,10 @@ window.setInterval(()=>{
 		}
 	}
 	// Dont implement it 
-	else {
+	else if (window.location.pathname == "/login" || window.location.pathname == "/register" || window.location.pathname == "/resetPassword" )  {
+		return;
+	
+	}else {
 		document.querySelector('.header-landingpage').style.backgroundColor = 'white';
 		document.querySelector('.header-landingpage').classList.add('border');
 

@@ -9,14 +9,14 @@ class TopicService implements TopicServiceInt {
 			const topic = await TopicModel;
 			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
 			return {
-				message : null ,
+				message : null,
 				found : false,
 				data : null
 			}
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				found : false,
 				data : null
 			}
@@ -26,20 +26,22 @@ class TopicService implements TopicServiceInt {
 		try {
 
 			const topic = await TopicModel;
+			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
 			// Get from Docs 
 			// Get from Courses
 			// Get from Articles
 			// Get from ProjectIdea
-			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
+			// Check if the user upvoted some of the content in each resource
+
 			return {
-				message : null ,
+				message : null,
 				found : false,
 				data : null
 			}
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				found : false,
 				data : null
 			}
@@ -49,16 +51,18 @@ class TopicService implements TopicServiceInt {
 	public async getTopic (item_id: string) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
 			const topic = await TopicModel.findById(item_id);
+
+			// Check if the user upvoted some of the content in each resource
 			//
 			return {
-				message : null ,
+				message : null,
 				found : false,
 				data : topic
 			}
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				found : false,
 				data : null
 			}
@@ -70,14 +74,14 @@ class TopicService implements TopicServiceInt {
 			const topics = await TopicModel.find().skip(skip).limit(limit).exec();
 			//
 			return {
-				message : null ,
+				message : null,
 				found : false,
 				data : null
 			}
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				found : false,
 				data : null
 			}
@@ -91,14 +95,14 @@ class TopicService implements TopicServiceInt {
 			await addtopic.save();
 			//
 			return {
-				message : null ,
+				message : null,
 				added : false,
 				data : addtopic
 			}
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				added : false,
 				data : null
 			}
@@ -121,7 +125,7 @@ class TopicService implements TopicServiceInt {
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				deleted : false,
 				data : null
 			}
@@ -136,14 +140,14 @@ class TopicService implements TopicServiceInt {
 			await adddocs.save();
 			//
 			return {
-				message : null ,
+				message : null,
 				added : false,
 				data : adddocs
 			}
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				added : false,
 				data : null
 			}
@@ -155,14 +159,14 @@ class TopicService implements TopicServiceInt {
 			const deletedocs = await DocsModel.findById(item_id).remove();
 			//
 			return {
-				message : null ,
+				message : null,
 				deleted : false,
 				data : null
 			}
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				deleted : false,
 				data : null
 			}
@@ -177,14 +181,14 @@ class TopicService implements TopicServiceInt {
 			await addcourse.save();
 			//
 			return {
-				message : null ,
+				message : null,
 				added : false,
 				data : addcourse
 			}
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				added : false,
 				data : null
 			}
@@ -196,14 +200,14 @@ class TopicService implements TopicServiceInt {
 			const deletecourse = await CourseModel.findById(item_id).remove();
 			//
 			return {
-				message : null ,
+				message : null,
 				deleted : false,
 				data : null
 			}
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				deleted : false,
 				data : null
 			}
@@ -218,14 +222,14 @@ class TopicService implements TopicServiceInt {
 			await addarticle.save();
 			//
 			return {
-				message : null ,
+				message : null,
 				added : false,
 				data : addarticle
 			}
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				added : false,
 				data : null
 			}
@@ -237,14 +241,14 @@ class TopicService implements TopicServiceInt {
 			const deletearticle = await ArticleModel.findById(item_id).remove();
 			// 
 			return {
-				message : null ,
+				message : null,
 				deleted : false,
 				data : null
 			}
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				deleted : false,
 				data : null
 			}
@@ -259,14 +263,14 @@ class TopicService implements TopicServiceInt {
 			await addprojectidea.save();
 			//
 			return {
-				message : null ,
+				message : null,
 				added : false,
 				data : addprojectidea
 			}
 		}
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				added : false,
 				data : null
 			}
@@ -278,19 +282,28 @@ class TopicService implements TopicServiceInt {
 			const deleteprojectidea = await ProjectIdeaModel.findById(item_id).remove();
 			//
 			return {
-				message : null ,
+				message : null,
 				deleted : false,
 				data : null
 			}
 		}	
 		catch(err){
 			return {
-				message : null ,
+				message : null,
 				deleted : false,
 				data : null
 			}
 		}
 
+	}
+	public async upvote(user_id:string, type:string, resource_id:string) : Promise<boolean>{
+		// Find the resource 
+			// Check if the user upvoted
+			// Upvote the resource and save user id to the upvotes array if not upvoted
+			// Down vote the resource and remove user id from the upvotes array if already upvoted
+			// Add to upvoted list when he upvoted to the upvoted list
+			// Remove the content from the upvoted list of the user
+			return false;
 	}
 
 }

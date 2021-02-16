@@ -9,14 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProjectIdeaInput = exports.ArticleInput = exports.CourseInput = exports.DocsInput = exports.TopicInput = exports.ProjectIdea = exports.Article = exports.Course = exports.Docs = exports.Topic = void 0;
+exports.LoadMoreRules = exports.ProjectIdeaInput = exports.ArticleInput = exports.CourseInput = exports.DocsInput = exports.TopicInput = exports.ProjectIdea = exports.Article = exports.Course = exports.Docs = exports.Topic = void 0;
 const type_graphql_1 = require("type-graphql");
 let Topic = class Topic {
 };
 __decorate([
+    type_graphql_1.Field(type => String, { description: "id field" }),
+    __metadata("design:type", String)
+], Topic.prototype, "_id", void 0);
+__decorate([
     type_graphql_1.Field(type => String, { description: "user_id field" }),
     __metadata("design:type", String)
 ], Topic.prototype, "user_id", void 0);
+__decorate([
+    type_graphql_1.Field(type => String, { description: "creator_name field" }),
+    __metadata("design:type", String)
+], Topic.prototype, "creator_name", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "topic_title field" }),
     __metadata("design:type", String)
@@ -48,9 +56,17 @@ exports.Topic = Topic;
 let Docs = class Docs {
 };
 __decorate([
+    type_graphql_1.Field(type => String, { description: "id field" }),
+    __metadata("design:type", String)
+], Docs.prototype, "_id", void 0);
+__decorate([
     type_graphql_1.Field(type => String, { description: "user_id field" }),
     __metadata("design:type", String)
 ], Docs.prototype, "user_id", void 0);
+__decorate([
+    type_graphql_1.Field(type => String, { description: "creator_name field" }),
+    __metadata("design:type", String)
+], Docs.prototype, "creator_name", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "topic_id field" }),
     __metadata("design:type", String)
@@ -67,6 +83,10 @@ __decorate([
     type_graphql_1.Field(type => String, { description: "docs_link field" }),
     __metadata("design:type", String)
 ], Docs.prototype, "docs_link", void 0);
+__decorate([
+    type_graphql_1.Field(type => String, { description: "upvotes field" }),
+    __metadata("design:type", String)
+], Docs.prototype, "upvotes", void 0);
 Docs = __decorate([
     type_graphql_1.ObjectType({ description: 'This one represents docs' })
 ], Docs);
@@ -74,9 +94,17 @@ exports.Docs = Docs;
 let Course = class Course {
 };
 __decorate([
+    type_graphql_1.Field(type => String, { description: "id field" }),
+    __metadata("design:type", String)
+], Course.prototype, "_id", void 0);
+__decorate([
     type_graphql_1.Field(type => String, { description: "user_id field" }),
     __metadata("design:type", String)
 ], Course.prototype, "user_id", void 0);
+__decorate([
+    type_graphql_1.Field(type => String, { description: "creator_name field" }),
+    __metadata("design:type", String)
+], Course.prototype, "creator_name", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "topic_id field" }),
     __metadata("design:type", String)
@@ -93,6 +121,10 @@ __decorate([
     type_graphql_1.Field(type => String, { description: "course_link field" }),
     __metadata("design:type", String)
 ], Course.prototype, "course_link", void 0);
+__decorate([
+    type_graphql_1.Field(type => String, { description: "upvotes field" }),
+    __metadata("design:type", String)
+], Course.prototype, "upvotes", void 0);
 Course = __decorate([
     type_graphql_1.ObjectType({ description: "This one represents course" })
 ], Course);
@@ -100,9 +132,17 @@ exports.Course = Course;
 let Article = class Article {
 };
 __decorate([
+    type_graphql_1.Field(type => String, { description: "id field" }),
+    __metadata("design:type", String)
+], Article.prototype, "_id", void 0);
+__decorate([
     type_graphql_1.Field(type => String, { description: "user_id field" }),
     __metadata("design:type", String)
 ], Article.prototype, "user_id", void 0);
+__decorate([
+    type_graphql_1.Field(type => String, { description: "creator_name field" }),
+    __metadata("design:type", String)
+], Article.prototype, "creator_name", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "topic_id field" }),
     __metadata("design:type", String)
@@ -126,9 +166,17 @@ exports.Article = Article;
 let ProjectIdea = class ProjectIdea {
 };
 __decorate([
+    type_graphql_1.Field(type => String, { description: "id field" }),
+    __metadata("design:type", String)
+], ProjectIdea.prototype, "_id", void 0);
+__decorate([
     type_graphql_1.Field(type => String, { description: "user_id field" }),
     __metadata("design:type", String)
 ], ProjectIdea.prototype, "user_id", void 0);
+__decorate([
+    type_graphql_1.Field(type => String, { description: "creator_name field" }),
+    __metadata("design:type", String)
+], ProjectIdea.prototype, "creator_name", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "topic_id field" }),
     __metadata("design:type", String)
@@ -267,3 +315,17 @@ ProjectIdeaInput = __decorate([
     type_graphql_1.InputType()
 ], ProjectIdeaInput);
 exports.ProjectIdeaInput = ProjectIdeaInput;
+let LoadMoreRules = class LoadMoreRules {
+};
+__decorate([
+    type_graphql_1.Field(type => Number),
+    __metadata("design:type", Number)
+], LoadMoreRules.prototype, "limit", void 0);
+__decorate([
+    type_graphql_1.Field(type => Number),
+    __metadata("design:type", Number)
+], LoadMoreRules.prototype, "skip", void 0);
+LoadMoreRules = __decorate([
+    type_graphql_1.InputType()
+], LoadMoreRules);
+exports.LoadMoreRules = LoadMoreRules;
