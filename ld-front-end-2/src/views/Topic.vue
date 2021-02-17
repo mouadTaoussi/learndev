@@ -10,7 +10,7 @@
 				<SearchAndFilter></SearchAndFilter>
 				<!-- Search And Filter -->
 				<!-- Resources -->
-				<Resources></Resources>
+				<Resources docs="dddddd" cources="" articels="" projectideas=""></Resources>
 				<!-- Resources -->
 			</div>
 		</section>

@@ -12,6 +12,9 @@ https://www.youtube.com/watch?v=9QiE-M1LrZk
 #0984e3 primary color
 #de078e secondary color
 
+// Watch that leater
+https://www.youtube.com/watch?v=33OAwHB5xOc
+
 function paginate(model) {
   return async (req, res, next) => {
     const page = parseInt(req.query.page);

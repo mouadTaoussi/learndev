@@ -118,13 +118,18 @@
 
 	  name: 'Resources',
 
+	  props : ["docs","cources","artiecls","projectideas"],
+
 	  components: {
 	  	Resource
 	  },
 
 	  data () {
 	    return {
-
+	    	docs : this.docs,
+	    	cources: this.cources,
+	    	articels: this.articels,
+	    	projectideas: this.projectideas
 	    }
 	  },
 

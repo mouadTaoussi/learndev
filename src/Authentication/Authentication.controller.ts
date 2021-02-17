@@ -37,7 +37,9 @@ class Authentication implements AuthenticationInt {
 			//////////////////////// sign a session
 			// res.redirect(`/auth/save_session?name=${userExists.user.user_name}&email=${email}`);
 			////////////////////////
-			req.session.local = { 
+			req.session.passport = {};
+
+			req.session.passport.user = { 
 				id:userExists.user._id, name: userExists.user.name, email: userExists.user.email, at_provider_id: null 
 			}
 			
@@ -48,6 +50,20 @@ class Authentication implements AuthenticationInt {
 		// Check if the user is alreay logged in
 		// Get user inputs
 		const body : UserBody = req.body;
+
+		// @TODO check if all of the elements addedd
+		if (body.email == null || body.email == undefined || body.email == "") {
+			res.status(404).send({ registered : false, message: "Fill all of the inputs!" }); res.end(); return;
+		}
+		else if (body.password == null || body.password == undefined || body.password == "") {
+			res.status(404).send({ registered : false, message: "Fill all of the inputs!" }); res.end(); return;
+		}
+		else if(body.fullname == null || body.fullname == undefined || body.fullname == ""){
+			res.status(404).send({ registered : false, message: "Fill all of the inputs!" }); res.end(); return;
+		}
+		else if(body.user_name == null || body.user_name == undefined || body.user_name == ""){
+			res.status(404).send({ registered : false, message: "Fill all of the inputs!" }); res.end(); return;
+		}
 
 		// Validate user inputs
 		const isAlreadyExists = await _user.findUser({email: body.email});
@@ -69,7 +85,8 @@ class Authentication implements AuthenticationInt {
 		if (new_user.saved == true) {
 
 			// sign a session
-			req.session.local = { id:new_user.user._id, name : body.user_name,  email: body.email, at_provider_id: null };
+			req.session.passport = {};
+			req.session.passport.user = { id:new_user.user._id, name : body.user_name,  email: body.email, at_provider_id: null };
 
 			// send it back to the frontend			
 			res.status(new_user.status).send({ registered : true, message: "Registered successfully!"})
@@ -138,7 +155,7 @@ class Authentication implements AuthenticationInt {
 	}
 	public async updateProfile(req: Request, res: Response) :Promise<void>{
 		// Get the user by its session
-		const authenticated_user = req.session.passport || req.session.local;
+		const authenticated_user = req.session.passport.user;
 
 		if ( authenticated_user == undefined ) {
 			res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end(); return
@@ -159,7 +176,7 @@ class Authentication implements AuthenticationInt {
 					status:number,updated:boolean,message:string,user:any } = await _user.updateUser(authenticated_user.id,body);
 
 				// Response backend
-				req.session.local = { 
+				req.session.passport.user = { 
 					id:updating.user._id, name: updating.user.name, email: updating.user.email, at_provider_id: null 
 				}
 
@@ -181,7 +198,7 @@ class Authentication implements AuthenticationInt {
 				status:number,updated:boolean,message:string, user:any } = await _user.updateUser(authenticated_user.id,body);
 
 			// Response back
-			req.session.local = { 
+			req.session.passport.user = { 
 				id:updating.user._id, name: updating.user.name, email: updating.user.email, at_provider_id: null 
 			}
 			
@@ -193,7 +210,7 @@ class Authentication implements AuthenticationInt {
 	}
 	public async deleteAccount(req: Request, res: Response) :Promise<void>{
 		// Get the user by its session
-		const authenticated_user = req.session.passport || req.session.local;
+		const authenticated_user = req.session.passport.user;
 
 		if ( authenticated_user == undefined ) {
 			res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end(); return
@@ -220,7 +237,7 @@ class Authentication implements AuthenticationInt {
 				const delete_user: any = await _user.deleteUser(user.user.id);
 
 				// Remove session
-				req.session.local = undefined;
+				req.session.passport = undefined;
 
 				res.status(delete_user.status).send({
 					deleted : delete_user.deleted, message : delete_user.message

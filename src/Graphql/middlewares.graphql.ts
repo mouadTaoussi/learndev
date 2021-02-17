@@ -1,10 +1,9 @@
 import { MiddlewareFn } from "type-graphql";
 
 export const Authenticated: MiddlewareFn<any> = async ({context,info}:{context:any,info:any},next) => {
-	console.log(context.req.session);
-	const auth = !!context.req.session.passport || !!context.req.session.local;
+	const auth = !!context.req.session.passport.user;
 
-	if (auth){ context.req.user = context.req.session.passport || context.req.session.local; await next() }
+	if (auth){ context.req.user = context.req.session.passport.user; await next() }
 
 	else { throw new Error('Not Authenticated') }
 
