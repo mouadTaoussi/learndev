@@ -8,12 +8,10 @@ axios.defaults.withCredentials = true
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
 
-
 new Vue({
   router,
   render: h => h(App)
 }).$mount("#app");
-console.log(window.location.pathname !== "/login")
 
 window.setInterval(()=>{
 	//Implement animation when in the home page

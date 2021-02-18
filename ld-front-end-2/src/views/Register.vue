@@ -152,6 +152,7 @@
 	  				data : {fullname:this.fullname,user_name:this.user_name,email: this.email, password:this.password}
 	  			})
 	  			.then((res)=>{
+	  				// Set a localstorage value to know whether the user already logged in or not
 	  				console.log(res);
 	  			})
 	  			.catch((err)=>{

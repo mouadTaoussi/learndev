@@ -8,14 +8,9 @@
 			</div>
 			<div class="list-child">
 				<router-link tag="a" class="list-item" to="/topics">Discover Topics</router-link>
-			    <router-link tag="a" class="list-item" to="/about">About</router-link>
-			    <router-link tag="button" class="shadow list-item btn btn-primary" to="/login">Contribute</router-link>
-			    <!-- <router-link to="/topics">Topics</router-link> -->
-			    <!-- <router-link to="/topic">Topic</router-link> -->
-			    <!-- <router-link to="/resetpassword">Reset Password</router-link> -->
-			    <!-- <router-link tag="a" class="list-item" to="/register">Search</router-link> -->
-			    <!-- <input class="list-item form-control" placeholder="Search" type="text"> -->
-			    <!-- <router-link tag="button" class="btn btn-primary" to="/user">User</router-link> -->
+				<router-link tag="a" class="list-item" to="/about">About</router-link>
+				<router-link tag="a" class="list-item" v-bind:to="'/user/'+'vvvv'">MOUAD</router-link>
+				<router-link tag="button" class="shadow list-item btn btn-primary" to="/login">Contribute</router-link>
 			</div>
 		</header>
 	</section>
@@ -25,6 +20,8 @@
 export default {
 
   name: 'costumHeader',
+
+  props : { 'user_name': String, 'user_id': String },
 
   data () {
     return {

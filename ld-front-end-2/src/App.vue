@@ -5,10 +5,12 @@
 </template>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Changa:wght@600&family=Poppins:wght@400;500&display=swap');
+/*@import url("https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css");*/
 
 
 :root {
     --primary-- :  #0652DD;
+    --bootstrap--primary-- : #2962FF;
     --font--    :'Changa', sans-serif;
 }
 .btn {

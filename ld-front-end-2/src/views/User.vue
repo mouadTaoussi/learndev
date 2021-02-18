@@ -29,15 +29,58 @@
 				</div> -->
 			</section>
 
-				<!-- Tabs pages -->
+			<!-- Tabs pages -->
 			<section class='tabs-pages-topics'>
+				<Topic 
+					topic_id="fbdbdb" 
+					img="https://images.wallpaperscraft.com/image/code_text_programming_146694_1920x1080.jpg" 
+					title="Development for beginners"
+				></Topic>
+				<Topic 
+					topic_id="fbdbdb" 
+					img="https://images.wallpaperscraft.com/image/code_text_programming_146694_1920x1080.jpg" 
+					title="Development for beginners"
+				></Topic>
+				<Topic 
+					topic_id="fbdbdb" 
+					img="https://images.wallpaperscraft.com/image/code_text_programming_146694_1920x1080.jpg" 
+					title="Development for beginners"
+				></Topic>
+				<div 
+					data-toggle="modal" 
+					data-target="#addNewTopic"
+					class="shadow bg-primary btn text-white mr-2"
+				>Add new Topic +</div>
 			</section>
 
 			<section class='tabs-pages-upvoted tab-hidden'>
-				<Resource></Resource>
-				<Resource></Resource>
-				<Resource></Resource>
-				<Resource></Resource>
+				<Resource 
+				id="sivbfuvbfdhbj"
+				title="Typescript course" 
+				upvotes="221" 
+				upvoted="true"
+				creator_name="mouadTaoussi" 
+				level="hard" 
+				user_id="sdidvhbidfhv"
+			></Resource>
+			<Resource 
+				id="sivvvvbfuvbfdhbj"
+				title="Typescript course" 
+				upvotes="221" 
+				upvoted="true"
+				creator_name="mouadTaoussi" 
+				level="hard" 
+				user_id="sdidvhbidfhv"
+			></Resource>
+			<Resource 
+				id="sivbvbfdhbj"
+				title="Typescript course" 
+				upvotes="221" 
+				upvoted="false"
+				creator_name="mouadTaoussi" 
+				level="hard" 
+				user_id="sdidvhbidfhv"
+			></Resource>
 
 			</section>
 
@@ -46,12 +89,38 @@
 
 			<section class='tabs-pages-projectideas tab-hidden'>	
 			</section>
-				<!-- Resources -->
-				<!-- <Resources></Resources> -->
-				<!-- Resources -->
+
+			<!-- Add New Topic Modal -->
+			<div 
+				class="modal fade" 
+				id="addNewTopic" 
+				tabindex="-1" 
+				role="dialog" 
+				aria-labelledby="addNewTopicTitle" 
+				aria-hidden="true"
+			>
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="addNewTopicTitle">Add New Topic</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+						...
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button v-on:click="addNewTopic()" type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+	
 		</section>
 		<!-- Custom Footer -->
-		<!-- <costumFooter></costumFooter> -->
+		<costumFooter></costumFooter>
 		<!-- Custom Footer -->
 	</section>
 </template>
@@ -59,6 +128,7 @@
 <script>
 	import costumHeader from ".././components/Header.vue";
 	import costumFooter from ".././components/Footer.vue";
+	import Topic from ".././components/Userpage/Topic.vue";
 	import Resource from ".././components/Topicpage/Resource.vue";
 
 
@@ -68,16 +138,23 @@
 
 	  components: {
 	  	costumHeader,
+	  	Topic,
 	  	Resource,
 	  	costumFooter
 	  },
 	  
 	  data () {
 	    return {
-
+	    	newTopic : {
+	    		title : null,
+	    		background_image : null
+	    	}
 	    }
 	  },
 	   methods : {
+	   	addNewTopic : function(){
+	   		alert('added');
+	   	},
 	  	switchTab : function(to){
 	  		const topics         = document.querySelector('.tabs-pages-topics');
 	  		const upvoted      = document.querySelector('.tabs-pages-upvoted');
@@ -146,6 +223,14 @@
 </script>
 
 <style lang="css" scoped>
+	.tabs-pages-topics {
+		display: grid;
+		grid-template-columns: 2fr 2fr 2fr;
+		grid-row-gap: 20px;
+		grid-column-gap: 20px;
+		margin-top: 20px;
+		z-index: -1;
+	}
 	.title {
 		font-family: var(--font--);
 		margin-top: 20px;
@@ -156,13 +241,17 @@
 	}
 
 	.tabs-btns {
-		/*width: 100px;*/
 		margin-top: 20px;
 		height: 50px;
 		display: inline;
 		cursor: pointer;
 		padding-top: 10px;
-		border-bottom: 1.5px solid var(--primary--);
+		border-bottom: 1.5px solid var(--bootstrap--primary--);
+		z-index: 999;
+	}
+	.tabs-btns:hover {
+		background-color: rgba(0,0,0,.1)!important;
+		transition: all .1s ease-out;
 	}
 	.tabs-group {
 		display: grid;
@@ -177,12 +266,21 @@
 		display: none;
 	}
 	.tab-btn-active {
-		background-color: var(--primary--)!important;
+		background-color: var(--bootstrap--primary--)!important;
 		color: white;
 	}
 	@media only screen and (max-width: 800px) {
+		.tabs-pages-topics {
+			display: grid;
+			grid-template-columns: 100%;
+			grid-gap: 20px;
+			width: 100%;
+		}
 		.tab-title {
 			display: none;
+		}
+		section {
+			width: 100%;
 		}
 	}
 </style>

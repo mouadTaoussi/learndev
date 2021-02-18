@@ -42,7 +42,7 @@ const routes = [
     component: Topics
   },
   {
-    path: "/user",
+    path: "/user/:id",
     name: "User",
     component: User
   },

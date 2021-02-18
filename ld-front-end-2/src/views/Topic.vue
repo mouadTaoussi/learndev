@@ -7,7 +7,7 @@
 			<div class="search-and-filter-container">
 				<h1 class="text-left title">Android Development</h1>
 				<!-- Search And Filter -->
-				<SearchAndFilter></SearchAndFilter>
+				<SearchAndFilter v-on:searchQuery="search"></SearchAndFilter>
 				<!-- Search And Filter -->
 				<!-- Resources -->
 				<Resources docs="dddddd" cources="" articels="" projectideas=""></Resources>
@@ -15,7 +15,7 @@
 			</div>
 		</section>
 		<!-- Custom Footer -->
-		<!-- <costumFooter></costumFooter> -->
+		<costumFooter></costumFooter>
 		<!-- Custom Footer -->
 	</section>
 </template>
@@ -38,11 +38,24 @@
 	  	costumFooter
 
 	  },
-
+	  mounted (){
+	  	// Fetch Topic within 
+	  	// - Docs (Check upvoted ones)
+	  	// - Courses(Check upvoted ones) 
+	  	// - Articels(Check upvoted ones) 
+	  	// - ProjectIdeas(Check upvoted ones)
+	  },
 	  data () {
 	    return {
 
 	    }
+	  },
+	  methods : {
+	  	// Search
+	  	search : function(item_query){
+	  		// Fetch query
+	  		alert('found '+ item_query)
+	  	}
 	  }
 	}
 </script>

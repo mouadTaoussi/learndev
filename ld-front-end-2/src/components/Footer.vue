@@ -20,5 +20,6 @@ export default {
 		background-color: black;
 		height: 350px;
 		width: 100%;
+		margin-top: 100px;
 	}
 </style>

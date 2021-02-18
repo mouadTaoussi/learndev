@@ -1,7 +1,11 @@
 <template>
 	<section class="search-area">
-		<input type="text" class="form-control search-input" placeholder="Search about a Topic! eg: Javascript, Blockchain...">
-		<button class="search-btn btn btn-primary shadow">Search</button>
+		<input 
+			v-model="query" 
+			type="text" 
+			class="form-control search-input" 
+			placeholder="Search about a Topic! eg: Javascript, Blockchain...">
+		<button v-on:click="search()" class="search-btn btn btn-primary shadow">Search</button>
 	</section>
 </template>
 
@@ -12,9 +16,18 @@ export default {
 
   data () {
     return {
-
+    	query : null
     }
-  }
+  },
+  methods : {
+	  search: function(){
+	  	if (this.query == null || this.query == '') {
+	  		alert('Provide us search query!');
+	  		return;
+	  	}
+	  	this.$emit('searchQuery',this.query);
+	  }
+  } 
 }
 </script>
 

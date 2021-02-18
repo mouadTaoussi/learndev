@@ -6,7 +6,7 @@
 		<section class="container search-and-filter-container">
 			<h1 class="text-left title">Some of the recommended Topics</h1>
 			<!-- Search And Filter -->
-			<SearchAndFilter></SearchAndFilter>
+			<SearchAndFilter v-on:searchQuery="search"></SearchAndFilter>
 			<!-- Search And Filter -->
 		</section>
 		<section class="container topics-container">
@@ -47,7 +47,7 @@
 				title="Blockchain" 
 				topic_id="fbgbggbf"></Topic>
 		</section>
-		<button class="btn btn-light shadow mt-4 mb-4">Load more</button>
+		<button v-on:click="loadMore" class="btn btn-light shadow mt-4 mb-4">Load more</button>
 		<!-- Custom Footer -->
 		<costumFooter></costumFooter>
 		<!-- Custom Footer -->
@@ -75,6 +75,19 @@
 	    return {
 
 	    }
+	  },
+
+	  mounted (){
+	  	// Fetch some Topics
+	  },
+	  methods : {
+	  	search : function(item_query){
+	  		// Fetch query
+	  		alert('Found '+ item_query)
+	  	},
+	  	loadMore: function(){
+
+	  	}
 	  }
 	}
 </script>

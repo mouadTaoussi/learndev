@@ -39,6 +39,8 @@
 </template>
 
 <script>
+	const apihost = require('../../.././api.config.js');
+
 export default {
 
   name: 'Resource',
@@ -52,7 +54,6 @@ export default {
   methods: {
   	upvote : function(upvote){
   		const upvote_btn = document.querySelector('.upvote-btn'+this.id); 
-  		console.log((upvote_btn).classList.contains('btn-warning'));
   		// Check if already upvoted
   		// Toggle the button color
   		if ( upvote_btn.classList.contains('btn-warning') ) {
@@ -68,7 +69,7 @@ export default {
   			this.resource_upvotes ++;
   		}
   		console.log(upvote_btn)
-  		// Send that upvote 
+  		// Send that upvote including -resource_id -type -user_id (in session)
   		// alert(upvote);
   	}
   }
@@ -83,6 +84,7 @@ export default {
 		cursor: pointer;
 		display: grid;
 		grid-template-columns: 2fr 25fr;
+		z-index: -1;
 
 	}
  	.title {
