@@ -10,9 +10,6 @@ const TopicSchema = new Schema({
 	topic_title : {
 		type : String, required : true
 	},
-	level : {
-		type : String, required : true
-	},
 	// Search trough the web about an image that relevents to that topic
 	background_image : {
 		type : String, required : true

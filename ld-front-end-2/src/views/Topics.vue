@@ -59,6 +59,7 @@
 	import Topic from ".././components/Topicspage/Topic.vue";
 	import SearchAndFilter from ".././components/Topicspage/SearchAndFilter.vue";
 	import costumFooter from ".././components/Footer.vue";
+	const  apihost = require('../.././api.config.js');
 
 	export default {
 
@@ -73,7 +74,9 @@
 
 	  data () {
 	    return {
-
+	    	limit : 10,
+	    	skip  : 0,
+	    	search_query : null
 	    }
 	  },
 
@@ -84,9 +87,15 @@
 	  	search : function(item_query){
 	  		// Fetch query
 	  		alert('Found '+ item_query)
+	  		// Save query to use it in load more
+	  		this.search_query = item_query
 	  	},
 	  	loadMore: function(){
-
+	  		//
+	  		this.search_query;
+	  		this.skip;
+	  		this.limit;
+	  		// increment skip
 	  	}
 	  }
 	}

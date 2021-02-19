@@ -108,11 +108,27 @@
 							</button>
 						</div>
 						<div class="modal-body">
-						...
-						</div>
+
+							<p class="text-left text-dark">
+								<strong>Enter topic title</strong>
+							</p>
+							<input
+								v-model="newTopic.topic_title" 
+								class="form-control my-2" 
+								placeholder="Enter the topic title">
+
+							<p class="text-left text-dark">
+								<strong>Provide a link about an image</strong>
+							</p>
+							<input
+								v-model="newTopic.background_image" 
+								class="form-control my-2" 
+								placeholder="Provide us an image link">
+							</div>
+
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button v-on:click="addNewTopic()" type="button" class="btn btn-primary">Save changes</button>
+							<button v-on:click="addNewTopic()" type="button" class="btn btn-primary">Add Topic</button>
 						</div>
 					</div>
 				</div>
@@ -130,6 +146,7 @@
 	import costumFooter from ".././components/Footer.vue";
 	import Topic from ".././components/Userpage/Topic.vue";
 	import Resource from ".././components/Topicpage/Resource.vue";
+	const  apihost = require('../.././api.config.js');
 
 
 	export default {
@@ -146,14 +163,14 @@
 	  data () {
 	    return {
 	    	newTopic : {
-	    		title : null,
+	    		topic_title : null,
 	    		background_image : null
 	    	}
 	    }
 	  },
 	   methods : {
 	   	addNewTopic : function(){
-	   		alert('added');
+	   		alert('added' + this.newTopic.topic_title);
 	   	},
 	  	switchTab : function(to){
 	  		const topics         = document.querySelector('.tabs-pages-topics');

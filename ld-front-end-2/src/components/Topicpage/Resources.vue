@@ -12,9 +12,9 @@
 					<i class="tab-title">Courses & Videos </i>🖥💻
 				</p>
 			</div>
-			<div class="tabs-btns tab-btn-articels bg-light">
-				<p @click="switchTab('articels')" class="text-left text-center">
-					<i class="tab-title">Articels </i>📑🧾
+			<div class="tabs-btns tab-btn-articles bg-light">
+				<p @click="switchTab('articles')" class="text-left text-center">
+					<i class="tab-title">Articles </i>📑🧾
 				</p>
 			</div>
 			<div class="tabs-btns tab-btn-projectideas bg-light">
@@ -103,7 +103,7 @@
 			></Resource>
 		</section>
 
-		<section class='tabs-pages-articels tab-hidden'>	
+		<section class='tabs-pages-articles tab-hidden'>	
 		</section>
 
 		<section class='tabs-pages-projectideas tab-hidden'>	
@@ -118,7 +118,7 @@
 
 	  name: 'Resources',
 
-	  props : ["docs","cources","artiecls","projectideas"],
+	  props : ["docs","cources","articles","projectideas"],
 
 	  components: {
 	  	Resource
@@ -128,71 +128,74 @@
 	    return {
 	    	docs : this.docs,
 	    	cources: this.cources,
-	    	articels: this.articels,
+	    	articles: this.articles,
 	    	projectideas: this.projectideas
 	    }
 	  },
 
 	  methods : {
+	  	loadMore: function(){
+
+	  	},
 	  	switchTab : function(to){
 	  		const docs         = document.querySelector('.tabs-pages-docs');
 	  		const courses      = document.querySelector('.tabs-pages-courses');
-	  		const articels     = document.querySelector('.tabs-pages-articels');
+	  		const articles     = document.querySelector('.tabs-pages-articles');
 	  		const projectideas = document.querySelector('.tabs-pages-projectideas');
 
 	  		const docs_btn         =  document.querySelector('.tab-btn-docs');
 	  		const courses_btn      =  document.querySelector('.tab-btn-courses');
-	  		const articels_btn     =  document.querySelector('.tab-btn-articels');
+	  		const articles_btn     =  document.querySelector('.tab-btn-articles');
 	  		const projectideas_btn =  document.querySelector('.tab-btn-projectideas');
 
 	  		// Check the target
 	  		if(to == "docs") {
 	  			docs.classList.remove('tab-hidden');
 	  			courses.classList.add('tab-hidden');
-	  			articels.classList.add('tab-hidden');
+	  			articles.classList.add('tab-hidden');
 	  			projectideas.classList.add('tab-hidden');
 
 	  			// Add mark over tab btn
 	  			docs_btn.classList.add('tab-btn-active');
 	  			courses_btn.classList.remove('tab-btn-active');
-	  			articels_btn.classList.remove('tab-btn-active');
+	  			articles_btn.classList.remove('tab-btn-active');
 	  			projectideas_btn.classList.remove('tab-btn-active');
 
 	  		}
 	  		else if (to == "courses") {
 	  			docs.classList.add('tab-hidden');
 	  			courses.classList.remove('tab-hidden');
-	  			articels.classList.add('tab-hidden');
+	  			articles.classList.add('tab-hidden');
 	  			projectideas.classList.add('tab-hidden');
 
 	  			// Add mark over tab btn
 	  			docs_btn.classList.remove('tab-btn-active');
 	  			courses_btn.classList.add('tab-btn-active');
-	  			articels_btn.classList.remove('tab-btn-active');
+	  			articles_btn.classList.remove('tab-btn-active');
 	  			projectideas_btn.classList.remove('tab-btn-active');
 	  		}
-	  		else if (to == "articels") {
+	  		else if (to == "articles") {
 	  			docs.classList.add('tab-hidden');
 	  			courses.classList.add('tab-hidden');
-	  			articels.classList.remove('tab-hidden');
+	  			articles.classList.remove('tab-hidden');
 	  			projectideas.classList.add('tab-hidden');
 
 	  			// Add mark over tab btn
 	  			docs_btn.classList.remove('tab-btn-active');
 	  			courses_btn.classList.remove('tab-btn-active');
-	  			articels_btn.classList.add('tab-btn-active');
+	  			articles_btn.classList.add('tab-btn-active');
 	  			projectideas_btn.classList.remove('tab-btn-active');
 	  		}
 	  		else if (to == "projectideas") {
 	  			docs.classList.add('tab-hidden');
 	  			courses.classList.add('tab-hidden');
-	  			articels.classList.add('tab-hidden');
+	  			articles.classList.add('tab-hidden');
 	  			projectideas.classList.remove('tab-hidden');
 
 	  			// Add mark over tab btn
 	  			docs_btn.classList.remove('tab-btn-active');
 	  			courses_btn.classList.remove('tab-btn-active');
-	  			articels_btn.classList.remove('tab-btn-active');
+	  			articles_btn.classList.remove('tab-btn-active');
 	  			projectideas_btn.classList.add('tab-btn-active');
 
 	  		}

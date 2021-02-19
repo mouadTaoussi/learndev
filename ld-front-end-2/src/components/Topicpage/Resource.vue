@@ -41,39 +41,49 @@
 <script>
 	const apihost = require('../../.././api.config.js');
 
-export default {
+	export default {
 
-  name: 'Resource',
-  props : [ "id", "title","upvotes", "upvoted", "creator_name", "level", "user_id" ],
+	  name: 'Resource',
+	  props : [ "id", "title","upvotes", "upvoted", "creator_name", "level", "user_id" ],
 
-  data () {
-    return {
-    	resource_upvotes : this.upvotes
-    }
-  },
-  methods: {
-  	upvote : function(upvote){
-  		const upvote_btn = document.querySelector('.upvote-btn'+this.id); 
-  		// Check if already upvoted
-  		// Toggle the button color
-  		if ( upvote_btn.classList.contains('btn-warning') ) {
-  			upvote_btn.classList.remove('btn-warning');
-  			upvote_btn.classList.add('btn-outline-warning');
-  			// Decrement the upvote
-  			this.resource_upvotes --;
-  		}
-  		else {
-  			upvote_btn.classList.add('btn-warning');
-  			upvote_btn.classList.remove('btn-outline-warning');
-  			// Increase the upvote
-  			this.resource_upvotes ++;
-  		}
-  		console.log(upvote_btn)
-  		// Send that upvote including -resource_id -type -user_id (in session)
-  		// alert(upvote);
-  	}
-  }
-}
+	  data () {
+	    return {
+	    	id               : this.id,
+	    	title            : this.title,
+	    	resource_upvotes : this.upvotes,
+	    	upvoted          : this.upvoted,
+	    	creator_name     : this.creator_name,
+	    	level            : this.level,
+	    	user_id          : this.user_id
+	    }
+	  },
+	  methods: {
+	  	// if the user owns that resource
+	  	deleteResource : function (){
+
+	  	},
+	  	upvote : function(upvote){
+	  		const upvote_btn = document.querySelector('.upvote-btn'+this.id); 
+	  		// Check if already upvoted
+	  		// Toggle the button color
+	  		if ( upvote_btn.classList.contains('btn-warning') ) {
+	  			upvote_btn.classList.remove('btn-warning');
+	  			upvote_btn.classList.add('btn-outline-warning');
+	  			// Decrement the upvote
+	  			this.resource_upvotes --;
+	  		}
+	  		else {
+	  			upvote_btn.classList.add('btn-warning');
+	  			upvote_btn.classList.remove('btn-outline-warning');
+	  			// Increase the upvote
+	  			this.resource_upvotes ++;
+	  		}
+	  		console.log(upvote_btn)
+	  		// Send that upvote including -resource_id -type -user_id (in session)
+	  		// alert(upvote);
+	  	}
+	  }
+	}
 </script>
 
 <style lang="css" scoped>

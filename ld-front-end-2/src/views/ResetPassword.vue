@@ -19,6 +19,7 @@
 
 <script>
 	import costumHeader from ".././components/Header.vue";
+	const  apihost = require('../.././api.config.js');
 
 	export default {
 

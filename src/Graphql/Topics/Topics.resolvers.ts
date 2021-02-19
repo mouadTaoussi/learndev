@@ -10,9 +10,9 @@ const _topicservice = new TopicService();
 
 interface topicResolver {
 	searchTopic(search_term: string) :Promise<any>
-	searchContentInTopic(search_term: string) :Promise<any>
-	getTopic(topic_id: string,context : any) :Promise<any>
-	getTopics(topic_id: string, loadmorerules: LoadMoreRules) :Promise<any>
+	searchContentInTopic(search_term: string,topic_id:string, context : any) :Promise<any> // Load more
+	getTopic(topic_id: string,context : any) :Promise<any> // Load more
+	getTopics(topic_id: string, loadmorerules: LoadMoreRules) :Promise<any> // Load more
 	addTopic(new_topic: TopicInput, context:any) :Promise<any>
 	deleteTopic(topic_id: string, context:any) :Promise<any>
 }
@@ -29,36 +29,30 @@ class topicResolver implements topicResolver {
 	}
 
 	@Query(returns => [Topic], { description : "This query returns the contents in the topic by the search item"})
-	public async searchContentInTopic(@Arg('search_term') search_term : string)  {
-		// Get the query 
+	public async searchContentInTopic(@Arg('search_term') search_term : string, @Arg('topic_id') topic_id : string, @Ctx() context : any)  {
+		// Get the query and topic_id
 		// Split the query to array
+		const user = context.req.session.passport.user || null;
 		// Delete logical tools (in-and...)
 		// Find the right documents
 		// Sort them by votes
 	}
 
 	@Query(returns => Topic, { description: "This query returns a topic" })
-	@UseMiddleware(Authenticated)
 	public async getTopic(@Arg('topic_id') topic_id: string, @Ctx() context : any) : Promise<any> {
 
-		const user = context.req.user;
+		const user = context.req.session.passport.user;
 
-		console.log(user)
-		return {
-			_id : "vffff",
-			user_id : "vffff",
-			creator_name : "vffff",
-			topic_title : topic_id,
-			background_image : "string",
-			docs : [{user_id:"mouad",topic_id: topic_id, docs_title : "get data",docs_link: "ff"}],
-			courses : [{user_id:"mouad",topic_id: topic_id, course_title : "get data",course_link: "ff"}],
-			articles : [{user_id:"mouad",topic_id: topic_id, article_title : "get data",article_link: "ff"}],
-			ProjectIdeas : [{user_id:"mouad",topic_id: topic_id, project_idea_title : "get data",description: "ff"}]
-		}
+		const topic = await _topicservice.getTopic(topic_id, user.id);
+
+		return topic.data;
 	}
 
 	@Query(returns => [Topic], { description: "This query returns available topics" })
-	public async getTopics(@Arg('new_course') loadmorerules: LoadMoreRules) : Promise<any> {
+	public async getTopics(@Arg('load_more_rules') loadmorerules: LoadMoreRules) : Promise<any> {
+
+		const topics = await _topicservice.getTopics (loadmorerules.limit, loadmorerules.skip);
+		return topics.data;
 
 	}
 
@@ -175,3 +169,14 @@ export { topicResolver, docsResolver, courseResolver, articleResolver, projectId
 // courses : [{user_id:"mouad",topic_id: topic_id, course_title : "get data",course_link: "ff"}],
 // articles : [{user_id:"mouad",topic_id: topic_id, article_title : "get data",article_link: "ff"}],
 // ProjectIdeas : [{user_id:"mouad",topic_id: topic_id, project_idea_title : "get data",description: "ff"}]
+// {
+// 	_id : "vffff",
+// 	user_id : "vffff",
+// 	creator_name : "vffff",
+// 	topic_title : topic_id,
+// 	background_image : "string",
+// 	docs : [{user_id:"mouad",topic_id: topic_id, docs_title : "get data",docs_link: "ff"}],
+// 	courses : [{user_id:"mouad",topic_id: topic_id, course_title : "get data",course_link: "ff"}],
+// 	articles : [{user_id:"mouad",topic_id: topic_id, article_title : "get data",article_link: "ff"}],
+// 	ProjectIdeas : [{user_id:"mouad",topic_id: topic_id, project_idea_title : "get data",description: "ff"}]
+// }

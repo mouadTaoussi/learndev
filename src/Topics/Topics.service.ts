@@ -8,6 +8,7 @@ class TopicService implements TopicServiceInt {
 
 			const topic = await TopicModel;
 			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
+			// Skip // Limit
 			return {
 				message : null,
 				found : false,
@@ -22,15 +23,15 @@ class TopicService implements TopicServiceInt {
 			}
 		}
 	}
-	public async searchContentInTopic(query: string[]) :Promise<{message: string|null,found:boolean,data:any}>{
+	public async searchContentInTopic(query: string[], topic_id:string | null, user_id: string | null) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
 
 			const topic = await TopicModel;
 			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
-			// Get from Docs 
-			// Get from Courses
-			// Get from Articles
-			// Get from ProjectIdea
+			// Get from Docs // Skip // Limit
+			// Get from Courses // Skip // Limit
+			// Get from Articles // Skip // Limit
+			// Get from ProjectIdea // Skip // Limit
 			// Check if the user upvoted some of the content in each resource
 
 			return {
@@ -48,12 +49,15 @@ class TopicService implements TopicServiceInt {
 		}
 
 	}
-	public async getTopic (item_id: string) :Promise<{message: string|null,found:boolean,data:any}>{
+	public async getTopic (item_id: string, user_id:string | null) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
 			const topic = await TopicModel.findById(item_id);
 
+			// Get from Docs // by topic_id // Skip // Limit
+			// Get from Courses // by topic_id // Skip // Limit
+			// Get from Articles // by topic_id // Skip // Limit
+			// Get from ProjectIdea // by topic_id // Skip // Limit
 			// Check if the user upvoted some of the content in each resource
-			//
 			return {
 				message : null,
 				found : false,
@@ -76,7 +80,7 @@ class TopicService implements TopicServiceInt {
 			return {
 				message : null,
 				found : false,
-				data : null
+				data : topics
 			}
 		}
 		catch(err){

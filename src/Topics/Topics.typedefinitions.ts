@@ -1,8 +1,8 @@
 interface TopicServiceInt {
 	searchTopic(query: string[])          :Promise<{message: string|null,found  :boolean,data:any}>
-	searchContentInTopic(query: string[]) :Promise<{message: string|null,found  :boolean,data:any}>
+	searchContentInTopic(query: string[], topic_id:string | null, user_id: string | null) :Promise<{message: string|null,found  :boolean,data:any}>
 	
-	getTopic(item_id: string)                :Promise<{message: string|null,found  :boolean,data:any}>
+	getTopic(item_id: string,user_id:string | null) :Promise<{message: string|null,found  :boolean,data:any}>
 	getTopics(limit:number,skip:number)      :Promise<{message: string|null,found  :boolean,data:any}>
 
 	addTopic(topic: Topic)                   :Promise<{message: string|null,added  :boolean,data:any}>

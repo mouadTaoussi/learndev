@@ -19,7 +19,7 @@ class TopicService {
             };
         }
     }
-    async searchContentInTopic(query) {
+    async searchContentInTopic(query, topic_id, user_id) {
         try {
             const topic = await Topics_models_1.TopicModel;
             return {
@@ -36,7 +36,7 @@ class TopicService {
             };
         }
     }
-    async getTopic(item_id) {
+    async getTopic(item_id, user_id) {
         try {
             const topic = await Topics_models_1.TopicModel.findById(item_id);
             return {
@@ -59,7 +59,7 @@ class TopicService {
             return {
                 message: null,
                 found: false,
-                data: null
+                data: topics
             };
         }
         catch (err) {

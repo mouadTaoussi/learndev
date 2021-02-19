@@ -12,9 +12,6 @@ const TopicSchema = new mongoose_1.Schema({
     topic_title: {
         type: String, required: true
     },
-    level: {
-        type: String, required: true
-    },
     background_image: {
         type: String, required: true
     },

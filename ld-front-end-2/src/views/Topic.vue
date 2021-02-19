@@ -10,8 +10,9 @@
 				<SearchAndFilter v-on:searchQuery="search"></SearchAndFilter>
 				<!-- Search And Filter -->
 				<!-- Resources -->
-				<Resources docs="dddddd" cources="" articels="" projectideas=""></Resources>
+				<Resources docs="dddddd" cources="" articles="" projectideas=""></Resources>
 				<!-- Resources -->
+				<button v-on:click="loadMore" class="btn btn-light shadow mt-4 mb-4">Load more</button>
 			</div>
 		</section>
 		<!-- Custom Footer -->
@@ -25,6 +26,7 @@
 	import SearchAndFilter from ".././components/Topicpage/SearchAndFilter.vue";
 	import Resources from ".././components/Topicpage/Resources.vue";
 	import costumFooter from ".././components/Footer.vue";
+	const  apihost = require('../.././api.config.js');
 
 
 	export default {
@@ -42,19 +44,34 @@
 	  	// Fetch Topic within 
 	  	// - Docs (Check upvoted ones)
 	  	// - Courses(Check upvoted ones) 
-	  	// - Articels(Check upvoted ones) 
+	  	// - Articles(Check upvoted ones) 
 	  	// - ProjectIdeas(Check upvoted ones)
 	  },
 	  data () {
 	    return {
-
+	    	docs         : null,
+	    	courses      : null,
+	    	articles     : null,
+	    	projectIdeas : null,
+	    	search_query : null,
+	    	skip         : null,
+	    	limit        : null
 	    }
 	  },
 	  methods : {
 	  	// Search
 	  	search : function(item_query){
-	  		// Fetch query
+	  		// Fetch query // send query+ topic_id +user_id in session
 	  		alert('found '+ item_query)
+	  		// Save query to use it in load more
+	  		this.search_query = item_query
+	  	},
+	  	loadMore : function() {
+	  		//
+	  		this.search_query;
+	  		this.skip;
+	  		this.limit;
+	  		// increment skip
 	  	}
 	  }
 	}
