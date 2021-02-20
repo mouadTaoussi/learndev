@@ -41,7 +41,7 @@ class topicResolver implements topicResolver {
 	@Query(returns => Topic, { description: "This query returns a topic" })
 	public async getTopic(@Arg('topic_id') topic_id: string, @Ctx() context : any) : Promise<any> {
 
-		const user = context.req.session.passport.user;
+		const user = context.req.session.passport.user || null;
 
 		const topic = await _topicservice.getTopic(topic_id, user.id);
 
@@ -52,19 +52,31 @@ class topicResolver implements topicResolver {
 	public async getTopics(@Arg('load_more_rules') loadmorerules: LoadMoreRules) : Promise<any> {
 
 		const topics = await _topicservice.getTopics (loadmorerules.limit, loadmorerules.skip);
+
 		return topics.data;
 
 	}
 
-	@Mutation(returns => String, { description: "This query adds new topic" })
+	@Mutation(returns => Topic, { description: "This query adds new topic" })
 	@UseMiddleware(Authenticated)
 	public async addTopic(@Arg('new_topic') new_topic: TopicInput, @Ctx() context : any) : Promise<any> {
-		console.log(context.session)
+
+		new_topic.user_id = context.req.user.id;
+		new_topic.creator_name = context.req.user.name;
+
+		const newTopic = await _topicservice.addTopic(new_topic);
+
+		if (newTopic.added) return newTopic.data;
+
+		// return "Something went wrong!";
 	}
 
 	@Mutation(returns => String, { description: "This query deletes a topic" })
 	@UseMiddleware(Authenticated)
 	public async deleteTopic(@Arg('topic_id') topic_id: string, @Ctx() context : any) : Promise<any> {
+
+		// Check if the user owns the target topic
+
 		return "Deleted Successfully!";
 		console.log(context.session)
 	}
@@ -88,6 +100,7 @@ class docsResolver implements docsResolver {
 	@Mutation(returns => String, { description: "This query deletes a docs" })
 	@UseMiddleware(Authenticated)
 	public async deleteDocs(@Arg('docs_id') docs_id: string, @Ctx() context : any) : Promise<any> {
+		// Check if the user owns the target topic
 		return "Deleted Successfully!";
 	}
 
@@ -110,6 +123,7 @@ class courseResolver implements courseResolver {
 	@Mutation(returns => String, { description: "This query deletes a course" })
 	@UseMiddleware(Authenticated)
 	public async deleteCourse(@Arg('course_id') course_id: string, @Ctx() context : any) : Promise<any> {
+		// Check if the user owns the target topic
 		return "Deleted Successfully!";
 	}
 
@@ -132,6 +146,7 @@ class articleResolver implements articleResolver {
 	@Mutation(returns => String, { description: "This query deletes a course" })
 	@UseMiddleware(Authenticated)
 	public async deleteArticle(@Arg('article_id') article_id: string, @Ctx() context : any) : Promise<any> {
+		// Check if the user owns the target topic
 		return "Deleted Successfully!";
 	}
 
@@ -154,6 +169,7 @@ class projectIdeaResolver implements projectIdeaResolver {
 	@Mutation(returns => String, { description: "This query deletes a Project Idea" })
 	@UseMiddleware(Authenticated)
 	public async deleteProjectIdea(@Arg('project_idea_id') project_idea_id: string, @Ctx() context : any) : Promise<any> {
+		// Check if the user owns the target topic
 		return "Deleted Successfully!";
 	}
 

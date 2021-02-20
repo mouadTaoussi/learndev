@@ -147,7 +147,7 @@
 	import Topic from ".././components/Userpage/Topic.vue";
 	import Resource from ".././components/Topicpage/Resource.vue";
 	const  apihost = require('../.././api.config.js');
-
+	import { print } from 'graphql';
 
 	export default {
 
@@ -170,7 +170,60 @@
 	  },
 	   methods : {
 	   	addNewTopic : function(){
-	   		alert('added' + this.newTopic.topic_title);
+	   		// Check the values
+	   		if (this.newTopic.topic_title == null | this.newTopic.topic_title == "") {
+	   			alert('Please fill the topic title');
+	   		}
+	   		else if (this.newTopic.background_image == null || this.newTopic.background_image == ""){
+	   			alert('Please fill the background image field');
+	   		}
+	   		else {
+
+				const ADD_TOPIC = `
+					mutation addTopic($topic_title: String, $background_image: String) {
+						addTopic(topic_title: $topic_title, background_image: $background_image) {
+							topic_title
+						}
+					}
+				`
+				const F = `
+					query { 
+					  getTopic (topic_id: "mytopicid") { 
+					    user_id 
+					    background_image 
+					    topic_title
+					    articles { 
+					      user_id 
+					      topic_id 
+					      article_link 
+					      article_title 
+					    }
+					  }
+					}
+				`
+				console.log(print(F))
+	   			// add
+	   	// 		this.$http({
+	   	// 			url : apihost.api_domain + "/graphql",
+	   	// 			method: "POST",
+	   	// 			headers: {
+					// 	'Content-Type': 'application/json',
+					// },
+	   	// 			data: JSON.stringify({
+	   	// 				query: ADD_TOPIC,
+					// 	variables: {
+					// 		topic_title: this.newTopic.topic_title,
+					// 		background_image: this.newTopic.background_image
+					// 	},
+	   	// 			})
+	   	// 		})
+	   	// 		.then((res)=>{
+	   	// 			// add new topic component
+	   	// 		})
+	   	// 		.catch((err)=>{
+
+	   	// 		})
+	   		}
 	   	},
 	  	switchTab : function(to){
 	  		const topics         = document.querySelector('.tabs-pages-topics');

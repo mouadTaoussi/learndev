@@ -32,7 +32,7 @@ class TopicService implements TopicServiceInt {
 			// Get from Courses // Skip // Limit
 			// Get from Articles // Skip // Limit
 			// Get from ProjectIdea // Skip // Limit
-			// Check if the user upvoted some of the content in each resource
+			// Check if the user upvoted some of the content in each resource // if logged in
 
 			return {
 				message : null,
@@ -57,7 +57,7 @@ class TopicService implements TopicServiceInt {
 			// Get from Courses // by topic_id // Skip // Limit
 			// Get from Articles // by topic_id // Skip // Limit
 			// Get from ProjectIdea // by topic_id // Skip // Limit
-			// Check if the user upvoted some of the content in each resource
+			// Check if the user upvoted some of the content in each resource // if logged in
 			return {
 				message : null,
 				found : false,

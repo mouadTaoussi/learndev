@@ -28,7 +28,7 @@ let topicResolver = class topicResolver {
         const user = context.req.session.passport.user || null;
     }
     async getTopic(topic_id, context) {
-        const user = context.req.session.passport.user;
+        const user = context.req.session.passport.user || null;
         const topic = await _topicservice.getTopic(topic_id, user.id);
         return topic.data;
     }
@@ -37,7 +37,11 @@ let topicResolver = class topicResolver {
         return topics.data;
     }
     async addTopic(new_topic, context) {
-        console.log(context.session);
+        new_topic.user_id = context.req.user.id;
+        new_topic.creator_name = context.req.user.name;
+        const newTopic = await _topicservice.addTopic(new_topic);
+        if (newTopic.added)
+            return newTopic.data;
     }
     async deleteTopic(topic_id, context) {
         return "Deleted Successfully!";
@@ -73,7 +77,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], topicResolver.prototype, "getTopics", null);
 __decorate([
-    type_graphql_1.Mutation(returns => String, { description: "This query adds new topic" }),
+    type_graphql_1.Mutation(returns => Topics_objecttypes_1.Topic, { description: "This query adds new topic" }),
     type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('new_topic')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),

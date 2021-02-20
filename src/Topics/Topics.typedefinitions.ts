@@ -26,8 +26,7 @@ interface TopicServiceInt {
 type Topic = {
 	user_id          :string,
 	creator_name     :string,
-	topics_title     :string,
-	level            :string,
+	topic_title      :string,
 	background_image :string
 }
 type Docs = {

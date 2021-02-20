@@ -40,7 +40,7 @@ class Authentication implements AuthenticationInt {
 			req.session.passport = {};
 
 			req.session.passport.user = { 
-				id:userExists.user._id, name: userExists.user.name, email: userExists.user.email, at_provider_id: null 
+				id:userExists.user._id, name: userExists.user.user_name, email: userExists.user.email, at_provider_id: null 
 			}
 			
 			res.status(userExists.status).send({ loggedin : true, message : "Logged in!" });
@@ -199,7 +199,7 @@ class Authentication implements AuthenticationInt {
 
 			// Response back
 			req.session.passport.user = { 
-				id:updating.user._id, name: updating.user.name, email: updating.user.email, at_provider_id: null 
+				id:updating.user._id, name: updating.user.user_name, email: updating.user.email, at_provider_id: null 
 			}
 			
 			res.status(updating.status).send({

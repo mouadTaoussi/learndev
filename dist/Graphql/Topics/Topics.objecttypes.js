@@ -34,19 +34,19 @@ __decorate([
     __metadata("design:type", String)
 ], Topic.prototype, "background_image", void 0);
 __decorate([
-    type_graphql_1.Field(type => [Docs], { description: "Docs field" }),
+    type_graphql_1.Field(type => [Docs], { description: "Docs field", nullable: true }),
     __metadata("design:type", Array)
 ], Topic.prototype, "docs", void 0);
 __decorate([
-    type_graphql_1.Field(type => [Course], { description: "courses field" }),
+    type_graphql_1.Field(type => [Course], { description: "courses field", nullable: true }),
     __metadata("design:type", Array)
 ], Topic.prototype, "courses", void 0);
 __decorate([
-    type_graphql_1.Field(type => [Article], { description: "articles field" }),
+    type_graphql_1.Field(type => [Article], { description: "articles field", nullable: true }),
     __metadata("design:type", Array)
 ], Topic.prototype, "articles", void 0);
 __decorate([
-    type_graphql_1.Field(type => [ProjectIdea], { description: "Project Idea field" }),
+    type_graphql_1.Field(type => [ProjectIdea], { description: "Project Idea field", nullable: true }),
     __metadata("design:type", Array)
 ], Topic.prototype, "ProjectIdeas", void 0);
 Topic = __decorate([
@@ -200,13 +200,21 @@ exports.ProjectIdea = ProjectIdea;
 let TopicInput = class TopicInput {
 };
 __decorate([
-    type_graphql_1.Field(type => String),
+    type_graphql_1.Field(type => String, { nullable: true }),
     __metadata("design:type", String)
 ], TopicInput.prototype, "user_id", void 0);
+__decorate([
+    type_graphql_1.Field(type => String, { nullable: true }),
+    __metadata("design:type", String)
+], TopicInput.prototype, "creator_name", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
 ], TopicInput.prototype, "topic_title", void 0);
+__decorate([
+    type_graphql_1.Field(type => String),
+    __metadata("design:type", String)
+], TopicInput.prototype, "background_image", void 0);
 TopicInput = __decorate([
     type_graphql_1.InputType()
 ], TopicInput);

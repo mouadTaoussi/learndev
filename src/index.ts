@@ -78,7 +78,7 @@ async function runapp (){
 			// 	logout: () => req.logout(),
 			// }
 		},
-		playground :  false
+		playground :  true
 	})
 	apollo.applyMiddleware({ app });
 

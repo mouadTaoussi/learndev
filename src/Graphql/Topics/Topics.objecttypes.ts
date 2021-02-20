@@ -19,16 +19,16 @@ class Topic {
 	background_image : string;
 
 
-	@Field(type => [Docs], { description: "Docs field" } )
+	@Field(type => [Docs], { description: "Docs field", nullable: true } )
 	docs : [Docs];
 
-	@Field(type => [Course], { description: "courses field" } )
+	@Field(type => [Course], { description: "courses field", nullable: true } )
 	courses : [Course];
 
-	@Field(type => [Article], { description: "articles field" } )
+	@Field(type => [Article], { description: "articles field", nullable: true } )
 	articles : [Article];
 
-	@Field(type => [ProjectIdea], { description: "Project Idea field" } )
+	@Field(type => [ProjectIdea], { description: "Project Idea field", nullable: true } )
 	ProjectIdeas : [ProjectIdea];
 
 }
@@ -139,11 +139,18 @@ class ProjectIdea {
 
 @InputType()
 class TopicInput {
-	@Field( type => String )
-	user_id : string;
 
+	@Field(type => String, { nullable: true })
+	user_id: string;
+
+	@Field(type => String, { nullable: true })
+	creator_name: string;
+	
 	@Field( type => String )
 	topic_title : string;
+	
+	@Field( type => String )
+	background_image : string;
 
 }
 

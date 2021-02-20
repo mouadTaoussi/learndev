@@ -59,7 +59,7 @@ async function runapp() {
         context: ({ req, res }) => {
             return { req, res };
         },
-        playground: false
+        playground: true
     });
     apollo.applyMiddleware({ app });
     app.use(helmet_1.default());
