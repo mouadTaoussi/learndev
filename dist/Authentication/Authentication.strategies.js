@@ -24,20 +24,16 @@ passport_1.default.use(new passport_github2_1.default({
     try {
         const isUserExists = await _user.findUser({ at_provider_id: user.at_provider_id });
         if (isUserExists.found == true) {
-            console.log(1);
             done(null, { id: isUserExists.user._id, name: profile.username, email: profile.email, at_provider_id: profile.id });
         }
         else {
             const isEmailExists = await _user.findUser({ email: user.email });
             if (isEmailExists.found == true) {
-                console.log(2);
                 user.email = null;
                 const saving = await _user.addUser(user);
-                console.log(saving);
                 done(null, { id: saving.user._id, name: profile.username, email: profile.email, at_provider_id: profile.id });
             }
             else {
-                console.log(3);
                 const saving = await _user.addUser(user);
                 done(null, { id: saving.user._id, name: profile.username, email: profile.email, at_provider_id: profile.id });
             }

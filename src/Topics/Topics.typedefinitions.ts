@@ -35,7 +35,9 @@ type Docs = {
 	topic_id     : string,
 	docs_title   : string,
 	level        : string,
-	docs_link    : string
+	docs_link    : string,
+	upvotes_count: number,
+	upvotes      : number[]
 }
 type Course = {
 	user_id	     : string,
@@ -43,7 +45,9 @@ type Course = {
 	topic_id     : string,
 	course_title : string,
 	level        : string,
-	course_link  : string
+	course_link  : string,
+	upvotes_count: number,
+	upvotes      : number[]
 }
 type Article = {
 	user_id	     : string,
@@ -51,7 +55,9 @@ type Article = {
 	topic_id     : string,
 	article_title: string,
 	level        : string,
-	article_link : string
+	article_link : string,
+	upvotes_count: number,
+	upvotes      : number[]
 }
 type ProjectIdea = {
 	user_id      : string,
@@ -59,6 +65,8 @@ type ProjectIdea = {
 	topic_id     : string,
 	project_idea_title : string, 
 	level        : string,
-	description  : string
+	description  : string,
+	upvotes_count: number,
+	upvotes      : number[]
 }
 export { TopicServiceInt, Topic, Docs, Course, Article, ProjectIdea };

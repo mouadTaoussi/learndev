@@ -1,4 +1,4 @@
-import { ObjectType, InputType, Field }  from 'type-graphql';
+import { ObjectType, ArgsType, Field }  from 'type-graphql';
 
 // docs- courses- articles- projects ideas
 @ObjectType({ description: 'This one represents topic' })
@@ -137,14 +137,8 @@ class ProjectIdea {
 	description : string;
 }
 
-@InputType()
-class TopicInput {
-
-	@Field(type => String, { nullable: true })
-	user_id: string;
-
-	@Field(type => String, { nullable: true })
-	creator_name: string;
+@ArgsType()
+class TopicArgs {
 	
 	@Field( type => String )
 	topic_title : string;
@@ -154,10 +148,8 @@ class TopicInput {
 
 }
 
-@InputType()
-class DocsInput {
-	@Field( type => String )
-	user_id : string;
+@ArgsType()
+class DocsArgs {
 
 	@Field( type => String )
 	topic_id : string;
@@ -173,10 +165,8 @@ class DocsInput {
 
 }
 
-@InputType()
-class CourseInput {
-	@Field( type => String )
-	user_id : string;
+@ArgsType()
+class CourseArgs {
 
 	@Field( type => String )
 	topic_id : string;
@@ -191,10 +181,8 @@ class CourseInput {
 	course_link : string;
 }
 
-@InputType()
-class ArticleInput {
-	@Field( type => String )
-	user_id : string;
+@ArgsType()
+class ArticleArgs {
 
 	@Field( type => String )
 	topic_id : string;
@@ -210,10 +198,8 @@ class ArticleInput {
 
 }
 
-@InputType()
-class ProjectIdeaInput {
-	@Field( type => String )
-	user_id : string;
+@ArgsType()
+class ProjectIdeaArgs {
 
 	@Field( type => String )
 	topic_id : string;
@@ -228,7 +214,7 @@ class ProjectIdeaInput {
 	description : string;
 }
 
-@InputType()
+@ArgsType()
 class LoadMoreRules {
 	@Field( type => Number )
 	limit : number;
@@ -239,5 +225,5 @@ class LoadMoreRules {
 
 export { 
 	Topic, Docs, Course, Article, ProjectIdea, 
-	TopicInput, DocsInput, CourseInput, ArticleInput, ProjectIdeaInput, LoadMoreRules
+	TopicArgs, DocsArgs, CourseArgs, ArticleArgs, ProjectIdeaArgs, LoadMoreRules
 };

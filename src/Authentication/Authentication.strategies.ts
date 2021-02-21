@@ -28,7 +28,6 @@ passport.use(new GitHubStrategy({
 
 			// user exists
 			if (isUserExists.found == true) { 
-				console.log(1)
 				done(null,{id: isUserExists.user._id, name : profile.username,  email: profile.email, at_provider_id : profile.id}); 
 			}
 			// user doesn't exits
@@ -39,18 +38,15 @@ passport.use(new GitHubStrategy({
 				const isEmailExists = await _user.findUser({ email: user.email });
 
 				if ( isEmailExists.found == true ) {
-					console.log(2)
 					// We gonna save the user without email and let hima put an email in future
 					user.email = null!;
 
 					// Save user
 					const saving = await _user.addUser(user);
-					console.log(saving)
 					// Done with that	
 					done(null,{id: saving.user._id, name : profile.username,  email: profile.email, at_provider_id : profile.id})
 				}
 				else {
-					console.log(3)
 					const saving = await _user.addUser(user);
 
 					// Done with that

@@ -28,11 +28,14 @@ class TopicService implements TopicServiceInt {
 
 			const topic = await TopicModel;
 			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
-			// Get from Docs // Skip // Limit
-			// Get from Courses // Skip // Limit
-			// Get from Articles // Skip // Limit
-			// Get from ProjectIdea // Skip // Limit
-			// Check if the user upvoted some of the content in each resource // if logged in
+			// Get from Docs // Skip // Limit // Add upvoted field set to false
+			// Get from Courses // Skip // Limit // Add upvoted field set to false
+			// Get from Articles // Skip // Limit // Add upvoted field set to false
+			// Get from ProjectIdea // Skip // Limit // Add upvoted field set to false
+			if(user_id !== null) {
+				// Check if the user upvoted some of the content in each resource // if logged in
+				// if true then set upvoted to true
+			}
 
 			return {
 				message : null,
@@ -53,11 +56,14 @@ class TopicService implements TopicServiceInt {
 		try {
 			const topic = await TopicModel.findById(item_id);
 
-			// Get from Docs // by topic_id // Skip // Limit
-			// Get from Courses // by topic_id // Skip // Limit
-			// Get from Articles // by topic_id // Skip // Limit
-			// Get from ProjectIdea // by topic_id // Skip // Limit
-			// Check if the user upvoted some of the content in each resource // if logged in
+			// Get from Docs // Skip // Limit // Add upvoted field set to false
+			// Get from Courses // Skip // Limit // Add upvoted field set to false
+			// Get from Articles // Skip // Limit // Add upvoted field set to false
+			// Get from ProjectIdea // Skip // Limit // Add upvoted field set to false
+			if(user_id !== null) {
+				// Check if the user upvoted some of the content in each resource // if logged in
+				// if true then set upvoted to true
+			}
 			return {
 				message : null,
 				found : false,

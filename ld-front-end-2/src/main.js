@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
 
-// axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true // Allows session the be set and sent between the server and the client
 
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;

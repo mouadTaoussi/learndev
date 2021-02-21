@@ -14,6 +14,7 @@ import { buildSchema, ResolverData } from "type-graphql";
 // Import resolvers
 import main_config from './main.config';
 import main_cors from './main.cors';
+import cors from "cors";
 import AuthenticationRoutes from './Authentication/Authentication.routes';
 import './Authentication/Authentication.strategies';
 import { 
@@ -78,7 +79,7 @@ async function runapp (){
 			// 	logout: () => req.logout(),
 			// }
 		},
-		playground :  true
+		playground :  false
 	})
 	apollo.applyMiddleware({ app });
 
@@ -86,6 +87,7 @@ async function runapp (){
 	app.use(helmet());
 	app.use(bodyParser.json());
 	app.use(main_cors);
+	// app.use(cors({ origin: 'http://localhost:8080' , credentials :  true}));
 
 	app.use('/auth', AuthenticationRoutes)
 

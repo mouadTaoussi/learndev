@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoadMoreRules = exports.ProjectIdeaInput = exports.ArticleInput = exports.CourseInput = exports.DocsInput = exports.TopicInput = exports.ProjectIdea = exports.Article = exports.Course = exports.Docs = exports.Topic = void 0;
+exports.LoadMoreRules = exports.ProjectIdeaArgs = exports.ArticleArgs = exports.CourseArgs = exports.DocsArgs = exports.TopicArgs = exports.ProjectIdea = exports.Article = exports.Course = exports.Docs = exports.Topic = void 0;
 const type_graphql_1 = require("type-graphql");
 let Topic = class Topic {
 };
@@ -197,132 +197,108 @@ ProjectIdea = __decorate([
     type_graphql_1.ObjectType({ description: 'This one represents project idea' })
 ], ProjectIdea);
 exports.ProjectIdea = ProjectIdea;
-let TopicInput = class TopicInput {
-};
-__decorate([
-    type_graphql_1.Field(type => String, { nullable: true }),
-    __metadata("design:type", String)
-], TopicInput.prototype, "user_id", void 0);
-__decorate([
-    type_graphql_1.Field(type => String, { nullable: true }),
-    __metadata("design:type", String)
-], TopicInput.prototype, "creator_name", void 0);
-__decorate([
-    type_graphql_1.Field(type => String),
-    __metadata("design:type", String)
-], TopicInput.prototype, "topic_title", void 0);
-__decorate([
-    type_graphql_1.Field(type => String),
-    __metadata("design:type", String)
-], TopicInput.prototype, "background_image", void 0);
-TopicInput = __decorate([
-    type_graphql_1.InputType()
-], TopicInput);
-exports.TopicInput = TopicInput;
-let DocsInput = class DocsInput {
+let TopicArgs = class TopicArgs {
 };
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], DocsInput.prototype, "user_id", void 0);
+], TopicArgs.prototype, "topic_title", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], DocsInput.prototype, "topic_id", void 0);
-__decorate([
-    type_graphql_1.Field(type => String),
-    __metadata("design:type", String)
-], DocsInput.prototype, "docs_title", void 0);
-__decorate([
-    type_graphql_1.Field(type => String),
-    __metadata("design:type", String)
-], DocsInput.prototype, "level", void 0);
-__decorate([
-    type_graphql_1.Field(type => String),
-    __metadata("design:type", String)
-], DocsInput.prototype, "docs_link", void 0);
-DocsInput = __decorate([
-    type_graphql_1.InputType()
-], DocsInput);
-exports.DocsInput = DocsInput;
-let CourseInput = class CourseInput {
+], TopicArgs.prototype, "background_image", void 0);
+TopicArgs = __decorate([
+    type_graphql_1.ArgsType()
+], TopicArgs);
+exports.TopicArgs = TopicArgs;
+let DocsArgs = class DocsArgs {
 };
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], CourseInput.prototype, "user_id", void 0);
+], DocsArgs.prototype, "topic_id", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], CourseInput.prototype, "topic_id", void 0);
+], DocsArgs.prototype, "docs_title", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], CourseInput.prototype, "course_title", void 0);
+], DocsArgs.prototype, "level", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], CourseInput.prototype, "level", void 0);
-__decorate([
-    type_graphql_1.Field(type => String),
-    __metadata("design:type", String)
-], CourseInput.prototype, "course_link", void 0);
-CourseInput = __decorate([
-    type_graphql_1.InputType()
-], CourseInput);
-exports.CourseInput = CourseInput;
-let ArticleInput = class ArticleInput {
+], DocsArgs.prototype, "docs_link", void 0);
+DocsArgs = __decorate([
+    type_graphql_1.ArgsType()
+], DocsArgs);
+exports.DocsArgs = DocsArgs;
+let CourseArgs = class CourseArgs {
 };
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], ArticleInput.prototype, "user_id", void 0);
+], CourseArgs.prototype, "topic_id", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], ArticleInput.prototype, "topic_id", void 0);
+], CourseArgs.prototype, "course_title", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], ArticleInput.prototype, "article_title", void 0);
+], CourseArgs.prototype, "level", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], ArticleInput.prototype, "level", void 0);
-__decorate([
-    type_graphql_1.Field(type => String),
-    __metadata("design:type", String)
-], ArticleInput.prototype, "article_link", void 0);
-ArticleInput = __decorate([
-    type_graphql_1.InputType()
-], ArticleInput);
-exports.ArticleInput = ArticleInput;
-let ProjectIdeaInput = class ProjectIdeaInput {
+], CourseArgs.prototype, "course_link", void 0);
+CourseArgs = __decorate([
+    type_graphql_1.ArgsType()
+], CourseArgs);
+exports.CourseArgs = CourseArgs;
+let ArticleArgs = class ArticleArgs {
 };
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], ProjectIdeaInput.prototype, "user_id", void 0);
+], ArticleArgs.prototype, "topic_id", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], ProjectIdeaInput.prototype, "topic_id", void 0);
+], ArticleArgs.prototype, "article_title", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], ProjectIdeaInput.prototype, "project_idea_title", void 0);
+], ArticleArgs.prototype, "level", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], ProjectIdeaInput.prototype, "level", void 0);
+], ArticleArgs.prototype, "article_link", void 0);
+ArticleArgs = __decorate([
+    type_graphql_1.ArgsType()
+], ArticleArgs);
+exports.ArticleArgs = ArticleArgs;
+let ProjectIdeaArgs = class ProjectIdeaArgs {
+};
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], ProjectIdeaInput.prototype, "description", void 0);
-ProjectIdeaInput = __decorate([
-    type_graphql_1.InputType()
-], ProjectIdeaInput);
-exports.ProjectIdeaInput = ProjectIdeaInput;
+], ProjectIdeaArgs.prototype, "topic_id", void 0);
+__decorate([
+    type_graphql_1.Field(type => String),
+    __metadata("design:type", String)
+], ProjectIdeaArgs.prototype, "project_idea_title", void 0);
+__decorate([
+    type_graphql_1.Field(type => String),
+    __metadata("design:type", String)
+], ProjectIdeaArgs.prototype, "level", void 0);
+__decorate([
+    type_graphql_1.Field(type => String),
+    __metadata("design:type", String)
+], ProjectIdeaArgs.prototype, "description", void 0);
+ProjectIdeaArgs = __decorate([
+    type_graphql_1.ArgsType()
+], ProjectIdeaArgs);
+exports.ProjectIdeaArgs = ProjectIdeaArgs;
 let LoadMoreRules = class LoadMoreRules {
 };
 __decorate([
@@ -334,6 +310,6 @@ __decorate([
     __metadata("design:type", Number)
 ], LoadMoreRules.prototype, "skip", void 0);
 LoadMoreRules = __decorate([
-    type_graphql_1.InputType()
+    type_graphql_1.ArgsType()
 ], LoadMoreRules);
 exports.LoadMoreRules = LoadMoreRules;

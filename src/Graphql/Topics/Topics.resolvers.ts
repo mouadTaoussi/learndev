@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Arg, Args, Ctx, UseMiddleware } from 'type-graphql';
 import { 
 	Topic,      Docs,      Course,      Article,      ProjectIdea,
-	TopicInput, DocsInput, CourseInput, ArticleInput, ProjectIdeaInput, LoadMoreRules
+	TopicArgs, DocsArgs, CourseArgs, ArticleArgs, ProjectIdeaArgs, LoadMoreRules
 } from './Topics.objecttypes';
 import { Authenticated }  from '../middlewares.graphql';
 import TopicService from "../.././Topics/Topics.service";
@@ -12,8 +12,8 @@ interface topicResolver {
 	searchTopic(search_term: string) :Promise<any>
 	searchContentInTopic(search_term: string,topic_id:string, context : any) :Promise<any> // Load more
 	getTopic(topic_id: string,context : any) :Promise<any> // Load more
-	getTopics(topic_id: string, loadmorerules: LoadMoreRules) :Promise<any> // Load more
-	addTopic(new_topic: TopicInput, context:any) :Promise<any>
+	getTopics({limit,skip}: LoadMoreRules) :Promise<any> // Load more
+	addTopic(new_topic: TopicArgs, context:any) :Promise<any>
 	deleteTopic(topic_id: string, context:any) :Promise<any>
 }
 
@@ -49,9 +49,9 @@ class topicResolver implements topicResolver {
 	}
 
 	@Query(returns => [Topic], { description: "This query returns available topics" })
-	public async getTopics(@Arg('load_more_rules') loadmorerules: LoadMoreRules) : Promise<any> {
+	public async getTopics(@Args() {limit,skip}: LoadMoreRules) : Promise<any> {
 
-		const topics = await _topicservice.getTopics (loadmorerules.limit, loadmorerules.skip);
+		const topics = await _topicservice.getTopics (limit, skip);
 
 		return topics.data;
 
@@ -59,11 +59,20 @@ class topicResolver implements topicResolver {
 
 	@Mutation(returns => Topic, { description: "This query adds new topic" })
 	@UseMiddleware(Authenticated)
-	public async addTopic(@Arg('new_topic') new_topic: TopicInput, @Ctx() context : any) : Promise<any> {
-
-		new_topic.user_id = context.req.user.id;
-		new_topic.creator_name = context.req.user.name;
-
+	public async addTopic(@Args() { topic_title, background_image } : TopicArgs, @Ctx() context : any) : Promise<any> {
+		console.log(context.req.user)
+		const new_topic :{
+			user_id          :string,
+			creator_name     :string,
+			topic_title      :string,
+			background_image :string
+		} = {
+			user_id          : context.req.user.id,
+			creator_name     : context.req.user.name,
+			topic_title      : topic_title,
+			background_image : background_image
+		}
+		console.log(new_topic)
 		const newTopic = await _topicservice.addTopic(new_topic);
 
 		if (newTopic.added) return newTopic.data;
@@ -84,7 +93,7 @@ class topicResolver implements topicResolver {
 }
 
 interface docsResolver {
-	addDocs(new_docs: DocsInput, context:any) :Promise<any>
+	addDocs(new_docs: DocsArgs, context:any) :Promise<any>
 	deleteDocs(docs_id: string, context:any) :Promise<any> 
 }
 
@@ -93,8 +102,27 @@ class docsResolver implements docsResolver {
 
 	@Mutation(returns => Docs, { description: "This query adds new docs" })
 	@UseMiddleware(Authenticated)
-	public async addDocs(@Arg('new_docs') new_docs: DocsInput, @Ctx() context : any) : Promise<any> {
+	public async addDocs(@Args() { topic_id, docs_title, level, docs_link }: DocsArgs, @Ctx() context : any) : Promise<any> {
 
+		const newDoc : {
+			user_id	     : string,
+			creator_name : string,
+			topic_id     : string,
+			docs_title   : string,
+			level        : string,
+			docs_link    : string,
+			upvotes_count: number,
+			upvotes      : number[]
+		} = {
+			user_id      : context.req.user.id,
+			creator_name : context.req.user.name,
+			topic_id     : topic_id,
+			docs_title   : docs_title,
+			level        : level,
+			docs_link    : docs_link,
+			upvotes_count: 0,
+			upvotes      : []
+		}
 	}
 
 	@Mutation(returns => String, { description: "This query deletes a docs" })
@@ -107,7 +135,7 @@ class docsResolver implements docsResolver {
 }
 
 interface courseResolver {
-	addCourse(new_course: CourseInput, context:any) : Promise<any>
+	addCourse(new_course: CourseArgs, context:any) : Promise<any>
 	deleteCourse(course_id: string, context:any) : Promise<any>
 }
 
@@ -116,8 +144,26 @@ class courseResolver implements courseResolver {
 	
 	@Mutation(returns => Course, { description: "This query adds new course" })
 	@UseMiddleware(Authenticated)
-	public async addCourse(@Arg('new_course') new_course: CourseInput, @Ctx() context : any) : Promise<any> {
-
+	public async addCourse(@Args() { topic_id, course_title, level, course_link }: CourseArgs, @Ctx() context : any) : Promise<any> {
+		const newCourse : {
+			user_id	     : string,
+			creator_name : string,
+			topic_id     : string,
+			course_title : string,
+			level        : string,
+			course_link  : string,
+			upvotes_count: number,
+			upvotes      : number[]
+		} = {
+			user_id      : context.req.user.id,
+			creator_name : context.req.user.name,
+			topic_id     : topic_id,
+			course_title : course_title,
+			level        : level,
+			course_link  : course_link,
+			upvotes_count: 0,
+			upvotes      : []
+		}
 	}
 
 	@Mutation(returns => String, { description: "This query deletes a course" })
@@ -130,7 +176,7 @@ class courseResolver implements courseResolver {
 }
 
 interface articleResolver {
-	addArticle(new_article: ArticleInput, context:any) : Promise<any>
+	addArticle(new_article: ArticleArgs, context:any) : Promise<any>
 	deleteArticle(article_id: string, context:any) : Promise<any>
 }
 
@@ -139,8 +185,26 @@ class articleResolver implements articleResolver {
 	
 	@Mutation(returns => Article, { description: "This query adds new course" })
 	@UseMiddleware(Authenticated)
-	public async addArticle(@Arg('new_article') new_article: ArticleInput, @Ctx() context : any) : Promise<any> {
-
+	public async addArticle(@Args() {topic_id,article_title,level,article_link}: ArticleArgs, @Ctx() context : any) : Promise<any> {
+		const newArticle : {
+			user_id	      : string,
+			creator_name  : string,
+			topic_id      : string,
+			article_title : string,
+			level         : string,
+			article_link  : string,
+			upvotes_count : number,
+			upvotes       : number[]
+		} = {
+			user_id       : context.req.user.id,
+			creator_name  : context.req.user.name,
+			topic_id      : topic_id,
+			article_title : article_title,
+			level         : level,
+			article_link  : article_link,
+			upvotes_count : 0,
+			upvotes       : []
+		}
 	}
 
 	@Mutation(returns => String, { description: "This query deletes a course" })
@@ -153,7 +217,7 @@ class articleResolver implements articleResolver {
 }
 
 interface projectIdeaResolver {
-	addProjectIdea( new_project_idea: ProjectIdeaInput, context:any) : Promise<any>
+	addProjectIdea( new_project_idea: ProjectIdeaArgs, context:any) : Promise<any>
 	deleteProjectIdea( project_idea_id: string, context:any) : Promise<any>
 }
 
@@ -162,8 +226,28 @@ class projectIdeaResolver implements projectIdeaResolver {
 	
 	@Mutation(returns => ProjectIdea, { description: "This query adds new Project Idea" })
 	@UseMiddleware(Authenticated)
-	public async addProjectIdea(@Arg('new_project_idea') new_project_idea: ProjectIdeaInput, @Ctx() context : any) : Promise<any> {
+	public async addProjectIdea(@Args() { topic_id, project_idea_title, level, description }: ProjectIdeaArgs, @Ctx() context : any)
+	 : Promise<any> {
 
+		const newArticle : {
+			user_id	      : string,
+			creator_name  : string,
+			topic_id      : string,
+			project_idea_title : string,
+			level         : string,
+			description   : string,
+			upvotes_count : number,
+			upvotes       : number[]
+		} = {
+			user_id       : context.req.user.id,
+			creator_name  : context.req.user.name,
+			topic_id      : topic_id,
+			project_idea_title : project_idea_title,
+			level         : level,
+			description   : description,
+			upvotes_count : 0,
+			upvotes       : []
+		}
 	}
 
 	@Mutation(returns => String, { description: "This query deletes a Project Idea" })

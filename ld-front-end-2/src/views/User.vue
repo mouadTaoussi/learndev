@@ -148,6 +148,7 @@
 	import Resource from ".././components/Topicpage/Resource.vue";
 	const  apihost = require('../.././api.config.js');
 	import { print } from 'graphql';
+	import gql from "graphql-tag";
 
 	export default {
 
@@ -179,8 +180,8 @@
 	   		}
 	   		else {
 
-				const ADD_TOPIC = `
-					mutation addTopic($topic_title: String, $background_image: String) {
+				const ADD_TOPIC = gql`
+					mutation($topic_title: String!, $background_image: String!) {
 						addTopic(topic_title: $topic_title, background_image: $background_image) {
 							topic_title
 						}
@@ -201,28 +202,39 @@
 					  }
 					}
 				`
-				console.log(print(F))
+				// console.log(print(ADD_TOPIC))
+				// this.$http({
+				// 	url : apihost.api_domain + "/auth/login",
+				// 	method : 'GET',
+				// })
+				// .then((res)=>{
+				// 	console.log(res)
+				// })
+				// .catch((err)=>{
+				// 	console.log(err)
+				// })
+				
 	   			// add
-	   	// 		this.$http({
-	   	// 			url : apihost.api_domain + "/graphql",
-	   	// 			method: "POST",
-	   	// 			headers: {
-					// 	'Content-Type': 'application/json',
-					// },
-	   	// 			data: JSON.stringify({
-	   	// 				query: ADD_TOPIC,
-					// 	variables: {
-					// 		topic_title: this.newTopic.topic_title,
-					// 		background_image: this.newTopic.background_image
-					// 	},
-	   	// 			})
-	   	// 		})
-	   	// 		.then((res)=>{
-	   	// 			// add new topic component
-	   	// 		})
-	   	// 		.catch((err)=>{
+	   			this.$http({
+	   				url : apihost.api_domain + "/graphql",
+	   				method: "POST",
+	   				headers: {
+						'Content-Type': 'application/json',
+					},
+	   				data: {
+	   					query: print(ADD_TOPIC),
+						variables: {
+							topic_title: this.newTopic.topic_title,
+							background_image: this.newTopic.background_image
+						},
+	   				}
+	   			})
+	   			.then((res)=>{
+	   				// add new topic component
+	   			})
+	   			.catch((err)=>{
 
-	   	// 		})
+	   			})
 	   		}
 	   	},
 	  	switchTab : function(to){

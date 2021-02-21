@@ -22,6 +22,8 @@ class TopicService {
     async searchContentInTopic(query, topic_id, user_id) {
         try {
             const topic = await Topics_models_1.TopicModel;
+            if (user_id !== null) {
+            }
             return {
                 message: null,
                 found: false,
@@ -39,6 +41,8 @@ class TopicService {
     async getTopic(item_id, user_id) {
         try {
             const topic = await Topics_models_1.TopicModel.findById(item_id);
+            if (user_id !== null) {
+            }
             return {
                 message: null,
                 found: false,
