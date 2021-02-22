@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
-
+//
 axios.defaults.withCredentials = true // Allows session the be set and sent between the server and the client
 
 Vue.config.productionTip = false;
