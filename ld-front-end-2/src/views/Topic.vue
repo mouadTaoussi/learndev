@@ -46,16 +46,18 @@
 	  	// - Courses(Check upvoted ones) 
 	  	// - Articles(Check upvoted ones) 
 	  	// - ProjectIdeas(Check upvoted ones)
+	  	this.skip;
+	  	this.limit;
 	  },
 	  data () {
 	    return {
-	    	docs         : null,
-	    	courses      : null,
-	    	articles     : null,
-	    	projectIdeas : null,
+	    	docs         : [],
+	    	courses      : [],
+	    	articles     : [],
+	    	projectIdeas : [],
 	    	search_query : null,
-	    	skip         : null,
-	    	limit        : null
+	    	skip         : 0,
+	    	limit        : 10
 	    }
 	  },
 	  methods : {
@@ -65,6 +67,9 @@
 	  		alert('found '+ item_query)
 	  		// Save query to use it in load more
 	  		this.search_query = item_query
+	  		this.skip;
+	  		this.limit;
+	  		// Graphql request
 	  	},
 	  	loadMore : function() {
 	  		//
@@ -72,6 +77,7 @@
 	  		this.skip;
 	  		this.limit;
 	  		// increment skip
+	  		// push to docs + courses + articels + projectIdeas
 	  	}
 	  }
 	}

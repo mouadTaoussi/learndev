@@ -7,22 +7,22 @@
 			<h1 class="text-left title">Your account</h1>
 			<!-- Tabs btns -->
 			<section class="tabs-group">
-				<div class="tabs-btns tab-btn-topics bg-light tab-btn-active">
+				<div class="tabs-btns tab-btn-topics tab-btn-active">
 					<p @click="switchTab('topics')" class="text-left text-center">
 						<i class="tab-title">Topics </i>📘📄
 					</p>
 				</div>
-				<div class="tabs-btns tab-btn-upvoted bg-light">
+				<div class="tabs-btns tab-btn-upvoted">
 					<p @click="switchTab('upvoted')" class="text-left text-center">
 						<i class="tab-title">Upvoted </i>🖥💻
 					</p>
 				</div>
-				<div class="tabs-btns tab-btn-userprofile bg-light">
+				<div class="tabs-btns tab-btn-userprofile">
 					<p @click="switchTab('userprofile')" class="text-left text-center">
 						<i class="tab-title">Your profile </i>📑🧾
 					</p>
 				</div>
-				<!-- <div class="tabs-btns tab-btn-projectideas bg-light">
+				<!-- <div class="tabs-btns tab-btn-projectideas">
 					<p @click="switchTab('projectideas')" class="text-left text-center">
 						<i class="tab-title">Project Ideas </i>🧪💡
 					</p>
@@ -337,9 +337,10 @@
 		transition: all .1s ease-out;
 	}
 	.tabs-group {
+		background-color: white;
 		display: grid;
 		grid-template-columns: 2fr 2fr 2fr 2fr;
-		grid-gap: 5px;
+		/*grid-gap: 5px;*/
 		/*position: -webkit-sticky!important;*/
 		position: sticky!important;
 		top: 60px!important;

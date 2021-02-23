@@ -11,11 +11,12 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const helmet_1 = __importDefault(require("helmet"));
 const passport_1 = __importDefault(require("passport"));
 const mongoose_1 = require("mongoose");
-require("reflect-metadata");
 const apollo_server_express_1 = require("apollo-server-express");
 const type_graphql_1 = require("type-graphql");
+require("reflect-metadata");
+require("class-validator");
 const main_config_1 = __importDefault(require("./main.config"));
-const cors_1 = __importDefault(require("cors"));
+const main_cors_1 = __importDefault(require("./main.cors"));
 const Authentication_routes_1 = __importDefault(require("./Authentication/Authentication.routes"));
 require("./Authentication/Authentication.strategies");
 const Topics_resolvers_1 = require("./Graphql/Topics/Topics.resolvers");
@@ -28,6 +29,7 @@ mongoose_1.connect(main_config_1.default.mongodb, { useNewUrlParser: true, useUn
         console.log('Database up and running!');
     }
 });
+app.use(main_cors_1.default);
 const redisClient = redis_1.default.createClient({
     host: main_config_1.default.redis_host,
     port: main_config_1.default.redis_port,
@@ -57,15 +59,17 @@ async function runapp() {
             globalMiddlewares: []
         }),
         context: ({ req, res }) => {
-            console.log(req.session);
             return { req, res };
         },
         playground: false
     });
-    apollo.applyMiddleware({ app });
+    apollo.applyMiddleware({ app, cors: {
+            origin: "http://localhost:8080",
+            credentials: true,
+            methods: ["POST", "OPTIONS"],
+        } });
     app.use(helmet_1.default());
     app.use(body_parser_1.default.json());
-    app.use(cors_1.default({ origin: 'http://localhost:8080', credentials: true }));
     app.use('/auth', Authentication_routes_1.default);
 }
 runapp();

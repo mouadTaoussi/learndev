@@ -22,9 +22,9 @@ const middlewares_graphql_1 = require("../middlewares.graphql");
 const Topics_service_1 = __importDefault(require("../.././Topics/Topics.service"));
 const _topicservice = new Topics_service_1.default();
 let topicResolver = class topicResolver {
-    async searchTopic(search_term) {
+    async searchTopic(search_term, { limit, skip }) {
     }
-    async searchContentInTopic(search_term, topic_id, context) {
+    async searchContentInTopic(search_term, topic_id, { limit, skip }, context) {
         const user = context.req.session.passport.user || null;
     }
     async getTopic(topic_id, context) {
@@ -37,17 +37,24 @@ let topicResolver = class topicResolver {
         return topics.data;
     }
     async addTopic({ topic_title, background_image }, context) {
-        console.log(context.req.user);
         const new_topic = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
             topic_title: topic_title,
             background_image: background_image
         };
-        console.log(new_topic);
         const newTopic = await _topicservice.addTopic(new_topic);
-        if (newTopic.added)
-            return newTopic.data;
+        return {
+            _id: newTopic.data._id,
+            user_id: newTopic.data.user_id,
+            creator_name: newTopic.data.creator_name,
+            topic_title: newTopic.data.topic_title,
+            background_image: newTopic.data.background_image,
+            docs: null,
+            courses: null,
+            articels: null,
+            project_idea: null
+        };
     }
     async deleteTopic(topic_id, context) {
         return "Deleted Successfully!";
@@ -56,16 +63,16 @@ let topicResolver = class topicResolver {
 };
 __decorate([
     type_graphql_1.Query(returns => [Topics_objecttypes_1.Topic], { description: "This query returns the topics by the search item" }),
-    __param(0, type_graphql_1.Arg('search_term')),
+    __param(0, type_graphql_1.Arg('search_term')), __param(1, type_graphql_1.Args()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Topics_objecttypes_1.LoadMoreRules]),
     __metadata("design:returntype", Promise)
 ], topicResolver.prototype, "searchTopic", null);
 __decorate([
     type_graphql_1.Query(returns => [Topics_objecttypes_1.Topic], { description: "This query returns the contents in the topic by the search item" }),
-    __param(0, type_graphql_1.Arg('search_term')), __param(1, type_graphql_1.Arg('topic_id')), __param(2, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('search_term')), __param(1, type_graphql_1.Arg('topic_id')), __param(2, type_graphql_1.Args()), __param(3, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, Object]),
+    __metadata("design:paramtypes", [String, String, Topics_objecttypes_1.LoadMoreRules, Object]),
     __metadata("design:returntype", Promise)
 ], topicResolver.prototype, "searchContentInTopic", null);
 __decorate([
@@ -104,7 +111,7 @@ topicResolver = __decorate([
 exports.topicResolver = topicResolver;
 let docsResolver = class docsResolver {
     async addDocs({ topic_id, docs_title, level, docs_link }, context) {
-        const newDoc = {
+        const new_doc = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
             topic_id: topic_id,
@@ -114,6 +121,8 @@ let docsResolver = class docsResolver {
             upvotes_count: 0,
             upvotes: []
         };
+        const newDoc = await _topicservice.addDocs(new_doc);
+        return newDoc.data;
     }
     async deleteDocs(docs_id, context) {
         return "Deleted Successfully!";
@@ -141,7 +150,7 @@ docsResolver = __decorate([
 exports.docsResolver = docsResolver;
 let courseResolver = class courseResolver {
     async addCourse({ topic_id, course_title, level, course_link }, context) {
-        const newCourse = {
+        const new_course = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
             topic_id: topic_id,
@@ -151,6 +160,8 @@ let courseResolver = class courseResolver {
             upvotes_count: 0,
             upvotes: []
         };
+        const newCourse = await _topicservice.addCourse(new_course);
+        return newCourse.data;
     }
     async deleteCourse(course_id, context) {
         return "Deleted Successfully!";
@@ -178,7 +189,7 @@ courseResolver = __decorate([
 exports.courseResolver = courseResolver;
 let articleResolver = class articleResolver {
     async addArticle({ topic_id, article_title, level, article_link }, context) {
-        const newArticle = {
+        const new_article = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
             topic_id: topic_id,
@@ -188,6 +199,8 @@ let articleResolver = class articleResolver {
             upvotes_count: 0,
             upvotes: []
         };
+        const newArticle = await _topicservice.addArticle(new_article);
+        return newArticle.data;
     }
     async deleteArticle(article_id, context) {
         return "Deleted Successfully!";
@@ -215,7 +228,7 @@ articleResolver = __decorate([
 exports.articleResolver = articleResolver;
 let projectIdeaResolver = class projectIdeaResolver {
     async addProjectIdea({ topic_id, project_idea_title, level, description }, context) {
-        const newArticle = {
+        const project_idea = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
             topic_id: topic_id,
@@ -225,6 +238,8 @@ let projectIdeaResolver = class projectIdeaResolver {
             upvotes_count: 0,
             upvotes: []
         };
+        const projectIdea = await _topicservice.addProjectIdea(project_idea);
+        return projectIdea.data;
     }
     async deleteProjectIdea(project_idea_id, context) {
         return "Deleted Successfully!";

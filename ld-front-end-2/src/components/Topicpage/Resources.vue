@@ -2,22 +2,22 @@
 	<section>
 		<!-- Tabs btns -->
 		<section class="tabs-group">
-			<div class="tabs-btns tab-btn-docs bg-light tab-btn-active">
+			<div class="tabs-btns tab-btn-docs tab-btn-active">
 				<p @click="switchTab('docs')" class="text-left text-center">
 					<i class="tab-title">Documentations </i>📘📄
 				</p>
 			</div>
-			<div class="tabs-btns tab-btn-courses bg-light">
+			<div class="tabs-btns tab-btn-courses">
 				<p @click="switchTab('courses')" class="text-left text-center">
 					<i class="tab-title">Courses & Videos </i>🖥💻
 				</p>
 			</div>
-			<div class="tabs-btns tab-btn-articles bg-light">
+			<div class="tabs-btns tab-btn-articles">
 				<p @click="switchTab('articles')" class="text-left text-center">
 					<i class="tab-title">Articles </i>📑🧾
 				</p>
 			</div>
-			<div class="tabs-btns tab-btn-projectideas bg-light">
+			<div class="tabs-btns tab-btn-projectideas">
 				<p @click="switchTab('projectideas')" class="text-left text-center">
 					<i class="tab-title">Project Ideas </i>🧪💡
 				</p>
@@ -221,7 +221,7 @@
 	/*position: -webkit-sticky!important;*/
 	position: sticky!important;
 	top: 60px!important;
-
+	background-color: white;
 }
 .tab-hidden {
 	display: none;

@@ -74,14 +74,17 @@
 
 	  data () {
 	    return {
-	    	limit : 10,
+	    	topics : [],
+	    	search_query : null,
 	    	skip  : 0,
-	    	search_query : null
+	    	limit : 10,
 	    }
 	  },
 
 	  mounted (){
 	  	// Fetch some Topics
+	  	this.skip;
+	  	this.limit;
 	  },
 	  methods : {
 	  	search : function(item_query){
@@ -89,6 +92,9 @@
 	  		alert('Found '+ item_query)
 	  		// Save query to use it in load more
 	  		this.search_query = item_query
+	  		this.skip;
+	  		this.limit;
+	  		// Graphql request
 	  	},
 	  	loadMore: function(){
 	  		//
@@ -96,6 +102,7 @@
 	  		this.skip;
 	  		this.limit;
 	  		// increment skip
+	  		// push to this.topics
 	  	}
 	  }
 	}

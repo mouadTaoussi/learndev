@@ -48,7 +48,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => [ProjectIdea], { description: "Project Idea field", nullable: true }),
     __metadata("design:type", Array)
-], Topic.prototype, "ProjectIdeas", void 0);
+], Topic.prototype, "project_idea", void 0);
 Topic = __decorate([
     type_graphql_1.ObjectType({ description: 'This one represents topic' })
 ], Topic);

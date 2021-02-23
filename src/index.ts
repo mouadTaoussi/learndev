@@ -8,9 +8,10 @@ import xss from 'xss';
 import moment from "moment";
 import passport from "passport";
 import { connect } from "mongoose";
-import "reflect-metadata";
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema, ResolverData } from "type-graphql";
+import "reflect-metadata";
+import 'class-validator';
 // Import resolvers
 import main_config from './main.config';
 import main_cors from './main.cors';
@@ -20,7 +21,6 @@ import './Authentication/Authentication.strategies';
 import { 
 	topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver 
 } from './Graphql/Topics/Topics.resolvers';
-// import cookieSession from 'cookie-session';
 
 const app : Application = express();
 
@@ -34,6 +34,8 @@ connect(main_config.mongodb,
 		console.log('Database up and running!');
 	}
 });
+
+app.use(main_cors);
 
 // Redis connection
 const redisClient: unknown = redis.createClient({
@@ -81,15 +83,17 @@ async function runapp (){
 		},
 		playground :  false
 	})
-	apollo.applyMiddleware({ app });
+	apollo.applyMiddleware({ app, cors: { 
+		origin: "http://localhost:8080", 
+		credentials: true,
+		methods: ["POST","OPTIONS"],
+	} });
 
 	// Init body parser and helmet and cors
 	app.use(helmet());
 	app.use(bodyParser.json());
-	app.use(main_cors);
-	// app.use(cors({ origin: 'http://localhost:8080' , credentials :  true}));
 
-	app.use('/auth', AuthenticationRoutes)
+	app.use('/auth', AuthenticationRoutes);
 
 }
 runapp();

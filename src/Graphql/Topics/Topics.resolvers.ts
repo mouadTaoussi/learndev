@@ -9,9 +9,9 @@ import TopicService from "../.././Topics/Topics.service";
 const _topicservice = new TopicService();
 
 interface topicResolver {
-	searchTopic(search_term: string) :Promise<any>
-	searchContentInTopic(search_term: string,topic_id:string, context : any) :Promise<any> // Load more
-	getTopic(topic_id: string,context : any) :Promise<any> // Load more
+	searchTopic(search_term: string,{limit,skip}: LoadMoreRules) :Promise<any> // Load more
+	searchContentInTopic(search_term: string,topic_id:string,{limit,skip}: LoadMoreRules, context : any) :Promise<any> // Load more
+	getTopic(topic_id: string,{limit,skip}: LoadMoreRules,context : any) :Promise<any> // Load more
 	getTopics({limit,skip}: LoadMoreRules) :Promise<any> // Load more
 	addTopic(new_topic: TopicArgs, context:any) :Promise<any>
 	deleteTopic(topic_id: string, context:any) :Promise<any>
@@ -21,7 +21,7 @@ interface topicResolver {
 class topicResolver implements topicResolver {
 
 	@Query(returns => [Topic], { description : "This query returns the topics by the search item"})
-	public async searchTopic(@Arg('search_term') search_term : string)  {
+	public async searchTopic(@Arg('search_term') search_term : string, @Args() {limit,skip}: LoadMoreRules)  {
 		// Get the query 
 		// Split the query to array
 		// Delete logical tools (in-and...)
@@ -29,7 +29,7 @@ class topicResolver implements topicResolver {
 	}
 
 	@Query(returns => [Topic], { description : "This query returns the contents in the topic by the search item"})
-	public async searchContentInTopic(@Arg('search_term') search_term : string, @Arg('topic_id') topic_id : string, @Ctx() context : any)  {
+	public async searchContentInTopic(@Arg('search_term') search_term : string, @Arg('topic_id') topic_id : string, @Args() {limit,skip}: LoadMoreRules, @Ctx() context : any)  {
 		// Get the query and topic_id
 		// Split the query to array
 		const user = context.req.session.passport.user || null;
@@ -39,7 +39,7 @@ class topicResolver implements topicResolver {
 	}
 
 	@Query(returns => Topic, { description: "This query returns a topic" })
-	public async getTopic(@Arg('topic_id') topic_id: string, @Ctx() context : any) : Promise<any> {
+	public async getTopic(@Arg('topic_id') topic_id: string,@Args() {limit,skip}: LoadMoreRules, @Ctx() context : any) : Promise<any> {
 
 		const user = context.req.session.passport.user || null;
 
@@ -60,7 +60,7 @@ class topicResolver implements topicResolver {
 	@Mutation(returns => Topic, { description: "This query adds new topic" })
 	@UseMiddleware(Authenticated)
 	public async addTopic(@Args() { topic_title, background_image } : TopicArgs, @Ctx() context : any) : Promise<any> {
-		console.log(context.req.user)
+
 		const new_topic :{
 			user_id          :string,
 			creator_name     :string,
@@ -72,11 +72,21 @@ class topicResolver implements topicResolver {
 			topic_title      : topic_title,
 			background_image : background_image
 		}
-		console.log(new_topic)
+
 		const newTopic = await _topicservice.addTopic(new_topic);
 
-		if (newTopic.added) return newTopic.data;
-
+		// return null for now
+		return {
+			_id          : newTopic.data._id,
+			user_id      : newTopic.data.user_id,
+			creator_name : newTopic.data.creator_name,
+			topic_title  : newTopic.data.topic_title,
+			background_image : newTopic.data.background_image,
+			docs             : null,
+			courses      : null,
+			articels     : null,
+			project_idea : null
+		};
 		// return "Something went wrong!";
 	}
 
@@ -104,7 +114,7 @@ class docsResolver implements docsResolver {
 	@UseMiddleware(Authenticated)
 	public async addDocs(@Args() { topic_id, docs_title, level, docs_link }: DocsArgs, @Ctx() context : any) : Promise<any> {
 
-		const newDoc : {
+		const new_doc : {
 			user_id	     : string,
 			creator_name : string,
 			topic_id     : string,
@@ -123,6 +133,10 @@ class docsResolver implements docsResolver {
 			upvotes_count: 0,
 			upvotes      : []
 		}
+
+		const newDoc = await _topicservice.addDocs(new_doc);
+
+		return newDoc.data;
 	}
 
 	@Mutation(returns => String, { description: "This query deletes a docs" })
@@ -145,7 +159,7 @@ class courseResolver implements courseResolver {
 	@Mutation(returns => Course, { description: "This query adds new course" })
 	@UseMiddleware(Authenticated)
 	public async addCourse(@Args() { topic_id, course_title, level, course_link }: CourseArgs, @Ctx() context : any) : Promise<any> {
-		const newCourse : {
+		const new_course : {
 			user_id	     : string,
 			creator_name : string,
 			topic_id     : string,
@@ -164,6 +178,10 @@ class courseResolver implements courseResolver {
 			upvotes_count: 0,
 			upvotes      : []
 		}
+
+		const newCourse = await _topicservice.addCourse(new_course);
+
+		return newCourse.data;
 	}
 
 	@Mutation(returns => String, { description: "This query deletes a course" })
@@ -186,7 +204,7 @@ class articleResolver implements articleResolver {
 	@Mutation(returns => Article, { description: "This query adds new course" })
 	@UseMiddleware(Authenticated)
 	public async addArticle(@Args() {topic_id,article_title,level,article_link}: ArticleArgs, @Ctx() context : any) : Promise<any> {
-		const newArticle : {
+		const new_article : {
 			user_id	      : string,
 			creator_name  : string,
 			topic_id      : string,
@@ -205,6 +223,10 @@ class articleResolver implements articleResolver {
 			upvotes_count : 0,
 			upvotes       : []
 		}
+
+		const newArticle = await _topicservice.addArticle(new_article);
+
+		return newArticle.data;
 	}
 
 	@Mutation(returns => String, { description: "This query deletes a course" })
@@ -229,7 +251,7 @@ class projectIdeaResolver implements projectIdeaResolver {
 	public async addProjectIdea(@Args() { topic_id, project_idea_title, level, description }: ProjectIdeaArgs, @Ctx() context : any)
 	 : Promise<any> {
 
-		const newArticle : {
+		const project_idea : {
 			user_id	      : string,
 			creator_name  : string,
 			topic_id      : string,
@@ -248,6 +270,10 @@ class projectIdeaResolver implements projectIdeaResolver {
 			upvotes_count : 0,
 			upvotes       : []
 		}
+
+		const projectIdea = await _topicservice.addProjectIdea(project_idea);
+
+		return projectIdea.data;
 	}
 
 	@Mutation(returns => String, { description: "This query deletes a Project Idea" })

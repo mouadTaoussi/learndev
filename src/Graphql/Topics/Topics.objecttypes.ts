@@ -29,7 +29,7 @@ class Topic {
 	articles : [Article];
 
 	@Field(type => [ProjectIdea], { description: "Project Idea field", nullable: true } )
-	ProjectIdeas : [ProjectIdea];
+	project_idea : [ProjectIdea];
 
 }
 
