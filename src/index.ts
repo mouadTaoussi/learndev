@@ -81,7 +81,7 @@ async function runapp (){
 			// 	logout: () => req.logout(),
 			// }
 		},
-		playground :  false
+		playground :  true
 	})
 	apollo.applyMiddleware({ app, cors: { 
 		origin: "http://localhost:8080", 

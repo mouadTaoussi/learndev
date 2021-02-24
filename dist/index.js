@@ -61,7 +61,7 @@ async function runapp() {
         context: ({ req, res }) => {
             return { req, res };
         },
-        playground: false
+        playground: true
     });
     apollo.applyMiddleware({ app, cors: {
             origin: "http://localhost:8080",

@@ -2,9 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Topics_models_1 = require("./Topics.models");
 class TopicService {
-    async searchTopic(query) {
+    async searchTopic(query, limit, skip) {
         try {
-            const topic = await Topics_models_1.TopicModel;
+            console.log(query);
+            const query_to_database = {
+                topic_title: {
+                    $in: ["Learn"]
+                }
+            };
+            const topic = await Topics_models_1.TopicModel.find(query_to_database);
+            console.log(topic);
             return {
                 message: null,
                 found: false,
@@ -19,7 +26,7 @@ class TopicService {
             };
         }
     }
-    async searchContentInTopic(query, topic_id, user_id) {
+    async searchContentInTopic(query, topic_id, user_id, limit, skip) {
         try {
             const topic = await Topics_models_1.TopicModel;
             if (user_id !== null) {
@@ -38,7 +45,7 @@ class TopicService {
             };
         }
     }
-    async getTopic(item_id, user_id) {
+    async getTopic(item_id, user_id, limit, skip) {
         try {
             const topic = await Topics_models_1.TopicModel.findById(item_id);
             if (user_id !== null) {

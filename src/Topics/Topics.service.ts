@@ -3,11 +3,23 @@ import { TopicServiceInt, Topic, Docs, Course, Article, ProjectIdea } from './To
 
 
 class TopicService implements TopicServiceInt {
-	public async searchTopic(query: string[]) :Promise<{message: string|null,found:boolean,data:any}>{
+	public async searchTopic(query: string[],limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
+			console.log(query)
+			const query_to_database = { 
+				topic_title: {
+				    $in: ["Learn"]
+				}
+			};
+			
+			// const query_to_database = { 
+			// 	"topic_title": "Learn dev",
+			// };
+			
 
-			const topic = await TopicModel;
-			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
+			// const topic = await TopicModel.find({topic_title:{"$in": query }}).limit(limit).skip(skip);
+			const topic = await TopicModel.find(query_to_database);
+			console.log(topic)
 			// Skip // Limit
 			return {
 				message : null,
@@ -23,7 +35,7 @@ class TopicService implements TopicServiceInt {
 			}
 		}
 	}
-	public async searchContentInTopic(query: string[], topic_id:string | null, user_id: string | null) :Promise<{message: string|null,found:boolean,data:any}>{
+	public async searchContentInTopic(query: string[], topic_id:string | null, user_id: string | null,limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
 
 			const topic = await TopicModel;
@@ -52,7 +64,7 @@ class TopicService implements TopicServiceInt {
 		}
 
 	}
-	public async getTopic (item_id: string, user_id:string | null) :Promise<{message: string|null,found:boolean,data:any}>{
+	public async getTopic (item_id: string, user_id:string | null,limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
 			const topic = await TopicModel.findById(item_id);
 

@@ -22,10 +22,36 @@ class topicResolver implements topicResolver {
 
 	@Query(returns => [Topic], { description : "This query returns the topics by the search item"})
 	public async searchTopic(@Arg('search_term') search_term : string, @Args() {limit,skip}: LoadMoreRules)  {
+
 		// Get the query 
 		// Split the query to array
+		const query_to_search :string[] = search_term.split(' ');
+
 		// Delete logical tools (in-and...)
+		const linking_words = ["how","to","and","in","by","the","on","with","which","while","all","for"];
+
+		// Delete linking words
+		for (let io = 0; io < query_to_search.length; io++) {
+			if (linking_words.includes(query_to_search[io].toLowerCase())) {
+				query_to_search.splice(io, 1);
+			}
+			else { continue; }
+		}
+
 		// Find the right documents
+		const topics = await _topicservice.searchTopic(query_to_search,limit,skip);
+
+		return [{
+			_id          : "newTopic.data._id",
+			user_id      : "newTopic.data.user_id",
+			creator_name : "newTopic.data.creator_name",
+			topic_title  : "newTopic.data.topic_title",
+			background_image : "newTopic.data.background_image",
+			docs             : null,
+			courses      : null,
+			articels     : null,
+			project_idea : null
+		}];
 	}
 
 	@Query(returns => [Topic], { description : "This query returns the contents in the topic by the search item"})
@@ -43,7 +69,7 @@ class topicResolver implements topicResolver {
 
 		const user = context.req.session.passport.user || null;
 
-		const topic = await _topicservice.getTopic(topic_id, user.id);
+		const topic = await _topicservice.getTopic(topic_id, user.id,limit,skip);
 
 		return topic.data;
 	}

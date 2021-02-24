@@ -23,13 +23,35 @@ const Topics_service_1 = __importDefault(require("../.././Topics/Topics.service"
 const _topicservice = new Topics_service_1.default();
 let topicResolver = class topicResolver {
     async searchTopic(search_term, { limit, skip }) {
+        const query_to_search = search_term.split(' ');
+        const linking_words = ["how", "to", "and", "in", "by", "the", "on", "with", "which", "while", "all", "for"];
+        for (let io = 0; io < query_to_search.length; io++) {
+            if (linking_words.includes(query_to_search[io].toLowerCase())) {
+                query_to_search.splice(io, 1);
+            }
+            else {
+                continue;
+            }
+        }
+        const topics = await _topicservice.searchTopic(query_to_search, limit, skip);
+        return [{
+                _id: "newTopic.data._id",
+                user_id: "newTopic.data.user_id",
+                creator_name: "newTopic.data.creator_name",
+                topic_title: "newTopic.data.topic_title",
+                background_image: "newTopic.data.background_image",
+                docs: null,
+                courses: null,
+                articels: null,
+                project_idea: null
+            }];
     }
     async searchContentInTopic(search_term, topic_id, { limit, skip }, context) {
         const user = context.req.session.passport.user || null;
     }
-    async getTopic(topic_id, context) {
+    async getTopic(topic_id, { limit, skip }, context) {
         const user = context.req.session.passport.user || null;
-        const topic = await _topicservice.getTopic(topic_id, user.id);
+        const topic = await _topicservice.getTopic(topic_id, user.id, limit, skip);
         return topic.data;
     }
     async getTopics({ limit, skip }) {
@@ -77,9 +99,9 @@ __decorate([
 ], topicResolver.prototype, "searchContentInTopic", null);
 __decorate([
     type_graphql_1.Query(returns => Topics_objecttypes_1.Topic, { description: "This query returns a topic" }),
-    __param(0, type_graphql_1.Arg('topic_id')), __param(1, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('topic_id')), __param(1, type_graphql_1.Args()), __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, Topics_objecttypes_1.LoadMoreRules, Object]),
     __metadata("design:returntype", Promise)
 ], topicResolver.prototype, "getTopic", null);
 __decorate([
