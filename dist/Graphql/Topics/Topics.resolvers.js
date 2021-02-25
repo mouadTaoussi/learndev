@@ -15,13 +15,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.projectIdeaResolver = exports.articleResolver = exports.courseResolver = exports.docsResolver = exports.topicResolver = void 0;
+exports.projectIdeaResolver = exports.articleResolver = exports.courseResolver = exports.docsResolver = exports.topicInfoResolver = exports.topicResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const Topics_objecttypes_1 = require("./Topics.objecttypes");
 const middlewares_graphql_1 = require("../middlewares.graphql");
 const Topics_service_1 = __importDefault(require("../.././Topics/Topics.service"));
 const _topicservice = new Topics_service_1.default();
-let topicResolver = class topicResolver {
+let topicInfoResolver = class topicInfoResolver {
     async searchTopic(search_term, { limit, skip }) {
         const query_to_search = search_term.split(' ');
         const linking_words = ["how", "to", "and", "in", "by", "the", "on", "with", "which", "while", "all", "for"];
@@ -34,18 +34,32 @@ let topicResolver = class topicResolver {
             }
         }
         const topics = await _topicservice.searchTopic(query_to_search, limit, skip);
-        return [{
-                _id: "newTopic.data._id",
-                user_id: "newTopic.data.user_id",
-                creator_name: "newTopic.data.creator_name",
-                topic_title: "newTopic.data.topic_title",
-                background_image: "newTopic.data.background_image",
-                docs: null,
-                courses: null,
-                articels: null,
-                project_idea: null
-            }];
+        return topics.data;
     }
+    async getTopics({ limit, skip }) {
+        const topics = await _topicservice.getTopics(limit, skip);
+        return topics.data;
+    }
+};
+__decorate([
+    type_graphql_1.Query(returns => [Topics_objecttypes_1.TopicInfo], { description: "This query returns the topics by the search item" }),
+    __param(0, type_graphql_1.Arg('search_term')), __param(1, type_graphql_1.Args()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Topics_objecttypes_1.LoadMoreRules]),
+    __metadata("design:returntype", Promise)
+], topicInfoResolver.prototype, "searchTopic", null);
+__decorate([
+    type_graphql_1.Query(returns => [Topics_objecttypes_1.TopicInfo], { description: "This query returns available topics" }),
+    __param(0, type_graphql_1.Args()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Topics_objecttypes_1.LoadMoreRules]),
+    __metadata("design:returntype", Promise)
+], topicInfoResolver.prototype, "getTopics", null);
+topicInfoResolver = __decorate([
+    type_graphql_1.Resolver(of => Topics_objecttypes_1.TopicInfo)
+], topicInfoResolver);
+exports.topicInfoResolver = topicInfoResolver;
+let topicResolver = class topicResolver {
     async searchContentInTopic(search_term, topic_id, { limit, skip }, context) {
         const user = context.req.session.passport.user || null;
     }
@@ -53,10 +67,6 @@ let topicResolver = class topicResolver {
         const user = context.req.session.passport.user || null;
         const topic = await _topicservice.getTopic(topic_id, user.id, limit, skip);
         return topic.data;
-    }
-    async getTopics({ limit, skip }) {
-        const topics = await _topicservice.getTopics(limit, skip);
-        return topics.data;
     }
     async addTopic({ topic_title, background_image }, context) {
         const new_topic = {
@@ -84,13 +94,6 @@ let topicResolver = class topicResolver {
     }
 };
 __decorate([
-    type_graphql_1.Query(returns => [Topics_objecttypes_1.Topic], { description: "This query returns the topics by the search item" }),
-    __param(0, type_graphql_1.Arg('search_term')), __param(1, type_graphql_1.Args()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Topics_objecttypes_1.LoadMoreRules]),
-    __metadata("design:returntype", Promise)
-], topicResolver.prototype, "searchTopic", null);
-__decorate([
     type_graphql_1.Query(returns => [Topics_objecttypes_1.Topic], { description: "This query returns the contents in the topic by the search item" }),
     __param(0, type_graphql_1.Arg('search_term')), __param(1, type_graphql_1.Arg('topic_id')), __param(2, type_graphql_1.Args()), __param(3, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
@@ -104,13 +107,6 @@ __decorate([
     __metadata("design:paramtypes", [String, Topics_objecttypes_1.LoadMoreRules, Object]),
     __metadata("design:returntype", Promise)
 ], topicResolver.prototype, "getTopic", null);
-__decorate([
-    type_graphql_1.Query(returns => [Topics_objecttypes_1.Topic], { description: "This query returns available topics" }),
-    __param(0, type_graphql_1.Args()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Topics_objecttypes_1.LoadMoreRules]),
-    __metadata("design:returntype", Promise)
-], topicResolver.prototype, "getTopics", null);
 __decorate([
     type_graphql_1.Mutation(returns => Topics_objecttypes_1.Topic, { description: "This query adds new topic" }),
     type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),

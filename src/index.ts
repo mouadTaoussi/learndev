@@ -19,7 +19,7 @@ import cors from "cors";
 import AuthenticationRoutes from './Authentication/Authentication.routes';
 import './Authentication/Authentication.strategies';
 import { 
-	topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver 
+	topicResolver, topicInfoResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver 
 } from './Graphql/Topics/Topics.resolvers';
 
 const app : Application = express();
@@ -68,8 +68,8 @@ async function runapp (){
 	const apollo = new ApolloServer({
 		schema : await buildSchema({
 			resolvers : [
-				topicResolver, docsResolver, courseResolver, 
-				articleResolver, projectIdeaResolver
+				topicResolver,  topicInfoResolver, docsResolver,
+				courseResolver, articleResolver,   projectIdeaResolver
 			],
 			globalMiddlewares: []
 		}),

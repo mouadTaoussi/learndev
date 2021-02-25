@@ -1,26 +1,22 @@
 import { Resolver, Query, Mutation, Arg, Args, Ctx, UseMiddleware } from 'type-graphql';
 import { 
 	Topic,      Docs,      Course,      Article,      ProjectIdea,
-	TopicArgs, DocsArgs, CourseArgs, ArticleArgs, ProjectIdeaArgs, LoadMoreRules
+	TopicArgs, DocsArgs, CourseArgs, ArticleArgs, ProjectIdeaArgs, LoadMoreRules, TopicInfo
 } from './Topics.objecttypes';
 import { Authenticated }  from '../middlewares.graphql';
 import TopicService from "../.././Topics/Topics.service";
 
 const _topicservice = new TopicService();
 
-interface topicResolver {
+interface topicInfoResolver {
 	searchTopic(search_term: string,{limit,skip}: LoadMoreRules) :Promise<any> // Load more
-	searchContentInTopic(search_term: string,topic_id:string,{limit,skip}: LoadMoreRules, context : any) :Promise<any> // Load more
-	getTopic(topic_id: string,{limit,skip}: LoadMoreRules,context : any) :Promise<any> // Load more
 	getTopics({limit,skip}: LoadMoreRules) :Promise<any> // Load more
-	addTopic(new_topic: TopicArgs, context:any) :Promise<any>
-	deleteTopic(topic_id: string, context:any) :Promise<any>
 }
 
-@Resolver(of => Topic)
-class topicResolver implements topicResolver {
+@Resolver(of => TopicInfo)
+class topicInfoResolver implements topicInfoResolver {
 
-	@Query(returns => [Topic], { description : "This query returns the topics by the search item"})
+	@Query(returns => [TopicInfo], { description : "This query returns the topics by the search item"})
 	public async searchTopic(@Arg('search_term') search_term : string, @Args() {limit,skip}: LoadMoreRules)  {
 
 		// Get the query 
@@ -39,20 +35,32 @@ class topicResolver implements topicResolver {
 		}
 
 		// Find the right documents
-		const topics = await _topicservice.searchTopic(query_to_search,limit,skip);
+		const topics = await _topicservice.searchTopic(query_to_search, limit, skip);
 
-		return [{
-			_id          : "newTopic.data._id",
-			user_id      : "newTopic.data.user_id",
-			creator_name : "newTopic.data.creator_name",
-			topic_title  : "newTopic.data.topic_title",
-			background_image : "newTopic.data.background_image",
-			docs             : null,
-			courses      : null,
-			articels     : null,
-			project_idea : null
-		}];
+		return topics.data;
 	}
+
+	@Query(returns => [TopicInfo], { description: "This query returns available topics" })
+	public async getTopics(@Args() {limit,skip}: LoadMoreRules) : Promise<any> {
+
+		const topics = await _topicservice.getTopics (limit, skip);
+
+		return topics.data;
+
+	}
+}
+
+interface topicResolver {
+	searchTopic(search_term: string,{limit,skip}: LoadMoreRules) :Promise<any> // Load more
+	searchContentInTopic(search_term: string,topic_id:string,{limit,skip}: LoadMoreRules, context : any) :Promise<any> // Load more
+	getTopic(topic_id: string,{limit,skip}: LoadMoreRules,context : any) :Promise<any> // Load more
+	getTopics({limit,skip}: LoadMoreRules) :Promise<any> // Load more
+	addTopic(new_topic: TopicArgs, context:any) :Promise<any>
+	deleteTopic(topic_id: string, context:any) :Promise<any>
+}
+
+@Resolver(of => Topic)
+class topicResolver implements topicResolver {
 
 	@Query(returns => [Topic], { description : "This query returns the contents in the topic by the search item"})
 	public async searchContentInTopic(@Arg('search_term') search_term : string, @Arg('topic_id') topic_id : string, @Args() {limit,skip}: LoadMoreRules, @Ctx() context : any)  {
@@ -71,16 +79,8 @@ class topicResolver implements topicResolver {
 
 		const topic = await _topicservice.getTopic(topic_id, user.id,limit,skip);
 
+		// Get content of the topic
 		return topic.data;
-	}
-
-	@Query(returns => [Topic], { description: "This query returns available topics" })
-	public async getTopics(@Args() {limit,skip}: LoadMoreRules) : Promise<any> {
-
-		const topics = await _topicservice.getTopics (limit, skip);
-
-		return topics.data;
-
 	}
 
 	@Mutation(returns => Topic, { description: "This query adds new topic" })
@@ -312,7 +312,7 @@ class projectIdeaResolver implements projectIdeaResolver {
 }
 
 
-export { topicResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver };
+export { topicResolver, topicInfoResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver };
 
 // user_id : "vffff",
 // topic_title : topic_id,

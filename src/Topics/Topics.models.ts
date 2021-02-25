@@ -14,6 +14,7 @@ const TopicSchema = new Schema({
 	background_image : {
 		type : String, required : true
 	},
+	// tags : [{type: String}]
 });
 
 const DocsSchema = new Schema({
@@ -39,7 +40,8 @@ const DocsSchema = new Schema({
 	upvotes_count : {
 		type : Number, default: 0, required: false
 	},
-	upvotes : [{type: String}]
+	upvotes : [{type: String}],
+	// tags : [{type: String}]
 });
 
 const CourseSchema = new Schema({
@@ -65,7 +67,8 @@ const CourseSchema = new Schema({
 	upvotes_count : {
 		type : Number, default: 0, required: false
 	},
-	upvotes : [{type: String}]
+	upvotes : [{type: String}],
+	// tags : [{type: String}]
 });
 
 const ArticleSchema = new Schema({
@@ -91,7 +94,8 @@ const ArticleSchema = new Schema({
 	upvotes_count : {
 		type : Number, default: 0, required: false
 	},
-	upvotes : [{type: String}]
+	upvotes : [{type: String}],
+	// tags : [{type: String}]
 
 });
 
@@ -117,7 +121,8 @@ const ProjectIdeaSchema = new Schema({
 	upvotes_count : {
 		type : Number, default: 0, required: false
 	},
-	upvotes : [{type: String}]
+	upvotes : [{type: String}],
+	// tags : [{type: String}]
 });
 
 // docs- courses- articles- projects ideas

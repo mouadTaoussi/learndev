@@ -5,26 +5,59 @@ import { TopicServiceInt, Topic, Docs, Course, Article, ProjectIdea } from './To
 class TopicService implements TopicServiceInt {
 	public async searchTopic(query: string[],limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
-			console.log(query)
-			const query_to_database = { 
-				topic_title: {
-				    $in: ["Learn"]
-				}
-			};
-			
+			// const query_to_database = { 
+			// 	topic_title: {
+			// 	    $in: ["Learn","C++"]
+			// 	}
+			// };
+			// 
+			// Search by tags
 			// const query_to_database = { 
 			// 	"topic_title": "Learn dev",
 			// };
-			
-
+			// 
+			// 
 			// const topic = await TopicModel.find({topic_title:{"$in": query }}).limit(limit).skip(skip);
-			const topic = await TopicModel.find(query_to_database);
-			console.log(topic)
+			// { topic_title: { $in:['C++'] } }
+
+			const topics = await TopicModel.find().skip(skip).limit(limit);
+
+			// Filter the topics by the query
+			let topics_needed : any = [];
+
+			for ( var i = 0; topics.length > i; i++ ) {
+
+				// console.log(topics[i])
+				for ( var io = 0; query.length > io; io++ ) {
+					// console.log(topics[i].topic_title.includes(query[io]))
+
+						if( topics[i].topic_title.includes(query[io])) {
+							topics_needed.push(topics[i])
+						}
+				}
+				console.log(topics_needed)
+				// if(topics[io].topic_title.includes(query[i])) {
+
+				// 	topics_needed.push(topics[i])
+				// }
+				// else {continue;}
+			}
+
+
 			// Skip // Limit
-			return {
-				message : null,
-				found : false,
-				data : null
+			if (topics.length > 0) {
+				return {
+					message : null,
+					found : true,
+					data : topics
+				}
+			}
+			else {
+				return {
+					message : "No content :-(",
+					found : false,
+					data : null
+				}	
 			}
 		}
 		catch(err){

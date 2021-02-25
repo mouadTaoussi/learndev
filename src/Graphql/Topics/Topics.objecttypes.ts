@@ -17,7 +17,7 @@ class Topic {
 
 	@Field( type => String, { description: "background_image field" } )
 	background_image : string;
-
+	// Tags
 
 	@Field(type => [Docs], { description: "Docs field", nullable: true } )
 	docs : [Docs];
@@ -31,6 +31,25 @@ class Topic {
 	@Field(type => [ProjectIdea], { description: "Project Idea field", nullable: true } )
 	project_idea : [ProjectIdea];
 
+}
+
+@ObjectType({ description: 'This one represents topic' })
+class TopicInfo {
+	@Field( type => String, { description: "id field" } )
+	_id : string;
+
+	@Field( type => String, { description: "user_id field" } )
+	user_id : string;
+
+	@Field( type => String, { description: "creator_name field" } )
+	creator_name : string;
+
+	@Field( type => String, { description: "topic_title field" } )
+	topic_title : string;
+
+	@Field( type => String, { description: "background_image field" } )
+	background_image : string;
+	// Tags
 }
 
 @ObjectType({ description: 'This one represents docs' })
@@ -225,5 +244,5 @@ class LoadMoreRules {
 
 export { 
 	Topic, Docs, Course, Article, ProjectIdea, 
-	TopicArgs, DocsArgs, CourseArgs, ArticleArgs, ProjectIdeaArgs, LoadMoreRules
+	TopicArgs, DocsArgs, CourseArgs, ArticleArgs, ProjectIdeaArgs, LoadMoreRules, TopicInfo
 };

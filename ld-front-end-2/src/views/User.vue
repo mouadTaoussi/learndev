@@ -165,7 +165,8 @@
 	    return {
 	    	newTopic : {
 	    		topic_title : null,
-	    		background_image : null
+	    		background_image : null,
+	    		tags : []
 	    	}
 	    }
 	  },
@@ -226,7 +227,8 @@
 	   					query: print(ADD_TOPIC),
 						variables: {
 							topic_title: this.newTopic.topic_title,
-							background_image: this.newTopic.background_image
+							background_image: this.newTopic.background_image,
+							// tags : this.newTopic.tags
 						},
 	   				}
 	   			})

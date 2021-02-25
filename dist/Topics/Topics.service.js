@@ -4,19 +4,30 @@ const Topics_models_1 = require("./Topics.models");
 class TopicService {
     async searchTopic(query, limit, skip) {
         try {
-            console.log(query);
-            const query_to_database = {
-                topic_title: {
-                    $in: ["Learn"]
+            const topics = await Topics_models_1.TopicModel.find().skip(skip).limit(limit);
+            let topics_needed = [];
+            for (var i = 0; topics.length > i; i++) {
+                for (var io = 0; query.length > io; io++) {
+                    if (topics[i].topic_title.includes(query[io])) {
+                        topics_needed.push(topics[i]);
+                    }
                 }
-            };
-            const topic = await Topics_models_1.TopicModel.find(query_to_database);
-            console.log(topic);
-            return {
-                message: null,
-                found: false,
-                data: null
-            };
+                console.log(topics_needed);
+            }
+            if (topics.length > 0) {
+                return {
+                    message: null,
+                    found: true,
+                    data: topics
+                };
+            }
+            else {
+                return {
+                    message: "No content :-(",
+                    found: false,
+                    data: null
+                };
+            }
         }
         catch (err) {
             return {

@@ -53,8 +53,8 @@ async function runapp() {
     const apollo = new apollo_server_express_1.ApolloServer({
         schema: await type_graphql_1.buildSchema({
             resolvers: [
-                Topics_resolvers_1.topicResolver, Topics_resolvers_1.docsResolver, Topics_resolvers_1.courseResolver,
-                Topics_resolvers_1.articleResolver, Topics_resolvers_1.projectIdeaResolver
+                Topics_resolvers_1.topicResolver, Topics_resolvers_1.topicInfoResolver, Topics_resolvers_1.docsResolver,
+                Topics_resolvers_1.courseResolver, Topics_resolvers_1.articleResolver, Topics_resolvers_1.projectIdeaResolver
             ],
             globalMiddlewares: []
         }),

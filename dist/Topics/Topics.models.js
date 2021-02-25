@@ -38,7 +38,7 @@ const DocsSchema = new mongoose_1.Schema({
     upvotes_count: {
         type: Number, default: 0, required: false
     },
-    upvotes: [{ type: String }]
+    upvotes: [{ type: String }],
 });
 const CourseSchema = new mongoose_1.Schema({
     user_id: {
@@ -62,7 +62,7 @@ const CourseSchema = new mongoose_1.Schema({
     upvotes_count: {
         type: Number, default: 0, required: false
     },
-    upvotes: [{ type: String }]
+    upvotes: [{ type: String }],
 });
 const ArticleSchema = new mongoose_1.Schema({
     user_id: {
@@ -86,7 +86,7 @@ const ArticleSchema = new mongoose_1.Schema({
     upvotes_count: {
         type: Number, default: 0, required: false
     },
-    upvotes: [{ type: String }]
+    upvotes: [{ type: String }],
 });
 const ProjectIdeaSchema = new mongoose_1.Schema({
     user_id: {
@@ -110,7 +110,7 @@ const ProjectIdeaSchema = new mongoose_1.Schema({
     upvotes_count: {
         type: Number, default: 0, required: false
     },
-    upvotes: [{ type: String }]
+    upvotes: [{ type: String }],
 });
 const TopicModel = mongoose_1.model('topics', TopicSchema);
 exports.TopicModel = TopicModel;
