@@ -62,6 +62,18 @@ exports.topicInfoResolver = topicInfoResolver;
 let topicResolver = class topicResolver {
     async searchContentInTopic(search_term, topic_id, { limit, skip }, context) {
         const user = context.req.session.passport.user || null;
+        const query_to_search = search_term.split(' ');
+        const linking_words = ["how", "to", "and", "in", "by", "the", "on", "with", "which", "while", "all", "for"];
+        for (let io = 0; io < query_to_search.length; io++) {
+            if (linking_words.includes(query_to_search[io].toLowerCase())) {
+                query_to_search.splice(io, 1);
+            }
+            else {
+                continue;
+            }
+        }
+        const topics = await _topicservice.searchTopic(query_to_search, limit, skip);
+        const content_in_topic = await _topicservice.searchContentInTopic(query_to_search, topic_id, user.id, limit, skip);
     }
     async getTopic(topic_id, { limit, skip }, context) {
         const user = context.req.session.passport.user || null;

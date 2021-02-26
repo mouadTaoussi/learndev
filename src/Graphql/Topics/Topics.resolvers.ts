@@ -64,11 +64,27 @@ class topicResolver implements topicResolver {
 
 	@Query(returns => [Topic], { description : "This query returns the contents in the topic by the search item"})
 	public async searchContentInTopic(@Arg('search_term') search_term : string, @Arg('topic_id') topic_id : string, @Args() {limit,skip}: LoadMoreRules, @Ctx() context : any)  {
+		// User if authenticated 
+		const user = context.req.session.passport.user || null;
 		// Get the query and topic_id
 		// Split the query to array
-		const user = context.req.session.passport.user || null;
+		const query_to_search :string[] = search_term.split(' ');
+
 		// Delete logical tools (in-and...)
+		const linking_words = ["how","to","and","in","by","the","on","with","which","while","all","for"];
+
+		// Delete linking words
+		for (let io = 0; io < query_to_search.length; io++) {
+			if (linking_words.includes(query_to_search[io].toLowerCase())) {
+				query_to_search.splice(io, 1);
+			}
+			else { continue; }
+		}
+
+		// Get topic
+		const topics = await _topicservice.searchTopic(query_to_search, limit, skip);
 		// Find the right documents
+		const content_in_topic : any = await _topicservice.searchContentInTopic(query_to_search, topic_id, user.id, limit, skip);
 		// Sort them by votes
 	}
 

@@ -13,6 +13,13 @@ class TopicService {
                     }
                 }
             }
+            for (var i = 0; topics_needed.length > i; i++) {
+                console.log(topics_needed[i]._id == topics_needed[i + 1]._id);
+                const next = i + 1;
+                if (topics_needed[i]._id == topics_needed[next]._id) {
+                    topics_needed.splice(next, 1);
+                }
+            }
             if (topics_needed.length > 0) {
                 return {
                     message: null,
@@ -38,7 +45,10 @@ class TopicService {
     }
     async searchContentInTopic(query, topic_id, user_id, limit, skip) {
         try {
-            const topic = await Topics_models_1.TopicModel;
+            const docs = await Topics_models_1.DocsModel.find().skip(skip).limit(limit);
+            const courses = await Topics_models_1.CourseModel.find().skip(skip).limit(limit);
+            const articles = await Topics_models_1.ArticleModel.find().skip(skip).limit(limit);
+            const projectIdeas = await Topics_models_1.ProjectIdeaModel.find().skip(skip).limit(limit);
             if (user_id !== null) {
             }
             return {
@@ -58,12 +68,22 @@ class TopicService {
     async getTopic(item_id, user_id, limit, skip) {
         try {
             const topic = await Topics_models_1.TopicModel.findById(item_id);
+            const docs = await Topics_models_1.DocsModel.find().skip(skip).limit(limit);
+            const courses = await Topics_models_1.CourseModel.find().skip(skip).limit(limit);
+            const articles = await Topics_models_1.ArticleModel.find().skip(skip).limit(limit);
+            const projectIdeas = await Topics_models_1.ProjectIdeaModel.find().skip(skip).limit(limit);
             if (user_id !== null) {
             }
             return {
                 message: null,
                 found: false,
-                data: topic
+                data: {
+                    _id: topic._id,
+                    user_id: topic.user_id,
+                    creator_name: topic.creator_name,
+                    topic_title: topic.topic_title,
+                    background_image: topic.background_image
+                }
             };
         }
         catch (err) {
