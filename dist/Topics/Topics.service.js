@@ -12,13 +12,12 @@ class TopicService {
                         topics_needed.push(topics[i]);
                     }
                 }
-                console.log(topics_needed);
             }
-            if (topics.length > 0) {
+            if (topics_needed.length > 0) {
                 return {
                     message: null,
                     found: true,
-                    data: topics
+                    data: topics_needed
                 };
             }
             else {

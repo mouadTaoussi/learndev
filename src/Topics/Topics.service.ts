@@ -20,36 +20,37 @@ class TopicService implements TopicServiceInt {
 			// const topic = await TopicModel.find({topic_title:{"$in": query }}).limit(limit).skip(skip);
 			// { topic_title: { $in:['C++'] } }
 
+			// Get the topics by limit and skip
 			const topics = await TopicModel.find().skip(skip).limit(limit);
 
 			// Filter the topics by the query
 			let topics_needed : any = [];
 
+			// Filter topics by query
 			for ( var i = 0; topics.length > i; i++ ) {
 
-				// console.log(topics[i])
 				for ( var io = 0; query.length > io; io++ ) {
-					// console.log(topics[i].topic_title.includes(query[io]))
 
-						if( topics[i].topic_title.includes(query[io])) {
-							topics_needed.push(topics[i])
-						}
+					if( topics[i].topic_title.includes(query[io])) {
+						topics_needed.push(topics[i])
+					}
 				}
-				console.log(topics_needed)
-				// if(topics[io].topic_title.includes(query[i])) {
 
-				// 	topics_needed.push(topics[i])
-				// }
-				// else {continue;}
 			}
-
+			// Remove Replucates (Repitition)
+			// for (var i = 0; topics_needed.length > i; i++) {
+			// 	console.log( topics_needed[i] == topics_needed[i-1] )
+			// 	if ( topics_needed[i] == topics_needed[i-1]) {
+			// 		topics_needed.splice(i+1, 1);
+			// 	}
+			// }
 
 			// Skip // Limit
-			if (topics.length > 0) {
+			if (topics_needed.length > 0) {
 				return {
 					message : null,
 					found : true,
-					data : topics
+					data : topics_needed
 				}
 			}
 			else {
