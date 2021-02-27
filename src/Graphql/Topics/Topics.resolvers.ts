@@ -65,7 +65,7 @@ class topicResolver implements topicResolver {
 	@Query(returns => [Topic], { description : "This query returns the contents in the topic by the search item"})
 	public async searchContentInTopic(@Arg('search_term') search_term : string, @Arg('topic_id') topic_id : string, @Args() {limit,skip}: LoadMoreRules, @Ctx() context : any)  {
 		// User if authenticated 
-		const user = context.req.session.passport.user || null;
+		const user = context.req.session.passport || null;
 		// Get the query and topic_id
 		// Split the query to array
 		const query_to_search :string[] = search_term.split(' ');
@@ -82,18 +82,18 @@ class topicResolver implements topicResolver {
 		}
 
 		// Get topic
-		const topics = await _topicservice.searchTopic(query_to_search, limit, skip);
+		const topics = await _topicservice.getTopic(search_term ,user, limit, skip);
 		// Find the right documents
-		const content_in_topic : any = await _topicservice.searchContentInTopic(query_to_search, topic_id, user.id, limit, skip);
+		const content_in_topic : any = await _topicservice.searchContentInTopic(query_to_search, topic_id, user, limit, skip);
 		// Sort them by votes
 	}
 
 	@Query(returns => Topic, { description: "This query returns a topic" })
 	public async getTopic(@Arg('topic_id') topic_id: string,@Args() {limit,skip}: LoadMoreRules, @Ctx() context : any) : Promise<any> {
 
-		const user = context.req.session.passport.user || null;
-
-		const topic = await _topicservice.getTopic(topic_id, user.id,limit,skip);
+		const user = context.req.session.passport || null;
+		console.log(user);
+		const topic = await _topicservice.getTopic(topic_id, user, limit, skip);
 
 		// Get content of the topic
 		return topic.data;

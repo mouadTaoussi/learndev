@@ -72,7 +72,7 @@ class TopicService implements TopicServiceInt {
 			}
 		}
 	}
-	public async searchContentInTopic(query: string[], topic_id:string | null, user_id: string | null,limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
+	public async searchContentInTopic(query: string[], topic_id:string | null, user_session: any, limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 			
 		try {
 			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
@@ -85,9 +85,10 @@ class TopicService implements TopicServiceInt {
 			// Get from ProjectIdea // Skip // Limit // Add upvoted field set to false
 			const projectIdeas = await ProjectIdeaModel.find().skip(skip).limit(limit);
 
-			if( user_id !== null ) {
+			if( user_session !== null ) {
 				// Check if the user upvoted some of the content in each resource // if logged in
 				// if true then set upvoted to true
+				const user_id: string = user_session.user.id;
 			}
 
 			return {
@@ -105,37 +106,42 @@ class TopicService implements TopicServiceInt {
 		}
 
 	}
-	public async getTopic (item_id: string, user_id:string | null,limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
+	public async getTopic (item_id: string, user_session: any, limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
 			const topic = await TopicModel.findById(item_id);
 
 			// Get from Docs // Skip // Limit // Add upvoted field set to false
-			const docs = await DocsModel.find().skip(skip).limit(limit);
+			const docs = await DocsModel.find({ topic_id: item_id }).skip(skip).limit(limit);
 			// Get from Courses // Skip // Limit // Add upvoted field set to false
-			const courses = await CourseModel.find().skip(skip).limit(limit);
+			const courses = await CourseModel.find({ topic_id: item_id }).skip(skip).limit(limit);
 			// Get from Articles // Skip // Limit // Add upvoted field set to false
-			const articles = await ArticleModel.find().skip(skip).limit(limit);
+			const articles = await ArticleModel.find({ topic_id: item_id }).skip(skip).limit(limit);
 			// Get from ProjectIdea // Skip // Limit // Add upvoted field set to false
-			const projectIdeas = await ProjectIdeaModel.find().skip(skip).limit(limit);
+			const projectIdeas = await ProjectIdeaModel.find({ topic_id: item_id }).skip(skip).limit(limit);
 
-			if(user_id !== null) {
+			if( user_session !== null ) {
 				// Check if the user upvoted some of the content in each resource // if logged in
 				// if true then set upvoted to true
+				const user_id: string = user_session.user.id;
 			}
+
 			return {
 				message : null,
 				found : false,
 				data : {
-					// Output
 					_id : topic._id,
 					user_id : topic.user_id,
 					creator_name : topic.creator_name,
 					topic_title : topic.topic_title,
-					background_image : topic.background_image
+					background_image : topic.background_image,
 					// docs
+					docs : docs,
 					// courses
+					courses : courses,
 					// articels
+					articles : articles,
 					// projectIdeas
+					projectIdeas : projectIdeas
 				}
 			}
 		}

@@ -43,13 +43,14 @@ class TopicService {
             };
         }
     }
-    async searchContentInTopic(query, topic_id, user_id, limit, skip) {
+    async searchContentInTopic(query, topic_id, user_session, limit, skip) {
         try {
             const docs = await Topics_models_1.DocsModel.find().skip(skip).limit(limit);
             const courses = await Topics_models_1.CourseModel.find().skip(skip).limit(limit);
             const articles = await Topics_models_1.ArticleModel.find().skip(skip).limit(limit);
             const projectIdeas = await Topics_models_1.ProjectIdeaModel.find().skip(skip).limit(limit);
-            if (user_id !== null) {
+            if (user_session !== null) {
+                const user_id = user_session.user.id;
             }
             return {
                 message: null,
@@ -65,14 +66,15 @@ class TopicService {
             };
         }
     }
-    async getTopic(item_id, user_id, limit, skip) {
+    async getTopic(item_id, user_session, limit, skip) {
         try {
             const topic = await Topics_models_1.TopicModel.findById(item_id);
-            const docs = await Topics_models_1.DocsModel.find().skip(skip).limit(limit);
-            const courses = await Topics_models_1.CourseModel.find().skip(skip).limit(limit);
-            const articles = await Topics_models_1.ArticleModel.find().skip(skip).limit(limit);
-            const projectIdeas = await Topics_models_1.ProjectIdeaModel.find().skip(skip).limit(limit);
-            if (user_id !== null) {
+            const docs = await Topics_models_1.DocsModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+            const courses = await Topics_models_1.CourseModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+            const articles = await Topics_models_1.ArticleModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+            const projectIdeas = await Topics_models_1.ProjectIdeaModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+            if (user_session !== null) {
+                const user_id = user_session.user.id;
             }
             return {
                 message: null,
@@ -82,7 +84,11 @@ class TopicService {
                     user_id: topic.user_id,
                     creator_name: topic.creator_name,
                     topic_title: topic.topic_title,
-                    background_image: topic.background_image
+                    background_image: topic.background_image,
+                    docs: docs,
+                    courses: courses,
+                    articles: articles,
+                    projectIdeas: projectIdeas
                 }
             };
         }

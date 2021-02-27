@@ -61,7 +61,7 @@ topicInfoResolver = __decorate([
 exports.topicInfoResolver = topicInfoResolver;
 let topicResolver = class topicResolver {
     async searchContentInTopic(search_term, topic_id, { limit, skip }, context) {
-        const user = context.req.session.passport.user || null;
+        const user = context.req.session.passport || null;
         const query_to_search = search_term.split(' ');
         const linking_words = ["how", "to", "and", "in", "by", "the", "on", "with", "which", "while", "all", "for"];
         for (let io = 0; io < query_to_search.length; io++) {
@@ -72,12 +72,13 @@ let topicResolver = class topicResolver {
                 continue;
             }
         }
-        const topics = await _topicservice.searchTopic(query_to_search, limit, skip);
-        const content_in_topic = await _topicservice.searchContentInTopic(query_to_search, topic_id, user.id, limit, skip);
+        const topics = await _topicservice.getTopic(search_term, user, limit, skip);
+        const content_in_topic = await _topicservice.searchContentInTopic(query_to_search, topic_id, user, limit, skip);
     }
     async getTopic(topic_id, { limit, skip }, context) {
-        const user = context.req.session.passport.user || null;
-        const topic = await _topicservice.getTopic(topic_id, user.id, limit, skip);
+        const user = context.req.session.passport || null;
+        console.log(user);
+        const topic = await _topicservice.getTopic(topic_id, user, limit, skip);
         return topic.data;
     }
     async addTopic({ topic_title, background_image }, context) {
