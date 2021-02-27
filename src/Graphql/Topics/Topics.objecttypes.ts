@@ -13,7 +13,7 @@ class Topic {
 	creator_name : string;
 
 	@Field( type => String, { description: "topic_title field" } )
-	topic_title : string;
+	title : string;
 
 	@Field( type => String, { description: "background_image field" } )
 	background_image : string;
@@ -45,7 +45,7 @@ class TopicInfo {
 	creator_name : string;
 
 	@Field( type => String, { description: "topic_title field" } )
-	topic_title : string;
+	title : string;
 
 	@Field( type => String, { description: "background_image field" } )
 	background_image : string;
@@ -67,7 +67,7 @@ class Docs {
 	topic_id : string;
 
 	@Field( type => String,{description: "docs_title field" } )
-	docs_title : string;
+	title : string;
 
 	@Field( type => String,{description: "level field" } )
 	level : string;
@@ -95,7 +95,7 @@ class Course {
 	topic_id : string;
 
 	@Field( type => String,{description: "course_title field" } )
-	course_title : string;
+	title : string;
 
 	@Field( type => String,{description: "level field" } )
 	level : string;
@@ -122,7 +122,7 @@ class Article {
 	topic_id : string;
 
 	@Field( type => String,{ description: "article_title field" } )
-	article_title : string;
+	title : string;
 
 	@Field( type => String,{ description: "level field" } )
 	level : string;
@@ -147,7 +147,7 @@ class ProjectIdea {
 	topic_id : string;
 
 	@Field( type => String,  { description : "This one represents project_idea_title" } )
-	project_idea_title : string
+	title : string
 
 	@Field( type => String,{description: "level field" } )
 	level : string;
@@ -160,7 +160,7 @@ class ProjectIdea {
 class TopicArgs {
 	
 	@Field( type => String )
-	topic_title : string;
+	title : string;
 	
 	@Field( type => String )
 	background_image : string;
@@ -174,7 +174,7 @@ class DocsArgs {
 	topic_id : string;
 
 	@Field( type => String )
-	docs_title : string;
+	title : string;
 
 	@Field( type => String )
 	level : string;
@@ -191,7 +191,7 @@ class CourseArgs {
 	topic_id : string;
 
 	@Field( type => String )
-	course_title : string;
+	title : string;
 
 	@Field( type => String )
 	level : string;
@@ -207,7 +207,7 @@ class ArticleArgs {
 	topic_id : string;
 
 	@Field( type => String )
-	article_title : string;
+	title : string;
 
 	@Field( type => String )
 	level : string;
@@ -224,7 +224,7 @@ class ProjectIdeaArgs {
 	topic_id : string;
 
 	@Field( type => String )
-	project_idea_title : string;
+	title : string;
 
 	@Field( type => String )
 	level : string;

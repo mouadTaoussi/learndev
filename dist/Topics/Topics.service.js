@@ -8,7 +8,7 @@ class TopicService {
             let topics_needed = [];
             for (var i = 0; topics.length > i; i++) {
                 for (var io = 0; query.length > io; io++) {
-                    if (topics[i].topic_title.includes(query[io])) {
+                    if (topics[i].title.includes(query[io])) {
                         topics_needed.push(topics[i]);
                     }
                 }
@@ -51,6 +51,38 @@ class TopicService {
             const projectIdeas = await Topics_models_1.ProjectIdeaModel.find().skip(skip).limit(limit);
             if (user_session !== null) {
                 const user_id = user_session.user.id;
+                for (var i = 0; docs.length > i; i++) {
+                    if (docs[i].upvotes.includes(user_id)) {
+                        docs[i].upvoted = true;
+                    }
+                    else {
+                        docs[i].upvoted = false;
+                    }
+                }
+                for (var i = 0; courses.length > i; i++) {
+                    if (courses[i].upvotes.includes(user_id)) {
+                        courses[i].upvoted = true;
+                    }
+                    else {
+                        courses[i].upvoted = false;
+                    }
+                }
+                for (var i = 0; articles.length > i; i++) {
+                    if (articles[i].upvotes.includes(user_id)) {
+                        articles[i].upvoted = true;
+                    }
+                    else {
+                        articles[i].upvoted = false;
+                    }
+                }
+                for (var i = 0; projectIdeas.length > i; i++) {
+                    if (projectIdeas[i].upvotes.includes(user_id)) {
+                        projectIdeas[i].upvoted = true;
+                    }
+                    else {
+                        projectIdeas[i].upvoted = false;
+                    }
+                }
             }
             return {
                 message: null,
@@ -75,6 +107,38 @@ class TopicService {
             const projectIdeas = await Topics_models_1.ProjectIdeaModel.find({ topic_id: item_id }).skip(skip).limit(limit);
             if (user_session !== null) {
                 const user_id = user_session.user.id;
+                for (var i = 0; docs.length > i; i++) {
+                    if (docs[i].upvotes.includes(user_id)) {
+                        docs[i].upvoted = true;
+                    }
+                    else {
+                        docs[i].upvoted = false;
+                    }
+                }
+                for (var i = 0; courses.length > i; i++) {
+                    if (courses[i].upvotes.includes(user_id)) {
+                        courses[i].upvoted = true;
+                    }
+                    else {
+                        courses[i].upvoted = false;
+                    }
+                }
+                for (var i = 0; articles.length > i; i++) {
+                    if (articles[i].upvotes.includes(user_id)) {
+                        articles[i].upvoted = true;
+                    }
+                    else {
+                        articles[i].upvoted = false;
+                    }
+                }
+                for (var i = 0; projectIdeas.length > i; i++) {
+                    if (projectIdeas[i].upvotes.includes(user_id)) {
+                        projectIdeas[i].upvoted = true;
+                    }
+                    else {
+                        projectIdeas[i].upvoted = false;
+                    }
+                }
             }
             return {
                 message: null,
@@ -83,7 +147,7 @@ class TopicService {
                     _id: topic._id,
                     user_id: topic.user_id,
                     creator_name: topic.creator_name,
-                    topic_title: topic.topic_title,
+                    title: topic.title,
                     background_image: topic.background_image,
                     docs: docs,
                     courses: courses,

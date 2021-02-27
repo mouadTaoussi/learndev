@@ -7,7 +7,7 @@ const TopicSchema = new Schema({
 	creator_name : {
 		type : String, required : true
 	},
-	topic_title : {
+	title : {
 		type : String, required : true
 	},
 	// Search trough the web about an image that relevents to that topic
@@ -28,7 +28,7 @@ const DocsSchema = new Schema({
 	topic_id : {
 		type : String, required: true
 	},
-	docs_title : {
+	title : {
 		type : String, required: true
 	},
 	level : {
@@ -52,7 +52,7 @@ const CourseSchema = new Schema({
 	creator_name : {
 		type : String, required: true
 	},
-	topic_id : {
+	title : {
 		type : String, required: true
 	},
 	course_title : {
@@ -82,7 +82,7 @@ const ArticleSchema = new Schema({
 	topic_id : {
 		type : String, required: true
 	},
-	article_title : {
+	title : {
 		type : String, required: true
 	},
 	level : {
@@ -109,7 +109,7 @@ const ProjectIdeaSchema = new Schema({
 	topic_id: {
 		type : String, required: true
 	},
-	project_idea_title : {
+	title : {
 		type : String, required: true
 	}, 
 	level : {

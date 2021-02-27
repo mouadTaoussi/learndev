@@ -79,13 +79,14 @@ let topicResolver = class topicResolver {
         const user = context.req.session.passport || null;
         console.log(user);
         const topic = await _topicservice.getTopic(topic_id, user, limit, skip);
+        console.log(topic);
         return topic.data;
     }
-    async addTopic({ topic_title, background_image }, context) {
+    async addTopic({ title, background_image }, context) {
         const new_topic = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
-            topic_title: topic_title,
+            title: title,
             background_image: background_image
         };
         const newTopic = await _topicservice.addTopic(new_topic);
@@ -93,7 +94,7 @@ let topicResolver = class topicResolver {
             _id: newTopic.data._id,
             user_id: newTopic.data.user_id,
             creator_name: newTopic.data.creator_name,
-            topic_title: newTopic.data.topic_title,
+            title: newTopic.data.title,
             background_image: newTopic.data.background_image,
             docs: null,
             courses: null,
@@ -141,12 +142,12 @@ topicResolver = __decorate([
 ], topicResolver);
 exports.topicResolver = topicResolver;
 let docsResolver = class docsResolver {
-    async addDocs({ topic_id, docs_title, level, docs_link }, context) {
+    async addDocs({ topic_id, title, level, docs_link }, context) {
         const new_doc = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
             topic_id: topic_id,
-            docs_title: docs_title,
+            title: title,
             level: level,
             docs_link: docs_link,
             upvotes_count: 0,
@@ -180,12 +181,12 @@ docsResolver = __decorate([
 ], docsResolver);
 exports.docsResolver = docsResolver;
 let courseResolver = class courseResolver {
-    async addCourse({ topic_id, course_title, level, course_link }, context) {
+    async addCourse({ topic_id, title, level, course_link }, context) {
         const new_course = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
             topic_id: topic_id,
-            course_title: course_title,
+            title: title,
             level: level,
             course_link: course_link,
             upvotes_count: 0,
@@ -219,12 +220,12 @@ courseResolver = __decorate([
 ], courseResolver);
 exports.courseResolver = courseResolver;
 let articleResolver = class articleResolver {
-    async addArticle({ topic_id, article_title, level, article_link }, context) {
+    async addArticle({ topic_id, title, level, article_link }, context) {
         const new_article = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
             topic_id: topic_id,
-            article_title: article_title,
+            title: title,
             level: level,
             article_link: article_link,
             upvotes_count: 0,
@@ -258,12 +259,12 @@ articleResolver = __decorate([
 ], articleResolver);
 exports.articleResolver = articleResolver;
 let projectIdeaResolver = class projectIdeaResolver {
-    async addProjectIdea({ topic_id, project_idea_title, level, description }, context) {
+    async addProjectIdea({ topic_id, title, level, description }, context) {
         const project_idea = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
             topic_id: topic_id,
-            project_idea_title: project_idea_title,
+            title: title,
             level: level,
             description: description,
             upvotes_count: 0,

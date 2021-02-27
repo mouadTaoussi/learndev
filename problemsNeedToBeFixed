@@ -5,3 +5,54 @@
 
 - To exectute upvotes (add another upvote or delete an upvote) see
 https://mongoosejs.com/docs/queries.html
+
+
+# Write your query or mutation here
+
+query{
+  # searchTopic(limit:4,skip:0,search_term:"learn C++ in a good way"){
+  #     _id
+  #     topic_title
+  # }
+  #  getTopics(limit:4,skip:0){
+  #     _id
+  #     topic_title
+  # }
+  getTopic(topic_id:"60353db272feeb609cb5af2b",limit:5,skip:0) {
+    _id
+    creator_name
+    topic_title
+    docs {
+      _id
+      topic_id
+      creator_name
+      docs_title
+      docs_link
+    }
+  }
+}
+
+# Write your query or mutation here
+
+query {
+  searchTopic(limit:4,skip:4,search_term:"learn C++ in a good way"){
+      _id
+      title
+  }
+   getTopics(limit:4,skip:0){
+      _id
+      title
+  }
+  getTopic(topic_id: "60353db272feeb609cb5af2b", limit: 5, skip: 0) {
+    _id
+    creator_name
+    title
+    docs {
+      _id
+      topic_id
+      creator_name
+      title
+      docs_link
+    }
+  }
+}

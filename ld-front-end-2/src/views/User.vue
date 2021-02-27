@@ -183,8 +183,8 @@
 
 				const ADD_TOPIC = gql`
 					mutation($topic_title: String!, $background_image: String!) {
-						addTopic(topic_title: $topic_title, background_image: $background_image) {
-							topic_title
+						addTopic(title: $title, background_image: $background_image) {
+							title
 						}
 					}
 				`
@@ -193,12 +193,12 @@
 					  getTopic (topic_id: "mytopicid") { 
 					    user_id 
 					    background_image 
-					    topic_title
+					    title
 					    articles { 
 					      user_id 
 					      topic_id 
 					      article_link 
-					      article_title 
+					      title 
 					    }
 					  }
 					}
@@ -226,7 +226,7 @@
 	   				data: {
 	   					query: print(ADD_TOPIC),
 						variables: {
-							topic_title: this.newTopic.topic_title,
+							title: this.newTopic.title,
 							background_image: this.newTopic.background_image,
 							// tags : this.newTopic.tags
 						},

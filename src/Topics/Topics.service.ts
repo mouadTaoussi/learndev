@@ -1,24 +1,25 @@
 import { TopicModel, DocsModel, CourseModel, ArticleModel, ProjectIdeaModel } from './Topics.models';
 import { TopicServiceInt, Topic, Docs, Course, Article, ProjectIdea } from './Topics.typedefinitions';
+import { filterByQuery, removeDuplicates } from "./Topics.functions";
 
 
 class TopicService implements TopicServiceInt {
 	public async searchTopic(query: string[],limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
 			// const query_to_database = { 
-			// 	topic_title: {
+			// 	title: {
 			// 	    $in: ["Learn","C++"]
 			// 	}
 			// };
 			// 
 			// Search by tags
 			// const query_to_database = { 
-			// 	"topic_title": "Learn dev",
+			// 	"title": "Learn dev",
 			// };
 			// 
 			// 
-			// const topic = await TopicModel.find({topic_title:{"$in": query }}).limit(limit).skip(skip);
-			// { topic_title: { $in:['C++'] } }
+			// const topic = await TopicModel.find({title:{"$in": query }}).limit(limit).skip(skip);
+			// { title: { $in:['C++'] } }
 
 			// Get the topics by limit and skip
 			const topics = await TopicModel.find().skip(skip).limit(limit);
@@ -31,7 +32,7 @@ class TopicService implements TopicServiceInt {
 
 				for ( var io = 0; query.length > io; io++ ) {
 
-					if( topics[i].topic_title.includes(query[io])) {
+					if( topics[i].title.includes(query[io])) {
 						topics_needed.push(topics[i])
 					}
 				}
@@ -85,10 +86,72 @@ class TopicService implements TopicServiceInt {
 			// Get from ProjectIdea // Skip // Limit // Add upvoted field set to false
 			const projectIdeas = await ProjectIdeaModel.find().skip(skip).limit(limit);
 
+			// Filter by the query
+			// docs
+			// Remove replucates
+
+			// courses
+			// Remove replucates
+
+			// articles
+			// Remove replucates
+
+			// projectIdeas
+			// Remove replucates
+
+
 			if( user_session !== null ) {
 				// Check if the user upvoted some of the content in each resource // if logged in
 				// if true then set upvoted to true
 				const user_id: string = user_session.user.id;
+				// console.log(user_id)
+				for ( var i = 0; docs.length > i; i++ ) {
+
+					if (docs[i].upvotes.includes(user_id)) {
+						// set upvoted to true
+						docs[i].upvoted = true;
+					} 
+					else {
+						// set upvoted to false 
+						docs[i].upvoted = false;
+					}
+				}
+				// Check in the courses
+				for ( var i = 0; courses.length > i; i++ ) {
+
+					if (courses[i].upvotes.includes(user_id)) {
+						// set upvoted to true
+						courses[i].upvoted = true;
+					}
+					else {
+						// set upvoted to false 
+						courses[i].upvoted = false;
+					}
+				}
+				// Check in the articles
+				for ( var i = 0; articles.length > i; i++ ) {
+
+					if (articles[i].upvotes.includes(user_id)) {
+						// set upvoted to true
+						articles[i].upvoted = true;
+					}
+					else {
+						// set upvoted to false 
+						articles[i].upvoted = false;
+					}
+				}
+				// Check in the projectIdeas
+				for ( var i = 0; projectIdeas.length > i; i++ ) {
+
+					if (projectIdeas[i].upvotes.includes(user_id)) {
+						// set upvoted to true
+						projectIdeas[i].upvoted = true;
+					}
+					else {
+						// set upvoted to false 
+						projectIdeas[i].upvoted = false;
+					}
+				}
 			}
 
 			return {
@@ -123,6 +186,55 @@ class TopicService implements TopicServiceInt {
 				// Check if the user upvoted some of the content in each resource // if logged in
 				// if true then set upvoted to true
 				const user_id: string = user_session.user.id;
+				// console.log(user_id)
+				// Check in the docs
+				for ( var i = 0; docs.length > i; i++ ) {
+
+					if (docs[i].upvotes.includes(user_id)) {
+						// set upvoted to true
+						docs[i].upvoted = true;
+					} 
+					else {
+						// set upvoted to false 
+						docs[i].upvoted = false;
+					}
+				}
+				// Check in the courses
+				for ( var i = 0; courses.length > i; i++ ) {
+
+					if (courses[i].upvotes.includes(user_id)) {
+						// set upvoted to true
+						courses[i].upvoted = true;
+					}
+					else {
+						// set upvoted to false 
+						courses[i].upvoted = false;
+					}
+				}
+				// Check in the articles
+				for ( var i = 0; articles.length > i; i++ ) {
+
+					if (articles[i].upvotes.includes(user_id)) {
+						// set upvoted to true
+						articles[i].upvoted = true;
+					}
+					else {
+						// set upvoted to false 
+						articles[i].upvoted = false;
+					}
+				}
+				// Check in the projectIdeas
+				for ( var i = 0; projectIdeas.length > i; i++ ) {
+
+					if (projectIdeas[i].upvotes.includes(user_id)) {
+						// set upvoted to true
+						projectIdeas[i].upvoted = true;
+					}
+					else {
+						// set upvoted to false 
+						projectIdeas[i].upvoted = false;
+					}
+				}
 			}
 
 			return {
@@ -132,7 +244,7 @@ class TopicService implements TopicServiceInt {
 					_id : topic._id,
 					user_id : topic.user_id,
 					creator_name : topic.creator_name,
-					topic_title : topic.topic_title,
+					title : topic.title,
 					background_image : topic.background_image,
 					// docs
 					docs : docs,

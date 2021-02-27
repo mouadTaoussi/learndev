@@ -9,7 +9,7 @@ const TopicSchema = new mongoose_1.Schema({
     creator_name: {
         type: String, required: true
     },
-    topic_title: {
+    title: {
         type: String, required: true
     },
     background_image: {
@@ -26,7 +26,7 @@ const DocsSchema = new mongoose_1.Schema({
     topic_id: {
         type: String, required: true
     },
-    docs_title: {
+    title: {
         type: String, required: true
     },
     level: {
@@ -47,7 +47,7 @@ const CourseSchema = new mongoose_1.Schema({
     creator_name: {
         type: String, required: true
     },
-    topic_id: {
+    title: {
         type: String, required: true
     },
     course_title: {
@@ -74,7 +74,7 @@ const ArticleSchema = new mongoose_1.Schema({
     topic_id: {
         type: String, required: true
     },
-    article_title: {
+    title: {
         type: String, required: true
     },
     level: {
@@ -98,7 +98,7 @@ const ProjectIdeaSchema = new mongoose_1.Schema({
     topic_id: {
         type: String, required: true
     },
-    project_idea_title: {
+    title: {
         type: String, required: true
     },
     level: {

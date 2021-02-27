@@ -94,6 +94,7 @@ class topicResolver implements topicResolver {
 		const user = context.req.session.passport || null;
 		console.log(user);
 		const topic = await _topicservice.getTopic(topic_id, user, limit, skip);
+		console.log(topic)
 
 		// Get content of the topic
 		return topic.data;
@@ -101,17 +102,17 @@ class topicResolver implements topicResolver {
 
 	@Mutation(returns => Topic, { description: "This query adds new topic" })
 	@UseMiddleware(Authenticated)
-	public async addTopic(@Args() { topic_title, background_image } : TopicArgs, @Ctx() context : any) : Promise<any> {
+	public async addTopic(@Args() { title, background_image } : TopicArgs, @Ctx() context : any) : Promise<any> {
 
 		const new_topic :{
 			user_id          :string,
 			creator_name     :string,
-			topic_title      :string,
+			title      :string,
 			background_image :string
 		} = {
 			user_id          : context.req.user.id,
 			creator_name     : context.req.user.name,
-			topic_title      : topic_title,
+			title      : title,
 			background_image : background_image
 		}
 
@@ -122,7 +123,7 @@ class topicResolver implements topicResolver {
 			_id          : newTopic.data._id,
 			user_id      : newTopic.data.user_id,
 			creator_name : newTopic.data.creator_name,
-			topic_title  : newTopic.data.topic_title,
+			title  : newTopic.data.title,
 			background_image : newTopic.data.background_image,
 			docs             : null,
 			courses      : null,
@@ -154,13 +155,13 @@ class docsResolver implements docsResolver {
 
 	@Mutation(returns => Docs, { description: "This query adds new docs" })
 	@UseMiddleware(Authenticated)
-	public async addDocs(@Args() { topic_id, docs_title, level, docs_link }: DocsArgs, @Ctx() context : any) : Promise<any> {
+	public async addDocs(@Args() { topic_id, title, level, docs_link }: DocsArgs, @Ctx() context : any) : Promise<any> {
 
 		const new_doc : {
 			user_id	     : string,
 			creator_name : string,
 			topic_id     : string,
-			docs_title   : string,
+			title   : string,
 			level        : string,
 			docs_link    : string,
 			upvotes_count: number,
@@ -169,7 +170,7 @@ class docsResolver implements docsResolver {
 			user_id      : context.req.user.id,
 			creator_name : context.req.user.name,
 			topic_id     : topic_id,
-			docs_title   : docs_title,
+			title   : title,
 			level        : level,
 			docs_link    : docs_link,
 			upvotes_count: 0,
@@ -200,12 +201,12 @@ class courseResolver implements courseResolver {
 	
 	@Mutation(returns => Course, { description: "This query adds new course" })
 	@UseMiddleware(Authenticated)
-	public async addCourse(@Args() { topic_id, course_title, level, course_link }: CourseArgs, @Ctx() context : any) : Promise<any> {
+	public async addCourse(@Args() { topic_id, title, level, course_link }: CourseArgs, @Ctx() context : any) : Promise<any> {
 		const new_course : {
 			user_id	     : string,
 			creator_name : string,
 			topic_id     : string,
-			course_title : string,
+			title : string,
 			level        : string,
 			course_link  : string,
 			upvotes_count: number,
@@ -214,7 +215,7 @@ class courseResolver implements courseResolver {
 			user_id      : context.req.user.id,
 			creator_name : context.req.user.name,
 			topic_id     : topic_id,
-			course_title : course_title,
+			title : title,
 			level        : level,
 			course_link  : course_link,
 			upvotes_count: 0,
@@ -245,12 +246,12 @@ class articleResolver implements articleResolver {
 	
 	@Mutation(returns => Article, { description: "This query adds new course" })
 	@UseMiddleware(Authenticated)
-	public async addArticle(@Args() {topic_id,article_title,level,article_link}: ArticleArgs, @Ctx() context : any) : Promise<any> {
+	public async addArticle(@Args() {topic_id,title,level,article_link}: ArticleArgs, @Ctx() context : any) : Promise<any> {
 		const new_article : {
 			user_id	      : string,
 			creator_name  : string,
 			topic_id      : string,
-			article_title : string,
+			title : string,
 			level         : string,
 			article_link  : string,
 			upvotes_count : number,
@@ -259,7 +260,7 @@ class articleResolver implements articleResolver {
 			user_id       : context.req.user.id,
 			creator_name  : context.req.user.name,
 			topic_id      : topic_id,
-			article_title : article_title,
+			title : title,
 			level         : level,
 			article_link  : article_link,
 			upvotes_count : 0,
@@ -290,14 +291,14 @@ class projectIdeaResolver implements projectIdeaResolver {
 	
 	@Mutation(returns => ProjectIdea, { description: "This query adds new Project Idea" })
 	@UseMiddleware(Authenticated)
-	public async addProjectIdea(@Args() { topic_id, project_idea_title, level, description }: ProjectIdeaArgs, @Ctx() context : any)
+	public async addProjectIdea(@Args() { topic_id, title, level, description }: ProjectIdeaArgs, @Ctx() context : any)
 	 : Promise<any> {
 
 		const project_idea : {
 			user_id	      : string,
 			creator_name  : string,
 			topic_id      : string,
-			project_idea_title : string,
+			title : string,
 			level         : string,
 			description   : string,
 			upvotes_count : number,
@@ -306,7 +307,7 @@ class projectIdeaResolver implements projectIdeaResolver {
 			user_id       : context.req.user.id,
 			creator_name  : context.req.user.name,
 			topic_id      : topic_id,
-			project_idea_title : project_idea_title,
+			title : title,
 			level         : level,
 			description   : description,
 			upvotes_count : 0,
@@ -331,20 +332,20 @@ class projectIdeaResolver implements projectIdeaResolver {
 export { topicResolver, topicInfoResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver };
 
 // user_id : "vffff",
-// topic_title : topic_id,
+// title : topic_id,
 // background_image : "string",
-// docs : [{user_id:"mouad",topic_id: topic_id, docs_title : "get data",docs_link: "ff"}],
-// courses : [{user_id:"mouad",topic_id: topic_id, course_title : "get data",course_link: "ff"}],
-// articles : [{user_id:"mouad",topic_id: topic_id, article_title : "get data",article_link: "ff"}],
-// ProjectIdeas : [{user_id:"mouad",topic_id: topic_id, project_idea_title : "get data",description: "ff"}]
+// docs : [{user_id:"mouad",topic_id: topic_id, title : "get data",docs_link: "ff"}],
+// courses : [{user_id:"mouad",topic_id: topic_id, title : "get data",course_link: "ff"}],
+// articles : [{user_id:"mouad",topic_id: topic_id, title : "get data",article_link: "ff"}],
+// ProjectIdeas : [{user_id:"mouad",topic_id: topic_id, title : "get data",description: "ff"}]
 // {
 // 	_id : "vffff",
 // 	user_id : "vffff",
 // 	creator_name : "vffff",
-// 	topic_title : topic_id,
+// 	title : topic_id,
 // 	background_image : "string",
-// 	docs : [{user_id:"mouad",topic_id: topic_id, docs_title : "get data",docs_link: "ff"}],
-// 	courses : [{user_id:"mouad",topic_id: topic_id, course_title : "get data",course_link: "ff"}],
-// 	articles : [{user_id:"mouad",topic_id: topic_id, article_title : "get data",article_link: "ff"}],
-// 	ProjectIdeas : [{user_id:"mouad",topic_id: topic_id, project_idea_title : "get data",description: "ff"}]
+// 	docs : [{user_id:"mouad",topic_id: topic_id, title : "get data",docs_link: "ff"}],
+// 	courses : [{user_id:"mouad",topic_id: topic_id, title : "get data",course_link: "ff"}],
+// 	articles : [{user_id:"mouad",topic_id: topic_id, title : "get data",article_link: "ff"}],
+// 	ProjectIdeas : [{user_id:"mouad",topic_id: topic_id, title : "get data",description: "ff"}]
 // }

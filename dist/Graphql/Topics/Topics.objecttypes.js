@@ -28,7 +28,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String, { description: "topic_title field" }),
     __metadata("design:type", String)
-], Topic.prototype, "topic_title", void 0);
+], Topic.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "background_image field" }),
     __metadata("design:type", String)
@@ -70,7 +70,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String, { description: "topic_title field" }),
     __metadata("design:type", String)
-], TopicInfo.prototype, "topic_title", void 0);
+], TopicInfo.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "background_image field" }),
     __metadata("design:type", String)
@@ -100,7 +100,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String, { description: "docs_title field" }),
     __metadata("design:type", String)
-], Docs.prototype, "docs_title", void 0);
+], Docs.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "level field" }),
     __metadata("design:type", String)
@@ -138,7 +138,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String, { description: "course_title field" }),
     __metadata("design:type", String)
-], Course.prototype, "course_title", void 0);
+], Course.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "level field" }),
     __metadata("design:type", String)
@@ -176,7 +176,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String, { description: "article_title field" }),
     __metadata("design:type", String)
-], Article.prototype, "article_title", void 0);
+], Article.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "level field" }),
     __metadata("design:type", String)
@@ -210,7 +210,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String, { description: "This one represents project_idea_title" }),
     __metadata("design:type", String)
-], ProjectIdea.prototype, "project_idea_title", void 0);
+], ProjectIdea.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "level field" }),
     __metadata("design:type", String)
@@ -228,7 +228,7 @@ let TopicArgs = class TopicArgs {
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], TopicArgs.prototype, "topic_title", void 0);
+], TopicArgs.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
@@ -246,7 +246,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], DocsArgs.prototype, "docs_title", void 0);
+], DocsArgs.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
@@ -268,7 +268,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], CourseArgs.prototype, "course_title", void 0);
+], CourseArgs.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
@@ -290,7 +290,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], ArticleArgs.prototype, "article_title", void 0);
+], ArticleArgs.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
@@ -312,7 +312,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], ProjectIdeaArgs.prototype, "project_idea_title", void 0);
+], ProjectIdeaArgs.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
