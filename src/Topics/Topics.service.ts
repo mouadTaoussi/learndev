@@ -6,50 +6,15 @@ import { filterByQuery, removeDuplicates } from "./Topics.functions";
 class TopicService implements TopicServiceInt {
 	public async searchTopic(query: string[],limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
-			// const query_to_database = { 
-			// 	title: {
-			// 	    $in: ["Learn","C++"]
-			// 	}
-			// };
-			// 
-			// Search by tags
-			// const query_to_database = { 
-			// 	"title": "Learn dev",
-			// };
-			// 
-			// 
-			// const topic = await TopicModel.find({title:{"$in": query }}).limit(limit).skip(skip);
-			// { title: { $in:['C++'] } }
-
 			// Get the topics by limit and skip
 			const topics = await TopicModel.find().skip(skip).limit(limit);
 
-			// Filter the topics by the query
-			let topics_needed : any = [];
+			// Filter by query
+			const topics_needed     = filterByQuery(topics, query);
 
-			// Filter topics by query
-			for ( var i = 0; topics.length > i; i++ ) {
+			// Remove removeDuplicates // Error here !!!
+			const topics_to_be_sent = removeDuplicates(topics_needed);
 
-				for ( var io = 0; query.length > io; io++ ) {
-
-					if( topics[i].title.includes(query[io])) {
-						topics_needed.push(topics[i])
-					}
-				}
-			}
-
-			// Remove Replucates (Repitition)
-			for (var i = 0; topics_needed.length > i; i++) {
-				console.log( topics_needed[i]._id == topics_needed[i+1]._id )
-
-				const next = i + 1;
-
-				if ( topics_needed[i]._id == topics_needed[next]._id) {
-					topics_needed.splice(next, 1);
-				}
-			}
-
-			// Skip // Limit
 			if (topics_needed.length > 0) {
 				return {
 					message : null,
@@ -508,3 +473,45 @@ class TopicService implements TopicServiceInt {
 
 
 export default TopicService;
+
+
+// const query_to_database = { 
+			// 	title: {
+			// 	    $in: ["Learn","C++"]
+			// 	}
+			// };
+			// 
+			// Search by tags
+			// const query_to_database = { 
+			// 	"title": "Learn dev",
+			// };
+			// 
+			// 
+			// const topic = await TopicModel.find({title:{"$in": query }}).limit(limit).skip(skip);
+			// { title: { $in:['C++'] } }
+
+
+			// // Filter the topics by the query
+			// let topics_needed : any = [];
+
+			// // Filter topics by query
+			// for ( var i = 0; topics.length > i; i++ ) {
+
+			// 	for ( var io = 0; query.length > io; io++ ) {
+
+			// 		if( topics[i].title.includes(query[io])) {
+			// 			topics_needed.push(topics[i])
+			// 		}
+			// 	}
+			// }
+
+			// // Remove Replucates (Repitition)
+			// for (var i = 0; topics_needed.length > i; i++) {
+			// 	console.log( topics_needed[i]._id == topics_needed[i+1]._id )
+
+			// 	const next = i + 1;
+
+			// 	if ( topics_needed[i]._id == topics_needed[next]._id) {
+			// 		topics_needed.splice(next, 1);
+			// 	}
+			// }

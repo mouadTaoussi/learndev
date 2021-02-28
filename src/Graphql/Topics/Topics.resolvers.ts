@@ -28,7 +28,8 @@ class topicInfoResolver implements topicInfoResolver {
 
 		// Delete linking words
 		for (let io = 0; io < query_to_search.length; io++) {
-			if (linking_words.includes(query_to_search[io].toLowerCase())) {
+
+			if (linking_words.includes(query_to_search[io])) {
 				query_to_search.splice(io, 1);
 			}
 			else { continue; }
@@ -36,7 +37,7 @@ class topicInfoResolver implements topicInfoResolver {
 
 		// Find the right documents
 		const topics = await _topicservice.searchTopic(query_to_search, limit, skip);
-
+		// console.log(topics.data)
 		return topics.data;
 	}
 

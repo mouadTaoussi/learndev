@@ -1,25 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Topics_models_1 = require("./Topics.models");
+const Topics_functions_1 = require("./Topics.functions");
 class TopicService {
     async searchTopic(query, limit, skip) {
         try {
             const topics = await Topics_models_1.TopicModel.find().skip(skip).limit(limit);
-            let topics_needed = [];
-            for (var i = 0; topics.length > i; i++) {
-                for (var io = 0; query.length > io; io++) {
-                    if (topics[i].title.includes(query[io])) {
-                        topics_needed.push(topics[i]);
-                    }
-                }
-            }
-            for (var i = 0; topics_needed.length > i; i++) {
-                console.log(topics_needed[i]._id == topics_needed[i + 1]._id);
-                const next = i + 1;
-                if (topics_needed[i]._id == topics_needed[next]._id) {
-                    topics_needed.splice(next, 1);
-                }
-            }
+            const topics_needed = Topics_functions_1.filterByQuery(topics, query);
+            const topics_to_be_sent = Topics_functions_1.removeDuplicates(topics_needed);
             if (topics_needed.length > 0) {
                 return {
                     message: null,

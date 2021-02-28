@@ -26,7 +26,7 @@ let topicInfoResolver = class topicInfoResolver {
         const query_to_search = search_term.split(' ');
         const linking_words = ["how", "to", "and", "in", "by", "the", "on", "with", "which", "while", "all", "for"];
         for (let io = 0; io < query_to_search.length; io++) {
-            if (linking_words.includes(query_to_search[io].toLowerCase())) {
+            if (linking_words.includes(query_to_search[io])) {
                 query_to_search.splice(io, 1);
             }
             else {
