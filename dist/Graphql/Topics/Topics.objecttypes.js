@@ -106,9 +106,9 @@ __decorate([
     __metadata("design:type", String)
 ], Docs.prototype, "level", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "docs_link field" }),
+    type_graphql_1.Field(type => String, { description: "link field" }),
     __metadata("design:type", String)
-], Docs.prototype, "docs_link", void 0);
+], Docs.prototype, "link", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "upvotes field" }),
     __metadata("design:type", String)
@@ -144,9 +144,9 @@ __decorate([
     __metadata("design:type", String)
 ], Course.prototype, "level", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "course_link field" }),
+    type_graphql_1.Field(type => String, { description: "link field" }),
     __metadata("design:type", String)
-], Course.prototype, "course_link", void 0);
+], Course.prototype, "link", void 0);
 __decorate([
     type_graphql_1.Field(type => String, { description: "upvotes field" }),
     __metadata("design:type", String)
@@ -182,9 +182,13 @@ __decorate([
     __metadata("design:type", String)
 ], Article.prototype, "level", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "article_link field" }),
+    type_graphql_1.Field(type => String, { description: "link field" }),
     __metadata("design:type", String)
-], Article.prototype, "article_link", void 0);
+], Article.prototype, "link", void 0);
+__decorate([
+    type_graphql_1.Field(type => String, { description: "upvotes field" }),
+    __metadata("design:type", String)
+], Article.prototype, "upvotes", void 0);
 Article = __decorate([
     type_graphql_1.ObjectType({ description: 'This one represents article' })
 ], Article);
@@ -254,7 +258,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], DocsArgs.prototype, "docs_link", void 0);
+], DocsArgs.prototype, "link", void 0);
 DocsArgs = __decorate([
     type_graphql_1.ArgsType()
 ], DocsArgs);
@@ -276,7 +280,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], CourseArgs.prototype, "course_link", void 0);
+], CourseArgs.prototype, "link", void 0);
 CourseArgs = __decorate([
     type_graphql_1.ArgsType()
 ], CourseArgs);
@@ -298,7 +302,7 @@ __decorate([
 __decorate([
     type_graphql_1.Field(type => String),
     __metadata("design:type", String)
-], ArticleArgs.prototype, "article_link", void 0);
+], ArticleArgs.prototype, "link", void 0);
 ArticleArgs = __decorate([
     type_graphql_1.ArgsType()
 ], ArticleArgs);

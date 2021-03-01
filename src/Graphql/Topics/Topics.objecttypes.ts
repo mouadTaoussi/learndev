@@ -72,11 +72,17 @@ class Docs {
 	@Field( type => String,{description: "level field" } )
 	level : string;
 
-	@Field( type => String,{description: "docs_link field" } )
-	docs_link : string;
+	@Field( type => String,{description: "link field" } )
+	link : string;
+
+	@Field( type => Number,{description: "upvotes_count field" } )
+	upvotes_count : number;
 
 	@Field( type => String,{description: "upvotes field" } )
 	upvotes : string;
+
+	@Field( type => Boolean,{description: "upvoted field" } )
+	upvoted : boolean;
 
 }
 
@@ -100,11 +106,17 @@ class Course {
 	@Field( type => String,{description: "level field" } )
 	level : string;
 
-	@Field( type => String,{description: "course_link field" } )
-	course_link : string;
+	@Field( type => String,{description: "link field" } )
+	link : string;
+
+	@Field( type => Number,{description: "upvotes_count field" } )
+	upvotes_count : number;
 
 	@Field( type => String,{description: "upvotes field" } )
 	upvotes : string;
+
+	@Field( type => Boolean,{description: "upvoted field" } )
+	upvoted : boolean;
 }
 
 @ObjectType({ description: 'This one represents article' })
@@ -127,8 +139,17 @@ class Article {
 	@Field( type => String,{ description: "level field" } )
 	level : string;
 
-	@Field( type => String,{ description: "article_link field" } )
-	article_link : string;
+	@Field( type => String,{ description: "link field" } )
+	link : string;
+
+	@Field( type => Number,{description: "upvotes_count field" } )
+	upvotes_count : number;
+
+	@Field( type => String,{description: "upvotes field" } )
+	upvotes : string;
+
+	@Field( type => Boolean,{description: "upvoted field" } )
+	upvoted : boolean;
 
 }
 
@@ -154,6 +175,15 @@ class ProjectIdea {
 
 	@Field( type => String , { description : "This one reqpresents description" } )
 	description : string;
+
+	@Field( type => Number,{description: "upvotes_count field" } )
+	upvotes_count : number;
+
+	@Field( type => String,{description: "upvotes field" } )
+	upvotes : string;
+
+	@Field( type => Boolean,{description: "upvoted field" } )
+	upvoted : boolean;
 }
 
 @ArgsType()
@@ -180,7 +210,7 @@ class DocsArgs {
 	level : string;
 
 	@Field( type => String )
-	docs_link : string;
+	link : string;
 
 }
 
@@ -197,7 +227,7 @@ class CourseArgs {
 	level : string;
 
 	@Field( type => String )
-	course_link : string;
+	link : string;
 }
 
 @ArgsType()
@@ -213,7 +243,7 @@ class ArticleArgs {
 	level : string;
 
 	@Field( type => String )
-	article_link : string;
+	link : string;
 
 }
 

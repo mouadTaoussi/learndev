@@ -34,7 +34,7 @@ const DocsSchema = new Schema({
 	level : {
 		type : String, required: true
 	},
-	docs_link  : {
+	link  : {
 		type : String, required: true
 	},
 	upvotes_count : {
@@ -52,16 +52,16 @@ const CourseSchema = new Schema({
 	creator_name : {
 		type : String, required: true
 	},
-	title : {
+	topic_id : {
 		type : String, required: true
 	},
-	course_title : {
+	title : {
 		type : String, required: true
 	},
 	level : {
 		type : String, required: true
 	},
-	course_link : {
+	link : {
 		type : String, required: true
 	},
 	upvotes_count : {
@@ -88,7 +88,7 @@ const ArticleSchema = new Schema({
 	level : {
 		type : String, required: true
 	},
-	article_link  : {
+	link  : {
 		type : String, required: true
 	},
 	upvotes_count : {

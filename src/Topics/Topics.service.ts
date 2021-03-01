@@ -54,18 +54,23 @@ class TopicService implements TopicServiceInt {
 			// Get from ProjectIdea // Skip // Limit // Add upvoted field set to false
 			const projectIdeas = await ProjectIdeaModel.find().skip(skip).limit(limit);
 
-			// Filter by the query
-			// docs
-			// Remove replucates
+			// Filter by query
+			const docs_needed          = filterByQuery(docs, query);
+			const courses_needed       = filterByQuery(courses, query);
+			const articles_needed      = filterByQuery(articles, query);
+			const project_ideas_needed = filterByQuery(projectIdeas, query);
 
-			// courses
-			// Remove replucates
+			// Remove duplicates
+			const docs_need_to_be_unduplicated          = removeDuplicates(docs_needed);
+			const courses_need_to_be_unduplicated       = removeDuplicates(courses_needed);
+			const articles_need_to_be_unduplicated      = removeDuplicates(articles_needed);
+			const project_ideas_need_to_be_unduplicated = removeDuplicates(project_ideas_needed);
 
-			// articles
-			// Remove replucates
-
-			// projectIdeas
-			// Remove replucates
+			// Sort them by upvotes
+			const docs_to_be_sent          = sortByUpvotes(docs_need_to_be_unduplicated);
+			const courses_to_be_sent       = sortByUpvotes(courses_need_to_be_unduplicated);
+			const articles_to_be_sent      = sortByUpvotes(articles_need_to_be_unduplicated);
+			const project_ideas_to_be_sent = sortByUpvotes(project_ideas_need_to_be_unduplicated);
 
 
 			if( user_session !== null ) {
@@ -73,51 +78,51 @@ class TopicService implements TopicServiceInt {
 				// if true then set upvoted to true
 				const user_id: string = user_session.user.id;
 				// console.log(user_id)
-				for ( var i = 0; docs.length > i; i++ ) {
+				for ( var i = 0; docs_to_be_sent.length > i; i++ ) {
 
-					if (docs[i].upvotes.includes(user_id)) {
+					if (docs_to_be_sent[i].upvotes.includes(user_id)) {
 						// set upvoted to true
-						docs[i].upvoted = true;
+						docs_to_be_sent[i].upvoted = true;
 					} 
 					else {
 						// set upvoted to false 
-						docs[i].upvoted = false;
+						docs_to_be_sent[i].upvoted = false;
 					}
 				}
 				// Check in the courses
-				for ( var i = 0; courses.length > i; i++ ) {
+				for ( var i = 0; courses_to_be_sent.length > i; i++ ) {
 
-					if (courses[i].upvotes.includes(user_id)) {
+					if (courses_to_be_sent[i].upvotes.includes(user_id)) {
 						// set upvoted to true
-						courses[i].upvoted = true;
+						courses_to_be_sent[i].upvoted = true;
 					}
 					else {
 						// set upvoted to false 
-						courses[i].upvoted = false;
+						courses_to_be_sent[i].upvoted = false;
 					}
 				}
 				// Check in the articles
-				for ( var i = 0; articles.length > i; i++ ) {
+				for ( var i = 0; articles_to_be_sent.length > i; i++ ) {
 
-					if (articles[i].upvotes.includes(user_id)) {
+					if (articles_to_be_sent[i].upvotes.includes(user_id)) {
 						// set upvoted to true
-						articles[i].upvoted = true;
+						articles_to_be_sent[i].upvoted = true;
 					}
 					else {
 						// set upvoted to false 
-						articles[i].upvoted = false;
+						articles_to_be_sent[i].upvoted = false;
 					}
 				}
 				// Check in the projectIdeas
-				for ( var i = 0; projectIdeas.length > i; i++ ) {
+				for ( var i = 0; project_ideas_to_be_sent.length > i; i++ ) {
 
-					if (projectIdeas[i].upvotes.includes(user_id)) {
+					if (project_ideas_to_be_sent[i].upvotes.includes(user_id)) {
 						// set upvoted to true
-						projectIdeas[i].upvoted = true;
+						project_ideas_to_be_sent[i].upvoted = true;
 					}
 					else {
 						// set upvoted to false 
-						projectIdeas[i].upvoted = false;
+						project_ideas_to_be_sent[i].upvoted = false;
 					}
 				}
 			}
@@ -150,57 +155,63 @@ class TopicService implements TopicServiceInt {
 			// Get from ProjectIdea // Skip // Limit // Add upvoted field set to false
 			const projectIdeas = await ProjectIdeaModel.find({ topic_id: item_id }).skip(skip).limit(limit);
 
+			// Sort them by upvotes
+			const docs_to_be_sent          = sortByUpvotes(docs);
+			const courses_to_be_sent       = sortByUpvotes(courses);
+			const articles_to_be_sent      = sortByUpvotes(articles);
+			const project_ideas_to_be_sent = sortByUpvotes(projectIdeas);
+			
 			if( user_session !== null ) {
 				// Check if the user upvoted some of the content in each resource // if logged in
 				// if true then set upvoted to true
 				const user_id: string = user_session.user.id;
 				// console.log(user_id)
 				// Check in the docs
-				for ( var i = 0; docs.length > i; i++ ) {
+				for ( var i = 0; docs_to_be_sent.length > i; i++ ) {
 
-					if (docs[i].upvotes.includes(user_id)) {
+					if (docs_to_be_sent[i].upvotes.includes(user_id)) {
 						// set upvoted to true
-						docs[i].upvoted = true;
+						docs_to_be_sent[i].upvoted = true;
 					} 
 					else {
 						// set upvoted to false 
-						docs[i].upvoted = false;
+						docs_to_be_sent[i].upvoted = false;
 					}
 				}
 				// Check in the courses
-				for ( var i = 0; courses.length > i; i++ ) {
+				for ( var i = 0; courses_to_be_sent.length > i; i++ ) {
 
-					if (courses[i].upvotes.includes(user_id)) {
+					if (courses_to_be_sent[i].upvotes.includes(user_id)) {
 						// set upvoted to true
-						courses[i].upvoted = true;
+						courses_to_be_sent[i].upvoted = true;
 					}
 					else {
 						// set upvoted to false 
-						courses[i].upvoted = false;
+						courses_to_be_sent[i].upvoted = false;
 					}
 				}
 				// Check in the articles
-				for ( var i = 0; articles.length > i; i++ ) {
+				for ( var i = 0; articles_to_be_sent.length > i; i++ ) {
 
-					if (articles[i].upvotes.includes(user_id)) {
+					if (articles_to_be_sent[i].upvotes.includes(user_id)) {
 						// set upvoted to true
-						articles[i].upvoted = true;
+						articles_to_be_sent[i].upvoted = true;
 					}
 					else {
 						// set upvoted to false 
-						articles[i].upvoted = false;
+						articles_to_be_sent[i].upvoted = false;
 					}
 				}
 				// Check in the projectIdeas
-				for ( var i = 0; projectIdeas.length > i; i++ ) {
+				for ( var i = 0; project_ideas_to_be_sent.length > i; i++ ) {
 
-					if (projectIdeas[i].upvotes.includes(user_id)) {
+					if (project_ideas_to_be_sent[i].upvotes.includes(user_id)) {
 						// set upvoted to true
-						projectIdeas[i].upvoted = true;
+						project_ideas_to_be_sent[i].upvoted = true;
 					}
 					else {
 						// set upvoted to false 
-						projectIdeas[i].upvoted = false;
+						project_ideas_to_be_sent[i].upvoted = false;
 					}
 				}
 			}
@@ -215,13 +226,13 @@ class TopicService implements TopicServiceInt {
 					title : topic.title,
 					background_image : topic.background_image,
 					// docs
-					docs : docs,
+					docs : docs_to_be_sent,
 					// courses
-					courses : courses,
+					courses : courses_to_be_sent,
 					// articels
-					articles : articles,
+					articles : articles_to_be_sent,
 					// projectIdeas
-					projectIdeas : projectIdeas
+					projectIdeas : project_ideas_to_be_sent
 				}
 			}
 		}

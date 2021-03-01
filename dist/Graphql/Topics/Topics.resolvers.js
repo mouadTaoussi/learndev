@@ -74,6 +74,7 @@ let topicResolver = class topicResolver {
         }
         const topics = await _topicservice.getTopic(search_term, user, limit, skip);
         const content_in_topic = await _topicservice.searchContentInTopic(query_to_search, topic_id, user, limit, skip);
+        return {};
     }
     async getTopic(topic_id, { limit, skip }, context) {
         const user = context.req.session.passport || null;

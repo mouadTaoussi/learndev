@@ -9,6 +9,9 @@
 				<!-- Search And Filter -->
 				<SearchAndFilter v-on:searchQuery="search"></SearchAndFilter>
 				<!-- Search And Filter -->
+				<!-- AddResource -->
+				<AddResource></AddResource>
+				<!-- AddResource -->
 				<!-- Resources -->
 				<Resources docs="dddddd" cources="" articles="" projectideas=""></Resources>
 				<!-- Resources -->
@@ -24,6 +27,7 @@
 <script>
 	import costumHeader from ".././components/Header.vue";
 	import SearchAndFilter from ".././components/Topicpage/SearchAndFilter.vue";
+	import AddResource from ".././components/Topicpage/AddResource.vue";
 	import Resources from ".././components/Topicpage/Resources.vue";
 	import costumFooter from ".././components/Footer.vue";
 	const  apihost = require('../.././api.config.js');
@@ -36,9 +40,9 @@
 	  components: {
 	  	costumHeader,
 	  	SearchAndFilter,
+	  	AddResource,
 	  	Resources,
 	  	costumFooter
-
 	  },
 	  mounted (){
 	  	// Fetch Topic within 

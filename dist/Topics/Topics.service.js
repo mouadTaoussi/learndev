@@ -38,38 +38,50 @@ class TopicService {
             const courses = await Topics_models_1.CourseModel.find().skip(skip).limit(limit);
             const articles = await Topics_models_1.ArticleModel.find().skip(skip).limit(limit);
             const projectIdeas = await Topics_models_1.ProjectIdeaModel.find().skip(skip).limit(limit);
+            const docs_needed = Topics_functions_1.filterByQuery(docs, query);
+            const courses_needed = Topics_functions_1.filterByQuery(courses, query);
+            const articles_needed = Topics_functions_1.filterByQuery(articles, query);
+            const project_ideas_needed = Topics_functions_1.filterByQuery(projectIdeas, query);
+            const docs_need_to_be_unduplicated = Topics_functions_1.removeDuplicates(docs_needed);
+            const courses_need_to_be_unduplicated = Topics_functions_1.removeDuplicates(courses_needed);
+            const articles_need_to_be_unduplicated = Topics_functions_1.removeDuplicates(articles_needed);
+            const project_ideas_need_to_be_unduplicated = Topics_functions_1.removeDuplicates(project_ideas_needed);
+            const docs_to_be_sent = Topics_functions_1.sortByUpvotes(docs_need_to_be_unduplicated);
+            const courses_to_be_sent = Topics_functions_1.sortByUpvotes(courses_need_to_be_unduplicated);
+            const articles_to_be_sent = Topics_functions_1.sortByUpvotes(articles_need_to_be_unduplicated);
+            const project_ideas_to_be_sent = Topics_functions_1.sortByUpvotes(project_ideas_need_to_be_unduplicated);
             if (user_session !== null) {
                 const user_id = user_session.user.id;
-                for (var i = 0; docs.length > i; i++) {
-                    if (docs[i].upvotes.includes(user_id)) {
-                        docs[i].upvoted = true;
+                for (var i = 0; docs_to_be_sent.length > i; i++) {
+                    if (docs_to_be_sent[i].upvotes.includes(user_id)) {
+                        docs_to_be_sent[i].upvoted = true;
                     }
                     else {
-                        docs[i].upvoted = false;
+                        docs_to_be_sent[i].upvoted = false;
                     }
                 }
-                for (var i = 0; courses.length > i; i++) {
-                    if (courses[i].upvotes.includes(user_id)) {
-                        courses[i].upvoted = true;
+                for (var i = 0; courses_to_be_sent.length > i; i++) {
+                    if (courses_to_be_sent[i].upvotes.includes(user_id)) {
+                        courses_to_be_sent[i].upvoted = true;
                     }
                     else {
-                        courses[i].upvoted = false;
+                        courses_to_be_sent[i].upvoted = false;
                     }
                 }
-                for (var i = 0; articles.length > i; i++) {
-                    if (articles[i].upvotes.includes(user_id)) {
-                        articles[i].upvoted = true;
+                for (var i = 0; articles_to_be_sent.length > i; i++) {
+                    if (articles_to_be_sent[i].upvotes.includes(user_id)) {
+                        articles_to_be_sent[i].upvoted = true;
                     }
                     else {
-                        articles[i].upvoted = false;
+                        articles_to_be_sent[i].upvoted = false;
                     }
                 }
-                for (var i = 0; projectIdeas.length > i; i++) {
-                    if (projectIdeas[i].upvotes.includes(user_id)) {
-                        projectIdeas[i].upvoted = true;
+                for (var i = 0; project_ideas_to_be_sent.length > i; i++) {
+                    if (project_ideas_to_be_sent[i].upvotes.includes(user_id)) {
+                        project_ideas_to_be_sent[i].upvoted = true;
                     }
                     else {
-                        projectIdeas[i].upvoted = false;
+                        project_ideas_to_be_sent[i].upvoted = false;
                     }
                 }
             }
@@ -94,38 +106,42 @@ class TopicService {
             const courses = await Topics_models_1.CourseModel.find({ topic_id: item_id }).skip(skip).limit(limit);
             const articles = await Topics_models_1.ArticleModel.find({ topic_id: item_id }).skip(skip).limit(limit);
             const projectIdeas = await Topics_models_1.ProjectIdeaModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+            const docs_to_be_sent = Topics_functions_1.sortByUpvotes(docs);
+            const courses_to_be_sent = Topics_functions_1.sortByUpvotes(courses);
+            const articles_to_be_sent = Topics_functions_1.sortByUpvotes(articles);
+            const project_ideas_to_be_sent = Topics_functions_1.sortByUpvotes(projectIdeas);
             if (user_session !== null) {
                 const user_id = user_session.user.id;
-                for (var i = 0; docs.length > i; i++) {
-                    if (docs[i].upvotes.includes(user_id)) {
-                        docs[i].upvoted = true;
+                for (var i = 0; docs_to_be_sent.length > i; i++) {
+                    if (docs_to_be_sent[i].upvotes.includes(user_id)) {
+                        docs_to_be_sent[i].upvoted = true;
                     }
                     else {
-                        docs[i].upvoted = false;
+                        docs_to_be_sent[i].upvoted = false;
                     }
                 }
-                for (var i = 0; courses.length > i; i++) {
-                    if (courses[i].upvotes.includes(user_id)) {
-                        courses[i].upvoted = true;
+                for (var i = 0; courses_to_be_sent.length > i; i++) {
+                    if (courses_to_be_sent[i].upvotes.includes(user_id)) {
+                        courses_to_be_sent[i].upvoted = true;
                     }
                     else {
-                        courses[i].upvoted = false;
+                        courses_to_be_sent[i].upvoted = false;
                     }
                 }
-                for (var i = 0; articles.length > i; i++) {
-                    if (articles[i].upvotes.includes(user_id)) {
-                        articles[i].upvoted = true;
+                for (var i = 0; articles_to_be_sent.length > i; i++) {
+                    if (articles_to_be_sent[i].upvotes.includes(user_id)) {
+                        articles_to_be_sent[i].upvoted = true;
                     }
                     else {
-                        articles[i].upvoted = false;
+                        articles_to_be_sent[i].upvoted = false;
                     }
                 }
-                for (var i = 0; projectIdeas.length > i; i++) {
-                    if (projectIdeas[i].upvotes.includes(user_id)) {
-                        projectIdeas[i].upvoted = true;
+                for (var i = 0; project_ideas_to_be_sent.length > i; i++) {
+                    if (project_ideas_to_be_sent[i].upvotes.includes(user_id)) {
+                        project_ideas_to_be_sent[i].upvoted = true;
                     }
                     else {
-                        projectIdeas[i].upvoted = false;
+                        project_ideas_to_be_sent[i].upvoted = false;
                     }
                 }
             }
@@ -138,10 +154,10 @@ class TopicService {
                     creator_name: topic.creator_name,
                     title: topic.title,
                     background_image: topic.background_image,
-                    docs: docs,
-                    courses: courses,
-                    articles: articles,
-                    projectIdeas: projectIdeas
+                    docs: docs_to_be_sent,
+                    courses: courses_to_be_sent,
+                    articles: articles_to_be_sent,
+                    projectIdeas: project_ideas_to_be_sent
                 }
             };
         }
