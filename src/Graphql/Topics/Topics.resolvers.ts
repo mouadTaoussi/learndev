@@ -86,7 +86,6 @@ class topicResolver implements topicResolver {
 		const topics = await _topicservice.getTopic(search_term ,user, limit, skip);
 		// Find the right documents
 		const content_in_topic : any = await _topicservice.searchContentInTopic(query_to_search, topic_id, user, limit, skip);
-		// Sort them by votes
 	}
 
 	@Query(returns => Topic, { description: "This query returns a topic" })

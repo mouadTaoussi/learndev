@@ -7,12 +7,13 @@ class TopicService {
         try {
             const topics = await Topics_models_1.TopicModel.find().skip(skip).limit(limit);
             const topics_needed = Topics_functions_1.filterByQuery(topics, query);
-            const topics_to_be_sent = Topics_functions_1.removeDuplicates(topics_needed);
+            const topics_need_to_be_unduplicated = Topics_functions_1.removeDuplicates(topics_needed);
+            const topics_to_be_sent = Topics_functions_1.sortByUpvotes(topics_need_to_be_unduplicated);
             if (topics_needed.length > 0) {
                 return {
                     message: null,
                     found: true,
-                    data: topics_needed
+                    data: topics_to_be_sent
                 };
             }
             else {

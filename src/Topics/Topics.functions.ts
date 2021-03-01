@@ -1,4 +1,6 @@
-export function filterByQuery( items_to_be_processed: any, query: any ) {
+import { Topic } from "./Topics.typedefinitions";
+
+export function filterByQuery( items_to_be_processed: any, query: any ) :unknown | any {
 	const items_needed = [];
 	// Filter topics by query
 	for ( var i = 0; items_to_be_processed.length > i; i++ ) {
@@ -13,22 +15,30 @@ export function filterByQuery( items_to_be_processed: any, query: any ) {
 	return items_needed;
 }
 
-export function removeDuplicates( items_to_be_processed: any ){
+export function removeDuplicates( items_to_be_processed: any ) :unknown | any {
 	// Remove Replucates (Repitition)
-	console.log("items_to_be_processed")
 	for (var i = 0; items_to_be_processed.length > i; i++) {
-		console.log(1)
+
 		const next = i + 1;
-		console.log(2)
-		console.log(items_to_be_processed[i]._id == items_to_be_processed[next]._id)
-		if ( items_to_be_processed[i]._id == items_to_be_processed[next]._id ) {
-		console.log(3)
-			items_to_be_processed.splice(next, 1);
+		if (items_to_be_processed[i+1] !== undefined) {
+			if ( items_to_be_processed[i]._id == items_to_be_processed[next]._id) {
+				items_to_be_processed.splice(next, 1);
+			}
+			else {
+				continue
+			}
 		}
-		console.log(4)
+		else {
+			continue
+		}
 	}
-	console.log(5)
-	// Return 
+	// // Return 
 	return items_to_be_processed;
 }
 
+
+export function sortByUpvotes ( items_to_be_processed: any ) :unknown | any {
+
+	return items_to_be_processed;
+
+}

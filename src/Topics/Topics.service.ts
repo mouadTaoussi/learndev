@@ -1,6 +1,6 @@
 import { TopicModel, DocsModel, CourseModel, ArticleModel, ProjectIdeaModel } from './Topics.models';
 import { TopicServiceInt, Topic, Docs, Course, Article, ProjectIdea } from './Topics.typedefinitions';
-import { filterByQuery, removeDuplicates } from "./Topics.functions";
+import { filterByQuery, sortByUpvotes, removeDuplicates } from "./Topics.functions";
 
 
 class TopicService implements TopicServiceInt {
@@ -12,14 +12,17 @@ class TopicService implements TopicServiceInt {
 			// Filter by query
 			const topics_needed     = filterByQuery(topics, query);
 
-			// Remove removeDuplicates // Error here !!!
-			const topics_to_be_sent = removeDuplicates(topics_needed);
+			// Remove duplicates
+			const topics_need_to_be_unduplicated = removeDuplicates(topics_needed);
 
+			// Sort them by upvotes
+			const topics_to_be_sent = sortByUpvotes(topics_need_to_be_unduplicated);
+			
 			if (topics_needed.length > 0) {
 				return {
 					message : null,
 					found : true,
-					data : topics_needed
+					data : topics_to_be_sent
 				}
 			}
 			else {
