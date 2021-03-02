@@ -159,7 +159,7 @@ class docsResolver implements docsResolver {
 
 	@Mutation(returns => Docs, { description: "This query adds new docs" })
 	@UseMiddleware(Authenticated)
-	public async addDocs(@Args() { topic_id, title, level, docs_link }: DocsArgs, @Ctx() context : any) : Promise<any> {
+	public async addDocs(@Args() { topic_id, title, level, link }: DocsArgs, @Ctx() context : any) : Promise<any> {
 
 		const new_doc : {
 			user_id	     : string,
@@ -167,7 +167,7 @@ class docsResolver implements docsResolver {
 			topic_id     : string,
 			title   : string,
 			level        : string,
-			docs_link    : string,
+			link    : string,
 			upvotes_count: number,
 			upvotes      : number[]
 		} = {
@@ -176,7 +176,7 @@ class docsResolver implements docsResolver {
 			topic_id     : topic_id,
 			title   : title,
 			level        : level,
-			docs_link    : docs_link,
+			link    : link,
 			upvotes_count: 0,
 			upvotes      : []
 		}
@@ -205,14 +205,14 @@ class courseResolver implements courseResolver {
 	
 	@Mutation(returns => Course, { description: "This query adds new course" })
 	@UseMiddleware(Authenticated)
-	public async addCourse(@Args() { topic_id, title, level, course_link }: CourseArgs, @Ctx() context : any) : Promise<any> {
+	public async addCourse(@Args() { topic_id, title, level, link }: CourseArgs, @Ctx() context : any) : Promise<any> {
 		const new_course : {
 			user_id	     : string,
 			creator_name : string,
 			topic_id     : string,
 			title : string,
 			level        : string,
-			course_link  : string,
+			link  : string,
 			upvotes_count: number,
 			upvotes      : number[]
 		} = {
@@ -221,7 +221,7 @@ class courseResolver implements courseResolver {
 			topic_id     : topic_id,
 			title : title,
 			level        : level,
-			course_link  : course_link,
+			link  : link,
 			upvotes_count: 0,
 			upvotes      : []
 		}
@@ -250,14 +250,14 @@ class articleResolver implements articleResolver {
 	
 	@Mutation(returns => Article, { description: "This query adds new course" })
 	@UseMiddleware(Authenticated)
-	public async addArticle(@Args() {topic_id,title,level,article_link}: ArticleArgs, @Ctx() context : any) : Promise<any> {
+	public async addArticle(@Args() {topic_id,title,level,link}: ArticleArgs, @Ctx() context : any) : Promise<any> {
 		const new_article : {
 			user_id	      : string,
 			creator_name  : string,
 			topic_id      : string,
 			title : string,
 			level         : string,
-			article_link  : string,
+			link  : string,
 			upvotes_count : number,
 			upvotes       : number[]
 		} = {
@@ -266,7 +266,7 @@ class articleResolver implements articleResolver {
 			topic_id      : topic_id,
 			title : title,
 			level         : level,
-			article_link  : article_link,
+			link  : link,
 			upvotes_count : 0,
 			upvotes       : []
 		}
@@ -338,9 +338,9 @@ export { topicResolver, topicInfoResolver, docsResolver, courseResolver, article
 // user_id : "vffff",
 // title : topic_id,
 // background_image : "string",
-// docs : [{user_id:"mouad",topic_id: topic_id, title : "get data",docs_link: "ff"}],
-// courses : [{user_id:"mouad",topic_id: topic_id, title : "get data",course_link: "ff"}],
-// articles : [{user_id:"mouad",topic_id: topic_id, title : "get data",article_link: "ff"}],
+// docs : [{user_id:"mouad",topic_id: topic_id, title : "get data",link: "ff"}],
+// courses : [{user_id:"mouad",topic_id: topic_id, title : "get data",link: "ff"}],
+// articles : [{user_id:"mouad",topic_id: topic_id, title : "get data",link: "ff"}],
 // ProjectIdeas : [{user_id:"mouad",topic_id: topic_id, title : "get data",description: "ff"}]
 // {
 // 	_id : "vffff",
@@ -348,8 +348,8 @@ export { topicResolver, topicInfoResolver, docsResolver, courseResolver, article
 // 	creator_name : "vffff",
 // 	title : topic_id,
 // 	background_image : "string",
-// 	docs : [{user_id:"mouad",topic_id: topic_id, title : "get data",docs_link: "ff"}],
-// 	courses : [{user_id:"mouad",topic_id: topic_id, title : "get data",course_link: "ff"}],
-// 	articles : [{user_id:"mouad",topic_id: topic_id, title : "get data",article_link: "ff"}],
+// 	docs : [{user_id:"mouad",topic_id: topic_id, title : "get data",link: "ff"}],
+// 	courses : [{user_id:"mouad",topic_id: topic_id, title : "get data",link: "ff"}],
+// 	articles : [{user_id:"mouad",topic_id: topic_id, title : "get data",link: "ff"}],
 // 	ProjectIdeas : [{user_id:"mouad",topic_id: topic_id, title : "get data",description: "ff"}]
 // }

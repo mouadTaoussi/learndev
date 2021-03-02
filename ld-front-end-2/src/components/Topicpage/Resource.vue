@@ -94,6 +94,7 @@
 		cursor: pointer;
 		display: grid;
 		grid-template-columns: 2fr 25fr;
+		grid-gap: 10px;
 		z-index: -1;
 
 	}

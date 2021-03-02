@@ -26,6 +26,9 @@ export default {
     costumHeader,
     landingpage,
     costumFooter
+  },
+  mounted (){
+    window.scrollTo(0, 0);
   }
 };
 </script>

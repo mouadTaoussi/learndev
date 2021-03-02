@@ -82,6 +82,7 @@
 	  },
 
 	  mounted (){
+	  	window.scrollTo(0, 0);
 	  	// Fetch some Topics
 	  	this.skip;
 	  	this.limit;

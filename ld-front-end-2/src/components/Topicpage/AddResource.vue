@@ -4,9 +4,14 @@
 		<div 
 			data-toggle="modal" 
 			data-target="#addResource"
-			class="shadow bg-primary btn text-white addResource"
-		>Add new Resource +</div>
-
+			class="shadow bg-info btn text-white addResource"
+		>✏</div>
+		<!-- <div 
+			data-toggle="modal" 
+			data-target="#addResource"
+			class="shadow bg-info btn text-white addResource1"
+		>add resource ✏</div>
+ -->
 		<div 
 			class="modal fade" 
 			id="addResource" 
@@ -28,8 +33,42 @@
 							<strong>Enter resource title</strong>
 						</p>
 						<input
+							id="title"
+							v-model="newresource.title"
 							class="form-control my-2" 
-							placeholder="Enter the topic title"
+							placeholder="Enter the title of the resource"
+						>
+						<p class="text-left text-dark">
+							<strong>Define the dificulty</strong>
+						</p>
+						<div class="input-group my-2 ">
+						  <div class="input-group-prepend">
+						    <label class="input-group-text" for="level">Options</label>
+						  </div>
+						  <select id="level" class="custom-select">
+						    <option value="1">Easy</option>
+						    <option value="2">Intermeditate</option>
+						    <option value="3">Hard</option>
+						  </select>
+						</div>
+
+						<p class="text-left text-dark">
+							<strong>Enter resource link</strong>
+						</p>
+						<input
+							id="link"
+							v-model="newresource.link"
+							class="form-control my-2" 
+							placeholder="Enter the link of the resource"
+						>
+						<p class="text-left text-dark">
+							<strong>Enter resource description</strong>
+						</p>
+						<input
+							id="description"
+							v-model="newresource.description"
+							class="form-control my-2" 
+							placeholder="Enter the description of the resource"
 						>
 					</div>
 
@@ -51,64 +90,23 @@ export default {
   data () {
     return {
     	newresource : {
-    		title : null,
+    		type     : null,
+    		topic_id : this.$route.params.id,
+    		title    : null,
     		level : null,
     		link : null,
+    		description : null
     	}
-//     		user_id	 : {
-// 		type : String, required: true
-// 	},
-// 	creator_name : {
-// 		type : String, required: true
-// 	},
-// 	topic_id : {
-// 		type : String, required: true
-// 	},
-// 	title : {
-// 		type : String, required: true
-// 	},
-// 	level : {
-// 		type : String, required: true
-// 	},
-// 	article_link  : {
-// 		type : String, required: true
-// 	},
-// 	upvotes_count : {
-// 		type : Number, default: 0, required: false
-// 	},
-// 	upvotes : [{type: String}],
-// 	// tags : [{type: String}]
-
-// });
-
-// const ProjectIdeaSchema = new Schema({
-// 	user_id : {
-// 		type : String, required: true
-// 	},
-// 	creator_name : {
-// 		type : String, required: true
-// 	},
-// 	topic_id: {
-// 		type : String, required: true
-// 	},
-// 	title : {
-// 		type : String, required: true
-// 	}, 
-// 	level : {
-// 		type : String, required: true
-// 	},
-// 	description : {
-// 		type : String, required: true
-// 	},
-// 	upvotes_count : {
-// 		type : Number, default: 0, required: false
-// 	},
-// 	upvotes : [{type: String}],
     }
   },
   methods : {
   	addResource : function(){
-  		alert('added');
+  		document.querySelector('#title').classList.add('is-valid');
+  		document.querySelector('#level').classList.add('is-valid');
+  		document.querySelector('#link').classList.add('is-valid');
+  		document.querySelector('#description').classList.add('is-valid');
+  		// document.querySelector('#title').classList.add('is-valid');
+  		console.log(this.newresource)
   	}
   }
 }
@@ -117,9 +115,25 @@ export default {
 <style lang="css" scoped>
 	.addResource {
 		position: absolute;
-		top: 100px;
-		right: 0;
+		bottom: 50px;
+		right: 50px;
 		position: fixed;
 		z-index: 999;
+		border-radius: 50%;
+		width: 50px;
+		height: 50px;
+		font-size: 25px;
+	}
+
+	.addResource1 {
+		position: absolute;
+		bottom: 50px;
+		right: 50px;
+		position: fixed;
+		z-index: 999;
+	}
+
+	#addNewTopicTitle {
+		font-family: var(--font--);
 	}
 </style>

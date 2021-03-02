@@ -1,15 +1,20 @@
 <template>
 	<section class="bg-light">
 		<!-- <costumHeader></costumHeader> -->
+		<!-- Alert Message -->
+		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
+		<!-- Alert Message -->
 		<div class="shadow login-components">
 			<h1 class="title text-center mb-4">Log in</h1>
 			<input 
+				id="email"
 				v-model="email"
 				class="form-control mb-2" 
 				type="email" 
 				placeholder="Enter your email">
 
 			<input 
+				id="password"
 				v-model="password"
 				class="form-control mb-4" 
 				type="password" 
@@ -32,6 +37,7 @@
 
 <script>
 	import costumHeader from ".././components/Header.vue";
+	import Alert from ".././components/Alert.vue";
 	const  apihost = require('../.././api.config.js');
 
 	export default {
@@ -39,25 +45,36 @@
 	  name: 'Login',
 
 	  components: {
-	  	costumHeader
+	  	costumHeader,
+	  	Alert
 	  },
 
 	  data () {
 	    return {
 	    	email    : null,
-	    	password : null
+	    	password : null,
+	    	alert : {
+	    		type : null,
+	    		message : null
+	    	}
 	    }
 	  },
 	  methods : {
 		login : function(){
 			// Validate
 			if (this.email == null || this.email.length == 0) {
-				alert("Fill the inputs")
+
+				this.showAlert('error','Fill all the inputs', null);
+
 			}else if(this.password == null || this.password.length == 0) {
-				alert("Fill the inputs")
+
+				this.showAlert('error','Fill all the inputs', null);
+
 			}
 			else if (this.email.length < 5 || this.email.includes('@') == false || this.email.includes('.') == false) {
-				alert('Enter a valid email')
+
+				this.showAlert('error','Enter a valid email', "#email");
+			
 			}
 			else {
 				this.$http({
@@ -73,9 +90,22 @@
 					console.log(err.message == "Request failed with status code 404");
 				})
 			}
+		},
+		showAlert : function(type, message, target){
+			// Set message to the alert
+			this.alert.message = message
+			this.alert.error = type
+	  		// Show alert
+			document.querySelector('.local-alert').style.opacity = "10";
+			// Determine where
+			document.querySelector(target).classList.add("is-invalid");
+
+			window.setTimeout(()=>{
+				document.querySelector('.local-alert').style.opacity = "0";				
+			},5000)
 		}
 	}
-	}
+}
 </script>
 
 <style lang="css" scoped>

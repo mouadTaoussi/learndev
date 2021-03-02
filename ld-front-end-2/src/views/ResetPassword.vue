@@ -1,9 +1,13 @@
 <template>
 	<section class="bg-light">
 		<!-- <costumHeader></costumHeader> -->
+		<!-- Alert -->
+		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
+		<!-- Alert -->
 		<div class="shadow resetpassword-components">
 			<h1 class="text-center mb-4">Reset Password</h1>
 			<input 
+				id="email"
 				v-model="email"
 				class="form-control mb-2" 
 				type="email" 
@@ -19,6 +23,7 @@
 
 <script>
 	import costumHeader from ".././components/Header.vue";
+	import Alert from ".././components/Alert.vue";
 	const  apihost = require('../.././api.config.js');
 
 	export default {
@@ -26,18 +31,24 @@
 	  name: 'resetpassword',
 
 	  components: {
-	  	costumHeader
+	  	costumHeader,
+	  	Alert,
+	  	
 	  },
 
 	  data () {
 	    return {
-	    	email: null
+	    	email: null,
+	    	alert : {
+	    		type : null,
+	    		message : null
+	    	}
 	    }
 	  },
 	  methods : {
 	  	resetPassword : function() {
 	  		if (this.email.length < 5 || this.email.includes('@') == false || this.email.includes('.') == false) {
-	  			alert("Fill the inputs")
+	  			this.showAlert('error','Enter a valid email!',"#email");
 	  		}
 	  		else {
 	  			this.$http({
@@ -53,7 +64,20 @@
 	  				console.log(err.message == "Request failed with status code 404");
 	  			})
 	  		}
-	  	}
+	  	},
+	  	showAlert : function(type, message, target){
+			// Set message to the alert
+			this.alert.message = message
+			this.alert.error = type
+	  		// Show alert
+			document.querySelector('.local-alert').style.opacity = "10";
+			// Determine where
+			document.querySelector(target).classList.add("is-invalid");
+
+			window.setTimeout(()=>{
+				document.querySelector('.local-alert').style.opacity = "0";				
+			},5000)
+		}
 	  }
 	}
 </script>

@@ -78,8 +78,8 @@ class Docs {
 	@Field( type => Number,{description: "upvotes_count field" } )
 	upvotes_count : number;
 
-	@Field( type => String,{description: "upvotes field" } )
-	upvotes : string;
+	// @Field( type => String,{description: "upvotes field" } )
+	// upvotes : string;
 
 	@Field( type => Boolean,{description: "upvoted field" } )
 	upvoted : boolean;
@@ -112,8 +112,8 @@ class Course {
 	@Field( type => Number,{description: "upvotes_count field" } )
 	upvotes_count : number;
 
-	@Field( type => String,{description: "upvotes field" } )
-	upvotes : string;
+	// @Field( type => String,{description: "upvotes field" } )
+	// upvotes : string;
 
 	@Field( type => Boolean,{description: "upvoted field" } )
 	upvoted : boolean;
@@ -145,8 +145,8 @@ class Article {
 	@Field( type => Number,{description: "upvotes_count field" } )
 	upvotes_count : number;
 
-	@Field( type => String,{description: "upvotes field" } )
-	upvotes : string;
+	// @Field( type => String,{description: "upvotes field" } )
+	// upvotes : string;
 
 	@Field( type => Boolean,{description: "upvoted field" } )
 	upvoted : boolean;
@@ -155,7 +155,7 @@ class Article {
 
 @ObjectType({ description : 'This one represents project idea' })
 class ProjectIdea {
-	@Field( type => String,{description: "id field" } )
+	@Field( type => String, { description: "id field" } )
 	_id : string;
 
 	@Field( type => String, { description: "user_id field" } )
@@ -167,22 +167,22 @@ class ProjectIdea {
 	@Field( type => String, { description: "topic_id field" } )
 	topic_id : string;
 
-	@Field( type => String,  { description : "This one represents project_idea_title" } )
+	@Field( type => String, { description : "This one represents project_idea_title" } )
 	title : string
 
-	@Field( type => String,{description: "level field" } )
+	@Field( type => String, { description: "level field" } )
 	level : string;
 
 	@Field( type => String , { description : "This one reqpresents description" } )
 	description : string;
 
-	@Field( type => Number,{description: "upvotes_count field" } )
+	@Field( type => Number, { description: "upvotes_count field" } )
 	upvotes_count : number;
 
-	@Field( type => String,{description: "upvotes field" } )
-	upvotes : string;
+	// @Field( type => String, { description: "upvotes field" } )
+	// upvotes : string;
 
-	@Field( type => Boolean,{description: "upvoted field" } )
+	@Field( type => Boolean, { description: "upvoted field" } )
 	upvoted : boolean;
 }
 

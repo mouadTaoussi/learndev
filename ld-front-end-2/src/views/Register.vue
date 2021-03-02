@@ -1,6 +1,9 @@
 <template>
 	<section class="bg-light">
 		<!-- <costumHeader></costumHeader> -->
+		<!-- Alert Message -->
+		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
+		<!-- Alert Message -->
 		<div class="background-area">
 			<h1 class="text-left">Logo Here</h1>
 			<!-- <img class="brand" width='160px' height='40px' src="https://app.revenual.com/images/logo.svg"> -->
@@ -33,20 +36,6 @@
 					Contribute to this library of resources!
 				</h5>
 				<p class="text-left background-area-text">As a developer, you are able to help others by sharing best or resources of learning to all!</p>
-
-				<!-- <h5 class="text-left">
-					<svg 
-						xmlns="http://www.w3.org/2000/svg" 
-						width="16" 
-						height="16" 
-						fill="currentColor" 
-						class="bi bi-check-circle-fill text-success" 
-						viewBox="0 0 16 16">
-		  				<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-					</svg>
-					Get access to +2000 programming resoures!
-				</h5>
-				<p class="text-left background-area-text">You can get access of unlimited resources that help you skip lot of steps !</p> -->
 			</aside>
 		</div>
 		<div class="shadow register-components">
@@ -54,14 +43,15 @@
 
 			<p class="text-left">Enter your fullname</p>
 			<input 
+				id="fullname"
 				v-model="fullname"
-				id="email" 
 				class="form-control mb-2" 
 				type="text" 
 				placeholder="Enter your Fullname">
 
 			<p class="text-left">Enter your user name</p>
 			<input 
+				id="user_name" 
 				v-model="user_name"
 				class="form-control mb-2" 
 				type="text" 
@@ -69,6 +59,7 @@
 
 			<p class="text-left">Enter your email</p>
 			<input 
+				id="email"
 				v-model="email"
 				class="form-control mb-2" 
 				type="email" 
@@ -76,6 +67,7 @@
 
 			<p class="text-left">Enter your password (The password should be contains lower and upper letters as well as symbols)</p>
 			<input 
+				id="password"
 				v-model="password"
 				class="form-control mb-2" 
 				type="password" 
@@ -83,6 +75,7 @@
 
 			<p class="text-left">Confirm your password</p>
 			<input 
+				id="password2"
 				v-model="password2"
 				class="form-control mb-4" 
 				type="password" 
@@ -101,6 +94,7 @@
 
 <script>
 	import costumHeader from ".././components/Header.vue";
+	import Alert from ".././components/Alert.vue";
 	const apihost = require('../.././api.config.js');
 	
 	export default {
@@ -108,7 +102,8 @@
 	  name: 'Register',
 
 	  components: {
-	  	costumHeader
+	  	costumHeader,
+	  	Alert
 	  },
 
 	  data () {
@@ -117,7 +112,11 @@
 	    	user_name: null,
 	    	email    : null,
 	    	password : null,
-	    	password2 : null
+	    	password2 : null,
+	    	alert : {
+	    		type : null,
+	    		message : null
+	    	}
 	    }
 	  },
 	  methods : {
@@ -128,22 +127,27 @@
 	  			|| this.email == null || this.email == '' || this.password == null || this.password == ''
 	  			) 
 	  		{
-	  			alert('Fill all the inputs');
+				this.showAlert('error','Fill all the inputs', null);
 	  		}
 	  		else if (this.fullname.length < 2) {
-	  			alert('dont use short names')
+	  			this.showAlert('error','Provide your real full name', "#fullname");
+
 	  		}
 	  		else if (this.user_name.length < 2) {
-	  			alert('dont use short names')
+	  			this.showAlert('error','Provide long user name', "#user_name");
+
 	  		}
 	  		else if (this.email.length < 5 || this.email.includes('@') == false || this.email.includes('.') == false) {
-	  			alert('Enter a valid email')
+	  			this.showAlert('error','Provide a valid email', "#email");
+
 	  		}
 	  		else if (this.password.length < 5) {
-	  			alert('Use long password');
+	  			this.showAlert('error','Provide a long password', "#password");
+
 	  		}
 	  		else if (this.password !== this.password2) {
-	  			alert('Confirm your password');
+	  			this.showAlert('error','Confirm your password', "#password2");
+
 	  		}
 	  		else {
 	  			this.$http({
@@ -159,6 +163,19 @@
 	  				console.log(err.message == "Request failed with status code 404");
 	  			})
 	  		}
+	  	},
+	  	showAlert : function(type, message, target){
+			// Set message to the alert
+			this.alert.message = message
+			this.alert.error = type
+	  		// Show alert
+			document.querySelector('.local-alert').style.opacity = "10";
+			// Determine where
+			document.querySelector(target).classList.add("is-invalid");
+
+			window.setTimeout(()=>{
+				document.querySelector('.local-alert').style.opacity = "0";				
+			},5000)
 	  	}
 	  }
 	}

@@ -45,6 +45,7 @@
 	  	costumFooter
 	  },
 	  mounted (){
+	  	window.scrollTo(0, 0);
 	  	// Fetch Topic within 
 	  	// - Docs (Check upvoted ones)
 	  	// - Courses(Check upvoted ones) 
