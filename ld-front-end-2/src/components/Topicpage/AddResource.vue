@@ -1,5 +1,8 @@
 <template>
 	<section>
+		<!-- Alert -->
+		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
+		<!-- Alert -->
 		<!-- <h1 class="text-dark">Hello World</h1> -->
 		<div 
 			data-toggle="modal" 
@@ -46,9 +49,24 @@
 						    <label class="input-group-text" for="level">Options</label>
 						  </div>
 						  <select id="level" class="custom-select">
-						    <option value="1">Easy</option>
-						    <option value="2">Intermeditate</option>
-						    <option value="3">Hard</option>
+						    <option value="easy">Easy</option>
+						    <option value="intermediate">Intermeditate</option>
+						    <option value="hard">Hard</option>
+						  </select>
+						</div>
+
+						<p class="text-left text-dark">
+							<strong>Type</strong>
+						</p>
+						<div class="input-group my-2">
+						  <div class="input-group-prepend">
+						    <label class="input-group-text" for="type">Options</label>
+						  </div>
+						  <select id="type" class="custom-select">
+						    <option value="docs">Documentation</option>
+						    <option value="course">Course</option>
+						    <option value="article">Article</option>
+						    <option value="projectIdea">Project Idea</option>
 						  </select>
 						</div>
 
@@ -83,33 +101,124 @@
 </template>
 
 <script>
-export default {
+	import Alert from ".././Alert.vue";
+	const  apihost = require('../../.././api.config.js');
+	import { print } from 'graphql';
+	import gql from "graphql-tag";
 
-  name: 'AddResource',
+	export default {
 
-  data () {
-    return {
-    	newresource : {
-    		type     : null,
-    		topic_id : this.$route.params.id,
-    		title    : null,
-    		level : null,
-    		link : null,
-    		description : null
-    	}
-    }
-  },
-  methods : {
-  	addResource : function(){
-  		document.querySelector('#title').classList.add('is-valid');
-  		document.querySelector('#level').classList.add('is-valid');
-  		document.querySelector('#link').classList.add('is-valid');
-  		document.querySelector('#description').classList.add('is-valid');
-  		// document.querySelector('#title').classList.add('is-valid');
-  		console.log(this.newresource)
-  	}
-  }
-}
+	  name: 'AddResource',
+	  components: {
+	  	Alert
+	  },
+
+	  data () {
+	    return {
+	    	newresource : {
+	    		type     : null,
+	    		topic_id : this.$route.params.id,
+	    		title    : null,
+	    		level : null,
+	    		link : null,
+	    		description : null
+	    	},
+	    	alert : {
+	    		type : null,
+	    		message : null
+	    	}
+	    }
+	  },
+	  methods : {
+	  	addResource : function(){
+	  		
+	  		this.newresource.type  = document.querySelector('#type').value;
+	  		this.newresource.level = document.querySelector('#level').value;
+
+	  		let ADD_RESOURCE = null;
+
+	  		// Validate inputs
+	  		if (this.newresource.title == null || this.newresource.link == null) {
+	  			console.log(1)
+		  		document.querySelector('#title').classList.add('is-invalid');
+		  		document.querySelector('#link').classList.add('is-invalid');
+		  		document.querySelector('#description').classList.add('is-invalid');
+
+		  // 		ADD_RESOURCE = `
+				// 	query { 
+				// 	  getTopic (topic_id: "mytopicid") { 
+				// 	    user_id 
+				// 	    background_image 
+				// 	    title
+				// 	    articles { 
+				// 	      user_id 
+				// 	      topic_id 
+				// 	      article_link 
+				// 	      title 
+				// 	    }
+				// 	  }
+				// 	}
+				// `
+
+			}if(this.newresource.title == "" || this.newresource.link == "") {
+				console.log(2)
+				document.querySelector('#title').classList.add('is-invalid');
+		  		document.querySelector('#link').classList.add('is-invalid');
+		  		document.querySelector('#description').classList.add('is-invalid');
+
+			}
+			if (this.newresource.type == "projectIdea" && this.newresource.description == null || this.newresource.description == "") {
+				console.log(3)
+				this.showAlert('error','Provide a short description about the idea',"#description");
+			}
+			if (this.newresource.title.length < 5 ) {
+				console.log(4)
+				this.showAlert('error','Short title are not allowed',"#title");
+			}
+			if (true){
+				// Validate the link
+			}
+	  		console.log(this.newresource)
+
+	  		// add
+   			this.$http({
+   				url : apihost.api_domain + "/graphql",
+   				method: "POST",
+   				headers: {
+					// 'Content-Type': 'application/json',
+			        // 'Accept'      : `application/json`
+				},
+   				data: {
+   					query: print(ADD_RESOURCE),
+					variables: {
+						// title: this.newTopic.title,
+						// background_image: this.newTopic.background_image,
+						// tags : this.newTopic.tags
+					},
+   				}
+   			})
+   			.then((res)=>{
+   				// add new topic component
+   			})
+   			.catch((err)=>{
+
+   			}) 
+	  	},
+	  	showAlert : function(type, message, target){
+			// Set message to the alert
+			this.alert.message = message
+			this.alert.error = type
+	  		// Show alert
+			document.querySelector('.local-alert').style.opacity = "10";
+			// Determine where
+			document.querySelector(target).classList.add("is-invalid");
+
+			window.setTimeout(()=>{
+				document.querySelector('.local-alert').style.opacity = "0";				
+			},5000)
+		}
+	  }
+	}
 </script>
 
 <style lang="css" scoped>

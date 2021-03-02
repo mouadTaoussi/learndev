@@ -43,7 +43,7 @@ window.setInterval(()=>{
 	
 	}else {
 		document.querySelector('.header-landingpage').style.backgroundColor = 'white';
-		document.querySelector('.header-landingpage').classList.add('border');
+		// document.querySelector('.header-landingpage').classList.add('border');
 
 		document.querySelectorAll('.list-item').forEach((item)=>{
 			item.style.color = "black";
