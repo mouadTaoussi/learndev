@@ -124,10 +124,10 @@
 	  data () {
 	    return {
 	    	newresource : {
-	    		type     : null,
+	    		type     : "docs",
 	    		topic_id : this.$route.params.id,
 	    		title    : null,
-	    		level : null,
+	    		level : "easy",
 	    		link : null,
 	    		description : null
 	    	},
@@ -172,40 +172,9 @@
 
 	  		// Validate inputs
 	  		if (this.newresource.title == null || this.newresource.link == null) {
-	  			console.log(1)
 		  		document.querySelector('#title').classList.add('is-invalid');
 		  		document.querySelector('#link').classList.add('is-invalid');
 		  		document.querySelector('#description').classList.add('is-invalid');
-
-				ADD_RESOURCE = gql`
-					mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
-						addDocs(topic_id: $topic_id, title: $title, level: $level, link: $link) {
-							title
-						}
-					}
-				`
-
-				ADD_RESOURCE = gql`
-					mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
-						addCourse(topic_id: $topic_id, title: $title, level: $level, link: $link) {
-							title
-						}
-					}
-				`
-				ADD_RESOURCE = gql`
-					mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
-						addArticle(topic_id: $topic_id, title: $title, level: $level, link: $link) {
-							title
-						}
-					}
-				`
-				ADD_RESOURCE = gql`
-					mutation($topic_id: String!, $title: String!, $level: String!, $description: String!) {
-						addProjectIdea(topic_id: $topic_id, title: $title, level: $level, description: $description) {
-							title
-						}
-					}
-				`
 			}if(this.newresource.title == "" || this.newresource.link == "") {
 				document.querySelector('#title').classList.add('is-invalid');
 		  		document.querySelector('#link').classList.add('is-invalid');
@@ -228,6 +197,43 @@
 			}
 	  		console.log(this.newresource)
 
+	  			// Check the resource type to determine the mutation
+		  		if ( this.newresource.type == "docs" ){
+					ADD_RESOURCE = gql`
+						mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
+							addDocs(topic_id: $topic_id, title: $title, level: $level, link: $link) {
+								title
+							}
+						}
+					`
+		  		}
+		  		else if ( this.newresource.type == "course" ){
+					ADD_RESOURCE = gql`
+						mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
+							addCourse(topic_id: $topic_id, title: $title, level: $level, link: $link) {
+								title
+							}
+						}
+					`
+		  		}
+		  		else if ( this.newresource.type == "article" ){
+					ADD_RESOURCE = gql`
+						mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
+							addArticle(topic_id: $topic_id, title: $title, level: $level, link: $link) {
+								title
+							}
+						}
+					`		  			
+		  		}else if ( this.newresource.type == "projectIdea" ) {
+					ADD_RESOURCE = gql`
+						mutation($topic_id: String!, $title: String!, $level: String!, $description: String!) {
+							addProjectIdea(topic_id: $topic_id, title: $title, level: $level, description: $description) {
+								title
+							}
+						}
+					`
+		  		}
+
 	  		// add
    			this.$http({
    				url : apihost.api_domain + "/graphql",
@@ -239,7 +245,7 @@
    				data: {
    					query: print(ADD_RESOURCE),
 					variables: {
-						topic_id: this.newresource.title,
+						topic_id: this.newresource.topic_id,
 						title: this.newresource.title,
 						level: this.newresource.level,
 						link: this.newresource.link,
