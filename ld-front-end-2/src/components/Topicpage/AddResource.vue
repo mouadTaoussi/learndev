@@ -48,7 +48,11 @@
 						  <div class="input-group-prepend">
 						    <label class="input-group-text" for="level">Options</label>
 						  </div>
-						  <select id="level" class="custom-select">
+						  <select
+							   v-on:change="selectdifficulty($event)" 
+							   id="level" 
+							   class="custom-select"
+						   >
 						    <option value="easy">Easy</option>
 						    <option value="intermediate">Intermeditate</option>
 						    <option value="hard">Hard</option>
@@ -62,7 +66,11 @@
 						  <div class="input-group-prepend">
 						    <label class="input-group-text" for="type">Options</label>
 						  </div>
-						  <select id="type" class="custom-select">
+						  <select
+							   v-on:change="selecttype($event)" 
+							   id="type" 
+							   class="custom-select" 
+							>
 						    <option value="docs">Documentation</option>
 						    <option value="course">Course</option>
 						    <option value="article">Article</option>
@@ -79,13 +87,13 @@
 							class="form-control my-2" 
 							placeholder="Enter the link of the resource"
 						>
-						<p class="text-left text-dark">
+						<p class="description hidden text-left text-dark">
 							<strong>Enter resource description</strong>
 						</p>
 						<input
 							id="description"
 							v-model="newresource.description"
-							class="form-control my-2" 
+							class="description hidden form-control my-2" 
 							placeholder="Enter the description of the resource"
 						>
 					</div>
@@ -129,12 +137,37 @@
 	    	}
 	    }
 	  },
+	  // watch : {
+	  // 	 "newresource.title": function(){
+	  // 		alert('Changer')
+	  // 	}
+	  // },
 	  methods : {
+	  	selecttype : function(event) {
+	  		//
+	  		this.newresource.type = event.target.value;
+	  		// Display or undisplay description field
+	  		if ( event.target.value == "projectIdea") {
+	  			document.querySelectorAll('.description').forEach((e)=>{
+	  				e.classList.add('not-hidden');
+	  			})
+	  			document.querySelectorAll('.description').forEach((e)=>{
+	  				e.classList.remove('hidden');
+	  			})
+	  		}
+	  		else {
+	  			document.querySelectorAll('.description').forEach((e)=>{
+	  				e.classList.add('hidden');
+	  			})
+	  			document.querySelectorAll('.description').forEach((e)=>{
+	  				e.classList.remove('not-hidden');
+	  			})
+	  		}
+	  	},
+	  	selectdifficulty : function(event){
+	  		this.newresource.level = event.target.value;
+	  	},
 	  	addResource : function(){
-	  		
-	  		this.newresource.type  = document.querySelector('#type').value;
-	  		this.newresource.level = document.querySelector('#level').value;
-
 	  		let ADD_RESOURCE = null;
 
 	  		// Validate inputs
@@ -144,39 +177,54 @@
 		  		document.querySelector('#link').classList.add('is-invalid');
 		  		document.querySelector('#description').classList.add('is-invalid');
 
-		  // 		ADD_RESOURCE = `
-				// 	query { 
-				// 	  getTopic (topic_id: "mytopicid") { 
-				// 	    user_id 
-				// 	    background_image 
-				// 	    title
-				// 	    articles { 
-				// 	      user_id 
-				// 	      topic_id 
-				// 	      article_link 
-				// 	      title 
-				// 	    }
-				// 	  }
-				// 	}
-				// `
+				ADD_RESOURCE = gql`
+					mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
+						addDocs(topic_id: $topic_id, title: $title, level: $level, link: $link) {
+							title
+						}
+					}
+				`
 
+				ADD_RESOURCE = gql`
+					mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
+						addCourse(topic_id: $topic_id, title: $title, level: $level, link: $link) {
+							title
+						}
+					}
+				`
+				ADD_RESOURCE = gql`
+					mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
+						addArticle(topic_id: $topic_id, title: $title, level: $level, link: $link) {
+							title
+						}
+					}
+				`
+				ADD_RESOURCE = gql`
+					mutation($topic_id: String!, $title: String!, $level: String!, $description: String!) {
+						addProjectIdea(topic_id: $topic_id, title: $title, level: $level, description: $description) {
+							title
+						}
+					}
+				`
 			}if(this.newresource.title == "" || this.newresource.link == "") {
-				console.log(2)
 				document.querySelector('#title').classList.add('is-invalid');
 		  		document.querySelector('#link').classList.add('is-invalid');
 		  		document.querySelector('#description').classList.add('is-invalid');
 
 			}
 			if (this.newresource.type == "projectIdea" && this.newresource.description == null || this.newresource.description == "") {
-				console.log(3)
 				this.showAlert('error','Provide a short description about the idea',"#description");
+				return;
 			}
 			if (this.newresource.title.length < 5 ) {
-				console.log(4)
 				this.showAlert('error','Short title are not allowed',"#title");
+				return;
 			}
-			if (true){
-				// Validate the link
+			if (!this.newresource.link.includes('http://')){
+				if (!this.newresource.link.includes('https://')) {
+					this.showAlert('error','this url is not valid',"#link");
+					return;	
+				}
 			}
 	  		console.log(this.newresource)
 
@@ -191,9 +239,11 @@
    				data: {
    					query: print(ADD_RESOURCE),
 					variables: {
-						// title: this.newTopic.title,
-						// background_image: this.newTopic.background_image,
-						// tags : this.newTopic.tags
+						topic_id: this.newresource.title,
+						title: this.newresource.title,
+						level: this.newresource.level,
+						link: this.newresource.link,
+						description: this.newresource.description,
 					},
    				}
    			})
@@ -241,7 +291,12 @@
 		position: fixed;
 		z-index: 999;
 	}
-
+	.hidden {
+		display: none;
+	}
+	.not-hidden {
+		display: block;
+	}
 	#addNewTopicTitle {
 		font-family: var(--font--);
 	}

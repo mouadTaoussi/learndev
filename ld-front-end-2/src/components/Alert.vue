@@ -20,13 +20,15 @@ export default {
 <style lang="css">
 	.local-alert {
 		position: absolute;
-		bottom : 20px;
-		right: 25px;
+		top : 100px;
+		right: 50px;
 		background-color: red!important;
 		width: 300px;
 		text-align: left;
 		color: white;
 		opacity: 0;
 		transition: all .2s ease-out;
+		position: fixed;
+		z-index: 999;
 	}
 </style>

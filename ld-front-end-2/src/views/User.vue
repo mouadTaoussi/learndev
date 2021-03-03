@@ -358,6 +358,9 @@
 		background-color: var(--bootstrap--primary--)!important;
 		color: white;
 	}
+	.tab-title {
+		font-family: var(--font--);
+	}
 	@media only screen and (max-width: 800px) {
 		.tabs-pages-topics {
 			display: grid;

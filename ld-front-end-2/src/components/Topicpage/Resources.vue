@@ -214,6 +214,9 @@
 	padding-top: 10px;
 	border-bottom: 1.5px solid var(--primary--);
 }
+.tab-title {
+	font-family: var(--font--);
+}
 .tabs-group {
 	display: grid;
 	grid-template-columns: 2fr 2fr 2fr 2fr;
