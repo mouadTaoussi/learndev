@@ -110,9 +110,13 @@ __decorate([
     __metadata("design:type", String)
 ], Docs.prototype, "link", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "upvotes field" }),
-    __metadata("design:type", String)
-], Docs.prototype, "upvotes", void 0);
+    type_graphql_1.Field(type => Number, { description: "upvotes_count field" }),
+    __metadata("design:type", Number)
+], Docs.prototype, "upvotes_count", void 0);
+__decorate([
+    type_graphql_1.Field(type => Boolean, { description: "upvoted field" }),
+    __metadata("design:type", Boolean)
+], Docs.prototype, "upvoted", void 0);
 Docs = __decorate([
     type_graphql_1.ObjectType({ description: 'This one represents docs' })
 ], Docs);
@@ -148,9 +152,13 @@ __decorate([
     __metadata("design:type", String)
 ], Course.prototype, "link", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "upvotes field" }),
-    __metadata("design:type", String)
-], Course.prototype, "upvotes", void 0);
+    type_graphql_1.Field(type => Number, { description: "upvotes_count field" }),
+    __metadata("design:type", Number)
+], Course.prototype, "upvotes_count", void 0);
+__decorate([
+    type_graphql_1.Field(type => Boolean, { description: "upvoted field" }),
+    __metadata("design:type", Boolean)
+], Course.prototype, "upvoted", void 0);
 Course = __decorate([
     type_graphql_1.ObjectType({ description: "This one represents course" })
 ], Course);
@@ -186,9 +194,13 @@ __decorate([
     __metadata("design:type", String)
 ], Article.prototype, "link", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "upvotes field" }),
-    __metadata("design:type", String)
-], Article.prototype, "upvotes", void 0);
+    type_graphql_1.Field(type => Number, { description: "upvotes_count field" }),
+    __metadata("design:type", Number)
+], Article.prototype, "upvotes_count", void 0);
+__decorate([
+    type_graphql_1.Field(type => Boolean, { description: "upvoted field" }),
+    __metadata("design:type", Boolean)
+], Article.prototype, "upvoted", void 0);
 Article = __decorate([
     type_graphql_1.ObjectType({ description: 'This one represents article' })
 ], Article);
@@ -223,6 +235,14 @@ __decorate([
     type_graphql_1.Field(type => String, { description: "This one reqpresents description" }),
     __metadata("design:type", String)
 ], ProjectIdea.prototype, "description", void 0);
+__decorate([
+    type_graphql_1.Field(type => Number, { description: "upvotes_count field" }),
+    __metadata("design:type", Number)
+], ProjectIdea.prototype, "upvotes_count", void 0);
+__decorate([
+    type_graphql_1.Field(type => Boolean, { description: "upvoted field" }),
+    __metadata("design:type", Boolean)
+], ProjectIdea.prototype, "upvoted", void 0);
 ProjectIdea = __decorate([
     type_graphql_1.ObjectType({ description: 'This one represents project idea' })
 ], ProjectIdea);

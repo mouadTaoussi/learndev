@@ -160,7 +160,16 @@
 	  				console.log(res);
 	  			})
 	  			.catch((err)=>{
-	  				console.log(err.message == "Request failed with status code 404");
+	  				// console.log(err.message == "Request failed with status code 404");
+	  				if ( err.message == "Request failed with status code 404" ) {
+
+						document.querySelector('.login-btns').innerHTML = "Log in";
+
+						document.querySelector('#email').classList.add("is-invalid");
+						document.querySelector('#password').classList.add("is-invalid");
+
+						this.showAlert('error', "Incorrect credentials!", null);
+					}
 	  			})
 	  		}
 	  	},

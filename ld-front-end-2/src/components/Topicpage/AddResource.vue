@@ -100,7 +100,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button v-on:click="addResource()" type="button" class="btn btn-primary">Add Resource</button>
+						<button v-on:click="addResource()" type="button" class="add-resource-btn btn btn-primary">Add Resource</button>
 					</div>
 				</div>
 			</div>
@@ -197,42 +197,44 @@
 			}
 	  		console.log(this.newresource)
 
-	  			// Check the resource type to determine the mutation
-		  		if ( this.newresource.type == "docs" ){
-					ADD_RESOURCE = gql`
-						mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
-							addDocs(topic_id: $topic_id, title: $title, level: $level, link: $link) {
-								title
-							}
+	  		document.querySelector('.add-resource-btn').innerHTML = "Please wait...";
+
+  			// Check the resource type to determine the mutation
+	  		if ( this.newresource.type == "docs" ){
+				ADD_RESOURCE = gql`
+					mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
+						addDocs(topic_id: $topic_id, title: $title, level: $level, link: $link) {
+							title
 						}
-					`
-		  		}
-		  		else if ( this.newresource.type == "course" ){
-					ADD_RESOURCE = gql`
-						mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
-							addCourse(topic_id: $topic_id, title: $title, level: $level, link: $link) {
-								title
-							}
+					}
+				`
+	  		}
+	  		else if ( this.newresource.type == "course" ){
+				ADD_RESOURCE = gql`
+					mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
+						addCourse(topic_id: $topic_id, title: $title, level: $level, link: $link) {
+							title
 						}
-					`
-		  		}
-		  		else if ( this.newresource.type == "article" ){
-					ADD_RESOURCE = gql`
-						mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
-							addArticle(topic_id: $topic_id, title: $title, level: $level, link: $link) {
-								title
-							}
+					}
+				`
+	  		}
+	  		else if ( this.newresource.type == "article" ){
+				ADD_RESOURCE = gql`
+					mutation($topic_id: String!, $title: String!, $level: String!, $link: String!) {
+						addArticle(topic_id: $topic_id, title: $title, level: $level, link: $link) {
+							title
 						}
-					`		  			
-		  		}else if ( this.newresource.type == "projectIdea" ) {
-					ADD_RESOURCE = gql`
-						mutation($topic_id: String!, $title: String!, $level: String!, $description: String!) {
-							addProjectIdea(topic_id: $topic_id, title: $title, level: $level, description: $description) {
-								title
-							}
+					}
+				`		  			
+	  		}else if ( this.newresource.type == "projectIdea" ) {
+				ADD_RESOURCE = gql`
+					mutation($topic_id: String!, $title: String!, $level: String!, $description: String!) {
+						addProjectIdea(topic_id: $topic_id, title: $title, level: $level, description: $description) {
+							title
 						}
-					`
-		  		}
+					}
+				`
+	  		}
 
 	  		// add
    			this.$http({
@@ -254,10 +256,16 @@
    				}
    			})
    			.then((res)=>{
-   				// add new topic component
+   				// add new resource 
+   				document.querySelector('.add-resource-btn').innerHTML = "Added!";
+   				document.querySelector('.add-resource-btn').classList.add('btn-success');
+   				document.querySelector('.add-resource-btn').classList.remove('btn-primary');
    			})
    			.catch((err)=>{
-
+   				// add new resource 
+   				document.querySelector('.add-resource-btn').innerHTML = "Try again!";
+   				document.querySelector('.add-resource-btn').classList.add('btn-danger');
+   				document.querySelector('.add-resource-btn').classList.remove('btn-primary');
    			}) 
 	  	},
 	  	showAlert : function(type, message, target){

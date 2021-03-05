@@ -143,14 +143,14 @@ topicResolver = __decorate([
 ], topicResolver);
 exports.topicResolver = topicResolver;
 let docsResolver = class docsResolver {
-    async addDocs({ topic_id, title, level, docs_link }, context) {
+    async addDocs({ topic_id, title, level, link }, context) {
         const new_doc = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
             topic_id: topic_id,
             title: title,
             level: level,
-            docs_link: docs_link,
+            link: link,
             upvotes_count: 0,
             upvotes: []
         };
@@ -182,14 +182,14 @@ docsResolver = __decorate([
 ], docsResolver);
 exports.docsResolver = docsResolver;
 let courseResolver = class courseResolver {
-    async addCourse({ topic_id, title, level, course_link }, context) {
+    async addCourse({ topic_id, title, level, link }, context) {
         const new_course = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
             topic_id: topic_id,
             title: title,
             level: level,
-            course_link: course_link,
+            link: link,
             upvotes_count: 0,
             upvotes: []
         };
@@ -221,14 +221,14 @@ courseResolver = __decorate([
 ], courseResolver);
 exports.courseResolver = courseResolver;
 let articleResolver = class articleResolver {
-    async addArticle({ topic_id, title, level, article_link }, context) {
+    async addArticle({ topic_id, title, level, link }, context) {
         const new_article = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
             topic_id: topic_id,
             title: title,
             level: level,
-            article_link: article_link,
+            link: link,
             upvotes_count: 0,
             upvotes: []
         };
