@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<!-- Custom Header -->
-		<costumHeader></costumHeader>
+		<costumHeader user_name="" user_id=""></costumHeader>
 		<!-- Custom Header -->
 		<section class="container">
 			<div class="search-and-filter-container">

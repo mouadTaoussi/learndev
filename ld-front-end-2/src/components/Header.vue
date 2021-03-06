@@ -9,8 +9,8 @@
 			<div class="list-child">
 				<router-link tag="a" class="list-item" to="/topics">Discover Topics</router-link>
 				<router-link tag="a" class="list-item" to="/about">About</router-link>
-				<router-link tag="a" class="list-item" v-bind:to="'/user/'+'vvvv'">MOUAD</router-link>
-				<router-link tag="button" class="shadow list-item btn btn-primary" to="/login">Contribute</router-link>
+				<router-link tag="a" class="list-item" v-bind:to="'/user/'+user_id">{{ user_name }}</router-link>
+				<router-link v-if="user_id" tag="button" class="shadow list-item btn btn-primary" to="/login">Contribute</router-link>
 			</div>
 		</header>
 	</section>

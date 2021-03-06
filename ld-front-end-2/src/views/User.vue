@@ -116,6 +116,7 @@
 								<strong>Enter topic title</strong>
 							</p>
 							<input
+								id="email"
 								v-model="newTopic.title" 
 								class="form-control my-2" 
 								placeholder="Enter the topic title">
@@ -124,6 +125,7 @@
 								<strong>Provide a link about an image</strong>
 							</p>
 							<input
+								id="password"
 								v-model="newTopic.background_image" 
 								class="form-control my-2" 
 								placeholder="Provide us an image link">
@@ -189,23 +191,25 @@
 	  },
 	   methods : {
 	   	addNewTopic : function(){
-	   		// Check the values
-	   		if (this.newTopic.title == null | this.newTopic.title == "") {
-	   			alert('Please fill the topic title');
-	   		}
-	   		else if (this.newTopic.background_image == null || this.newTopic.background_image == ""){
-	   			alert('Please fill the background image field');
-	   		}
+			// Check the values
+			if (this.newTopic.title == null | this.newTopic.title == "") {
+				document.querySelector('#email').classList.add('is-invalid');
+			}
+			else if (this.newTopic.background_image == null || this.newTopic.background_image == ""){
+	   			document.querySelector('#password').classList.add('is-invalid');
+			}
 	   		else {
 
 				const ADD_TOPIC = gql`
 					mutation($title: String!, $background_image: String!) {
 						addTopic(title: $title, background_image: $background_image) {
 							title
+							user_id
+							creator_name
+							background_image
 						}
 					}
 				`
-				console.log(this.newTopic.title)
 	   			// add
 	   			this.$http({
 	   				url : apihost.api_domain + "/graphql",
@@ -223,32 +227,34 @@
 						},
 	   				}
 	   			})
-	   			.then((res)=>{
-	   				// add new topic component
-	   				if (res.data.data.addTopic.title == this.newTopic.title) {
-	   					document.querySelector('.add-topic-btn').innerHTML = "Added!";
-	   					document.querySelector('.add-topic-btn').classList.add('btn-success');
-	   					document.querySelector('.add-topic-btn').classList.remove('btn-primary');
-	   				}
-	   				// if (res.data.)
-	   			})
-	   			.catch((err)=>{
-	   				this.showAlert('error','something went wrong!',null);
-	   			})
-	   		}
-	   	},
-	  	switchTab : function(to){
-	  		const topics         = document.querySelector('.tabs-pages-topics');
-	  		const upvoted      = document.querySelector('.tabs-pages-upvoted');
-	  		const userprofile     = document.querySelector('.tabs-pages-userprofile');
-	  		// const projectideas = document.querySelector('.tabs-pages-projectideas');
+				.then((res)=>{
+ 					// add new topic component
+					if ( res.data.data.addTopic.title == this.newTopic.title ) {
+						document.querySelector('.add-topic-btn').innerHTML = "Added!";
+						document.querySelector('.add-topic-btn').classList.add('btn-success');
+						document.querySelector('.add-topic-btn').classList.remove('btn-primary');
+					}
+					else {
+						this.showAlert('error', 'something went wrong!, Try again!', null);	
+					}
+				})
+				.catch((err)=>{
+					this.showAlert('error', 'something went wrong!, Try again!', null);
+				})
+			}
+		},
+		switchTab : function(to){
+			const topics         = document.querySelector('.tabs-pages-topics');
+			const upvoted      = document.querySelector('.tabs-pages-upvoted');
+			const userprofile     = document.querySelector('.tabs-pages-userprofile');
+			// const projectideas = document.querySelector('.tabs-pages-projectideas');
 
-	  		const topics_btn         =  document.querySelector('.tab-btn-topics');
-	  		const upvoted_btn      =  document.querySelector('.tab-btn-upvoted');
-	  		const user_profile_btn     =  document.querySelector('.tab-btn-userprofile');
-	  		// const projectideas_btn =  document.querySelector('.tab-btn-projectideas');
+			const topics_btn         =  document.querySelector('.tab-btn-topics');
+			const upvoted_btn      =  document.querySelector('.tab-btn-upvoted');
+			const user_profile_btn     =  document.querySelector('.tab-btn-userprofile');
+			// const projectideas_btn =  document.querySelector('.tab-btn-projectideas');
 
-	  		// Check the target
+			// Check the target
 	  		if(to == "topics") {
 	  			topics.classList.remove('tab-hidden');
 	  			upvoted.classList.add('tab-hidden');
