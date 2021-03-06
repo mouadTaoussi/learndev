@@ -86,18 +86,24 @@
 				})
 				.then((res)=>{
 					// Set a localstorage value to know whether the user already logged in or not
-					console.log(res);
+					this.$router.push({ path: '/topics' });
 				})
 				.catch((err)=>{
-					console.log(err.message == "Request failed with status code 404");
 					if ( err.message == "Request failed with status code 404" ) {
-
 						document.querySelector('.login-btns').innerHTML = "Log in";
 
 						document.querySelector('#email').classList.add("is-invalid");
 						document.querySelector('#password').classList.add("is-invalid");
 
-						this.showAlert('error', "Incorrect credentials!", null);
+						this.showAlert('error', "incorrect credentials", null);
+					}
+					else {
+						document.querySelector('.login-btns').innerHTML = "Log in";
+
+						document.querySelector('#email').classList.add("is-invalid");
+						document.querySelector('#password').classList.add("is-invalid");
+
+						this.showAlert('error', "something went wrong", null);
 					}
 				})
 			}

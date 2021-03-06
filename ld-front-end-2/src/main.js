@@ -50,3 +50,22 @@ window.setInterval(()=>{
 		})
 	}
 },10)
+
+
+
+
+// const F = `
+// 	query { 
+// 	  getTopic (topic_id: "mytopicid") { 
+// 	    user_id 
+// 	    background_image 
+// 	    title
+// 	    articles { 
+// 	      user_id 
+// 	      topic_id 
+// 	      article_link 
+// 	      title 
+// 	    }
+// 	  }
+// 	}
+// `

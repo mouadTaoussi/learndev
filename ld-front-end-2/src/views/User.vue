@@ -3,6 +3,9 @@
 		<!-- Custom Header -->
 		<costumHeader></costumHeader>
 		<!-- Custom Header -->
+		<!-- Alert -->
+		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
+		<!-- Alert -->
 		<section class="container">
 			<h1 class="text-left title">Your account</h1>
 			<!-- Tabs btns -->
@@ -113,7 +116,7 @@
 								<strong>Enter topic title</strong>
 							</p>
 							<input
-								v-model="newTopic.topic_title" 
+								v-model="newTopic.title" 
 								class="form-control my-2" 
 								placeholder="Enter the topic title">
 
@@ -128,7 +131,10 @@
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button v-on:click="addNewTopic()" type="button" class="btn btn-primary">Add Topic</button>
+							<button 
+								v-on:click="addNewTopic()" 
+								type="button" 
+								class="btn add-topic-btn btn-primary">Add Topic</button>
 						</div>
 					</div>
 				</div>
@@ -145,7 +151,9 @@
 	import costumHeader from ".././components/Header.vue";
 	import costumFooter from ".././components/Footer.vue";
 	import Topic from ".././components/Userpage/Topic.vue";
+	import AddTopic from ".././components/Userpage/AddTopic.vue";
 	import Resource from ".././components/Topicpage/Resource.vue";
+	import Alert from ".././components/Alert.vue";
 	const  apihost = require('../.././api.config.js');
 	import { print } from 'graphql';
 	import gql from "graphql-tag";
@@ -157,16 +165,22 @@
 	  components: {
 	  	costumHeader,
 	  	Topic,
+	  	AddTopic,
 	  	Resource,
+	  	Alert,
 	  	costumFooter
 	  },
 	  
 	  data () {
 	    return {
 	    	newTopic : {
-	    		topic_title : null,
+	    		title : null,
 	    		background_image : null,
 	    		tags : []
+	    	},
+	    	alert : {
+	    		type : null,
+	    		message : null
 	    	}
 	    }
 	  },
@@ -176,7 +190,7 @@
 	   methods : {
 	   	addNewTopic : function(){
 	   		// Check the values
-	   		if (this.newTopic.topic_title == null | this.newTopic.topic_title == "") {
+	   		if (this.newTopic.title == null | this.newTopic.title == "") {
 	   			alert('Please fill the topic title');
 	   		}
 	   		else if (this.newTopic.background_image == null || this.newTopic.background_image == ""){
@@ -185,39 +199,13 @@
 	   		else {
 
 				const ADD_TOPIC = gql`
-					mutation($topic_title: String!, $background_image: String!) {
+					mutation($title: String!, $background_image: String!) {
 						addTopic(title: $title, background_image: $background_image) {
 							title
 						}
 					}
 				`
-				const F = `
-					query { 
-					  getTopic (topic_id: "mytopicid") { 
-					    user_id 
-					    background_image 
-					    title
-					    articles { 
-					      user_id 
-					      topic_id 
-					      article_link 
-					      title 
-					    }
-					  }
-					}
-				`
-				// console.log(print(ADD_TOPIC))
-				// this.$http({
-				// 	url : apihost.api_domain + "/auth/login",
-				// 	method : 'GET',
-				// })
-				// .then((res)=>{
-				// 	console.log(res)
-				// })
-				// .catch((err)=>{
-				// 	console.log(err)
-				// })
-				
+				console.log(this.newTopic.title)
 	   			// add
 	   			this.$http({
 	   				url : apihost.api_domain + "/graphql",
@@ -237,9 +225,15 @@
 	   			})
 	   			.then((res)=>{
 	   				// add new topic component
+	   				if (res.data.data.addTopic.title == this.newTopic.title) {
+	   					document.querySelector('.add-topic-btn').innerHTML = "Added!";
+	   					document.querySelector('.add-topic-btn').classList.add('btn-success');
+	   					document.querySelector('.add-topic-btn').classList.remove('btn-primary');
+	   				}
+	   				// if (res.data.)
 	   			})
 	   			.catch((err)=>{
-
+	   				this.showAlert('error','something went wrong!',null);
 	   			})
 	   		}
 	   	},
@@ -305,6 +299,19 @@
 	  			// projectideas_btn.classList.add('tab-btn-active');
 
 	  		}
+	  	},
+	  	showAlert : function(type, message, target){
+			// Set message to the alert
+			this.alert.message = message
+			this.alert.error = type
+	  		// Show alert
+			document.querySelector('.local-alert').style.opacity = "10";
+			// Determine where
+			document.querySelector(target).classList.add("is-invalid");
+
+			window.setTimeout(()=>{
+				document.querySelector('.local-alert').style.opacity = "0";				
+			},5000)
 	  	}
 	  }
 	}

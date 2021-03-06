@@ -53,23 +53,23 @@ class Authentication implements AuthenticationInt {
 
 		// @TODO check if all of the elements addedd
 		if (body.email == null || body.email == undefined || body.email == "") {
-			res.status(404).send({ registered : false, message: "Fill all of the inputs!" }); res.end(); return;
+			res.status(200).send({ registered : false, message: "Fill all of the inputs!" }); res.end(); return;
 		}
 		else if (body.password == null || body.password == undefined || body.password == "") {
-			res.status(404).send({ registered : false, message: "Fill all of the inputs!" }); res.end(); return;
+			res.status(200).send({ registered : false, message: "Fill all of the inputs!" }); res.end(); return;
 		}
 		else if(body.fullname == null || body.fullname == undefined || body.fullname == ""){
-			res.status(404).send({ registered : false, message: "Fill all of the inputs!" }); res.end(); return;
+			res.status(200).send({ registered : false, message: "Fill all of the inputs!" }); res.end(); return;
 		}
 		else if(body.user_name == null || body.user_name == undefined || body.user_name == ""){
-			res.status(404).send({ registered : false, message: "Fill all of the inputs!" }); res.end(); return;
+			res.status(200).send({ registered : false, message: "Fill all of the inputs!" }); res.end(); return;
 		}
 
 		// Validate user inputs
 		const isAlreadyExists = await _user.findUser({email: body.email});
 
 		if (isAlreadyExists.found == true ) {
-			res.status(404).send({ registered : false, message: "email exists!" }); res.end(); return;
+			res.status(200).send({ registered : false, message: "email exists!" }); res.end(); return;
 		}
 
 		// Hash password

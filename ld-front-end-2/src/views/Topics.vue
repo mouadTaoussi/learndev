@@ -19,6 +19,10 @@
 				title="Typescript" 
 				topic_id="fbgbggbf"></Topic>
 			<Topic 
+				img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaper.wiki%2Fwp-content%2Fuploads%2F2017%2F04%2Fwallpaper.wiki-Download-Free-Data-Background-PIC-WPB0010542.jpg&f=1&nofb=1" 
+				title="Cyber security" 
+				topic_id="fbgbggbf"></Topic>
+			<Topic 
 				img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.pNzwj00Fd1YGH8DpD4bp-AHaEL%26pid%3DApi&f=1" 
 				title="Ruby" 
 				topic_id="fbgbggbf"></Topic>
