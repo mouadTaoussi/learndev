@@ -205,6 +205,41 @@ class TopicService {
         }
     }
     async getUserTopics(user_id) {
+        try {
+            const topics = await Topics_models_1.TopicModel.find({ user_id: user_id });
+            return {
+                message: null,
+                found: true,
+                data: topics
+            };
+        }
+        catch (err) {
+            return {
+                message: 'Something went wrong!',
+                found: false,
+                data: null
+            };
+        }
+    }
+    async getUpvotedContent(user_id) {
+        try {
+            const docs = await Topics_models_1.DocsModel.find({ upvotes: user_id });
+            const articles = await Topics_models_1.ArticleModel.find({ upvotes: user_id });
+            const course = await Topics_models_1.CourseModel.find({ upvotes: user_id });
+            const projectIdeas = Topics_models_1.ProjectIdeaModel.find({ upvotes: user_id });
+            return {
+                message: 'Something went wrong!',
+                found: false,
+                data: null
+            };
+        }
+        catch (err) {
+        }
+        return {
+            message: 'Something went wrong!',
+            found: false,
+            data: null
+        };
     }
     async deleteTopic(item_id) {
         try {

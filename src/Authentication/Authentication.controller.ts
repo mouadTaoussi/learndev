@@ -20,10 +20,11 @@ class Authentication implements AuthenticationInt {
 			const user_id = user.user.id; 
 			// Get user
 			const current_user = await _user.findUser({id:user_id});
-			console.log(current_user)
 			// Get his topics
-			// const topics = await _topic;
+			const topics = await _topic.getUserTopics(user_id);
 			// Get his upvoted content
+			const upvotedcontent = await _topic.getUpvotedContent(user_id);
+			
 		}
 
 		else { res.status(404).send({message:"Not Authenticated"}) } 
@@ -62,7 +63,7 @@ class Authentication implements AuthenticationInt {
 				id:userExists.user._id, name: userExists.user.user_name, email: userExists.user.email, at_provider_id: null 
 			}
 			
-			res.status(userExists.status).send({ loggedin : true, message : "Logged in!" });
+			res.status(userExists.status).send({ loggedin : true, message : "Logged in!", user: userExists});
 		}
 	}
 	public async register(req: Request, res: Response) :Promise<void>{

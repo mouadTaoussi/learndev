@@ -286,7 +286,45 @@ class TopicService implements TopicServiceInt {
 
 	}
 	public async getUserTopics (user_id: string) :Promise<{message:string|null,found:boolean,data:any}> {
-		
+		try {
+			const topics = await TopicModel.find({user_id : user_id});
+			return {
+				message: null,
+				found  : true,
+				data   : topics
+			}
+		}catch(err){
+			return {
+				message: 'Something went wrong!',
+				found  : false,
+				data   : null
+			}
+		}
+	}
+	public async getUpvotedContent(user_id: string) :Promise<{message: string|null,found:boolean,data:any}> {
+		try {
+			// Get docs
+			const docs = await DocsModel.find({upvotes : user_id});
+			// Get articels
+			const articles = await ArticleModel.find({upvotes : user_id});
+			// Get courses
+			const course = await CourseModel.find({upvotes : user_id});
+			// Get projectIdeas
+			const projectIdeas = ProjectIdeaModel.find({upvotes : user_id});
+
+			return {
+				message: 'Something went wrong!',
+				found  : false,
+				data   : null
+			}
+		}catch(err){
+
+		}
+		return {
+			message: 'Something went wrong!',
+			found  : false,
+			data   : null
+		}
 	}
 	
 	public async deleteTopic (item_id: string) :Promise<{message: string|null,deleted:boolean,data:any}>{

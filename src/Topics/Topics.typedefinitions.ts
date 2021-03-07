@@ -5,6 +5,7 @@ interface TopicServiceInt {
 	getTopic(item_id: string,user_session:any,limit: number,skip:number) :Promise<{message: string|null,found  :boolean,data:any}>
 	getTopics(limit:number,skip:number)      :Promise<{message: string|null,found  :boolean,data:any}>
 	getUserTopics (user_id: string) :Promise<{message:string|null,found:boolean,data:any}>
+	getUpvotedContent(user_id: string) :Promise<{message: string|null,found:boolean,data:any}>
 
 	addTopic(topic: Topic)                   :Promise<{message: string|null,added  :boolean,data:any}>
 	deleteTopic(item_id: string)             :Promise<{message: string|null,deleted:boolean,data:any}>

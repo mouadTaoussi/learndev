@@ -86,6 +86,7 @@
 				})
 				.then((res)=>{
 					// Set a localstorage value to know whether the user already logged in or not
+					localStorage.setItem('user_name',res.data.user.user.user_name)
 					this.$router.push({ path: '/topics' });
 				})
 				.catch((err)=>{
