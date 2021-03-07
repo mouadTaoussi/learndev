@@ -204,6 +204,8 @@ class TopicService {
             };
         }
     }
+    async getUserTopics(user_id) {
+    }
     async deleteTopic(item_id) {
         try {
             const deletetopic = await Topics_models_1.TopicModel.findById(item_id).remove();

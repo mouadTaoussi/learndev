@@ -22,6 +22,7 @@ const auth = new Authentication();
 /////////////////////////////////////
 
 router.get ('/login',    (req: Request,res: Response)=>{ res.json(req.session);console.log(req.session) });
+router.get ('/getuser',  auth.getUser);
 router.post('/login',    auth.login);
 router.post('/register', auth.register);
 

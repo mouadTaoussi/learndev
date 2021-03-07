@@ -9,21 +9,22 @@ interface UserService {
 }
 
 interface AuthenticationInt {
-	 login   (req: Request, res: Response) :Promise<void>
-	 register(req: Request, res: Response) :Promise<void>
-	 resetPassword(req: Request, res: Response) :Promise<void>
-	 updateProfile(req: Request, res: Response) :Promise<void>
-	 deleteAccount(req: Request, res: Response) :Promise<void>
+	getUser (req: Request, res: Response) :Promise<void>
+	login   (req: Request, res: Response) :Promise<void>
+	register(req: Request, res: Response) :Promise<void>
+	resetPassword(req: Request, res: Response) :Promise<void>
+	updateProfile(req: Request, res: Response) :Promise<void>
+	deleteAccount(req: Request, res: Response) :Promise<void>
 }
 
 interface UserBody {
-	at_provider_id? : string
-	provider?       : string
-	fullname       : string,
-	user_name      : string,
-	email          : string,
-	avatar?         : string
-	password?       : string
+	at_provider_id? : string,
+	provider?       : string,
+	fullname        : string,
+	user_name       : string,
+	email           : string,
+	avatar?         : string,
+	password?       : string,
 }
 
 // interface UserUpdate {

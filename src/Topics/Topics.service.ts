@@ -11,7 +11,7 @@ class TopicService implements TopicServiceInt {
 
 			// Filter by query
 			const topics_needed     = filterByQuery(topics, query);
-
+			
 			// Remove duplicates
 			const topics_need_to_be_unduplicated = removeDuplicates(topics_needed);
 
@@ -285,6 +285,10 @@ class TopicService implements TopicServiceInt {
 		}
 
 	}
+	public async getUserTopics (user_id: string) :Promise<{message:string|null,found:boolean,data:any}> {
+		
+	}
+	
 	public async deleteTopic (item_id: string) :Promise<{message: string|null,deleted:boolean,data:any}>{
 		try {
 			const deletetopic = await TopicModel.findById(item_id).remove();

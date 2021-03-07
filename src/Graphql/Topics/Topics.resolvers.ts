@@ -37,7 +37,7 @@ class topicInfoResolver implements topicInfoResolver {
 
 		// Find the right documents
 		const topics = await _topicservice.searchTopic(query_to_search, limit, skip);
-		// console.log(topics.data)
+		console.log(topics.data)
 		return topics.data;
 	}
 

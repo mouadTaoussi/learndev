@@ -9,6 +9,7 @@ const Authentication_controller_1 = __importDefault(require("./Authentication.co
 const router = express_1.Router();
 const auth = new Authentication_controller_1.default();
 router.get('/login', (req, res) => { res.json(req.session); console.log(req.session); });
+router.get('/getuser', auth.getUser);
 router.post('/login', auth.login);
 router.post('/register', auth.register);
 router.get('/Oauth/login', passport_1.default.authenticate('github', { scope: ["profile", "email"] }));

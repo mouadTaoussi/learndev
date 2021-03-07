@@ -58,3 +58,28 @@ query {
     }
   }
 }
+
+// Graphql Queries to be used
+
+query {
+  # searchTopic(limit: 20, skip:0, search_term: "Ruby"){
+  #   _id,
+  #   background_image,
+  #   title
+  # }
+  # getTopics(limit: 1, skip:2){
+  #   _id,
+  #   background_image,
+  #   title
+  # }
+  # getTopic (limit:10,skip:0,topic_id: "603567695d97a836cce44725") {
+  #   _id,
+  #   title,
+  #   docs {
+  #     _id,
+  #     title,
+  #     link
+  #   }
+  #   articles {_id,title,link}
+  # }
+}

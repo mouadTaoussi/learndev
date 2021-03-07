@@ -188,6 +188,17 @@
 	  },
 	  mounted (){
 	  	window.scrollTo(0, 0);
+
+	  	this.$http({
+	  		method : "GET",
+	  		url    : apihost.api_domain + '/auth/getuser',
+	  	})
+	  	.then((req)=>{
+	  		console.log(res)
+	  	})
+	  	.catch((err)=>{
+	  		console.log(err)
+	  	})
 	  },
 	   methods : {
 	   	addNewTopic : function(){

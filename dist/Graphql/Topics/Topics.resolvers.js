@@ -34,6 +34,7 @@ let topicInfoResolver = class topicInfoResolver {
             }
         }
         const topics = await _topicservice.searchTopic(query_to_search, limit, skip);
+        console.log(topics.data);
         return topics.data;
     }
     async getTopics({ limit, skip }) {

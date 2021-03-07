@@ -1,4 +1,5 @@
 import __UserService__ from "./Authentication.service";
+import __TopicService__ from ".././Topics/Topics.service";
 import { UserService, AuthenticationInt, UserBody } from './Authentication.typedefinitions';
 import { Request, Response } from "express";
 import { genSalt, hash, compare } from "bcrypt";
@@ -7,8 +8,26 @@ import main_config from ".././main.config";
 import { v4 } from "uuid";
 
 const _user = new __UserService__();
+const _topic = new __TopicService__();
 
 class Authentication implements AuthenticationInt {
+	public async getUser(req:Request,res:Response) :Promise<void>{
+		// const user = req.session.passport;
+		const auth = !!req.session.passport;
+
+		if (auth){ 
+			const user = req.session.passport
+			const user_id = user.user.id; 
+			// Get user
+			const current_user = await _user.findUser({id:user_id});
+			console.log(current_user)
+			// Get his topics
+			// const topics = await _topic;
+			// Get his upvoted content
+		}
+
+		else { res.status(404).send({message:"Not Authenticated"}) } 
+	}
 	public async login(req: Request, res: Response) :Promise<void>{
 		// Check if the user is alreay logged in
 		// Get body data
