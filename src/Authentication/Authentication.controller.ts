@@ -15,7 +15,7 @@ class Authentication implements AuthenticationInt {
 		// const user = req.session.passport;
 		const auth = !!req.session.passport;
 
-		if (auth){ 
+		if (auth){  
 			const user = req.session.passport
 			const user_id = user.user.id; 
 			// Get user
@@ -23,8 +23,13 @@ class Authentication implements AuthenticationInt {
 			// Get his topics
 			const topics = await _topic.getUserTopics(user_id);
 			// Get his upvoted content
-			const upvotedcontent = await _topic.getUpvotedContent(user_id);
-			
+			const upvoted_content = await _topic.getUpvotedContent(user_id);
+
+			res.status(200).send({
+				user : current_user.user,
+				topics : topics.data,
+				upvoted_content : upvoted_content.data
+			})
 		}
 
 		else { res.status(404).send({message:"Not Authenticated"}) } 

@@ -34,21 +34,13 @@
 
 			<!-- Tabs pages -->
 			<section class='tabs-pages-topics'>
-				<Topic 
-					topic_id="fbdbdb" 
-					img="https://images.wallpaperscraft.com/image/code_text_programming_146694_1920x1080.jpg" 
-					title="Development for beginners"
-				></Topic>
-				<Topic 
-					topic_id="fbdbdb" 
-					img="https://images.wallpaperscraft.com/image/code_text_programming_146694_1920x1080.jpg" 
-					title="Development for beginners"
-				></Topic>
-				<Topic 
-					topic_id="fbdbdb" 
-					img="https://images.wallpaperscraft.com/image/code_text_programming_146694_1920x1080.jpg" 
-					title="Development for beginners"
-				></Topic>
+				<div v-for="topic in topics">
+					<Topic 
+						v-bind:topic_id="topic._id" 
+						v-bind:img="topic.background_image" 
+						v-bind:title="topic.title"
+					></Topic>
+				</div>
 				<div 
 					data-toggle="modal" 
 					data-target="#addNewTopic"
@@ -57,37 +49,29 @@
 			</section>
 
 			<section class='tabs-pages-upvoted tab-hidden'>
-				<Resource 
-				id="sivbfuvbfdhbj"
-				title="Typescript course" 
-				upvotes="221" 
-				upvoted="true"
-				creator_name="mouadTaoussi" 
-				level="hard" 
-				user_id="sdidvhbidfhv"
-			></Resource>
-			<Resource 
-				id="sivvvvbfuvbfdhbj"
-				title="Typescript course" 
-				upvotes="221" 
-				upvoted="true"
-				creator_name="mouadTaoussi" 
-				level="hard" 
-				user_id="sdidvhbidfhv"
-			></Resource>
-			<Resource 
-				id="sivbvbfdhbj"
-				title="Typescript course" 
-				upvotes="221" 
-				upvoted="false"
-				creator_name="mouadTaoussi" 
-				level="hard" 
-				user_id="sdidvhbidfhv"
-			></Resource>
-
+				<div v-for="upvoted in upvoted_content">
+					<Resource 
+						v-bind:id="upvoted._id"
+						v-bind:title="upvoted.title" 
+						v-bind:upvotes="upvoted.upvotes_count" 
+						v-bind:upvoted="upvoted.upvoted"
+						v-bind:creator_name="upvoted.creator_name" 
+						v-bind:level="upvoted.level" 
+						v-bind:user_id="upvoted.user_id"
+					></Resource>
+				</div>
 			</section>
 
-			<section class='tabs-pages-userprofile tab-hidden'>	
+			<section class='tabs-pages-userprofile py-4 tab-hidden'>	
+				<!-- <img v-bind:src='current_user.avatar' width="200" height="200" class=""><br> -->
+				<p class="text-left text-dark">Full name</p>
+				<p class="text-left text-dark"><strong class="user-credentials">{{ current_user.fullname }}</strong></p>
+				<p class="text-left text-dark">User name</p>
+				<p class="text-left text-dark"><strong class="user-credentials">{{ current_user.user_name }}</strong></p>
+				<p class="text-left text-dark">Email</p>
+				<p class="text-left text-dark"><strong class="user-credentials">{{ current_user.email }}</strong></p>
+				<p class="text-left text-dark">Full name</p>
+				<p class="text-left text-dark"><strong class="user-credentials">{{ current_user.email }}</strong></p>
 			</section>
 
 			<section class='tabs-pages-projectideas tab-hidden'>	
@@ -175,6 +159,9 @@
 	  
 	  data () {
 	    return {
+	    	current_user : null,
+	    	topics : null,
+	    	upvoted_content : null,
 	    	newTopic : {
 	    		title : null,
 	    		background_image : null,
@@ -193,8 +180,11 @@
 	  		method : "GET",
 	  		url    : apihost.api_domain + '/auth/getuser',
 	  	})
-	  	.then((req)=>{
+	  	.then((res)=>{
 	  		console.log(res)
+	  		this.current_user = res.data.user;
+	  		this.topics = res.data.topics;
+	  		this.upvoted_content = res.data.upvoted_content;
 	  	})
 	  	.catch((err)=>{
 	  		console.log(err)
@@ -347,6 +337,9 @@
 		font-family: var(--font--);
 		margin-top: 20px;
 		margin-bottom: 20px;
+	}
+	#addNewTopicTitle, .user-credentials {
+		font-family: var(--font--);
 	}
 	.container {
 		padding-top: 100px;

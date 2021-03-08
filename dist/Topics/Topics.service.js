@@ -226,20 +226,29 @@ class TopicService {
             const docs = await Topics_models_1.DocsModel.find({ upvotes: user_id });
             const articles = await Topics_models_1.ArticleModel.find({ upvotes: user_id });
             const course = await Topics_models_1.CourseModel.find({ upvotes: user_id });
-            const projectIdeas = Topics_models_1.ProjectIdeaModel.find({ upvotes: user_id });
+            let output = await Topics_models_1.ProjectIdeaModel.find({ upvotes: user_id });
+            for (var i = 0; i < docs.length; i++) {
+                output.push(docs[i]);
+            }
+            for (var i = 0; i < articles.length; i++) {
+                output.push(articles[i]);
+            }
+            for (var i = 0; i < course.length; i++) {
+                output.push(course[i]);
+            }
             return {
-                message: 'Something went wrong!',
+                message: null,
+                found: true,
+                data: output
+            };
+        }
+        catch (err) {
+            return {
+                message: "Something went wrong!",
                 found: false,
                 data: null
             };
         }
-        catch (err) {
-        }
-        return {
-            message: 'Something went wrong!',
-            found: false,
-            data: null
-        };
     }
     async deleteTopic(item_id) {
         try {
