@@ -1,11 +1,12 @@
 <template>
 	<section class="search-area">
 		<input 
-			v-model="query" 
+			v-model="query"
+			v-on:input="search()" 
 			type="text" 
 			class="form-control search-input" 
 			placeholder="Search about a Topic! eg: Javascript, Blockchain...">
-		<button v-on:click="search()" class="search-btn btn btn-primary shadow">Search</button>
+		<!-- <button v-on:click="search()" class="search-btn btn btn-primary shadow">Search</button> -->
 	</section>
 </template>
 
@@ -33,15 +34,15 @@ export default {
 
 <style lang="css" scoped>
 	.search-area {
-		display: grid;
-		grid-template-columns: 78% 20%;
-		grid-gap: 1%;	
+		/*display: grid;*/
+		/*grid-template-columns: 78% 20%;*/
+		/*grid-gap: 1%;	*/
 	}
 	@media only screen and (max-width: 800px) {
 		.search-area {
-			display: grid;
-			grid-template-columns: 100%;
-			grid-gap: 1%;	
+			/*display: grid;*/
+			/*grid-template-columns: 100%;*/
+			/*grid-gap: 1%;	*/
 		}
 	}
 </style>
