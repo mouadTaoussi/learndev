@@ -65,13 +65,33 @@
 			<section class='tabs-pages-userprofile py-4 tab-hidden'>	
 				<!-- <img v-bind:src='current_user.avatar' width="200" height="200" class=""><br> -->
 				<p class="text-left text-dark">Full name</p>
-				<p class="text-left text-dark"><strong class="user-credentials">{{ current_user.fullname }}</strong></p>
+				<input
+					v-on:change="toggleSaveChanges()" 
+					class="current_user form-control my-2" 
+					type="text" 
+					v-model="current_user.fullname" 
+					placeholder="fullname" >
 				<p class="text-left text-dark">User name</p>
-				<p class="text-left text-dark"><strong class="user-credentials">{{ current_user.user_name }}</strong></p>
+				<input
+					v-on:change="toggleSaveChanges()" 
+					class="current_user form-control my-2" 
+					type="text" 
+					v-model="current_user.user_name" 
+					placeholder="user_name" >
 				<p class="text-left text-dark">Email</p>
-				<p class="text-left text-dark"><strong class="user-credentials">{{ current_user.email }}</strong></p>
-				<p class="text-left text-dark">Full name</p>
-				<p class="text-left text-dark"><strong class="user-credentials">{{ current_user.email }}</strong></p>
+				<input 
+					v-on:change="toggleSaveChanges()"
+					class="current_user form-control my-2" 
+					type="text" 
+					v-model="current_user.email"
+					placeholder="Email" >
+				<p class="text-left text-dark">Change Password</p>
+				<button 
+					v-on:click="updateProfile()" 
+					id="saveChanges" 
+					disabled
+					class="btn btn-info float-left"
+				>Save Changes</button>
 			</section>
 
 			<section class='tabs-pages-projectideas tab-hidden'>	
@@ -240,6 +260,12 @@
 				// Add topic to the Page
 			}
 		},
+		updateProfile : function(){
+			alert(this.current_user)
+		},
+		toggleSaveChanges : function(){
+			document.querySelector('#saveChanges').removeAttribute('disabled');
+		},
 		switchTab : function(to){
 			const topics         = document.querySelector('.tabs-pages-topics');
 			const upvoted      = document.querySelector('.tabs-pages-upvoted');
@@ -373,6 +399,11 @@
 	}
 	.tab-title {
 		font-family: var(--font--);
+	}
+	.current_user {
+		border :0;
+		padding: 0;
+		font-weight: bolder;
 	}
 	@media only screen and (max-width: 800px) {
 		.tabs-pages-topics {

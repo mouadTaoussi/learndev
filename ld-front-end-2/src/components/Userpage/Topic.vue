@@ -55,7 +55,7 @@ export default {
 		/*position: relative;*/
 		border-radius: 3px;
 		cursor: pointer;
-		z-index: -1;
+		/*z-index: -1;*/
 	}
 	.topic img {
 		width: 350px;

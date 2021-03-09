@@ -8,6 +8,11 @@ import TopicService from "../.././Topics/Topics.service";
 
 const _topicservice = new TopicService();
 
+
+// Upvotes function
+
+
+
 interface topicInfoResolver {
 	searchTopic(search_term: string,{limit,skip}: LoadMoreRules) :Promise<any> // Load more
 	getTopics({limit,skip}: LoadMoreRules) :Promise<any> // Load more
