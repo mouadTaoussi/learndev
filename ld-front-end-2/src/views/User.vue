@@ -170,7 +170,8 @@
 	    	alert : {
 	    		type : null,
 	    		message : null
-	    	}
+	    	},
+	    	new_topic_added : null
 	    }
 	  },
 	  mounted (){
@@ -228,20 +229,15 @@
 						},
 	   				}
 	   			})
-				.then((res)=>{
- 					// add new topic component
-					if ( res.data.data.addTopic.title == this.newTopic.title ) {
-						document.querySelector('.add-topic-btn').innerHTML = "Added!";
-						document.querySelector('.add-topic-btn').classList.add('btn-success');
-						document.querySelector('.add-topic-btn').classList.remove('btn-primary');
-					}
-					else {
-						this.showAlert('error', 'something went wrong!, Try again!', null);	
-					}
+				.then(function(res){
+					document.querySelector('.add-topic-btn').innerHTML = "Added!";
+					document.querySelector('.add-topic-btn').classList.add('btn-success');
+					document.querySelector('.add-topic-btn').classList.remove('btn-primary');
 				})
 				.catch((err)=>{
 					this.showAlert('error', 'something went wrong!, Try again!', null);
 				})
+				// Add topic to the Page
 			}
 		},
 		switchTab : function(to){

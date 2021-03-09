@@ -127,7 +127,7 @@ class topicResolver implements topicResolver {
 			_id          : newTopic.data._id,
 			user_id      : newTopic.data.user_id,
 			creator_name : newTopic.data.creator_name,
-			title  : newTopic.data.title,
+			title        : newTopic.data.title,
 			background_image : newTopic.data.background_image,
 			docs             : null,
 			courses      : null,
