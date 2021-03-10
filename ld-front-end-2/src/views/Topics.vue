@@ -114,8 +114,10 @@
 	  	search : function(item_query){
 	  		// Save query to use it in load more
 	  		this.search_query = item_query
-	  		this.skip;
-	  		this.limit;
+
+	  		// Back to 0
+	  		this.skip = 0;
+
 	  		// Graphql request
 	  		const SEARCH_QUERY = gql`
 	  		query ($limit:Float!, $skip:Float!, $search_term:String!) {
@@ -147,21 +149,51 @@
    				}
    			})
    			.then((res)=>{
-   				console.log(res.data);
    				// Attach that to the topics
    				this.topics = res.data.data.searchTopic;
-   			// Increment the skip 
+	   			// Increment the skip 
    			})
 
 
 	  	},
 	  	loadMore: function(){
-	  		//
-	  		this.search_query;
-	  		this.skip;
-	  		this.limit;
-	  		// increment skip
-	  		// push to this.topics
+
+	  		const SEARCH_QUERY = gql`
+	  		query ($limit:Float!, $skip:Float!, $search_term:String!) {
+	  			searchTopic(limit:$limit, skip:$skip, search_term:$search_term){
+					_id
+					title
+					background_image
+				}
+
+	  		}
+	  		`
+	  		this.$http({
+   				url : apihost.api_domain + "/graphql",
+   				method: "POST",
+   				headers: {
+					// 'Content-Type': 'application/json',
+			        // 'Accept'      : `application/json`
+				},
+   				data: {
+   					query: print(SEARCH_QUERY),
+					variables: {
+						limit: this.limit,
+						skip: this.skip,
+						search_term: this.search_query,
+						// tags : this.newTopic.tags
+					},
+   				}
+   			})
+   			.then((res)=>{
+   				// Push new content to the topics
+   				for (var i = 0; i < res.data.data.searchTopic.length; i++) {
+   					this.topics.push(res.data.data.searchTopic[i])
+   				}
+	   			// Increment the skip 
+	   			this.skip += this.limit;
+	   			console.log(this.skip)
+   			})
 	  	}
 	  }
 	}

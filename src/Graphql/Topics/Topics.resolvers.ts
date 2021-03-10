@@ -1,3 +1,4 @@
+
 import { Resolver, Query, Mutation, Arg, Args, Ctx, UseMiddleware } from 'type-graphql';
 import { 
 	Topic,      Docs,      Course,      Article,      ProjectIdea,
@@ -42,7 +43,6 @@ class topicInfoResolver implements topicInfoResolver {
 
 		// Find the right documents
 		const topics = await _topicservice.searchTopic(query_to_search, limit, skip);
-		console.log(topics.data)
 		return topics.data;
 	}
 
@@ -101,9 +101,7 @@ class topicResolver implements topicResolver {
 	public async getTopic(@Arg('topic_id') topic_id: string,@Args() {limit,skip}: LoadMoreRules, @Ctx() context : any) : Promise<any> {
 
 		const user = context.req.session.passport || null;
-		console.log(user);
 		const topic = await _topicservice.getTopic(topic_id, user, limit, skip);
-		console.log(topic)
 
 		// Get content of the topic
 		return topic.data;

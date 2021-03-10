@@ -34,7 +34,6 @@ let topicInfoResolver = class topicInfoResolver {
             }
         }
         const topics = await _topicservice.searchTopic(query_to_search, limit, skip);
-        console.log(topics.data);
         return topics.data;
     }
     async getTopics({ limit, skip }) {
@@ -79,9 +78,7 @@ let topicResolver = class topicResolver {
     }
     async getTopic(topic_id, { limit, skip }, context) {
         const user = context.req.session.passport || null;
-        console.log(user);
         const topic = await _topicservice.getTopic(topic_id, user, limit, skip);
-        console.log(topic);
         return topic.data;
     }
     async addTopic({ title, background_image }, context) {

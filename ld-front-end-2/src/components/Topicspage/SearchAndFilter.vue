@@ -23,7 +23,6 @@ export default {
   methods : {
 	  search: function(){
 	  	if (this.query == null || this.query == '') {
-	  		alert('Provide us search query!');
 	  		return;
 	  	}
 	  	this.$emit('searchQuery',this.query);
