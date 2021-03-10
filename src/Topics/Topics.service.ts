@@ -7,9 +7,9 @@ class TopicService implements TopicServiceInt {
 	public async searchTopic(query: string[],limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
 			// Get the topics by limit and skip
-			// const topics = await TopicModel.find().skip(skip).limit(limit);
-			const topics = await TopicModel.find();
-
+			const topics = await TopicModel.find().skip(skip).limit(limit);
+			// const topics = await TopicModel.find();
+			console.log(topics)
 			// Filter by query
 			const topics_needed     = filterByQuery(topics, query);
 			

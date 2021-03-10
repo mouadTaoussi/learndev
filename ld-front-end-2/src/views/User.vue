@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<!-- Custom Header -->
-		<costumHeader></costumHeader>
+		<!-- <costumHeader></costumHeader> -->
 		<!-- Custom Header -->
 		<!-- Alert -->
 		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
@@ -204,11 +204,13 @@
 	  	.then((res)=>{
 	  		console.log(res)
 	  		this.current_user = res.data.user;
+	  		// if (!this.current_user){ this.$router.push({ path: '/login' }); return };
+
 	  		this.topics = res.data.topics;
 	  		this.upvoted_content = res.data.upvoted_content;
 	  	})
 	  	.catch((err)=>{
-	  		console.log(err)
+	  		this.$router.push({ path: '/login' })
 	  	})
 	  },
 	   methods : {
