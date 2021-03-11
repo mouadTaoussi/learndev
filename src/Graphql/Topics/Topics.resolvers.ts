@@ -88,12 +88,20 @@ class topicResolver implements topicResolver {
 		}
 
 		// Get topic
-		const topics = await _topicservice.getTopic(search_term ,user, limit, skip);
+		const topic = await _topicservice.getTopic(search_term ,user, limit, skip);
 		// Find the right documents
-		const content_in_topic : any = await _topicservice.searchContentInTopic(query_to_search, topic_id, user, limit, skip);
+		const content_in_topic  = await _topicservice.searchContentInTopic(query_to_search, topic_id, user, limit, skip);
 
 		return {
-			
+			_id              : topic.data._id,
+			user_id          : topic.data.user_id,
+			creator_name     : topic.data.creator_name,
+			title            : topic.data.title,
+			background_image : topic.data.background_image,
+			docs          : content_in_topic.data.docs,
+			courses       : content_in_topic.data.courses,
+			articles      : content_in_topic.data.articles,
+			poject_idea   : content_in_topic.data.poject_idea,
 		}
 	}
 

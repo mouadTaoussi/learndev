@@ -27,86 +27,58 @@
 		<!-- Tabs pages -->
 		<section class='tabs-pages-docs'>
 			<Resource 
-				id="sivbfuvbfdhbj"
-				title="Typescript course" 
-				upvotes="221" 
-				upvoted="true"
-				creator_name="mouadTaoussi" 
-				level="hard" 
-				user_id="sdidvhbidfhv"
-			></Resource>
-			<Resource 
-				id="sivvvvbfuvbfdhbj"
-				title="Typescript course" 
-				upvotes="221" 
-				upvoted="true"
-				creator_name="mouadTaoussi" 
-				level="hard" 
-				user_id="sdidvhbidfhv"
-			></Resource>
-			<Resource 
-				id="sivbvbfdhbj"
-				title="Typescript course" 
-				upvotes="221" 
-				upvoted="false"
-				creator_name="mouadTaoussi" 
-				level="hard" 
-				user_id="sdidvhbidfhv"
+				v-for="doc in docs"
+				v-bind:id="doc._id"
+				v-bind:title="doc.title" 
+				v-bind:upvotes="doc.upvotes_count" 
+				v-bind:upvoted="doc.upvoted"
+				v-bind:creator_name="doc.creator_name" 
+				v-bind:link="doc.link"
+				v-bind:level="doc.hard" 
+				v-bind:user_id="doc.user_id"
 			></Resource>
 		</section>
 
 		<section class='tabs-pages-courses tab-hidden'>
 			<Resource 
-				id="sivbfuvbfdhbbbbj"
-				title="Typescript course" 
-				upvotes="221" 
-				upvoted="true"
-				creator_name="mouadTaoussi" 
-				level="hard" 
-				user_id="sdidvhbidfhv"
-			></Resource>
-			<Resource 
-				id="sivbfuvfffbfdhbj"
-				title="Typescript course" 
-				upvotes="221" 
-				upvoted="true"
-				creator_name="mouadTaoussi" 
-				level="hard" 
-				user_id="sdidvhbidfhv"
-			></Resource>
-			<Resource 
-				id="sivbfuvbvfffdhbj"
-				title="Typescript course" 
-				upvotes="221" 
-				upvoted="true"
-				creator_name="mouadTaoussi" 
-				level="hard" 
-				user_id="sdidvhbidfhv"
-			></Resource>
-			<Resource 
-				id="sivbfuvbfbj"
-				title="Typescript course" 
-				upvotes="221" 
-				upvoted="true"
-				creator_name="mouadTaoussi" 
-				level="hard" 
-				user_id="sdidvhbidfhv"
-			></Resource>
-			<Resource 
-				id="sivbuvbfdhbj"
-				title="Typescript course" 
-				upvotes="221" 
-				upvoted="true"
-				creator_name="mouadTaoussi" 
-				level="hard" 
-				user_id="sdidvhbidfhv"
+				v-for="course in courses"
+				v-bind:id="course._id"
+				v-bind:title="course.title" 
+				v-bind:upvotes="course.upvotes_count" 
+				v-bind:upvoted="course.upvoted"
+				v-bind:creator_name="course.creator_name" 
+				v-bind:link="course.link"
+				v-bind:level="course.hard" 
+				v-bind:user_id="course.user_id"
 			></Resource>
 		</section>
 
 		<section class='tabs-pages-articles tab-hidden'>	
+			<Resource 
+				v-for="article in articles"
+				v-bind:id="article._id"
+				v-bind:title="article.title" 
+				v-bind:upvotes="article.upvotes_count" 
+				v-bind:upvoted="article.upvoted"
+				v-bind:creator_name="article.creator_name" 
+				v-bind:link="article.link"
+				v-bind:level="article.hard" 
+				v-bind:user_id="article.user_id"
+			></Resource>
 		</section>
 
-		<section class='tabs-pages-projectideas tab-hidden'>	
+		<section class='tabs-pages-projectideas tab-hidden'>
+			<Resource 
+				v-for="projectidea in projectideas"
+				v-bind:id="projectidea._id"
+				v-bind:title="projectidea.title" 
+				v-bind:upvotes="projectidea.upvotes_count" 
+				v-bind:upvoted="projectidea.upvoted"
+				v-bind:creator_name="projectidea.creator_name" 
+				v-bind:link="projectidea.link"
+				v-bind:level="projectidea.hard" 
+				v-bind:user_id="projectidea.user_id"
+			></Resource>	
 		</section>
 	</section>
 </template>

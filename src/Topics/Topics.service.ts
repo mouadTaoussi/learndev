@@ -131,7 +131,12 @@ class TopicService implements TopicServiceInt {
 			return {
 				message : null,
 				found : false,
-				data : null
+				data : {
+					docs         :docs_to_be_sent,
+					courses      :courses_to_be_sent,
+					articles     :articles_to_be_sent,
+					project_idea :project_ideas_to_be_sent
+				}
 			}
 		}
 		catch(err){

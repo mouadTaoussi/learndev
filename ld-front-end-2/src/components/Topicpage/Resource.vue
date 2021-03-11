@@ -44,7 +44,7 @@
 	export default {
 
 	  name: 'Resource',
-	  props : [ "id", "title","upvotes", "upvoted", "creator_name", "level", "user_id" ],
+	  props : [ "id", "title","upvotes", "upvoted", "creator_name", "link", "level", "user_id" ],
 
 	  data () {
 	    return {
@@ -53,6 +53,7 @@
 	    	resource_upvotes : this.upvotes,
 	    	upvoted          : this.upvoted,
 	    	creator_name     : this.creator_name,
+	    	link             : this.link
 	    	level            : this.level,
 	    	user_id          : this.user_id
 	    }

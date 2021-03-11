@@ -75,16 +75,16 @@
 			  	getTopic(topic_id:$topic_id,limit:$limit,skip:$skip) {
 					_id creator_name title
 					docs {
-						_id topic_id creator_name title link
+						_id topic_id creator_name title link level user_id upvotes_count upvoted
 					}
 					courses {
-						_id topic_id creator_name title link
+						_id topic_id creator_name title link level user_id upvotes_count upvoted
 					}
 					articles {
-						_id topic_id creator_name title link
+						_id topic_id creator_name title link level user_id upvotes_count upvoted
 					}
 					project_idea {
-						_id topic_id creator_name title description
+						_id topic_id creator_name title description user_id upvotes_count upvoted
 					}
 				}
 		  	}
@@ -108,7 +108,6 @@
 			}
 		})
 		.then((res)=>{
-			console.log(res.data.data.getTopic)
 			//
 			this.docs = res.data.data.getTopic.docs;
 			this.courses = res.data.data.getTopic.courses;
