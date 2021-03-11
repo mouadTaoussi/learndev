@@ -13,7 +13,12 @@
 				<AddResource></AddResource>
 				<!-- AddResource -->
 				<!-- Resources -->
-				<Resources docs="dddddd" cources="" articles="" projectideas=""></Resources>
+				<Resources 
+					v-bind:docs="docs" 
+					v-bind:courses="courses" 
+					v-bind:articles="articles" 
+					v-bind:projectideas="projectIdeas"
+				></Resources>
 				<!-- Resources -->
 				<button v-on:click="loadMore" class="btn btn-light shadow mt-4 mb-4">Load more</button>
 			</div>
@@ -30,6 +35,8 @@
 	import AddResource from ".././components/Topicpage/AddResource.vue";
 	import Resources from ".././components/Topicpage/Resources.vue";
 	import costumFooter from ".././components/Footer.vue";
+	import { print } from 'graphql';
+	import gql from "graphql-tag";
 	const  apihost = require('../.././api.config.js');
 
 
@@ -44,6 +51,18 @@
 	  	Resources,
 	  	costumFooter
 	  },
+	  data (){
+	  	return {
+	  		docs         : [],
+			courses      : [],
+			articles     : [],
+			projectIdeas : [],
+	  		topic_id : this.$route.params.id,
+	  		search_query : null,
+	  		skip : 0,
+	  		limit: 10
+	  	}
+	  },
 	  mounted (){
 	  	window.scrollTo(0, 0);
 	  	// Fetch Topic within 
@@ -51,19 +70,55 @@
 	  	// - Courses(Check upvoted ones) 
 	  	// - Articles(Check upvoted ones) 
 	  	// - ProjectIdeas(Check upvoted ones)
-	  	this.skip;
-	  	this.limit;
-	  },
-	  data () {
-	    return {
-	    	docs         : [],
-	    	courses      : [],
-	    	articles     : [],
-	    	projectIdeas : [],
-	    	search_query : null,
-	    	skip         : 0,
-	    	limit        : 10
-	    }
+	  	const TOPIC_QUERY = gql`
+		  	query ($topic_id:String!,$limit:Float!,$skip:Float!){
+			  	getTopic(topic_id:$topic_id,limit:$limit,skip:$skip) {
+					_id creator_name title
+					docs {
+						_id topic_id creator_name title link
+					}
+					courses {
+						_id topic_id creator_name title link
+					}
+					articles {
+						_id topic_id creator_name title link
+					}
+					project_idea {
+						_id topic_id creator_name title description
+					}
+				}
+		  	}
+	  	`;
+
+	  	this.$http({
+				url : apihost.api_domain + "/graphql",
+				method: "POST",
+				headers: {
+				// 'Content-Type': 'application/json',
+		        // 'Accept'      : `application/json`
+			},
+			data: {
+				query: print(TOPIC_QUERY),
+				variables: {
+					limit: this.limit,
+					skip: this.skip,
+					topic_id: this.topic_id,
+					// tags : this.newTopic.tags
+				},
+			}
+		})
+		.then((res)=>{
+			console.log(res.data.data.getTopic)
+			//
+			this.docs = res.data.data.getTopic.docs;
+			this.courses = res.data.data.getTopic.courses;
+			this.articles = res.data.data.getTopic.articles;
+			this.projectIdeas = res.data.data.getTopic.project_idea;
+		})
+		.catch((err)=>{
+
+		})
+
 	  },
 	  methods : {
 	  	// Search
@@ -75,6 +130,8 @@
 	  		this.skip;
 	  		this.limit;
 	  		// Graphql request
+	  		// Incretment skip
+	  		this.skip += this.limit;
 	  	},
 	  	loadMore : function() {
 	  		//

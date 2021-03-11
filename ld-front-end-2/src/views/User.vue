@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<!-- Custom Header -->
-		<!-- <costumHeader></costumHeader> -->
+		<costumHeader></costumHeader>
 		<!-- Custom Header -->
 		<!-- Alert -->
 		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
