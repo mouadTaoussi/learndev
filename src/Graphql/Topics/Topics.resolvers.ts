@@ -110,7 +110,6 @@ class topicResolver implements topicResolver {
 
 		const user = context.req.session.passport || null;
 		const topic = await _topicservice.getTopic(topic_id, user, limit, skip);
-
 		// Get content of the topic
 		return topic.data;
 	}

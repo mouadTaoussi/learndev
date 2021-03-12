@@ -90,7 +90,7 @@
 
 	  name: 'Resources',
 
-	  props : ["docs","cources","articles","projectideas"],
+	  props : ["docs","courses","articles","projectideas"],
 
 	  components: {
 	  	Resource
@@ -99,7 +99,7 @@
 	  data () {
 	    return {
 	    	docs : this.docs,
-	    	cources: this.cources,
+	    	courses: this.courses,
 	    	articles: this.articles,
 	    	projectideas: this.projectideas
 	    }

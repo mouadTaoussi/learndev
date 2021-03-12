@@ -6,7 +6,6 @@ class TopicService {
     async searchTopic(query, limit, skip) {
         try {
             const topics = await Topics_models_1.TopicModel.find().skip(skip).limit(limit);
-            console.log(topics);
             const topics_needed = Topics_functions_1.filterByQuery(topics, query);
             const topics_need_to_be_unduplicated = Topics_functions_1.removeDuplicates(topics_needed);
             const topics_to_be_sent = Topics_functions_1.sortByUpvotes(topics_need_to_be_unduplicated);
@@ -89,7 +88,12 @@ class TopicService {
             return {
                 message: null,
                 found: false,
-                data: null
+                data: {
+                    docs: docs_to_be_sent,
+                    courses: courses_to_be_sent,
+                    articles: articles_to_be_sent,
+                    project_idea: project_ideas_to_be_sent
+                }
             };
         }
         catch (err) {
@@ -158,7 +162,7 @@ class TopicService {
                     docs: docs_to_be_sent,
                     courses: courses_to_be_sent,
                     articles: articles_to_be_sent,
-                    projectIdeas: project_ideas_to_be_sent
+                    project_idea: project_ideas_to_be_sent
                 }
             };
         }

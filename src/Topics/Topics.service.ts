@@ -9,7 +9,7 @@ class TopicService implements TopicServiceInt {
 			// Get the topics by limit and skip
 			const topics = await TopicModel.find().skip(skip).limit(limit);
 			// const topics = await TopicModel.find();
-			console.log(topics)
+
 			// Filter by query
 			const topics_needed     = filterByQuery(topics, query);
 			
@@ -78,7 +78,7 @@ class TopicService implements TopicServiceInt {
 				// Check if the user upvoted some of the content in each resource // if logged in
 				// if true then set upvoted to true
 				const user_id: string = user_session.user.id;
-				// console.log(user_id)
+
 				for ( var i = 0; docs_to_be_sent.length > i; i++ ) {
 
 					if (docs_to_be_sent[i].upvotes.includes(user_id)) {
@@ -171,7 +171,6 @@ class TopicService implements TopicServiceInt {
 				// Check if the user upvoted some of the content in each resource // if logged in
 				// if true then set upvoted to true
 				const user_id: string = user_session.user.id;
-				// console.log(user_id)
 				// Check in the docs
 				for ( var i = 0; docs_to_be_sent.length > i; i++ ) {
 
@@ -221,7 +220,6 @@ class TopicService implements TopicServiceInt {
 					}
 				}
 			}
-
 			return {
 				message : null,
 				found : false,
@@ -238,7 +236,7 @@ class TopicService implements TopicServiceInt {
 					// articels
 					articles : articles_to_be_sent,
 					// projectIdeas
-					projectIdeas : project_ideas_to_be_sent
+					project_idea : project_ideas_to_be_sent
 				}
 			}
 		}

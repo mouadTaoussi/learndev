@@ -5,7 +5,8 @@
 		<!-- Custom Header -->
 		<section class="container">
 			<div class="search-and-filter-container">
-				<h1 class="text-left title">Android Development</h1>
+				<h1 class="text-left title">{{ title }}</h1>
+				<p class="creator_name text-left">by {{ creator_name }}</p>
 				<!-- Search And Filter -->
 				<SearchAndFilter v-on:searchQuery="search"></SearchAndFilter>
 				<!-- Search And Filter -->
@@ -53,11 +54,13 @@
 	  },
 	  data (){
 	  	return {
+	  		title        : null,
+	  		creator_name : null,
+	  		topic_id : this.$route.params.id,
 	  		docs         : [],
 			courses      : [],
 			articles     : [],
 			projectIdeas : [],
-	  		topic_id : this.$route.params.id,
 	  		search_query : null,
 	  		skip : 0,
 	  		limit: 10
@@ -109,6 +112,8 @@
 		})
 		.then((res)=>{
 			//
+			this.title = res.data.data.getTopic.title, 
+			this.creator_name = res.data.data.getTopic.creator_name, 
 			this.docs = res.data.data.getTopic.docs;
 			this.courses = res.data.data.getTopic.courses;
 			this.articles = res.data.data.getTopic.articles;
@@ -151,6 +156,9 @@
 	.title {
 		font-family: var(--font--);
 		margin-top: 20px;
+		margin-bottom: 0px;
+	}
+	.creator_name {
 		margin-bottom: 20px;
 	}
 </style>

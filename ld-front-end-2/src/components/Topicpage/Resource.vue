@@ -11,7 +11,7 @@
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
 						  <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
 						</svg><br>
-						{{ resource_upvotes }}
+						{{ resource_upvotes + upvoted }}
 					</button>
 					<button 
 						@click="upvote(upvoted)" 
@@ -21,7 +21,7 @@
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
 						  <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
 						</svg><br>
-						{{ resource_upvotes }}
+						{{ resource_upvotes + upvoted }}
 					</button>
 				</div>
 
@@ -53,7 +53,7 @@
 	    	resource_upvotes : this.upvotes,
 	    	upvoted          : this.upvoted,
 	    	creator_name     : this.creator_name,
-	    	link             : this.link
+	    	link             : this.link,
 	    	level            : this.level,
 	    	user_id          : this.user_id
 	    }
