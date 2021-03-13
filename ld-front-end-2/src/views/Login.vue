@@ -5,7 +5,8 @@
 		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
 		<!-- Alert Message -->
 		<div class="shadow login-components">
-			<h1 class="title text-center mb-4">Log in</h1>
+			<!-- <h1 class="title text-center mb-4">Log in</h1> -->
+			<div class="logo"></div>
 			<input 
 				id="email"
 				v-model="email"
@@ -132,6 +133,16 @@
 		padding-top: 120px;
 		background-color: var(--primary--);
 		font-family: var(--font--);
+	}
+	.logo {
+		background-image: url('.././assets/logolight.svg');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		width: 200px;
+		height: 48px;
+		margin: 0 auto;
+		margin-bottom: 20px;
 	}
 	.login-components {
 		background-color: white;

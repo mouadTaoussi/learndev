@@ -5,7 +5,8 @@
 		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
 		<!-- Alert Message -->
 		<div class="background-area">
-			<h1 class="text-left">Logo Here</h1>
+			<!-- <h1 class="text-left">Logo Here</h1> -->
+			<div class="logo"></div>
 			<!-- <img class="brand" width='160px' height='40px' src="https://app.revenual.com/images/logo.svg"> -->
 			<aside class="features">
 				<h5 class="text-left">
@@ -203,6 +204,15 @@
 		display: grid;
 		grid-template-columns: 2fr 3fr;
 		font-family: var(--font--);
+	}
+	.logo {
+		background-image: url('.././assets/logolight.svg');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		width: 200px;
+		height: 48px;
+		margin-bottom: 20px;
 	}
 	.background-area {
 		background-image: url('../assets/Learndev.svg');

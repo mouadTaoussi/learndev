@@ -3,7 +3,8 @@
 	 	<header class="header-landingpage">
 	 		<div class="brand-child">
 		 		<router-link to="/">
-					<p class="logo text-dark">.learnDev()</p>
+					<!-- <p class="logo text-dark">.learnDev()</p> -->
+					<div class="logo"></div>
 				</router-link>
 			</div>
 			<div class="list-child">
@@ -32,6 +33,14 @@ export default {
 </script>
 
 <style lang="css" scoped>
+	.logo {
+		background-image: url('.././assets/logolight.svg');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		width: 150px;
+		height: 48px;
+	}
 	.btn {
 		color: white!important;
 		font-family: var(--font--);
@@ -55,13 +64,14 @@ export default {
 		justify-self: start;
 	}
 	.list-child {
+		padding-top: 12px;
 		padding-right: 30px;	
 		justify-self: end;
 	}
-	.logo {
-		font-family: var(--font--);
-		/*font-size: 50px;*/
-	}
+	/*.logo {
+		/*font-family: var(--font--);*/
+		/*font-size: 50px;
+	}*/
 	@media only screen and (max-width: 800px) {
 		.list-item {
 			display: none;
