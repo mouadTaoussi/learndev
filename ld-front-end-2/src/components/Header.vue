@@ -4,7 +4,7 @@
 	 		<div class="brand-child">
 		 		<router-link to="/">
 					<!-- <p class="logo text-dark">.learnDev()</p> -->
-					<div class="logo"></div>
+					<div class="logo logo-blue"></div>
 				</router-link>
 			</div>
 			<div class="list-child">
@@ -34,7 +34,6 @@ export default {
 
 <style lang="css" scoped>
 	.logo {
-		background-image: url('.././assets/logolight.svg');
 		background-size: contain;
 		background-repeat: no-repeat;
 		background-position: center;
@@ -72,6 +71,12 @@ export default {
 		/*font-family: var(--font--);*/
 		/*font-size: 50px;
 	}*/
+	.logo-light {
+		background-image: url('.././assets/logolight.svg');
+	}
+	.logo-blue {
+		background-image: url('.././assets/logoblue.svg');
+	}
 	@media only screen and (max-width: 800px) {
 		.list-item {
 			display: none;

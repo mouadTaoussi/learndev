@@ -5,7 +5,11 @@
 		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
 		<!-- Alert -->
 		<div class="shadow resetpassword-components">
-			<h1 class="text-center mb-4">Reset Password</h1>
+			
+			<router-link to='/'>
+				<div class="logo"></div>
+			</router-link>
+
 			<input 
 				id="email"
 				v-model="email"
@@ -88,6 +92,16 @@
 		padding-top: 120px;
 		background-color: var(--primary--);
 		font-family: var(--font--);
+	}
+	.logo {
+		background-image: url('.././assets/logolight.svg');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		width: 200px;
+		height: 48px;
+		margin: 0 auto;
+		margin-bottom: 20px;
 	}
 	.resetpassword-components {
 		background-color: white;

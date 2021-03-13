@@ -5,9 +5,11 @@
 		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
 		<!-- Alert Message -->
 		<div class="background-area">
-			<!-- <h1 class="text-left">Logo Here</h1> -->
-			<div class="logo"></div>
-			<!-- <img class="brand" width='160px' height='40px' src="https://app.revenual.com/images/logo.svg"> -->
+
+			<router-link to='/'>
+				<div class="logo"></div>
+			</router-link>
+
 			<aside class="features">
 				<h5 class="text-left">
 					<svg 

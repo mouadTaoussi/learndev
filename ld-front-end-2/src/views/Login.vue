@@ -5,8 +5,11 @@
 		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
 		<!-- Alert Message -->
 		<div class="shadow login-components">
-			<!-- <h1 class="title text-center mb-4">Log in</h1> -->
-			<div class="logo"></div>
+			
+			<router-link to="/">
+				<div class="logo"></div>
+			</router-link>
+
 			<input 
 				id="email"
 				v-model="email"

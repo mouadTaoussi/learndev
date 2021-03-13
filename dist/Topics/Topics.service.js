@@ -85,6 +85,26 @@ class TopicService {
                     }
                 }
             }
+            else {
+                for (var i = 0; docs_to_be_sent.length > i; i++) {
+                    docs_to_be_sent[i].upvoted = false;
+                }
+                for (var i = 0; courses_to_be_sent.length > i; i++) {
+                    courses_to_be_sent[i].upvoted = false;
+                }
+                for (var i = 0; articles_to_be_sent.length > i; i++) {
+                    articles_to_be_sent[i].upvoted = false;
+                }
+                for (var i = 0; project_ideas_to_be_sent.length > i; i++) {
+                    project_ideas_to_be_sent[i].upvoted = false;
+                }
+            }
+            console.log({
+                docs: docs_to_be_sent,
+                courses: courses_to_be_sent,
+                articles: articles_to_be_sent,
+                project_idea: project_ideas_to_be_sent
+            });
             return {
                 message: null,
                 found: false,
@@ -148,6 +168,20 @@ class TopicService {
                     else {
                         project_ideas_to_be_sent[i].upvoted = false;
                     }
+                }
+            }
+            else {
+                for (var i = 0; docs_to_be_sent.length > i; i++) {
+                    docs_to_be_sent[i].upvoted = false;
+                }
+                for (var i = 0; courses_to_be_sent.length > i; i++) {
+                    courses_to_be_sent[i].upvoted = false;
+                }
+                for (var i = 0; articles_to_be_sent.length > i; i++) {
+                    articles_to_be_sent[i].upvoted = false;
+                }
+                for (var i = 0; project_ideas_to_be_sent.length > i; i++) {
+                    project_ideas_to_be_sent[i].upvoted = false;
                 }
             }
             return {
