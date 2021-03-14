@@ -58,6 +58,9 @@ window.setInterval(()=>{
 		document.querySelectorAll('.list-item').forEach((item)=>{
 			item.style.color = "black";
 		})
+
+		document.querySelector('.logo').classList.add('logo-light');
+		document.querySelector('.logo').classList.remove('logo-blue');
 	}
 },10)
 

@@ -81,6 +81,12 @@ export default {
 		.list-item {
 			display: none;
 		}
+		.logo {
+			width: 100px;
+		}
+		.brand-child {
+			padding-left: 0;
+		}
 	}
 /*	.header {
 		background-color: white;

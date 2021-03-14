@@ -122,6 +122,11 @@
 	    	}
 	    }
 	  },
+	  mounted (){
+	  	if (!localStorage.getItem('user_name')){
+	  		this.$router.push({ path: '/topics' });
+	  	}
+	  }
 	  methods : {
 	  	register: function() {
 	  		// Validate
@@ -161,7 +166,10 @@
 	  			.then((res)=>{
 	  				// Set a localstorage value to know whether the user already logged in or not
 	  				if (res.data.registered) {
-	  					this.$router.push({ path: '/topics' });
+	  					// Set a localstorage value to know whether the user already logged in or not
+						localStorage.setItem('user_name',res.data.user.user.user_name);
+						// push to topics page
+						this.$router.push({ path: '/topics' });
 	  				} 
 	  				else {
 	  					document.querySelector('.register-btns').innerHTML = "Register";
@@ -209,10 +217,10 @@
 	}
 	.logo {
 		background-image: url('.././assets/logolight.svg');
-		background-size: contain;
+		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center;
-		width: 200px;
+		width: 300px;
 		height: 48px;
 		margin-bottom: 20px;
 	}
@@ -227,7 +235,7 @@
 		float: left;
 	}
 	.features {
-		margin-top: 80px;
+		margin-top: 50px;
 	}
 	.background-area-text {
 		font-family: sans-serif;

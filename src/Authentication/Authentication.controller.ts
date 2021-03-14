@@ -103,7 +103,7 @@ class Authentication implements AuthenticationInt {
 
 		body.password      = hashed_password;
 
-		// Save use in the database
+		// Save user in the database
 		const new_user = await _user.addUser(body);
 
 		// Check whether saved or not
@@ -114,11 +114,12 @@ class Authentication implements AuthenticationInt {
 			req.session.passport.user = { id:new_user.user._id, name : body.user_name,  email: body.email, at_provider_id: null };
 
 			// send it back to the frontend			
-			res.status(new_user.status).send({ registered : true, message: "Registered successfully!"})
+			res.status(new_user.status).send({ registered : true, message: "Registered successfully!",user: new_user.user})
 
 		}
 		else {		
 			res.status(new_user.status).send({
+				registered : false,
 				message : "Something went wrong!"
 			})
 		}

@@ -5,7 +5,7 @@
 			type="text" 
 			class="form-control search-input" 
 			placeholder="Search about a resource: Crach course, tutorial...">
-		<button v-on:click="search()" class="search-btn btn btn-primary shadow">Search</button>
+		<!-- <button v-on:click="search()" class="search-btn btn btn-primary shadow">Search</button> -->
 	</section>
 </template>
 
@@ -33,9 +33,13 @@ export default {
 
 <style lang="css" scoped>
 	.search-area {
-		display: grid;
+	/*	display: grid;
 		grid-template-columns: 78% 20%;
-		grid-gap: 1%;	
+		grid-gap: 1%;	*/
+		
+	}
+	.search-input {
+		width: 100%;
 	}
 	@media only screen and (max-width: 800px) {
 		.search-area {

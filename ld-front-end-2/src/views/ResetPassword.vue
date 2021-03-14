@@ -49,6 +49,11 @@
 	    	}
 	    }
 	  },
+	  mounted (){
+	  	if (!localStorage.getItem('user_name')){
+	  		this.$router.push({ path: '/topics' });
+	  	}
+	  }
 	  methods : {
 	  	resetPassword : function() {
 	  		if (this.email.length < 5 || this.email.includes('@') == false || this.email.includes('.') == false) {
