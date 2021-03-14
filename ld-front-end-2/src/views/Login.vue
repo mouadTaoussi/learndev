@@ -64,10 +64,10 @@
 	    }
 	  },
 	  mounted (){
-	  	if (!localStorage.getItem('user_name')){
+	  	if (!!localStorage.getItem('user_name') == true){
 	  		this.$router.push({ path: '/topics' });
 	  	}
-	  }
+	  },
 	  methods : {
 		login : function(){
 			// Validate

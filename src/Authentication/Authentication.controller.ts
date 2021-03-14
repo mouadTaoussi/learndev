@@ -71,6 +71,11 @@ class Authentication implements AuthenticationInt {
 			res.status(userExists.status).send({ loggedin : true, message : "Logged in!", user: userExists});
 		}
 	}
+	public async logout(req: Request,res:Response) :Promise<void>{
+		req.session.destroy(()=>{
+			res.status(200).send({message:"logged out!"})
+		})
+	}
 	public async register(req: Request, res: Response) :Promise<void>{
 		// Check if the user is alreay logged in
 		// Get user inputs

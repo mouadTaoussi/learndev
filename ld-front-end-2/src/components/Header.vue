@@ -11,25 +11,44 @@
 				<router-link tag="a" class="list-item" to="/topics">Discover Topics</router-link>
 				<router-link tag="a" class="list-item" to="/about">About</router-link>
 				<router-link v-if="user_name" tag="a" class="list-item" to="/user">{{ user_name }}</router-link>
+				<p v-if="user_name" class="list-item text-danger" v-on:click='logout()'>Log out</p>
 				<router-link v-if="!user_name" tag="button" class="shadow list-item btn btn-primary" to="/login">Contribute</router-link>
+
 			</div>
 		</header>
 	</section>
 </template>
 
 <script>
-export default {
+	const  apihost = require('../.././api.config.js');
 
-  name: 'costumHeader',
+	export default {
 
-  data () {
-    return {
-    	user_name : localStorage.getItem('user_name')
-    }
-  },
-  mounted(){
-  }
-}
+	  name: 'costumHeader',
+
+	  data () {
+	    return {
+	    	user_name : localStorage.getItem('user_name')
+	    }
+	  },
+	  mounted(){
+	  },
+	  methods : {
+	  	logout: function(){
+	  		this.$http({
+				url : apihost.api_domain + '/auth/logout',
+				method : "GET",
+				// data : {email: this.email, password:this.password}
+			})
+			.then((res)=>{
+				// Set a localstorage value to know whether the user already logged in or not
+				localStorage.removeItem('user_name');
+				// push to topics page
+				this.$router.push({ path: '/' });
+			})
+	  	}
+	  }
+	}
 </script>
 
 <style lang="css" scoped>
@@ -66,6 +85,9 @@ export default {
 		padding-top: 12px;
 		padding-right: 30px;	
 		justify-self: end;
+	}
+	.text-danger {
+		cursor: pointer;
 	}
 	/*.logo {
 		/*font-family: var(--font--);*/

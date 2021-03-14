@@ -123,10 +123,10 @@
 	    }
 	  },
 	  mounted (){
-	  	if (!localStorage.getItem('user_name')){
+	  	if (!!localStorage.getItem('user_name') == true){
 	  		this.$router.push({ path: '/topics' });
 	  	}
-	  }
+	  },
 	  methods : {
 	  	register: function() {
 	  		// Validate
@@ -166,8 +166,9 @@
 	  			.then((res)=>{
 	  				// Set a localstorage value to know whether the user already logged in or not
 	  				if (res.data.registered) {
+	  					console.log(res.data)
 	  					// Set a localstorage value to know whether the user already logged in or not
-						localStorage.setItem('user_name',res.data.user.user.user_name);
+						localStorage.setItem('user_name',res.data.user.user_name);
 						// push to topics page
 						this.$router.push({ path: '/topics' });
 	  				} 
