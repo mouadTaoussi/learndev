@@ -187,13 +187,25 @@ class Authentication implements AuthenticationInt {
 	public async changePassword(req: Request, res: Response) :Promise<void>{
 		// Get the user by its session
 		const authenticated_user = req.session.passport;
+		
+		// Get body data // password
+		const body: {current_password:string,new_password:string} =  req.body;
 
 		if ( authenticated_user == undefined ) {
 			res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end(); return
 		}
 		// compare the old password
-		// Get body data
-		const body: UserBody = req.body;
+		const current_user = await _user.findUser({id: authenticated_user.user.id});
+
+		// Load hash from your password DB.
+		const matched: boolean = await compare( body.current_password, current_user.user.password );
+
+		// if compared then
+		if (matched != true) {res.status(404).send({ loggedin : false, message: "credentials aren't correct!" })}
+		else {
+			// Change password
+			res.status(200).send({changed: true, message:"Password changed!"})
+		}
 	}
 	public async updateProfile(req: Request, res: Response) :Promise<void>{
 		// Get the user by its session

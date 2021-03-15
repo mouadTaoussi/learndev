@@ -84,8 +84,14 @@
 					class="current_user form-control my-2" 
 					type="text" 
 					v-model="current_user.email"
-					placeholder="Email" >
-				<p class="text-left text-dark">Change Password</p>
+					placeholder="Email"
+					>
+				<p  
+					style="cursor: pointer"
+					data-toggle="modal" 
+					data-target="#changePassword"
+					class="text-left text-dark"
+					>Change Password</p>
 				<button 
 					v-on:click="updateProfile()" 
 					id="saveChanges" 
@@ -141,6 +147,56 @@
 								v-on:click="addNewTopic()" 
 								type="button" 
 								class="btn add-topic-btn btn-primary">Add Topic</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Change password Modal -->
+			<div 
+				class="modal fade" 
+				id="changePassword" 
+				tabindex="-1" 
+				role="dialog" 
+				aria-labelledby="changePassword" 
+				aria-hidden="true"
+			>
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="changePassword">Change password</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<p class="text-left text-dark">
+								<strong>Enter topic title</strong>
+							</p>
+							<input
+								id="email"
+								v-model="newTopic.title" 
+								class="form-control my-2" 
+								placeholder="Enter the topic title">
+
+							<p class="text-left text-dark">
+								<strong>Provide a link about an image</strong>
+							</p>
+							<input
+								id="password"
+								v-model="newTopic.background_image" 
+								class="form-control my-2" 
+								placeholder="Provide us an image link">
+							</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button 
+								v-on:click="changePassword()" 
+								type="button" 
+								class="btn add-topic-btn btn-primary">Change it👍
+							</button>
 						</div>
 					</div>
 				</div>
@@ -264,6 +320,21 @@
 		},
 		updateProfile : function(){
 			alert(this.current_user)
+		},
+		changePassword : function(){
+			alert('changed')
+
+			this.$http({
+		  		method : "POST",
+		  		url    : apihost.api_domain + '/auth/changePassword',
+		  		data : { current_password: "ffvv", new_password: "dbbddbg" }
+		  	})
+		  	.then((res)=>{
+		  		console.log(res)
+		  	})
+		  	.catch((err)=>{
+		  		console.log(err)
+		  	})
 		},
 		toggleSaveChanges : function(){
 			document.querySelector('#saveChanges').removeAttribute('disabled');
