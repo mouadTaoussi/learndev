@@ -31,6 +31,7 @@ router.get('/Oauth/login',    passport.authenticate('github',{ scope: ["profile"
 router.get('/Oauth/callback', passport.authenticate('github',{failureRedirect:'http://localhost:8080/login', successRedirect:"http://localhost:8080/topics"}));
 
 router.post  ('/resetPassword', auth.resetPassword);
+router.post  ('/changePassword', auth.changePassword);
 router.put   ('/updateUser', auth.updateProfile);
 router.delete('/deleteUser', auth.deleteAccount);
 

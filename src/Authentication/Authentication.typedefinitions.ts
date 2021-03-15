@@ -13,6 +13,7 @@ interface AuthenticationInt {
 	login   (req: Request, res: Response) :Promise<void>
 	register(req: Request, res: Response) :Promise<void>
 	resetPassword(req: Request, res: Response) :Promise<void>
+	changePassword(req: Request, res: Response):Promise<void>
 	updateProfile(req: Request, res: Response) :Promise<void>
 	deleteAccount(req: Request, res: Response) :Promise<void>
 }

@@ -50,7 +50,7 @@
 	    }
 	  },
 	  mounted (){
-	  	if (!localStorage.getItem('user_name')){
+	  	if (!!localStorage.getItem('user_name')){
 	  		this.$router.push({ path: '/topics' });
 	  	}
 	  },

@@ -11,7 +11,7 @@
 				<SearchAndFilter v-on:searchQuery="search"></SearchAndFilter>
 				<!-- Search And Filter -->
 				<!-- AddResource -->
-				<AddResource></AddResource>
+				<AddResource v-if="isLoggedIn"></AddResource>
 				<!-- AddResource -->
 				<!-- Resources -->
 				<Resources 
@@ -63,10 +63,12 @@
 			projectIdeas : [],
 	  		search_query : null,
 	  		skip : 0,
-	  		limit: 10
+	  		limit: 10,
+	  		isLoggedIn : !!localStorage.getItem('user_name')
 	  	}
 	  },
 	  mounted (){
+	  	console.log(this.isLoggedIn)
 	  	window.scrollTo(0, 0);
 	  	// Fetch Topic within 
 	  	// - Docs (Check upvoted ones)

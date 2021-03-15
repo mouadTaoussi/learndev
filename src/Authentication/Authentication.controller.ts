@@ -184,9 +184,20 @@ class Authentication implements AuthenticationInt {
 			})
 		}
 	}
+	public async changePassword(req: Request, res: Response) :Promise<void>{
+		// Get the user by its session
+		const authenticated_user = req.session.passport;
+
+		if ( authenticated_user == undefined ) {
+			res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end(); return
+		}
+		// compare the old password
+		// Get body data
+		const body: UserBody = req.body;
+	}
 	public async updateProfile(req: Request, res: Response) :Promise<void>{
 		// Get the user by its session
-		const authenticated_user = req.session.passport.user;
+		const authenticated_user = req.session.passport;
 
 		if ( authenticated_user == undefined ) {
 			res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end(); return
@@ -201,10 +212,10 @@ class Authentication implements AuthenticationInt {
 		// if found then
 		if (userEmail.found == true) {
 
-			if ( authenticated_user.email == body.email ) {
+			if ( authenticated_user.user.email == body.email ) {
 				// Update user
 				const updating: { 
-					status:number,updated:boolean,message:string,user:any } = await _user.updateUser(authenticated_user.id,body);
+					status:number,updated:boolean,message:string,user:any } = await _user.updateUser(authenticated_user.user.id,body);
 
 				// Response backend
 				req.session.passport.user = { 
@@ -226,7 +237,7 @@ class Authentication implements AuthenticationInt {
 		else {
 			// Update user
 			const updating: { 
-				status:number,updated:boolean,message:string, user:any } = await _user.updateUser(authenticated_user.id,body);
+				status:number,updated:boolean,message:string, user:any } = await _user.updateUser(authenticated_user.user.id,body);
 
 			// Response back
 			req.session.passport.user = { 
@@ -241,7 +252,7 @@ class Authentication implements AuthenticationInt {
 	}
 	public async deleteAccount(req: Request, res: Response) :Promise<void>{
 		// Get the user by its session
-		const authenticated_user = req.session.passport.user;
+		const authenticated_user = req.session.passport;
 
 		if ( authenticated_user == undefined ) {
 			res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end(); return
@@ -254,7 +265,7 @@ class Authentication implements AuthenticationInt {
 		if (!password) {res.status(400).send({ message:"no password provided!" }); res.end()};
 
 		// Find user by its session
-		const user: any = await _user.findUser({ email: authenticated_user.email });
+		const user: any = await _user.findUser({ email: authenticated_user.user.email });
 
 		// if found then
 		if (user.found == true) {
