@@ -257,7 +257,7 @@
    			})
    			.then((res)=>{
    				// add new resource 
-   				document.querySelector('.add-resource-btn').innerHTML = "Added!";
+   				document.querySelector('.add-resource-btn').innerHTML = "Added👍";
    				document.querySelector('.add-resource-btn').classList.add('btn-success');
    				document.querySelector('.add-resource-btn').classList.remove('btn-primary');
    			})

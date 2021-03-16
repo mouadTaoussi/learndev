@@ -72,6 +72,7 @@
 		width: 100%;
 		z-index: 999;
 		transform: all .2s ease-out;
+		height: 80px;
 	}
 	.list-item {
 		display: inline;

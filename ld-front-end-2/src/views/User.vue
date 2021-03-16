@@ -172,32 +172,44 @@
 						<div class="modal-body">
 
 							<p class="text-left text-dark">
-								<strong>Enter topic title</strong>
+								<strong>Enter your current password</strong>
 							</p>
 							<input
-								id="email"
-								v-model="newTopic.title" 
+								id="current_password"
+								v-model="passwords.current_password" 
 								class="form-control my-2" 
-								placeholder="Enter the topic title">
+								placeholder="Enter the current password">
 
 							<p class="text-left text-dark">
-								<strong>Provide a link about an image</strong>
+								<strong>Enter the newest password</strong>
 							</p>
 							<input
-								id="password"
-								v-model="newTopic.background_image" 
+								id="new_password"
+								v-model="passwords.new_password" 
 								class="form-control my-2" 
-								placeholder="Provide us an image link">
-							</div>
+								placeholder="Enter the newest password">
+							<p class="text-left text-dark">
+								<strong>Confirm the newest password</strong>
+							</p>
+							<input
+								id="confirmation_password"
+								v-model="passwords.new_password_confirmed" 
+								class="form-control my-2" 
+								placeholder="Confirm the newest password">
+						</div>
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							<button 
+
 								v-on:click="changePassword()" 
 								type="button" 
-								class="btn add-topic-btn btn-primary">Change it👍
+								class="change_password_btn btn add-topic-btn btn-primary">Change it
 							</button>
 						</div>
+							
+						</div>
+
 					</div>
 				</div>
 			</div>
@@ -247,6 +259,11 @@
 	    		type : null,
 	    		message : null
 	    	},
+	    	passwords : {
+	    		current_password : null,
+	    		new_password : null,
+	    		new_password_confirmed : null
+	    	},
 	    	new_topic_added : null
 	    }
 	  },
@@ -272,7 +289,7 @@
 	   methods : {
 	   	addNewTopic : function(){
 			// Check the values
-			if (this.newTopic.title == null | this.newTopic.title == "") {
+			if (this.newTopic.title == null || this.newTopic.title == "") {
 				document.querySelector('#email').classList.add('is-invalid');
 			}
 			else if (this.newTopic.background_image == null || this.newTopic.background_image == ""){
@@ -308,7 +325,7 @@
 	   				}
 	   			})
 				.then(function(res){
-					document.querySelector('.add-topic-btn').innerHTML = "Added!";
+					document.querySelector('.add-topic-btn').innerHTML = "Added👍";
 					document.querySelector('.add-topic-btn').classList.add('btn-success');
 					document.querySelector('.add-topic-btn').classList.remove('btn-primary');
 				})
@@ -322,15 +339,40 @@
 			alert(this.current_user)
 		},
 		changePassword : function(){
+			console.log()
+			if ( this.passwords.current_password == "" || this.passwords.current_password == null ) {
+				this.showAlert('error','Fill the inputs',"null");
+				return;
+			}
+			if ( this.passwords.new_password == "" || this.passwords.new_password == null ) {
+				this.showAlert('error','Fill the inputs',null);
+				return;
+			}
+			if ( this.passwords.new_password_confirmed == "" || this.passwords.new_password_confirmed == null ) {
+				this.showAlert('error','Fill the inputs',null);
+				return;
+			}
+
+			if (this.passwords.new_password != this.passwords.new_password_confirmed) {
+				this.showAlert('error','Confirm your password',"#confirmation_password");
+				return;
+			}
+			
 			alert('changed')
 
 			this.$http({
 		  		method : "POST",
 		  		url    : apihost.api_domain + '/auth/changePassword',
-		  		data : { current_password: "ffvv", new_password: "dbbddbg" }
+		  		data : { 
+		  			current_password: this.passwords.current_password,
+		  			new_password: this.passwords.new_password 
+		  		}
 		  	})
 		  	.then((res)=>{
-		  		console.log(res)
+		  		console.log(res.data)
+		  		document.querySelector('.change_password_btn').innerHTML = "Changed👍";
+				document.querySelector('.change_password_btn').classList.add('btn-success');
+				document.querySelector('.change_password_btn').classList.remove('btn-primary');
 		  	})
 		  	.catch((err)=>{
 		  		console.log(err)

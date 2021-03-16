@@ -178,7 +178,7 @@ class Authentication implements AuthenticationInt {
 			})
 		}
 		else {
-			res.status(404).send({
+			res.status(200).send({
 				message : "Make sure to put a correct email!",
 				sent    : false
 			})
@@ -201,7 +201,7 @@ class Authentication implements AuthenticationInt {
 		const matched: boolean = await compare( body.current_password, current_user.user.password );
 
 		// if compared then
-		if (matched != true) {res.status(404).send({ loggedin : false, message: "credentials aren't correct!" })}
+		if (matched != true) {res.status(200).send({ loggedin : false, message: "credentials aren't correct!" })}
 		else {
 			// Change password
 			res.status(200).send({changed: true, message:"Password changed!"})
@@ -240,7 +240,7 @@ class Authentication implements AuthenticationInt {
 				})
 			}
 			else {
-				res.status(404).send({
+				res.status(200).send({
 					updated : false,
 					message : "Email alreay provided!"
 				})
@@ -274,7 +274,7 @@ class Authentication implements AuthenticationInt {
 		// Get the password to authorize user to change his credentials
 		const { password } = req.query;
 
-		if (!password) {res.status(400).send({ message:"no password provided!" }); res.end()};
+		if (!password) {res.status(200).send({ message:"no password provided!" }); res.end()};
 
 		// Find user by its session
 		const user: any = await _user.findUser({ email: authenticated_user.user.email });
