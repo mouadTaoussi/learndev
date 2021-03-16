@@ -3,6 +3,8 @@
 - Create blog or community
 - WithCredentials set to false! so sessions are no longer be set and sent between the server and the client
 
+* Layout between front and backend with errors sharing!!!!!
+
 - To exectute upvotes (add another upvote or delete an upvote) see
 https://mongoosejs.com/docs/queries.html
 

@@ -99,8 +99,9 @@ class UserService implements UserService {
 	} async changePassword(id: string, password: string):Promise<{status:number, changed:boolean,message:string}>
 	{
 		try {
+			console.log(1)
 			const user = await UserModel.findByIdAndUpdate(id,{ password: password });
-			
+			console.log(user)
 			return {
 				status : 200, changed : true, message : 'password changed successfully!'
 			}

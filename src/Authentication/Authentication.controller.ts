@@ -119,11 +119,11 @@ class Authentication implements AuthenticationInt {
 			req.session.passport.user = { id:new_user.user._id, name : body.user_name,  email: body.email, at_provider_id: null };
 
 			// send it back to the frontend			
-			res.status(new_user.status).send({ registered : true, message: "Registered successfully!",user: new_user.user})
+			res.status(200).send({ registered : true, message: "Registered successfully!",user: new_user.user})
 
 		}
 		else {		
-			res.status(new_user.status).send({
+			res.status(200).send({
 				registered : false,
 				message : "Something went wrong!"
 			})
@@ -172,7 +172,7 @@ class Authentication implements AuthenticationInt {
 			    html: mailTemplate
 			});
 
-			res.status(updatePassword.status).send({
+			res.status(200).send({
 				sent : true,
 				message : "email sent to your inbox!",
 			})
@@ -203,7 +203,18 @@ class Authentication implements AuthenticationInt {
 		// if compared then
 		if (matched != true) {res.status(200).send({ loggedin : false, message: "credentials aren't correct!" })}
 		else {
+			// Hash password
+			// Hash password
+			const salt = await genSalt(10);
+			const hashed_password = await hash(body.new_password, salt);
+
 			// Change password
+			const changePassword = await _user.changePassword(authenticated_user.user.id, hashed_password);
+
+			if (!changePassword.changed) { 
+				res.status(200).send({changed: false,message : "The password was not changed!"});
+				return;
+			 }
 			res.status(200).send({changed: true, message:"Password changed!"})
 		}
 	}
@@ -234,7 +245,7 @@ class Authentication implements AuthenticationInt {
 					id:updating.user._id, name: updating.user.name, email: updating.user.email, at_provider_id: null 
 				}
 
-				res.status(updating.status).send({
+				res.status(200).send({
 					updated : updating.updated,
 					message : updating.message
 				})
@@ -256,7 +267,7 @@ class Authentication implements AuthenticationInt {
 				id:updating.user._id, name: updating.user.user_name, email: updating.user.email, at_provider_id: null 
 			}
 			
-			res.status(updating.status).send({
+			res.status(200).send({
 				updated : updating.updated,
 				message : updating.message
 			})
@@ -293,7 +304,7 @@ class Authentication implements AuthenticationInt {
 				// Remove session
 				req.session.passport = undefined;
 
-				res.status(delete_user.status).send({
+				res.status(200).send({
 					deleted : delete_user.deleted, message : delete_user.message
 				})
 			}

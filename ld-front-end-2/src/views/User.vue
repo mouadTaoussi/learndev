@@ -96,7 +96,7 @@
 					v-on:click="updateProfile()" 
 					id="saveChanges" 
 					disabled
-					class="btn btn-info float-left"
+					class="save_changes_btn btn btn-info float-left"
 				>Save Changes</button>
 			</section>
 
@@ -176,6 +176,7 @@
 							</p>
 							<input
 								id="current_password"
+								type="password"
 								v-model="passwords.current_password" 
 								class="form-control my-2" 
 								placeholder="Enter the current password">
@@ -185,6 +186,7 @@
 							</p>
 							<input
 								id="new_password"
+								type="password"
 								v-model="passwords.new_password" 
 								class="form-control my-2" 
 								placeholder="Enter the newest password">
@@ -193,6 +195,7 @@
 							</p>
 							<input
 								id="confirmation_password"
+								type="password"
 								v-model="passwords.new_password_confirmed" 
 								class="form-control my-2" 
 								placeholder="Confirm the newest password">
@@ -258,6 +261,11 @@
 	    	alert : {
 	    		type : null,
 	    		message : null
+	    	},
+	    	updatedProfile : {
+	    		fullname : null,
+	    		user_name: null,
+	    		email    : null
 	    	},
 	    	passwords : {
 	    		current_password : null,
@@ -336,10 +344,32 @@
 			}
 		},
 		updateProfile : function(){
-			alert(this.current_user)
+			// Check inputs
+			// Update
+			this.$http({
+				url : apihost.api_domain + "/auth/updateUser",
+				method : "POST",
+				data : {
+					fullname: this.current_user.fullname,
+					user_name: this.current_user.user_name, 
+					email: this.current_user.email 
+				}
+			})
+			.then((res)=>{
+				if (!res.data.updated) {
+					this.showAlert('error', res.data.message, "null");
+					return;
+				}
+				else {
+					document.querySelector('.save_changes_btn').innerHTML = "Changed👍";
+					document.querySelector('.save_changes_btn').classList.add('btn-success');
+					document.querySelector('.save_changes_btn').classList.remove('btn-primary');	
+				}
+			})
+			.catch((err)=>{
+			})
 		},
 		changePassword : function(){
-			console.log()
 			if ( this.passwords.current_password == "" || this.passwords.current_password == null ) {
 				this.showAlert('error','Fill the inputs',"null");
 				return;
@@ -357,8 +387,6 @@
 				this.showAlert('error','Confirm your password',"#confirmation_password");
 				return;
 			}
-			
-			alert('changed')
 
 			this.$http({
 		  		method : "POST",
@@ -369,13 +397,18 @@
 		  		}
 		  	})
 		  	.then((res)=>{
-		  		console.log(res.data)
+
+		  		if (!res.data.changed) {
+		  			this.showAlert('#error','something went wrong!',null);
+		  			return;
+		  		}
+
 		  		document.querySelector('.change_password_btn').innerHTML = "Changed👍";
 				document.querySelector('.change_password_btn').classList.add('btn-success');
 				document.querySelector('.change_password_btn').classList.remove('btn-primary');
 		  	})
 		  	.catch((err)=>{
-		  		console.log(err)
+		  		
 		  	})
 		},
 		toggleSaveChanges : function(){

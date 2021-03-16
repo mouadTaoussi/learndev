@@ -93,7 +93,9 @@ class UserService {
     }
     async changePassword(id, password) {
         try {
+            console.log(1);
             const user = await Authentication_models_1.UserModel.findByIdAndUpdate(id, { password: password });
+            console.log(user);
             return {
                 status: 200, changed: true, message: 'password changed successfully!'
             };
