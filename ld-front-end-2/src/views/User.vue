@@ -344,7 +344,19 @@
 			}
 		},
 		updateProfile : function(){
-			// Check inputs
+			// // Check inputs
+			if ( this.current_user.fullname == "" || this.current_user.fullname == null ){
+				this.showAlert('error', "Fill all the inputs", "null"); return;
+			}
+			if ( this.current_user.user_name == "" || this.current_user.user_name == null ){
+				this.showAlert('error', "Fill all the inputs", "null"); return;
+			}
+			if ( this.current_user.email == "" || this.current_user.email == null ){
+				this.showAlert('error', "Fill all the inputs", "null"); return;
+			}
+
+			document.querySelector('.save_changes_btn').innerHTML = "Please wait...";
+
 			// Update
 			this.$http({
 				url : apihost.api_domain + "/auth/updateUser",
@@ -387,6 +399,7 @@
 				this.showAlert('error','Confirm your password',"#confirmation_password");
 				return;
 			}
+			document.querySelector('.change_password_btn').innerHTML = "Please wait...";
 
 			this.$http({
 		  		method : "POST",
@@ -399,7 +412,7 @@
 		  	.then((res)=>{
 
 		  		if (!res.data.changed) {
-		  			this.showAlert('#error','something went wrong!',null);
+		  			this.showAlert('#error',res.data.message,null);
 		  			return;
 		  		}
 

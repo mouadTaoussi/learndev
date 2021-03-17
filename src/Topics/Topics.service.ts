@@ -300,6 +300,10 @@ class TopicService implements TopicServiceInt {
 		try {
 			const topics = await TopicModel.find().skip(skip).limit(limit).exec();
 			//
+
+			// Filter topics by user interests
+			// Filter topics by users interests
+			// Filter topics by content volume 
 			return {
 				message : null,
 				found : false,

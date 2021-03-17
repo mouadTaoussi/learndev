@@ -52,7 +52,7 @@ class topicInfoResolver implements topicInfoResolver {
 		const topics = await _topicservice.getTopics (limit, skip);
 
 		return topics.data;
-
+ 
 	}
 }
 

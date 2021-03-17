@@ -45,7 +45,8 @@
 
 	  data () {
 	    return {
-	    	topics : [
+	    	topics : null,
+	    	topics_demo : [
 	    		{
 	    			_id : "gvv",
 	    			title : "Javascript",
@@ -106,9 +107,40 @@
 
 	  mounted (){
 	  	window.scrollTo(0, 0);
+	  	console.log(1)
+	  	const GET_TOPICS = gql`
+		  	query ($limit:Float!,$skip:Float!) {
+			  	getTopics(limit:$limit,skip:$skip){
+			    	_id
+			    	title
+			    	background_image
+				}
+		  	}
+	  	`
 	  	// Fetch some Topics
-	  	this.skip;
-	  	this.limit;
+	  	this.$http({
+			url : apihost.api_domain + "/graphql",
+			method: "POST",
+			headers: {
+			// 'Content-Type': 'application/json',
+	        // 'Accept'      : `application/json`
+		},
+			data: {
+				query: print(GET_TOPICS),
+				variables: {
+					limit: this.limit,
+					skip: this.skip,
+				},
+			}
+		})
+		.then((res)=>{
+			// Attach that to the topics
+			this.topics = res.data.data.getTopics;
+			// Increment the skip 
+		})
+		.catch(()=>{
+
+		})
 	  },
 	  methods : {
 	  	search : function(item_query){

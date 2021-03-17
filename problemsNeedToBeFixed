@@ -3,10 +3,48 @@
 - Create blog or community
 - WithCredentials set to false! so sessions are no longer be set and sent between the server and the client
 
-* Layout between front and backend with errors sharing!!!!!
+!!!! Problmes above are fixed !!!!
 
-- To exectute upvotes (add another upvote or delete an upvote) see
+* Layout between front and backend with errors sharing!!!!!
+* skip && limit problom for search 
+* sort content by upvotes
+* recommendation algorithm
+  - filter by search keywords (if searched)
+  - filter by user interests (upvoted)(if search and recomendation)
+  - filter by content volume in topic (if topic)(if search and recomendation)
+  - sort content by upvotes (if search and recomendation)
+  - skip and limit
+  // Steps
+    
+    get topics by recomed
+      - get topics 
+      - sort by user interests
+      - skip and limit
+    
+    get topics by search
+      - filter by search keywords
+      - remove duplicates
+      - sort by user interests (upvotes)
+      - skip and limit 
+    
+    get content by recomend
+      -  get topics 
+      - sort by user interests
+      - skip and limit
+    
+    get content by search
+      - filter by search keywords
+      - remove duplicates
+      - sort by user interests (upvotes)
+      - skip and limit 
+
+
+- To exectute upvotes (add another upvote or delete an upvote) see:
 https://mongoosejs.com/docs/queries.html
+
+- To implement skip limit in js without mongoose see:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+
 
 SHOT ON IPHONE
 - https://www.youtube.com/watch?v=CbiIeD2Ss94

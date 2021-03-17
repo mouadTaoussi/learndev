@@ -25,15 +25,23 @@
 					</button>
 				</div>
 
-				<a class="text-dark" href='' target="_blank">
-					<div class="content">
+				<div class="content">
+					<a v-if="!description" class="text-dark" v-bind:href="link" target="_blank">
 						<h5 class="title">{{ title }}</h5>
-						<router-link v-bind:to="/user/+ user_id" tag='i' class="creator_name">
-							By {{ creator_name }}
-						</router-link>
-						<span class="level badge badge-danger ml-2">{{ level }}</span>
+					</a>
+					<div v-else-if="description">
+						<h5 v-on:click="showDescription(id)" class="title">{{ title }}</h5>
 					</div>
-				</a>
+					<!-- <router-link v-bind:to="/user/+ user_id" tag='i' class="creator_name"> -->
+						<i>
+							By {{ creator_name }}
+						</i>
+					<!-- </router-link> -->
+					<span class="level badge badge-danger ml-2">{{ level }}</span>
+				</div>
+			</div>
+			<div v-bind:id="'a'+id" class="description-show border shadow p-4">
+				<p class="text-left text-dark">{{description}}</p>
 			</div>
 	</section>
 </template>
@@ -59,6 +67,10 @@
 	    }
 	  },
 	  methods: {
+	  	showDescription : function(id) {
+	  		alert('showed')
+	  		console.log(document.querySelector("#a"+id))
+	  	},
 	  	// if the user owns that resource
 	  	deleteResource : function (){
 
@@ -79,6 +91,7 @@
 	  			// Increase the upvote
 	  			this.resource_upvotes ++;
 	  		}
+
 	  		console.log(upvote_btn)
 	  		// Send that upvote including -resource_id -type -user_id (in session)
 	  		// alert(upvote);
@@ -109,5 +122,23 @@
  	}
  	.upvote-btn {
  		height: 100%;
+ 	}
+
+ 	.description-hidden {
+ 		transition: all .2s ease-in!important; 
+ 		height: 0;
+ 		padding: 0!important;
+ 	}
+ 	.description-hidden p {
+ 		transform: scaleY(0);
+ 		transition: all .2s ease-in!important;
+ 	}
+ 	.description-show {
+ 		transition: all .2s ease-in!important; 
+ 		height: auto;
+ 	}
+ 	.description-show p {
+ 		transform: scaleY(1);
+ 		transition: all .2s ease-in!important;
  	}
 </style>
