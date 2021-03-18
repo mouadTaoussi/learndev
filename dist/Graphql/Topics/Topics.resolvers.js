@@ -15,12 +15,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.projectIdeaResolver = exports.articleResolver = exports.courseResolver = exports.docsResolver = exports.topicInfoResolver = exports.topicResolver = void 0;
+exports.upvoteResolver = exports.projectIdeaResolver = exports.articleResolver = exports.courseResolver = exports.docsResolver = exports.topicInfoResolver = exports.topicResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const Topics_objecttypes_1 = require("./Topics.objecttypes");
 const middlewares_graphql_1 = require("../middlewares.graphql");
 const Topics_service_1 = __importDefault(require("../.././Topics/Topics.service"));
 const _topicservice = new Topics_service_1.default();
+let upvoteResolver = class upvoteResolver {
+    async upvote(resource_id, type, context) {
+        console.log(resource_id);
+        console.log(type);
+        return {
+            upvoted: true
+        };
+    }
+};
+__decorate([
+    type_graphql_1.Mutation(returns => Topics_objecttypes_1.Upvote, { description: "this mutation upvoting a content" }),
+    __param(0, type_graphql_1.Arg('resource_id')), __param(1, type_graphql_1.Arg('type')), __param(2, type_graphql_1.Ctx()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, Object]),
+    __metadata("design:returntype", Promise)
+], upvoteResolver.prototype, "upvote", null);
+upvoteResolver = __decorate([
+    type_graphql_1.Resolver(of => Topics_objecttypes_1.Upvote)
+], upvoteResolver);
+exports.upvoteResolver = upvoteResolver;
 let topicInfoResolver = class topicInfoResolver {
     async searchTopic(search_term, { limit, skip }) {
         const query_to_search = search_term.split(' ');

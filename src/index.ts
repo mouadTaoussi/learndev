@@ -19,7 +19,7 @@ import cors from "cors";
 import AuthenticationRoutes from './Authentication/Authentication.routes';
 import './Authentication/Authentication.strategies';
 import { 
-	topicResolver, topicInfoResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver 
+	topicResolver, topicInfoResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver, upvoteResolver 
 } from './Graphql/Topics/Topics.resolvers';
 
 const app : Application = express();
@@ -69,7 +69,7 @@ async function runapp (){
 		schema : await buildSchema({
 			resolvers : [
 				topicResolver,  topicInfoResolver, docsResolver,
-				courseResolver, articleResolver,   projectIdeaResolver
+				courseResolver, articleResolver,   projectIdeaResolver, upvoteResolver
 			],
 			globalMiddlewares: []
 		}),

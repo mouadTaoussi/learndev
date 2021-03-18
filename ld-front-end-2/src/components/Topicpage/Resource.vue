@@ -47,15 +47,18 @@
 
 <script>
 	const apihost = require('../../.././api.config.js');
+	import { print } from 'graphql';
+	import gql from "graphql-tag";
 
 	export default {
 
 	  name: 'Resource',
-	  props : [ "id", "title","upvotes", "upvoted", "creator_name", "link", "level", "user_id","description" ],
+	  props : [ "id", "type", "title","upvotes", "upvoted", "creator_name", "link", "level", "user_id","description" ],
 
 	  data () {
 	    return {
 	    	id               : this.id,
+	    	type             : this.type,
 	    	user_id          : this.user_id,
 	    	creator_name     : this.creator_name,
 	    	title            : this.title,
@@ -117,7 +120,35 @@
 	  		}
 
 	  		// Send that upvote including -resource_id -type -user_id (in session)
+	  		const UPVOTE = gql`
+	  			mutation ($type: String!, $resource_id:String!) {
+				  upvote( type:$type, resource_id:$resource_id ){ upvoted }
+				}
+	  		`;
 	  		// alert(upvote);
+
+	  		// add
+   			this.$http({
+   				url : apihost.api_domain + "/graphql",
+   				method: "POST",
+   				headers: {
+					// 'Content-Type': 'application/json',
+			        // 'Accept'      : `application/json`
+				},
+   				data: {
+   					query: print(UPVOTE),
+					variables: {
+						type : this.type,
+						resource_id : this.id
+					},
+   				}
+   			})
+   			.then((res)=>{
+   				console.log(res)
+   			})
+   			.catch((err)=>{
+
+   			})
 	  	}
 	  }
 	}

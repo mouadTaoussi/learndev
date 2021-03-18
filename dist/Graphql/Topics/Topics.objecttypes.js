@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TopicInfo = exports.LoadMoreRules = exports.ProjectIdeaArgs = exports.ArticleArgs = exports.CourseArgs = exports.DocsArgs = exports.TopicArgs = exports.ProjectIdea = exports.Article = exports.Course = exports.Docs = exports.Topic = void 0;
+exports.TopicInfo = exports.LoadMoreRules = exports.ProjectIdeaArgs = exports.ArticleArgs = exports.CourseArgs = exports.DocsArgs = exports.TopicArgs = exports.Upvote = exports.ProjectIdea = exports.Article = exports.Course = exports.Docs = exports.Topic = void 0;
 const type_graphql_1 = require("type-graphql");
 let Topic = class Topic {
 };
@@ -247,6 +247,16 @@ ProjectIdea = __decorate([
     type_graphql_1.ObjectType({ description: 'This one represents project idea' })
 ], ProjectIdea);
 exports.ProjectIdea = ProjectIdea;
+let Upvote = class Upvote {
+};
+__decorate([
+    type_graphql_1.Field(type => Boolean, { description: "isupvoted" }),
+    __metadata("design:type", Boolean)
+], Upvote.prototype, "upvoted", void 0);
+Upvote = __decorate([
+    type_graphql_1.ObjectType({ description: "Upvote section" })
+], Upvote);
+exports.Upvote = Upvote;
 let TopicArgs = class TopicArgs {
 };
 __decorate([

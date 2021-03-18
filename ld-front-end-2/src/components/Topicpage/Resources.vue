@@ -39,6 +39,7 @@
 			<Resource 
 				v-for="doc in docs"
 				v-bind:id="doc._id"
+				type="doc"
 				v-bind:title="doc.title" 
 				v-bind:upvotes="doc.upvotes_count" 
 				v-bind:upvoted="doc.upvoted"
@@ -53,6 +54,7 @@
 			<Resource 
 				v-for="course in courses"
 				v-bind:id="course._id"
+				type="course"
 				v-bind:title="course.title" 
 				v-bind:upvotes="course.upvotes_count" 
 				v-bind:upvoted="course.upvoted"
@@ -67,6 +69,7 @@
 			<Resource 
 				v-for="article in articles"
 				v-bind:id="article._id"
+				type="article"
 				v-bind:title="article.title" 
 				v-bind:upvotes="article.upvotes_count" 
 				v-bind:upvoted="article.upvoted"
@@ -81,6 +84,7 @@
 			<Resource 
 				v-for="projectidea in projectideas"
 				v-bind:id="projectidea._id"
+				type="projectidea"
 				v-bind:title="projectidea.title" 
 				v-bind:upvotes="projectidea.upvotes_count" 
 				v-bind:upvoted="projectidea.upvoted"

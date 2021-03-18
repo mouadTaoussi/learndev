@@ -1,7 +1,7 @@
 
 import { Resolver, Query, Mutation, Arg, Args, Ctx, UseMiddleware } from 'type-graphql';
 import { 
-	Topic,      Docs,      Course,      Article,      ProjectIdea,
+	Topic,      Docs,      Course,      Article,      ProjectIdea, Upvote,
 	TopicArgs, DocsArgs, CourseArgs, ArticleArgs, ProjectIdeaArgs, LoadMoreRules, TopicInfo
 } from './Topics.objecttypes';
 import { Authenticated }  from '../middlewares.graphql';
@@ -11,8 +11,26 @@ const _topicservice = new TopicService();
 
 
 // Upvotes function
+interface upvoteResolver {
+	upvote (resource_id:string, type:string, context:any) :Promise<any>
+}
 
-
+@Resolver(of  => Upvote)
+class upvoteResolver implements upvoteResolver{
+	@Mutation(returns => Upvote, {description: "this mutation upvoting a content"})
+	// @UseMiddleware(Authenticated)
+	public async upvote(@Arg('resource_id') resource_id:string, @Arg('type') type: string, @Ctx() context:any) :Promise<any>{
+		
+		// Check if the user already upvoted
+		// if upvoted then remove the upvote
+		// if not upvoted then add the upvote*
+		console.log(resource_id)
+		console.log(type)
+		return {
+			upvoted : true
+		}
+	}
+}
 
 interface topicInfoResolver {
 	searchTopic(search_term: string,{limit,skip}: LoadMoreRules) :Promise<any> // Load more
@@ -343,7 +361,7 @@ class projectIdeaResolver implements projectIdeaResolver {
 }
 
 
-export { topicResolver, topicInfoResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver };
+export { topicResolver, topicInfoResolver, docsResolver, courseResolver, articleResolver, projectIdeaResolver, upvoteResolver };
 
 // user_id : "vffff",
 // title : topic_id,

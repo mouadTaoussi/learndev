@@ -186,6 +186,12 @@ class ProjectIdea {
 	upvoted : boolean;
 }
 
+@ObjectType({description:"Upvote section"})
+class Upvote {
+	@Field(type => Boolean,{description:"isupvoted"})
+	upvoted: Boolean;
+}
+
 @ArgsType()
 class TopicArgs {
 	
@@ -273,6 +279,6 @@ class LoadMoreRules {
 }
 
 export { 
-	Topic, Docs, Course, Article, ProjectIdea, 
+	Topic, Docs, Course, Article, ProjectIdea, Upvote, 
 	TopicArgs, DocsArgs, CourseArgs, ArticleArgs, ProjectIdeaArgs, LoadMoreRules, TopicInfo
 };
