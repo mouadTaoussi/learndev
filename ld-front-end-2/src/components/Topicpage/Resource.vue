@@ -5,13 +5,13 @@
 				<div class="upvote">
 					<button 
 						@click="upvote(upvoted)" 
-						v-if="upvoted == 'true'" 
+						v-if="!upvoted" 
 						v-bind:class="'btn btn-outline-warning text-dark upvote-btn'+id"
 					>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
 						  <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
 						</svg><br>
-						{{ resource_upvotes + upvoted }}
+						{{ resource_upvotes }}
 					</button>
 					<button 
 						@click="upvote(upvoted)" 
@@ -21,26 +21,25 @@
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
 						  <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
 						</svg><br>
-						{{ resource_upvotes + upvoted }}
+						{{ resource_upvotes }}
 					</button>
 				</div>
 
 				<div class="content">
-					<a v-if="!description" class="text-dark" v-bind:href="link" target="_blank">
-						<h5 class="title">{{ title }}</h5>
-					</a>
-					<div v-else-if="description">
-						<h5 v-on:click="showDescription(id)" class="title">{{ title }}</h5>
-					</div>
-					<!-- <router-link v-bind:to="/user/+ user_id" tag='i' class="creator_name"> -->
+				
+						<a class="text-dark"  
+							v-bind:href='"http://localhost"' target="_blank"
+							v-on:click="showDescription($event,id,link,description)" 
+							>
+							<h5 class="title">{{ title }}</h5>
+						</a>
 						<i>
 							By {{ creator_name }}
 						</i>
-					<!-- </router-link> -->
 					<span class="level badge badge-danger ml-2">{{ level }}</span>
 				</div>
 			</div>
-			<div v-bind:id="'a'+id" class="description-show border shadow p-4">
+			<div v-bind:id="'a'+id" class="description-hidden border shadow p-4">
 				<p class="text-left text-dark">{{description}}</p>
 			</div>
 	</section>
@@ -52,24 +51,49 @@
 	export default {
 
 	  name: 'Resource',
-	  props : [ "id", "title","upvotes", "upvoted", "creator_name", "link", "level", "user_id" ],
+	  props : [ "id", "title","upvotes", "upvoted", "creator_name", "link", "level", "user_id","description" ],
 
 	  data () {
 	    return {
 	    	id               : this.id,
-	    	title            : this.title,
-	    	resource_upvotes : this.upvotes,
-	    	upvoted          : this.upvoted,
+	    	user_id          : this.user_id,
 	    	creator_name     : this.creator_name,
+	    	title            : this.title,
 	    	link             : this.link,
 	    	level            : this.level,
-	    	user_id          : this.user_id
+	    	resource_upvotes : this.upvotes,
+	    	upvoted          : this.upvoted,
+	    	description      : this.description
 	    }
 	  },
 	  methods: {
-	  	showDescription : function(id) {
-	  		alert('showed')
-	  		console.log(document.querySelector("#a"+id))
+	  	showDescription : function(event,id,link,description) {
+
+	  		// if there is description but there is no link then this is a projectidea
+	  		if (description && !link) {
+	  			// Don't redirect user 
+	  			event.preventDefault()
+
+		  		const description_area = document.querySelector("#a"+id);
+
+		  		if (description_area.classList.contains('description-show')) {
+		  			if (!description_area.classList.contains('description-hidden')) {
+			  			// Hide description area
+			  			description_area.classList.add('description-hidden');
+			  			description_area.classList.remove('description-show');
+		  			}
+		  		}
+		  		else if(description_area.classList.contains('description-hidden')) {
+		  			if (!description_area.classList.contains('description-show')) {
+		  				// Show description area
+			  			description_area.classList.add('description-show');
+			  			description_area.classList.remove('description-hidden');
+		  			}
+		  		}
+	  		}
+	  		else {
+	  			// Redirect user
+	  		}
 	  	},
 	  	// if the user owns that resource
 	  	deleteResource : function (){
@@ -92,7 +116,6 @@
 	  			this.resource_upvotes ++;
 	  		}
 
-	  		console.log(upvote_btn)
 	  		// Send that upvote including -resource_id -type -user_id (in session)
 	  		// alert(upvote);
 	  	}
@@ -125,20 +148,20 @@
  	}
 
  	.description-hidden {
- 		transition: all .2s ease-in!important; 
+ 		transition: all .1s ease-in!important; 
  		height: 0;
  		padding: 0!important;
  	}
  	.description-hidden p {
  		transform: scaleY(0);
- 		transition: all .2s ease-in!important;
+ 		transition: all .1s ease-in!important;
  	}
  	.description-show {
- 		transition: all .2s ease-in!important; 
+ 		transition: all .1s ease-in!important; 
  		height: auto;
  	}
  	.description-show p {
  		transform: scaleY(1);
- 		transition: all .2s ease-in!important;
+ 		transition: all .1s ease-in!important;
  	}
 </style>

@@ -26,6 +26,16 @@
 
 		<!-- Tabs pages -->
 		<section class='tabs-pages-docs'>
+<!-- 			<Resource 
+				id="doc._id"
+				title="doc.title" 
+				upvotes="doc.upvotes_count" 
+				upvoted="doc.upvoted"
+				creator_name="doc.creator_name" 
+				link="doc.link"
+				level="doc.hard" 
+				user_id="doc.user_id" -->
+			<!-- ></Resource> -->
 			<Resource 
 				v-for="doc in docs"
 				v-bind:id="doc._id"
@@ -78,6 +88,8 @@
 				v-bind:link="projectidea.link"
 				v-bind:level="projectidea.hard" 
 				v-bind:user_id="projectidea.user_id"
+				v-bind:description="projectidea.description"
+
 			></Resource>	
 		</section>
 	</section>
