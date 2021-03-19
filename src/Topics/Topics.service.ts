@@ -148,12 +148,7 @@ class TopicService implements TopicServiceInt {
 					project_ideas_to_be_sent[i].upvoted = false;
 				}
 			}
-			console.log({
-				docs         :docs_to_be_sent,
-				courses      :courses_to_be_sent,
-				articles     :articles_to_be_sent,
-				project_idea :project_ideas_to_be_sent
-			})
+			
 			return {
 				message : null,
 				found : false,
@@ -599,19 +594,40 @@ class TopicService implements TopicServiceInt {
 		if (type == "projectidea"){
 			resource = await ProjectIdeaModel.findOne({_id : resource_id});
 		}
-		console.log(resource)
+
 		// Check if the user upvoted
-		console.log(resource.upvotes.includes(user_id))
 		if (resource.upvotes.includes(user_id)) {
-			console.log('upvoted')
-		}else {
-			console.log('not upvoted')
+			
+			// Down vote the resource and remove user id from the upvotes array if already upvoted
+			// Get the index of the user in upvotes
+			const index_of_upvote = resource.upvotes.indexOf(user_id);
+
+			// Delete that upvote
+			resource.upvotes.splice(index_of_upvote, 1);
+
+			// Decrease upvotes_count 
+			resource.upvotes_count--;
+
+			await resource.save();
+
+			// false means that the user removed the upvoted
+			return false
 		}
-		// Upvote the resource and save user id to the upvotes array if not upvoted
-		// Down vote the resource and remove user id from the upvotes array if already upvoted
+		else {
+			
+			// Upvote the resource and save user id to the upvotes array if not upvoted
+			resource.upvotes.push(user_id);
+
+			// Increase upvotes_count 
+			resource.upvotes_count++;
+
+			await resource.save();
+			
+			// true means that the user is upvoted
+			return true;
+		}
 		// Add to upvoted list when he upvoted to the upvoted list
 		// Remove the content from the upvoted list of the user
-		return false;
 	}
 
 }

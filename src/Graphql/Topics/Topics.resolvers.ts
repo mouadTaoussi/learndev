@@ -22,10 +22,10 @@ class upvoteResolver implements upvoteResolver{
 	public async upvote(@Arg('resource_id') resource_id:string, @Arg('type') type: string, @Ctx() context:any) :Promise<any>{
 		
 		const user_id = context.req.user.id
-		const upvote = await _topicservice.upvote(user_id, type, resource_id);
+		const upvote: boolean = await _topicservice.upvote(user_id, type, resource_id);
 
 		return {
-			upvoted : true
+			upvoted : upvote
 		}
 	}
 }

@@ -1,5 +1,8 @@
 <template>
 	<section>
+			<!-- Alert -->
+			<Alert></Alert>
+			<!-- Alert -->
 			<div class="border bg-light resource-area text-left my-2 p-2">
 
 				<div class="upvote">
@@ -49,12 +52,15 @@
 	const apihost = require('../../.././api.config.js');
 	import { print } from 'graphql';
 	import gql from "graphql-tag";
+	import Alert from ".././Alert.vue";
 
 	export default {
 
 	  name: 'Resource',
 	  props : [ "id", "type", "title","upvotes", "upvoted", "creator_name", "link", "level", "user_id","description" ],
-
+	  components: {
+	  	Alert
+	  },
 	  data () {
 	    return {
 	    	id               : this.id,
@@ -66,7 +72,11 @@
 	    	level            : this.level,
 	    	resource_upvotes : this.upvotes,
 	    	upvoted          : this.upvoted,
-	    	description      : this.description
+	    	description      : this.description,
+	    	alert : {
+	    		type : null,
+	    		message : null
+	    	}
 	    }
 	  },
 	  methods: {
@@ -149,7 +159,21 @@
    			.catch((err)=>{
    				// if not then we can reset the upvotes back to normal
    				this.resource_upvotes = this.upvotes;
+   				this.showAlert('error',"Something went wrong!",null);
    			})
+	  	},
+	  	showAlert : function(type, message, target){
+			// Set message to the alert
+			this.alert.message = message
+			this.alert.error = type
+	  		// Show alert
+			document.querySelector('.local-alert').style.opacity = "10";
+			// Determine where
+			document.querySelector(target).classList.add("is-invalid");
+
+			window.setTimeout(()=>{
+				document.querySelector('.local-alert').style.opacity = "0";				
+			},5000)
 	  	}
 	  }
 	}

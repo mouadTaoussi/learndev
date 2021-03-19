@@ -99,12 +99,6 @@ class TopicService {
                     project_ideas_to_be_sent[i].upvoted = false;
                 }
             }
-            console.log({
-                docs: docs_to_be_sent,
-                courses: courses_to_be_sent,
-                articles: articles_to_be_sent,
-                project_idea: project_ideas_to_be_sent
-            });
             return {
                 message: null,
                 found: false,
@@ -462,15 +456,19 @@ class TopicService {
         if (type == "projectidea") {
             resource = await Topics_models_1.ProjectIdeaModel.findOne({ _id: resource_id });
         }
-        console.log(resource);
-        console.log(resource.upvotes.includes(user_id));
         if (resource.upvotes.includes(user_id)) {
-            console.log('upvoted');
+            const index_of_upvote = resource.upvotes.indexOf(user_id);
+            resource.upvotes.splice(index_of_upvote, 1);
+            resource.upvotes_count--;
+            await resource.save();
+            return false;
         }
         else {
-            console.log('not upvoted');
+            resource.upvotes.push(user_id);
+            resource.upvotes_count++;
+            await resource.save();
+            return true;
         }
-        return false;
     }
 }
 exports.default = TopicService;

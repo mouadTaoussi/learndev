@@ -26,7 +26,7 @@ let upvoteResolver = class upvoteResolver {
         const user_id = context.req.user.id;
         const upvote = await _topicservice.upvote(user_id, type, resource_id);
         return {
-            upvoted: true
+            upvoted: upvote
         };
     }
 };
