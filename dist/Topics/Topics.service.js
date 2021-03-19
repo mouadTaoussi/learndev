@@ -449,6 +449,27 @@ class TopicService {
         }
     }
     async upvote(user_id, type, resource_id) {
+        let resource = null;
+        if (type == "docs") {
+            resource = await Topics_models_1.DocsModel.findOne({ _id: resource_id });
+        }
+        if (type == "course") {
+            resource = await Topics_models_1.CourseModel.findOne({ _id: resource_id });
+        }
+        if (type == "article") {
+            resource = await Topics_models_1.ArticleModel.findOne({ _id: resource_id });
+        }
+        if (type == "projectidea") {
+            resource = await Topics_models_1.ProjectIdeaModel.findOne({ _id: resource_id });
+        }
+        console.log(resource);
+        console.log(resource.upvotes.includes(user_id));
+        if (resource.upvotes.includes(user_id)) {
+            console.log('upvoted');
+        }
+        else {
+            console.log('not upvoted');
+        }
         return false;
     }
 }

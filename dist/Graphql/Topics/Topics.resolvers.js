@@ -23,8 +23,8 @@ const Topics_service_1 = __importDefault(require("../.././Topics/Topics.service"
 const _topicservice = new Topics_service_1.default();
 let upvoteResolver = class upvoteResolver {
     async upvote(resource_id, type, context) {
-        console.log(resource_id);
-        console.log(type);
+        const user_id = context.req.user.id;
+        const upvote = await _topicservice.upvote(user_id, type, resource_id);
         return {
             upvoted: true
         };
@@ -32,6 +32,7 @@ let upvoteResolver = class upvoteResolver {
 };
 __decorate([
     type_graphql_1.Mutation(returns => Topics_objecttypes_1.Upvote, { description: "this mutation upvoting a content" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('resource_id')), __param(1, type_graphql_1.Arg('type')), __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, Object]),
@@ -112,6 +113,7 @@ let topicResolver = class topicResolver {
         return topic.data;
     }
     async addTopic({ title, background_image }, context) {
+        const user_id = context.req.user.id;
         const new_topic = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
@@ -132,6 +134,7 @@ let topicResolver = class topicResolver {
         };
     }
     async deleteTopic(topic_id, context) {
+        const user_id = context.req.user.id;
         return "Deleted Successfully!";
         console.log(context.session);
     }
@@ -172,6 +175,7 @@ topicResolver = __decorate([
 exports.topicResolver = topicResolver;
 let docsResolver = class docsResolver {
     async addDocs({ topic_id, title, level, link }, context) {
+        const user_id = context.req.user.id;
         const new_doc = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
@@ -186,6 +190,7 @@ let docsResolver = class docsResolver {
         return newDoc.data;
     }
     async deleteDocs(docs_id, context) {
+        const user_id = context.req.user.id;
         return "Deleted Successfully!";
     }
 };
@@ -211,6 +216,7 @@ docsResolver = __decorate([
 exports.docsResolver = docsResolver;
 let courseResolver = class courseResolver {
     async addCourse({ topic_id, title, level, link }, context) {
+        const user_id = context.req.user.id;
         const new_course = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
@@ -225,6 +231,7 @@ let courseResolver = class courseResolver {
         return newCourse.data;
     }
     async deleteCourse(course_id, context) {
+        const user_id = context.req.user.id;
         return "Deleted Successfully!";
     }
 };
@@ -250,6 +257,7 @@ courseResolver = __decorate([
 exports.courseResolver = courseResolver;
 let articleResolver = class articleResolver {
     async addArticle({ topic_id, title, level, link }, context) {
+        const user_id = context.req.user.id;
         const new_article = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
@@ -264,6 +272,7 @@ let articleResolver = class articleResolver {
         return newArticle.data;
     }
     async deleteArticle(article_id, context) {
+        const user_id = context.req.user.id;
         return "Deleted Successfully!";
     }
 };
@@ -289,6 +298,7 @@ articleResolver = __decorate([
 exports.articleResolver = articleResolver;
 let projectIdeaResolver = class projectIdeaResolver {
     async addProjectIdea({ topic_id, title, level, description }, context) {
+        const user_id = context.req.user.id;
         const project_idea = {
             user_id: context.req.user.id,
             creator_name: context.req.user.name,
@@ -303,6 +313,7 @@ let projectIdeaResolver = class projectIdeaResolver {
         return projectIdea.data;
     }
     async deleteProjectIdea(project_idea_id, context) {
+        const user_id = context.req.user.id;
         return "Deleted Successfully!";
     }
 };

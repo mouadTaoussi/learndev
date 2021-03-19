@@ -144,10 +144,11 @@
    				}
    			})
    			.then((res)=>{
-   				console.log(res)
+   				
    			})
    			.catch((err)=>{
-
+   				// if not then we can reset the upvotes back to normal
+   				this.resource_upvotes = this.upvotes;
    			})
 	  	}
 	  }

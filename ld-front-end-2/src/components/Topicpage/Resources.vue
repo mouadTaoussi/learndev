@@ -39,7 +39,7 @@
 			<Resource 
 				v-for="doc in docs"
 				v-bind:id="doc._id"
-				type="doc"
+				type="docs"
 				v-bind:title="doc.title" 
 				v-bind:upvotes="doc.upvotes_count" 
 				v-bind:upvoted="doc.upvoted"

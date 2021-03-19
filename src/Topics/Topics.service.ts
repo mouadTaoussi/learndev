@@ -582,19 +582,39 @@ class TopicService implements TopicServiceInt {
 		}
 
 	}
+
 	public async upvote(user_id:string, type:string, resource_id:string) : Promise<boolean>{
-		// Find the resource 
-			// Check if the user upvoted
-			// Upvote the resource and save user id to the upvotes array if not upvoted
-			// Down vote the resource and remove user id from the upvotes array if already upvoted
-			// Add to upvoted list when he upvoted to the upvoted list
-			// Remove the content from the upvoted list of the user
-			return false;
+		// Find the right resource
+		let resource: any = null;
+
+		if (type == "docs"){
+			resource = await DocsModel.findOne({_id : resource_id});
+		} 
+		if (type == "course"){
+			resource = await CourseModel.findOne({_id : resource_id});
+		}
+		if (type == "article"){
+			resource = await ArticleModel.findOne({_id : resource_id});
+		}
+		if (type == "projectidea"){
+			resource = await ProjectIdeaModel.findOne({_id : resource_id});
+		}
+		console.log(resource)
+		// Check if the user upvoted
+		console.log(resource.upvotes.includes(user_id))
+		if (resource.upvotes.includes(user_id)) {
+			console.log('upvoted')
+		}else {
+			console.log('not upvoted')
+		}
+		// Upvote the resource and save user id to the upvotes array if not upvoted
+		// Down vote the resource and remove user id from the upvotes array if already upvoted
+		// Add to upvoted list when he upvoted to the upvoted list
+		// Remove the content from the upvoted list of the user
+		return false;
 	}
 
 }
-
-
 
 export default TopicService;
 

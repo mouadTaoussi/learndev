@@ -18,14 +18,12 @@ interface upvoteResolver {
 @Resolver(of  => Upvote)
 class upvoteResolver implements upvoteResolver{
 	@Mutation(returns => Upvote, {description: "this mutation upvoting a content"})
-	// @UseMiddleware(Authenticated)
+	@UseMiddleware(Authenticated)
 	public async upvote(@Arg('resource_id') resource_id:string, @Arg('type') type: string, @Ctx() context:any) :Promise<any>{
 		
-		// Check if the user already upvoted
-		// if upvoted then remove the upvote
-		// if not upvoted then add the upvote*
-		console.log(resource_id)
-		console.log(type)
+		const user_id = context.req.user.id
+		const upvote = await _topicservice.upvote(user_id, type, resource_id);
+
 		return {
 			upvoted : true
 		}
@@ -136,6 +134,9 @@ class topicResolver implements topicResolver {
 	@UseMiddleware(Authenticated)
 	public async addTopic(@Args() { title, background_image } : TopicArgs, @Ctx() context : any) : Promise<any> {
 
+		// User
+	 	const user_id = context.req.user.id
+
 		const new_topic :{
 			user_id          :string,
 			creator_name     :string,
@@ -169,6 +170,9 @@ class topicResolver implements topicResolver {
 	@UseMiddleware(Authenticated)
 	public async deleteTopic(@Arg('topic_id') topic_id: string, @Ctx() context : any) : Promise<any> {
 
+		// User
+	 	const user_id = context.req.user.id
+
 		// Check if the user owns the target topic
 
 		return "Deleted Successfully!";
@@ -189,7 +193,10 @@ class docsResolver implements docsResolver {
 	@UseMiddleware(Authenticated)
 	public async addDocs(@Args() { topic_id, title, level, link }: DocsArgs, @Ctx() context : any) : Promise<any> {
 
-		const new_doc : {
+		// User
+	 	const user_id = context.req.user.id
+
+	 	const new_doc : {
 			user_id	     : string,
 			creator_name : string,
 			topic_id     : string,
@@ -217,6 +224,10 @@ class docsResolver implements docsResolver {
 	@Mutation(returns => String, { description: "This query deletes a docs" })
 	@UseMiddleware(Authenticated)
 	public async deleteDocs(@Arg('docs_id') docs_id: string, @Ctx() context : any) : Promise<any> {
+		
+	 	// User
+	 	const user_id = context.req.user.id
+
 		// Check if the user owns the target topic
 		return "Deleted Successfully!";
 	}
@@ -234,7 +245,11 @@ class courseResolver implements courseResolver {
 	@Mutation(returns => Course, { description: "This query adds new course" })
 	@UseMiddleware(Authenticated)
 	public async addCourse(@Args() { topic_id, title, level, link }: CourseArgs, @Ctx() context : any) : Promise<any> {
-		const new_course : {
+		
+		// User
+	 	const user_id = context.req.user.id
+
+	 	const new_course : {
 			user_id	     : string,
 			creator_name : string,
 			topic_id     : string,
@@ -262,6 +277,10 @@ class courseResolver implements courseResolver {
 	@Mutation(returns => String, { description: "This query deletes a course" })
 	@UseMiddleware(Authenticated)
 	public async deleteCourse(@Arg('course_id') course_id: string, @Ctx() context : any) : Promise<any> {
+		
+	 	// User
+	 	const user_id = context.req.user.id
+
 		// Check if the user owns the target topic
 		return "Deleted Successfully!";
 	}
@@ -279,6 +298,10 @@ class articleResolver implements articleResolver {
 	@Mutation(returns => Article, { description: "This query adds new course" })
 	@UseMiddleware(Authenticated)
 	public async addArticle(@Args() {topic_id,title,level,link}: ArticleArgs, @Ctx() context : any) : Promise<any> {
+		
+	 	// User
+	 	const user_id = context.req.user.id
+
 		const new_article : {
 			user_id	      : string,
 			creator_name  : string,
@@ -307,6 +330,10 @@ class articleResolver implements articleResolver {
 	@Mutation(returns => String, { description: "This query deletes a course" })
 	@UseMiddleware(Authenticated)
 	public async deleteArticle(@Arg('article_id') article_id: string, @Ctx() context : any) : Promise<any> {
+		
+	 	// User
+	 	const user_id = context.req.user.id
+
 		// Check if the user owns the target topic
 		return "Deleted Successfully!";
 	}
@@ -325,6 +352,9 @@ class projectIdeaResolver implements projectIdeaResolver {
 	@UseMiddleware(Authenticated)
 	public async addProjectIdea(@Args() { topic_id, title, level, description }: ProjectIdeaArgs, @Ctx() context : any)
 	 : Promise<any> {
+
+	 	// User
+	 	const user_id = context.req.user.id
 
 		const project_idea : {
 			user_id	      : string,
@@ -354,6 +384,10 @@ class projectIdeaResolver implements projectIdeaResolver {
 	@Mutation(returns => String, { description: "This query deletes a Project Idea" })
 	@UseMiddleware(Authenticated)
 	public async deleteProjectIdea(@Arg('project_idea_id') project_idea_id: string, @Ctx() context : any) : Promise<any> {
+		
+		// User
+	 	const user_id = context.req.user.id
+
 		// Check if the user owns the target topic
 		return "Deleted Successfully!";
 	}

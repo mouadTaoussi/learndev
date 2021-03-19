@@ -76,4 +76,14 @@ type ProjectIdea = {
 	upvotes      : number[],
 	// tags         : string[]
 }
-export { TopicServiceInt, Topic, Docs, Course, Article, ProjectIdea };
+
+// Used to check the resource type the user want to upvote in topic 
+// to fetch it in the right documents in mongodb
+enum ResourceType {
+	DOCS = 1,
+	COURSE = 2,
+	ARTICLE = 3,
+	PROJECT_IDEA = 4
+}
+
+export { TopicServiceInt, Topic, Docs, Course, Article, ProjectIdea, ResourceType };
