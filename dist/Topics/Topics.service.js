@@ -269,6 +269,9 @@ class TopicService {
             for (var i = 0; i < course.length; i++) {
                 output.push(course[i]);
             }
+            for (var i = 0; output.length > i; i++) {
+                output[i].upvoted = true;
+            }
             return {
                 message: null,
                 found: true,

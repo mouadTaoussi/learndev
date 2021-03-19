@@ -362,6 +362,7 @@ class TopicService implements TopicServiceInt {
 				// Get projectIdeas
 				let output = await ProjectIdeaModel.find({upvotes : user_id});
 				
+				// Merge them into single place
 				for (var i = 0; i < docs.length; i++) {
 					// code...
 					output.push(docs[i])
@@ -374,6 +375,12 @@ class TopicService implements TopicServiceInt {
 					// code...
 					output.push(course[i])
 				}
+
+				// set upvoted to true
+				for ( var i = 0; output.length > i; i++ ) {
+					output[i].upvoted = true;
+				}
+				
 				return {
 					message: null,
 					found  : true,
