@@ -34,8 +34,8 @@
 				creator_name="doc.creator_name" 
 				link="doc.link"
 				level="doc.hard" 
-				user_id="doc.user_id" -->
-			<!-- ></Resource> -->
+				user_id="doc.user_id"
+			<!-- ></Resource> --> 
 			<Resource 
 				v-for="doc in docs"
 				v-bind:id="doc._id"

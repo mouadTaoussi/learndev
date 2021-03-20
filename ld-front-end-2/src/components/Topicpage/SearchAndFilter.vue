@@ -2,6 +2,7 @@
 	<section class="search-area">
 		<input 
 			v-model="query"
+			v-on:input="search()"
 			type="text" 
 			class="form-control search-input" 
 			placeholder="Search about a resource: Crach course, tutorial...">
@@ -21,8 +22,8 @@ export default {
   },
   methods : {
 	  search: function(){
+	  	console.log(this.query)
 	  	if (this.query == null || this.query == '') {
-	  		alert('Provide us search query!');
 	  		return;
 	  	}
 	  	this.$emit('searchQuery',this.query);

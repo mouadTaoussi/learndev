@@ -493,11 +493,14 @@
 	  	showAlert : function(type, message, target){
 			// Set message to the alert
 			this.alert.message = message
-			this.alert.error = type
+			this.alert.type = type
 	  		// Show alert
 			document.querySelector('.local-alert').style.opacity = "10";
+			
 			// Determine where
-			document.querySelector(target).classList.add("is-invalid");
+			if (target !== null) {
+				document.querySelector(target).classList.add("is-invalid");
+			}
 
 			window.setTimeout(()=>{
 				document.querySelector('.local-alert').style.opacity = "0";				

@@ -1,7 +1,8 @@
 <template>
 	<section>
 			<!-- Alert -->
-			<Alert></Alert>
+			<!-- <Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert> -->
+			<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
 			<!-- Alert -->
 			<div class="border bg-light resource-area text-left my-2 p-2">
 
@@ -74,8 +75,8 @@
 	    	upvoted          : this.upvoted,
 	    	description      : this.description,
 	    	alert : {
-	    		type : null,
-	    		message : null
+	    		type : "error",
+	    		message : "Something went wrong!"
 	    	}
 	    }
 	  },
@@ -154,7 +155,9 @@
    				}
    			})
    			.then((res)=>{
-   				
+
+   				this.showAlert('error',"Something went wrong!",null);
+
    			})
    			.catch((err)=>{
    				// if not then we can reset the upvotes back to normal
@@ -164,12 +167,15 @@
 	  	},
 	  	showAlert : function(type, message, target){
 			// Set message to the alert
-			this.alert.message = message
-			this.alert.error = type
+			// this.alert.message = message
+			// this.alert.type = type
 	  		// Show alert
 			document.querySelector('.local-alert').style.opacity = "10";
+			
 			// Determine where
-			document.querySelector(target).classList.add("is-invalid");
+			if (target !== null) {
+				document.querySelector(target).classList.add("is-invalid");
+			}
 
 			window.setTimeout(()=>{
 				document.querySelector('.local-alert').style.opacity = "0";				
