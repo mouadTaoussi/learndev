@@ -120,6 +120,10 @@
 			this.courses = res.data.data.getTopic.courses;
 			this.articles = res.data.data.getTopic.articles;
 			this.projectIdeas = res.data.data.getTopic.project_idea;
+
+			// Increment skip
+	  		this.skip += this.limit;
+
 		})
 		.catch((err)=>{
 
@@ -129,23 +133,29 @@
 	  methods : {
 	  	// Search
 	  	search : function(item_query){
-	  		// Fetch query // send query+ topic_id +user_id in session
-	  		alert('found '+ item_query)
+	  		console.log(item_query)
+	  		// back to 0 beacuse we search new one
+	  		this.skip = 0;
+
 	  		// Save query to use it in load more
 	  		this.search_query = item_query
-	  		this.skip;
-	  		this.limit;
+
+	  		this.docs         = null;
+			this.courses      = null;
+			this.articles     = null;
+			this.projectIdeas = null;
+
 	  		// Graphql request
-	  		// Incretment skip
+
+	  		// Increment skip
 	  		this.skip += this.limit;
 	  	},
 	  	loadMore : function() {
-	  		//
-	  		this.search_query;
-	  		this.skip;
-	  		this.limit;
-	  		// increment skip
+	  		// Get content
 	  		// push to docs + courses + articels + projectIdeas
+
+	  		// Increment skip
+	  		this.skip += this.limit;
 	  	}
 	  }
 	}

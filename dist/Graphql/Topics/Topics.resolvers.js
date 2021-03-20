@@ -93,8 +93,19 @@ let topicResolver = class topicResolver {
                 continue;
             }
         }
-        const topic = await _topicservice.getTopic(search_term, user, limit, skip);
+        const topic = await _topicservice.getTopic(topic_id, user, 1, 0);
         const content_in_topic = await _topicservice.searchContentInTopic(query_to_search, topic_id, user, limit, skip);
+        console.log({
+            _id: topic.data._id,
+            user_id: topic.data.user_id,
+            creator_name: topic.data.creator_name,
+            title: topic.data.title,
+            background_image: topic.data.background_image,
+            docs: content_in_topic.data.docs,
+            courses: content_in_topic.data.courses,
+            articles: content_in_topic.data.articles,
+            project_idea: content_in_topic.data.project_idea,
+        });
         return {
             _id: topic.data._id,
             user_id: topic.data.user_id,
@@ -104,7 +115,7 @@ let topicResolver = class topicResolver {
             docs: content_in_topic.data.docs,
             courses: content_in_topic.data.courses,
             articles: content_in_topic.data.articles,
-            poject_idea: content_in_topic.data.poject_idea,
+            project_idea: content_in_topic.data.project_idea,
         };
     }
     async getTopic(topic_id, { limit, skip }, context) {

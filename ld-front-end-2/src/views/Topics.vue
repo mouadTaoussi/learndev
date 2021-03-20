@@ -107,7 +107,7 @@
 
 	  mounted (){
 	  	window.scrollTo(0, 0);
-	  	console.log(1)
+
 	  	const GET_TOPICS = gql`
 		  	query ($limit:Float!,$skip:Float!) {
 			  	getTopics(limit:$limit,skip:$skip){
@@ -124,7 +124,7 @@
 			headers: {
 			// 'Content-Type': 'application/json',
 	        // 'Accept'      : `application/json`
-		},
+			},
 			data: {
 				query: print(GET_TOPICS),
 				variables: {
@@ -137,6 +137,7 @@
 			// Attach that to the topics
 			this.topics = res.data.data.getTopics;
 			// Increment the skip 
+			this.skip += this.limit;
 		})
 		.catch(()=>{
 
@@ -147,7 +148,7 @@
 	  		// Save query to use it in load more
 	  		this.search_query = item_query
 
-	  		// Back to 0
+	  		// back to 0 beacuse we search new one
 	  		this.skip = 0;
 
 	  		// Graphql request
@@ -183,7 +184,8 @@
    			.then((res)=>{
    				// Attach that to the topics
    				this.topics = res.data.data.searchTopic;
-	   			// Increment the skip 
+   				// Increment the skip
+   				this.skip += this.limit;
    			})
 
 
@@ -197,7 +199,6 @@
 					title
 					background_image
 				}
-
 	  		}
 	  		`
 	  		this.$http({
@@ -224,7 +225,6 @@
    				}
 	   			// Increment the skip 
 	   			this.skip += this.limit;
-	   			console.log(this.skip)
    			})
 	  	}
 	  }

@@ -22,7 +22,6 @@ export default {
   },
   methods : {
 	  search: function(){
-	  	console.log(this.query)
 	  	if (this.query == null || this.query == '') {
 	  		return;
 	  	}

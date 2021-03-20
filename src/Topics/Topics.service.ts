@@ -148,7 +148,6 @@ class TopicService implements TopicServiceInt {
 					project_ideas_to_be_sent[i].upvoted = false;
 				}
 			}
-			
 			return {
 				message : null,
 				found : false,
