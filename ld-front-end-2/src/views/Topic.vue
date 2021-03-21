@@ -130,7 +130,7 @@
 		})
 
 	  },
-	  methods : {
+	  methods : { 
 	  	// Search
 	  	search : function(item_query){
 	  		console.log(item_query)

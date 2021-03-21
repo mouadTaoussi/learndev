@@ -54,28 +54,28 @@ class TopicInfo {
 
 @ObjectType({ description: 'This one represents docs' })
 class Docs {
-	@Field( type => String,{description: "id field" } )
+	@Field( type => String,{ description: "id field", nullable: true } )
 	_id : string;
 
-	@Field( type => String,{description: "user_id field" } )
+	@Field( type => String,{ description: "user_id field", nullable: true } )
 	user_id : string;
 
-	@Field( type => String,{description: "creator_name field" } )
+	@Field( type => String,{ description: "creator_name field", nullable: true } )
 	creator_name : string;
 
-	@Field( type => String,{description: "topic_id field" } )
+	@Field( type => String,{ description: "topic_id field", nullable: true } )
 	topic_id : string;
 
-	@Field( type => String,{description: "docs_title field" } )
+	@Field( type => String,{ description: "docs_title field", nullable: true } )
 	title : string;
 
-	@Field( type => String,{description: "level field" } )
+	@Field( type => String,{ description: "level field", nullable: true } )
 	level : string;
 
-	@Field( type => String,{description: "link field" } )
+	@Field( type => String,{ description: "link field", nullable: true } )
 	link : string;
 
-	@Field( type => Number,{description: "upvotes_count field" } )
+	@Field( type => Number,{ description: "upvotes_count field", nullable: true } )
 	upvotes_count : number;
 
 	// @Field( type => String,{description: "upvotes field" } )
@@ -88,101 +88,101 @@ class Docs {
 
 @ObjectType({ description : "This one represents course" })
 class Course {
-	@Field( type => String,{description: "id field" } )
+	@Field( type => String,{description: "id field", nullable: true } )
 	_id : string;
 
-	@Field( type => String,{description: "user_id field" } )
+	@Field( type => String,{description: "user_id field", nullable: true } )
 	user_id : string;
 
-	@Field( type => String,{ description: "creator_name field" } )
+	@Field( type => String,{ description: "creator_name field", nullable: true } )
 	creator_name : string;
 
-	@Field( type => String,{description: "topic_id field" } )
+	@Field( type => String,{description: "topic_id field", nullable: true } )
 	topic_id : string;
 
-	@Field( type => String,{description: "course_title field" } )
+	@Field( type => String,{description: "course_title field", nullable: true } )
 	title : string;
 
-	@Field( type => String,{description: "level field" } )
+	@Field( type => String,{description: "level field", nullable: true } )
 	level : string;
 
-	@Field( type => String,{description: "link field" } )
+	@Field( type => String,{description: "link field", nullable: true } )
 	link : string;
 
-	@Field( type => Number,{description: "upvotes_count field" } )
+	@Field( type => Number,{description: "upvotes_count field", nullable: true } )
 	upvotes_count : number;
 
 	// @Field( type => String,{description: "upvotes field" } )
 	// upvotes : string;
 
-	@Field( type => Boolean,{description: "upvoted field" } )
+	@Field( type => Boolean,{description: "upvoted field", nullable: true } )
 	upvoted : boolean;
 }
 
 @ObjectType({ description: 'This one represents article' })
 class Article {
-	@Field( type => String,{description: "id field" } )
+	@Field( type => String,{description: "id field", nullable: true } )
 	_id : string;
 
-	@Field( type => String,{ description: "user_id field" } )
+	@Field( type => String,{ description: "user_id field", nullable: true } )
 	user_id : string;
 
-	@Field( type => String,{ description: "creator_name field" } )
+	@Field( type => String,{ description: "creator_name field", nullable: true } )
 	creator_name : string;
 
-	@Field( type => String,{ description: "topic_id field" } )
+	@Field( type => String,{ description: "topic_id field", nullable: true } )
 	topic_id : string;
 
-	@Field( type => String,{ description: "article_title field" } )
+	@Field( type => String,{ description: "article_title field", nullable: true } )
 	title : string;
 
-	@Field( type => String,{ description: "level field" } )
+	@Field( type => String,{ description: "level field", nullable: true } )
 	level : string;
 
-	@Field( type => String,{ description: "link field" } )
+	@Field( type => String,{ description: "link field", nullable: true } )
 	link : string;
 
-	@Field( type => Number,{description: "upvotes_count field" } )
+	@Field( type => Number,{description: "upvotes_count field", nullable: true } )
 	upvotes_count : number;
 
 	// @Field( type => String,{description: "upvotes field" } )
 	// upvotes : string;
 
-	@Field( type => Boolean,{description: "upvoted field" } )
+	@Field( type => Boolean,{description: "upvoted field", nullable: true } )
 	upvoted : boolean;
 
 }
 
 @ObjectType({ description : 'This one represents project idea' })
 class ProjectIdea {
-	@Field( type => String, { description: "id field" } )
+	@Field( type => String, { description: "id field", nullable: true } )
 	_id : string;
 
-	@Field( type => String, { description: "user_id field" } )
+	@Field( type => String, { description: "user_id field", nullable: true } )
 	user_id : string;
 
-	@Field( type => String,{ description: "creator_name field" } )
+	@Field( type => String,{ description: "creator_name field", nullable: true } )
 	creator_name : string;
 
-	@Field( type => String, { description: "topic_id field" } )
+	@Field( type => String, { description: "topic_id field", nullable: true } )
 	topic_id : string;
 
-	@Field( type => String, { description : "This one represents project_idea_title" } )
+	@Field( type => String, { description : "This one represents project_idea_title", nullable: true } )
 	title : string
 
-	@Field( type => String, { description: "level field" } )
+	@Field( type => String, { description: "level field", nullable: true } )
 	level : string;
 
-	@Field( type => String , { description : "This one reqpresents description" } )
+	@Field( type => String , { description : "This one reqpresents description", nullable: true } )
 	description : string;
 
-	@Field( type => Number, { description: "upvotes_count field" } )
+	@Field( type => Number, { description: "upvotes_count field", nullable: true } )
 	upvotes_count : number;
 
 	// @Field( type => String, { description: "upvotes field" } )
 	// upvotes : string;
 
-	@Field( type => Boolean, { description: "upvoted field" } )
+	@Field( type => Boolean, { description: "upvoted field", nullable: true } )
 	upvoted : boolean;
 }
 

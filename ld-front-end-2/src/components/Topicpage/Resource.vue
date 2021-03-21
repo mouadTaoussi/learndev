@@ -155,9 +155,13 @@
    				}
    			})
    			.then((res)=>{
-
-   				this.showAlert('error',"Something went wrong!",null);
-
+   				//
+   				console.log(res)
+   				if (res.data.errors && res.data.data == null) {
+					// if not then we can reset the upvotes back to normal
+	   				this.resource_upvotes = this.upvotes;
+	   				this.showAlert('error',"You are not authenticated!",null);
+   				}
    			})
    			.catch((err)=>{
    				// if not then we can reset the upvotes back to normal
@@ -167,8 +171,8 @@
 	  	},
 	  	showAlert : function(type, message, target){
 			// Set message to the alert
-			// this.alert.message = message
-			// this.alert.type = type
+			this.alert.message = message
+			this.alert.type = type
 	  		// Show alert
 			document.querySelector('.local-alert').style.opacity = "10";
 			

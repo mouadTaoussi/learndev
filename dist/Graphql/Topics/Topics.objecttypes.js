@@ -82,35 +82,35 @@ exports.TopicInfo = TopicInfo;
 let Docs = class Docs {
 };
 __decorate([
-    type_graphql_1.Field(type => String, { description: "id field" }),
+    type_graphql_1.Field(type => String, { description: "id field", nullable: true }),
     __metadata("design:type", String)
 ], Docs.prototype, "_id", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "user_id field" }),
+    type_graphql_1.Field(type => String, { description: "user_id field", nullable: true }),
     __metadata("design:type", String)
 ], Docs.prototype, "user_id", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "creator_name field" }),
+    type_graphql_1.Field(type => String, { description: "creator_name field", nullable: true }),
     __metadata("design:type", String)
 ], Docs.prototype, "creator_name", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "topic_id field" }),
+    type_graphql_1.Field(type => String, { description: "topic_id field", nullable: true }),
     __metadata("design:type", String)
 ], Docs.prototype, "topic_id", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "docs_title field" }),
+    type_graphql_1.Field(type => String, { description: "docs_title field", nullable: true }),
     __metadata("design:type", String)
 ], Docs.prototype, "title", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "level field" }),
+    type_graphql_1.Field(type => String, { description: "level field", nullable: true }),
     __metadata("design:type", String)
 ], Docs.prototype, "level", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "link field" }),
+    type_graphql_1.Field(type => String, { description: "link field", nullable: true }),
     __metadata("design:type", String)
 ], Docs.prototype, "link", void 0);
 __decorate([
-    type_graphql_1.Field(type => Number, { description: "upvotes_count field" }),
+    type_graphql_1.Field(type => Number, { description: "upvotes_count field", nullable: true }),
     __metadata("design:type", Number)
 ], Docs.prototype, "upvotes_count", void 0);
 __decorate([
@@ -124,39 +124,39 @@ exports.Docs = Docs;
 let Course = class Course {
 };
 __decorate([
-    type_graphql_1.Field(type => String, { description: "id field" }),
+    type_graphql_1.Field(type => String, { description: "id field", nullable: true }),
     __metadata("design:type", String)
 ], Course.prototype, "_id", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "user_id field" }),
+    type_graphql_1.Field(type => String, { description: "user_id field", nullable: true }),
     __metadata("design:type", String)
 ], Course.prototype, "user_id", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "creator_name field" }),
+    type_graphql_1.Field(type => String, { description: "creator_name field", nullable: true }),
     __metadata("design:type", String)
 ], Course.prototype, "creator_name", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "topic_id field" }),
+    type_graphql_1.Field(type => String, { description: "topic_id field", nullable: true }),
     __metadata("design:type", String)
 ], Course.prototype, "topic_id", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "course_title field" }),
+    type_graphql_1.Field(type => String, { description: "course_title field", nullable: true }),
     __metadata("design:type", String)
 ], Course.prototype, "title", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "level field" }),
+    type_graphql_1.Field(type => String, { description: "level field", nullable: true }),
     __metadata("design:type", String)
 ], Course.prototype, "level", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "link field" }),
+    type_graphql_1.Field(type => String, { description: "link field", nullable: true }),
     __metadata("design:type", String)
 ], Course.prototype, "link", void 0);
 __decorate([
-    type_graphql_1.Field(type => Number, { description: "upvotes_count field" }),
+    type_graphql_1.Field(type => Number, { description: "upvotes_count field", nullable: true }),
     __metadata("design:type", Number)
 ], Course.prototype, "upvotes_count", void 0);
 __decorate([
-    type_graphql_1.Field(type => Boolean, { description: "upvoted field" }),
+    type_graphql_1.Field(type => Boolean, { description: "upvoted field", nullable: true }),
     __metadata("design:type", Boolean)
 ], Course.prototype, "upvoted", void 0);
 Course = __decorate([
@@ -166,39 +166,39 @@ exports.Course = Course;
 let Article = class Article {
 };
 __decorate([
-    type_graphql_1.Field(type => String, { description: "id field" }),
+    type_graphql_1.Field(type => String, { description: "id field", nullable: true }),
     __metadata("design:type", String)
 ], Article.prototype, "_id", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "user_id field" }),
+    type_graphql_1.Field(type => String, { description: "user_id field", nullable: true }),
     __metadata("design:type", String)
 ], Article.prototype, "user_id", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "creator_name field" }),
+    type_graphql_1.Field(type => String, { description: "creator_name field", nullable: true }),
     __metadata("design:type", String)
 ], Article.prototype, "creator_name", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "topic_id field" }),
+    type_graphql_1.Field(type => String, { description: "topic_id field", nullable: true }),
     __metadata("design:type", String)
 ], Article.prototype, "topic_id", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "article_title field" }),
+    type_graphql_1.Field(type => String, { description: "article_title field", nullable: true }),
     __metadata("design:type", String)
 ], Article.prototype, "title", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "level field" }),
+    type_graphql_1.Field(type => String, { description: "level field", nullable: true }),
     __metadata("design:type", String)
 ], Article.prototype, "level", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "link field" }),
+    type_graphql_1.Field(type => String, { description: "link field", nullable: true }),
     __metadata("design:type", String)
 ], Article.prototype, "link", void 0);
 __decorate([
-    type_graphql_1.Field(type => Number, { description: "upvotes_count field" }),
+    type_graphql_1.Field(type => Number, { description: "upvotes_count field", nullable: true }),
     __metadata("design:type", Number)
 ], Article.prototype, "upvotes_count", void 0);
 __decorate([
-    type_graphql_1.Field(type => Boolean, { description: "upvoted field" }),
+    type_graphql_1.Field(type => Boolean, { description: "upvoted field", nullable: true }),
     __metadata("design:type", Boolean)
 ], Article.prototype, "upvoted", void 0);
 Article = __decorate([
@@ -208,39 +208,39 @@ exports.Article = Article;
 let ProjectIdea = class ProjectIdea {
 };
 __decorate([
-    type_graphql_1.Field(type => String, { description: "id field" }),
+    type_graphql_1.Field(type => String, { description: "id field", nullable: true }),
     __metadata("design:type", String)
 ], ProjectIdea.prototype, "_id", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "user_id field" }),
+    type_graphql_1.Field(type => String, { description: "user_id field", nullable: true }),
     __metadata("design:type", String)
 ], ProjectIdea.prototype, "user_id", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "creator_name field" }),
+    type_graphql_1.Field(type => String, { description: "creator_name field", nullable: true }),
     __metadata("design:type", String)
 ], ProjectIdea.prototype, "creator_name", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "topic_id field" }),
+    type_graphql_1.Field(type => String, { description: "topic_id field", nullable: true }),
     __metadata("design:type", String)
 ], ProjectIdea.prototype, "topic_id", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "This one represents project_idea_title" }),
+    type_graphql_1.Field(type => String, { description: "This one represents project_idea_title", nullable: true }),
     __metadata("design:type", String)
 ], ProjectIdea.prototype, "title", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "level field" }),
+    type_graphql_1.Field(type => String, { description: "level field", nullable: true }),
     __metadata("design:type", String)
 ], ProjectIdea.prototype, "level", void 0);
 __decorate([
-    type_graphql_1.Field(type => String, { description: "This one reqpresents description" }),
+    type_graphql_1.Field(type => String, { description: "This one reqpresents description", nullable: true }),
     __metadata("design:type", String)
 ], ProjectIdea.prototype, "description", void 0);
 __decorate([
-    type_graphql_1.Field(type => Number, { description: "upvotes_count field" }),
+    type_graphql_1.Field(type => Number, { description: "upvotes_count field", nullable: true }),
     __metadata("design:type", Number)
 ], ProjectIdea.prototype, "upvotes_count", void 0);
 __decorate([
-    type_graphql_1.Field(type => Boolean, { description: "upvoted field" }),
+    type_graphql_1.Field(type => Boolean, { description: "upvoted field", nullable: true }),
     __metadata("design:type", Boolean)
 ], ProjectIdea.prototype, "upvoted", void 0);
 ProjectIdea = __decorate([
