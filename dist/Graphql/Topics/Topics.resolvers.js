@@ -151,7 +151,7 @@ let topicResolver = class topicResolver {
     }
 };
 __decorate([
-    type_graphql_1.Query(returns => [Topics_objecttypes_1.Topic], { description: "This query returns the contents in the topic by the search item" }),
+    type_graphql_1.Query(returns => Topics_objecttypes_1.Topic, { description: "This query returns the contents in the topic by the search item" }),
     __param(0, type_graphql_1.Arg('search_term')), __param(1, type_graphql_1.Arg('topic_id')), __param(2, type_graphql_1.Args()), __param(3, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, Topics_objecttypes_1.LoadMoreRules, Object]),

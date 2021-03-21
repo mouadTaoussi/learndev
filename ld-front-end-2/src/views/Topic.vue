@@ -78,7 +78,9 @@
 	  	const TOPIC_QUERY = gql`
 		  	query ($topic_id:String!,$limit:Float!,$skip:Float!){
 			  	getTopic(topic_id:$topic_id,limit:$limit,skip:$skip) {
-					_id creator_name title
+					_id 
+					creator_name 
+					title
 					docs {
 						_id topic_id creator_name title link level user_id upvotes_count upvoted
 					}
@@ -146,9 +148,55 @@
 			this.projectIdeas = null;
 
 	  		// Graphql request
+	  		const SEARCH_CONTENT = gql`
+				query ($topic_id:String!, $search_term: String!, $limit: Float!, $skip: Float!) {
+					searchContentInTopic (topic_id:$topic_id, search_term:$search_term, limit:$limit, skip:$skip) {
+						user_id
+						creator_name
+						title
+						docs {
+							_id topic_id creator_name title link level user_id upvotes_count upvoted
+						}
+						courses {
+							_id topic_id creator_name title link level user_id upvotes_count upvoted
+						}
+						articles {
+							_id topic_id creator_name title link level user_id upvotes_count upvoted
+						}
+						project_idea {
+							_id topic_id creator_name title description user_id upvotes_count upvoted
+						}
+					}
+				}
+			`
+				this.$http({
+					url : apihost.api_domain + "/graphql",
+					method: "POST",
+					headers: {
+					// 'Content-Type': 'application/json',
+			        // 'Accept'      : `application/json`
+				},
+				data: {
+					query: print(SEARCH_CONTENT),
+					variables: {
+						limit: this.limit,
+						skip: this.skip,
+						topic_id: this.topic_id,
+						search_term: this.search_query,
+						// tags : this.newTopic.tags
+					},
+				}
+			})
+			.then((res)=>{
+				// Get them out
+				this.docs = res.data.data.searchContentInTopic.docs;
+				this.courses = res.data.data.searchContentInTopic.courses;
+				this.articles = res.data.data.searchContentInTopic.articles;
+				this.projectIdeas = res.data.data.searchContentInTopic.project_idea;
 
-	  		// Increment skip
-	  		this.skip += this.limit;
+		  		// Increment skip
+		  		this.skip += this.limit;
+			})
 	  	},
 	  	loadMore : function() {
 	  		// Get content

@@ -84,7 +84,7 @@ interface topicResolver {
 @Resolver(of => Topic)
 class topicResolver implements topicResolver {
 
-	@Query(returns => [Topic], { description : "This query returns the contents in the topic by the search item"})
+	@Query(returns => Topic, { description : "This query returns the contents in the topic by the search item"})
 	public async searchContentInTopic(@Arg('search_term') search_term : string, @Arg('topic_id') topic_id : string, @Args() {limit,skip}: LoadMoreRules, @Ctx() context : any)  {
 		// User if authenticated 
 		const user = context.req.session.passport || null;
