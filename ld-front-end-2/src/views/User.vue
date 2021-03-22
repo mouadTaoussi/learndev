@@ -55,6 +55,7 @@
 						v-bind:title="upvoted.title" 
 						v-bind:upvotes="upvoted.upvotes_count" 
 						v-bind:upvoted="true"
+						v-bind:type="'nooo'"
 						v-bind:creator_name="upvoted.creator_name" 
 						v-bind:level="upvoted.level" 
 						v-bind:user_id="upvoted.user_id"

@@ -599,6 +599,16 @@ class TopicService implements TopicServiceInt {
 		}
 		if (type == "projectidea"){
 			resource = await ProjectIdeaModel.findOne({_id : resource_id});
+		}else {
+			const isOnDocs = await DocsModel.findOne({_id : resource_id});
+			const isOnCourses = await CourseModel.findOne({_id : resource_id});
+			const isOnArticles = await ArticleModel.findOne({_id : resource_id});
+			const isOnProjectIdeas = await ProjectIdeaModel.findOne({_id : resource_id});
+
+			if (isOnDocs) { resource = isOnDocs; }
+			if (isOnCourses) { resource = isOnCourses; }
+			if (isOnArticles) { resource = isOnArticles; }
+			if (isOnProjectIdeas) { resource = isOnProjectIdeas; }
 		}
 
 		// Check if the user upvoted

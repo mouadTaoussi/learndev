@@ -459,6 +459,24 @@ class TopicService {
         if (type == "projectidea") {
             resource = await Topics_models_1.ProjectIdeaModel.findOne({ _id: resource_id });
         }
+        else {
+            const isOnDocs = await Topics_models_1.DocsModel.findOne({ _id: resource_id });
+            const isOnCourses = await Topics_models_1.CourseModel.findOne({ _id: resource_id });
+            const isOnArticles = await Topics_models_1.ArticleModel.findOne({ _id: resource_id });
+            const isOnProjectIdeas = await Topics_models_1.ProjectIdeaModel.findOne({ _id: resource_id });
+            if (isOnDocs) {
+                resource = isOnDocs;
+            }
+            if (isOnCourses) {
+                resource = isOnCourses;
+            }
+            if (isOnArticles) {
+                resource = isOnArticles;
+            }
+            if (isOnProjectIdeas) {
+                resource = isOnProjectIdeas;
+            }
+        }
         if (resource.upvotes.includes(user_id)) {
             const index_of_upvote = resource.upvotes.indexOf(user_id);
             resource.upvotes.splice(index_of_upvote, 1);
