@@ -7,7 +7,8 @@ class TopicService implements TopicServiceInt {
 	public async searchTopic(query: string[],limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
 			// Get the topics by limit and skip
-			const topics = await TopicModel.find().skip(skip).limit(limit);
+			// const topics = await TopicModel.find().skip(skip).limit(limit);
+			const topics = await TopicModel.find();
 			// const topics = await TopicModel.find();
 
 			// Filter by query
@@ -18,15 +19,14 @@ class TopicService implements TopicServiceInt {
 
 			// Sort them by upvotes
 			const topics_to_be_sent = sortByUpvotes(topics_need_to_be_unduplicated);
-			
-			// @TODO Skip and Limit function
-			const data = topics_to_be_sent.slice(skip, skip+limit);
+
+			// @TODO Skip and Limit function  slice(startIndex, endIndex)  
 
 			if (topics_needed.length > 0) {
 				return {
 					message : null,
 					found : true,
-					data : topics_to_be_sent
+					data : topics_to_be_sent.slice(skip, skip + limit)
 				}
 			}
 			else {
@@ -50,13 +50,17 @@ class TopicService implements TopicServiceInt {
 		try {
 			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
 			// Get from Docs // Skip // Limit // Add upvoted field set to false
-			const docs = await DocsModel.find().skip(skip).limit(limit);
+			// const docs = await DocsModel.find().skip(skip).limit(limit);
+			const docs = await DocsModel.find();
 			// Get from Courses // Skip // Limit // Add upvoted field set to false
-			const courses = await CourseModel.find().skip(skip).limit(limit);
+			// const courses = await CourseModel.find().skip(skip).limit(limit);
+			const courses = await CourseModel.find();
 			// Get from Articles // Skip // Limit // Add upvoted field set to false
-			const articles = await ArticleModel.find().skip(skip).limit(limit);
+			// const articles = await ArticleModel.find().skip(skip).limit(limit);
+			const articles = await ArticleModel.find();
 			// Get from ProjectIdea // Skip // Limit // Add upvoted field set to false
-			const projectIdeas = await ProjectIdeaModel.find().skip(skip).limit(limit);
+			// const projectIdeas = await ProjectIdeaModel.find().skip(skip).limit(limit);
+			const projectIdeas = await ProjectIdeaModel.find();
 
 			// Filter by query
 			const docs_needed          = filterByQuery(docs, query);
@@ -156,15 +160,14 @@ class TopicService implements TopicServiceInt {
 			// @TODO Skip and Limit function
 			// @TODO Skip and Limit function
 
-
 			return {
 				message : null,
 				found : false,
 				data : {
-					docs         :docs_to_be_sent,
-					courses      :courses_to_be_sent,
-					articles     :articles_to_be_sent,
-					project_idea :project_ideas_to_be_sent
+					docs         :docs_to_be_sent.slice(skip, skip + limit),
+					courses      :courses_to_be_sent.slice(skip, skip + limit),
+					articles     :articles_to_be_sent.slice(skip, skip + limit),
+					project_idea :project_ideas_to_be_sent.slice(skip, skip + limit)
 				}
 			}
 		}
@@ -182,13 +185,17 @@ class TopicService implements TopicServiceInt {
 			const topic = await TopicModel.findById(item_id);
 
 			// Get from Docs // Skip // Limit // Add upvoted field set to false
-			const docs = await DocsModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+			// const docs = await DocsModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+			const docs = await DocsModel.find({ topic_id: item_id });
 			// Get from Courses // Skip // Limit // Add upvoted field set to false
-			const courses = await CourseModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+			// const courses = await CourseModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+			const courses = await CourseModel.find({ topic_id: item_id });
 			// Get from Articles // Skip // Limit // Add upvoted field set to false
-			const articles = await ArticleModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+			// const articles = await ArticleModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+			const articles = await ArticleModel.find({ topic_id: item_id });
 			// Get from ProjectIdea // Skip // Limit // Add upvoted field set to false
-			const projectIdeas = await ProjectIdeaModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+			// const projectIdeas = await ProjectIdeaModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+			const projectIdeas = await ProjectIdeaModel.find({ topic_id: item_id });
 
 			// Sort them by upvotes
 			const docs_to_be_sent          = sortByUpvotes(docs);
@@ -286,13 +293,13 @@ class TopicService implements TopicServiceInt {
 					title : topic.title,
 					background_image : topic.background_image,
 					// docs
-					docs : docs_to_be_sent,
+					docs : docs_to_be_sent.slice(skip, skip + limit),
 					// courses
-					courses : courses_to_be_sent,
+					courses : courses_to_be_sent.slice(skip, skip + limit),
 					// articels
-					articles : articles_to_be_sent,
+					articles : articles_to_be_sent.slice(skip, skip + limit),
 					// projectIdeas
-					project_idea : project_ideas_to_be_sent
+					project_idea : project_ideas_to_be_sent.slice(skip, skip + limit)
 				}
 			}
 		}

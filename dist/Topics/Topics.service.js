@@ -5,16 +5,15 @@ const Topics_functions_1 = require("./Topics.functions");
 class TopicService {
     async searchTopic(query, limit, skip) {
         try {
-            const topics = await Topics_models_1.TopicModel.find().skip(skip).limit(limit);
+            const topics = await Topics_models_1.TopicModel.find();
             const topics_needed = Topics_functions_1.filterByQuery(topics, query);
             const topics_need_to_be_unduplicated = Topics_functions_1.removeDuplicates(topics_needed);
             const topics_to_be_sent = Topics_functions_1.sortByUpvotes(topics_need_to_be_unduplicated);
-            const data = topics_to_be_sent.slice(skip, skip + limit);
             if (topics_needed.length > 0) {
                 return {
                     message: null,
                     found: true,
-                    data: topics_to_be_sent
+                    data: topics_to_be_sent.slice(skip, skip + limit)
                 };
             }
             else {
@@ -35,10 +34,10 @@ class TopicService {
     }
     async searchContentInTopic(query, topic_id, user_session, limit, skip) {
         try {
-            const docs = await Topics_models_1.DocsModel.find().skip(skip).limit(limit);
-            const courses = await Topics_models_1.CourseModel.find().skip(skip).limit(limit);
-            const articles = await Topics_models_1.ArticleModel.find().skip(skip).limit(limit);
-            const projectIdeas = await Topics_models_1.ProjectIdeaModel.find().skip(skip).limit(limit);
+            const docs = await Topics_models_1.DocsModel.find();
+            const courses = await Topics_models_1.CourseModel.find();
+            const articles = await Topics_models_1.ArticleModel.find();
+            const projectIdeas = await Topics_models_1.ProjectIdeaModel.find();
             const docs_needed = Topics_functions_1.filterByQuery(docs, query);
             const courses_needed = Topics_functions_1.filterByQuery(courses, query);
             const articles_needed = Topics_functions_1.filterByQuery(articles, query);
@@ -104,10 +103,10 @@ class TopicService {
                 message: null,
                 found: false,
                 data: {
-                    docs: docs_to_be_sent,
-                    courses: courses_to_be_sent,
-                    articles: articles_to_be_sent,
-                    project_idea: project_ideas_to_be_sent
+                    docs: docs_to_be_sent.slice(skip, skip + limit),
+                    courses: courses_to_be_sent.slice(skip, skip + limit),
+                    articles: articles_to_be_sent.slice(skip, skip + limit),
+                    project_idea: project_ideas_to_be_sent.slice(skip, skip + limit)
                 }
             };
         }
@@ -122,10 +121,10 @@ class TopicService {
     async getTopic(item_id, user_session, limit, skip) {
         try {
             const topic = await Topics_models_1.TopicModel.findById(item_id);
-            const docs = await Topics_models_1.DocsModel.find({ topic_id: item_id }).skip(skip).limit(limit);
-            const courses = await Topics_models_1.CourseModel.find({ topic_id: item_id }).skip(skip).limit(limit);
-            const articles = await Topics_models_1.ArticleModel.find({ topic_id: item_id }).skip(skip).limit(limit);
-            const projectIdeas = await Topics_models_1.ProjectIdeaModel.find({ topic_id: item_id }).skip(skip).limit(limit);
+            const docs = await Topics_models_1.DocsModel.find({ topic_id: item_id });
+            const courses = await Topics_models_1.CourseModel.find({ topic_id: item_id });
+            const articles = await Topics_models_1.ArticleModel.find({ topic_id: item_id });
+            const projectIdeas = await Topics_models_1.ProjectIdeaModel.find({ topic_id: item_id });
             const docs_to_be_sent = Topics_functions_1.sortByUpvotes(docs);
             const courses_to_be_sent = Topics_functions_1.sortByUpvotes(courses);
             const articles_to_be_sent = Topics_functions_1.sortByUpvotes(articles);
@@ -188,10 +187,10 @@ class TopicService {
                     creator_name: topic.creator_name,
                     title: topic.title,
                     background_image: topic.background_image,
-                    docs: docs_to_be_sent,
-                    courses: courses_to_be_sent,
-                    articles: articles_to_be_sent,
-                    project_idea: project_ideas_to_be_sent
+                    docs: docs_to_be_sent.slice(skip, skip + limit),
+                    courses: courses_to_be_sent.slice(skip, skip + limit),
+                    articles: articles_to_be_sent.slice(skip, skip + limit),
+                    project_idea: project_ideas_to_be_sent.slice(skip, skip + limit)
                 }
             };
         }
