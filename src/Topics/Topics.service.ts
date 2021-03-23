@@ -19,6 +19,9 @@ class TopicService implements TopicServiceInt {
 			// Sort them by upvotes
 			const topics_to_be_sent = sortByUpvotes(topics_need_to_be_unduplicated);
 			
+			// @TODO Skip and Limit function
+			const data = topics_to_be_sent.slice(skip, skip+limit);
+
 			if (topics_needed.length > 0) {
 				return {
 					message : null,
@@ -72,7 +75,6 @@ class TopicService implements TopicServiceInt {
 			const courses_to_be_sent       = sortByUpvotes(courses_need_to_be_unduplicated);
 			const articles_to_be_sent      = sortByUpvotes(articles_need_to_be_unduplicated);
 			const project_ideas_to_be_sent = sortByUpvotes(project_ideas_need_to_be_unduplicated);
-
 
 			if( user_session !== null ) {
 				// Check if the user upvoted some of the content in each resource // if logged in
@@ -148,6 +150,13 @@ class TopicService implements TopicServiceInt {
 					project_ideas_to_be_sent[i].upvoted = false;
 				}
 			}
+
+			// @TODO Skip and Limit function
+			// @TODO Skip and Limit function
+			// @TODO Skip and Limit function
+			// @TODO Skip and Limit function
+
+
 			return {
 				message : null,
 				found : false,
@@ -261,6 +270,12 @@ class TopicService implements TopicServiceInt {
 					project_ideas_to_be_sent[i].upvoted = false;
 				}
 			}
+
+			// @TODO Skip and Limit function
+			// @TODO Skip and Limit function
+			// @TODO Skip and Limit function
+			// @TODO Skip and Limit function
+
 			return {
 				message : null,
 				found : false,
@@ -298,6 +313,9 @@ class TopicService implements TopicServiceInt {
 			// Filter topics by user interests
 			// Filter topics by users interests
 			// Filter topics by content volume 
+
+			// @TODO Skip and Limit function
+
 			return {
 				message : null,
 				found : false,
