@@ -50,13 +50,14 @@
 				v-bind:user_id="doc.user_id"
 			></Resource>
 			<!-- EmptyContent -->
-			<EmptyContent v-else></EmptyContent>
+			<div v-if='docs.length == 0'>
+				<EmptyContent></EmptyContent>
+			</div>
 			<!-- EmptyContent -->
 		</section>
 
 		<section class='tabs-pages-courses tab-hidden'>
 			<Resource 
-				v-if="courses"
 				v-for="course in courses"
 				v-bind:id="course._id"
 				type="course"
@@ -69,7 +70,9 @@
 				v-bind:user_id="course.user_id"
 			></Resource>
 			<!-- EmptyContent -->
-			<EmptyContent v-else></EmptyContent>
+			<div v-if='courses.length == 0'>
+				<EmptyContent></EmptyContent>
+			</div>
 			<!-- EmptyContent -->
 		</section>
 
@@ -88,7 +91,9 @@
 				v-bind:user_id="article.user_id"
 			></Resource>
 			<!-- EmptyContent -->
-			<EmptyContent v-else></EmptyContent>
+			<div v-if='articles.length == 0'>
+				<EmptyContent></EmptyContent>
+			</div>
 			<!-- EmptyContent -->
 		</section>
 
@@ -109,7 +114,9 @@
 
 			></Resource>	
 			<!-- EmptyContent -->
-			<EmptyContent v-else></EmptyContent>
+			<div v-if='projectideas.length == 0'>
+				<EmptyContent></EmptyContent>
+			</div>
 			<!-- EmptyContent -->
 		</section>
 	</section>

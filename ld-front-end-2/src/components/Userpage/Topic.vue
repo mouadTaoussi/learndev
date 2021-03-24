@@ -16,26 +16,58 @@
 </template>
 
 <script>
-export default {
+	const  apihost = require('../../.././api.config.js');
+	import { print } from 'graphql';
+	import gql from "graphql-tag";
 
-  name: 'Topic',
-  props : {
-  	"topic_id" : String,
-  	"title" : String,
-  	"img": String
-  },
+	export default {
 
-  data () {
-    return {
+	  name: 'Topic',
+	  props : {
+	  	"topic_id" : String,
+	  	"title" : String,
+	  	"img": String
+	  },
 
-    }
-  },
-  methods : {
-  	deleteTopic : function(topic_id){
-  		alert('Topic:'+ topic_id + " has been deleted!")
-  	}
-  }
-}
+	  data () {
+	    return {
+
+	    }
+	  },
+
+	  methods : {
+	  	deleteTopic : function(topic_id){	
+	  		alert('Topic:'+ topic_id + " has been deleted!")
+
+			const REMOVE_TOPIC = gql`
+				mutation( $topic_id: String! ){
+					deleteTopic(topic_id: $topic_id)
+				}
+			`
+
+	  		this.$http({
+   				url : apihost.api_domain + "/graphql",
+   				method: "POST",
+   				headers: {
+					// 'Content-Type': 'application/json',
+			        // 'Accept'      : `application/json`
+				},
+   				data: {
+   					query: print(REMOVE_TOPIC),
+					variables: {
+						topic_id: this.newresource.topic_id,
+					},
+   				}
+   			})
+   			.then((res)=>{
+   				console.log(res);
+   			})
+   			.catch((err)=>{
+   				console.log(err);
+   			})
+   		}
+	  }
+	}
 </script>
 
 <style lang="css" scoped>

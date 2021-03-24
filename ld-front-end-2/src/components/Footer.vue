@@ -53,6 +53,7 @@ export default {
 		grid-template-columns: 300px 300px 300px 300px;
 		grid-gap: 5px;
 		padding: 50px 50px 0 50px;
+		font-family: "Poppins";
 	}
 	/*.footer div {
 		background-color: red;
