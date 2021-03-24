@@ -9,13 +9,16 @@
 			<SearchAndFilter v-on:searchQuery="search"></SearchAndFilter>
 			<!-- Search And Filter -->
 		</section>
-		<section class="container topics-container">
+		<section v-if="topics" class="container topics-container">
 			<Topic 
 				v-for='topic in topics'
 				v-bind:img="topic.background_image" 
 				v-bind:title="topic.title" 
 				v-bind:topic_id="topic._id"></Topic>
 		</section>
+		<!-- EmptyContent -->
+		<EmptyContent v-else></EmptyContent>
+		<!-- EmptyContent -->
 		<button v-on:click="loadMore" class="btn btn-light shadow mt-4 mb-4">Load more</button>
 		<!-- Custom Footer -->
 		<costumFooter></costumFooter>
@@ -27,6 +30,7 @@
 	import costumHeader from ".././components/Header.vue";
 	import Topic from ".././components/Topicspage/Topic.vue";
 	import SearchAndFilter from ".././components/Topicspage/SearchAndFilter.vue";
+	import EmptyContent from '.././components/EmptyContent.vue';
 	import costumFooter from ".././components/Footer.vue";
 	import { print } from 'graphql';
 	import gql from "graphql-tag";
@@ -40,6 +44,7 @@
 	  	costumHeader,
 	  	SearchAndFilter,
 	  	Topic,
+	  	EmptyContent,
 	  	costumFooter
 	  },
 

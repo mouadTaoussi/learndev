@@ -5,26 +5,23 @@
 		</div>
 		<div class="list-one">
 			<ul class="lists">
-				<li>Item</li>
-				<li>Item</li>
-				<li>Item</li>
-				<li>Item</li>
+				<li>How it works?</li>
+				<li>About</li>
+				<li>Privacy& Policy</li>
+				<li>Terms of use</li>
 			</ul>
 		</div>
 		<div class="list-two">
 			<ul class="lists">
-				<li>Item</li>
-				<li>Item</li>
-				<li>Item</li>
-				<li>Item</li>
+				<li>Login</li>
+				<li>Contribute</li>
+				<li>Reset password</li>
+				<!-- <li>Item</li> -->
 			</ul>
 		</div>
 		<div class="social-media">
 			<ul class="lists">
-				<li>Item</li>
-				<li>Item</li>
-				<li>Item</li>
-				<li>Item</li>
+				<li>Code available on Github!</li>
 			</ul>
 		</div>
 		<p class="cc text-white">Copyright 2021, by mouadTaoussi</p>
@@ -48,7 +45,7 @@ export default {
 	.footer {
 		position: relative;
 		background-color: black;
-		height: 350px;
+		height: 280px;
 		width: 100%;
 		margin-top: 100px;
 		padding-top: 50px;

@@ -37,6 +37,7 @@
 				user_id="doc.user_id"
 			<!-- ></Resource> --> 
 			<Resource 
+				v-if="docs"
 				v-for="doc in docs"
 				v-bind:id="doc._id"
 				type="docs"
@@ -48,10 +49,14 @@
 				v-bind:level="doc.hard" 
 				v-bind:user_id="doc.user_id"
 			></Resource>
+			<!-- EmptyContent -->
+			<EmptyContent v-else></EmptyContent>
+			<!-- EmptyContent -->
 		</section>
 
 		<section class='tabs-pages-courses tab-hidden'>
 			<Resource 
+				v-if="courses"
 				v-for="course in courses"
 				v-bind:id="course._id"
 				type="course"
@@ -63,10 +68,14 @@
 				v-bind:level="course.hard" 
 				v-bind:user_id="course.user_id"
 			></Resource>
+			<!-- EmptyContent -->
+			<EmptyContent v-else></EmptyContent>
+			<!-- EmptyContent -->
 		</section>
 
 		<section class='tabs-pages-articles tab-hidden'>	
 			<Resource 
+				v-if="articles"
 				v-for="article in articles"
 				v-bind:id="article._id"
 				type="article"
@@ -78,10 +87,14 @@
 				v-bind:level="article.hard" 
 				v-bind:user_id="article.user_id"
 			></Resource>
+			<!-- EmptyContent -->
+			<EmptyContent v-else></EmptyContent>
+			<!-- EmptyContent -->
 		</section>
 
 		<section class='tabs-pages-projectideas tab-hidden'>
 			<Resource 
+				v-if="projectideas"
 				v-for="projectidea in projectideas"
 				v-bind:id="projectidea._id"
 				type="projectidea"
@@ -95,12 +108,16 @@
 				v-bind:description="projectidea.description"
 
 			></Resource>	
+			<!-- EmptyContent -->
+			<EmptyContent v-else></EmptyContent>
+			<!-- EmptyContent -->
 		</section>
 	</section>
 </template>
 
 <script>
 	import Resource from "./Resource.vue";
+	import EmptyContent from ".././EmptyContent.vue";
 
 	export default {
 
@@ -109,7 +126,8 @@
 	  props : ["docs","courses","articles","projectideas"],
 
 	  components: {
-	  	Resource
+	  	Resource,
+	  	EmptyContent
 	  },
 
 	  data () {

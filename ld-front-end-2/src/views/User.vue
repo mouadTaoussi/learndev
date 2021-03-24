@@ -60,6 +60,9 @@
 						v-bind:level="upvoted.level" 
 						v-bind:user_id="upvoted.user_id"
 					></Resource>
+					<!-- EmptyContent -->
+					<EmptyContent></EmptyContent>
+					<!-- EmptyContent -->
 				</div>
 			</section>
 
@@ -227,11 +230,12 @@
 
 <script>
 	import costumHeader from ".././components/Header.vue";
-	import costumFooter from ".././components/Footer.vue";
 	import Topic from ".././components/Userpage/Topic.vue";
 	import AddTopic from ".././components/Userpage/AddTopic.vue";
 	import Resource from ".././components/Topicpage/Resource.vue";
 	import Alert from ".././components/Alert.vue";
+	import EmptyContent from '.././components/EmptyContent.vue';
+	import costumFooter from ".././components/Footer.vue";
 	const  apihost = require('../.././api.config.js');
 	import { print } from 'graphql';
 	import gql from "graphql-tag";
@@ -246,6 +250,7 @@
 	  	AddTopic,
 	  	Resource,
 	  	Alert,
+	  	EmptyContent,
 	  	costumFooter
 	  },
 	  

@@ -35,6 +35,7 @@
 	import SearchAndFilter from ".././components/Topicpage/SearchAndFilter.vue";
 	import AddResource from ".././components/Topicpage/AddResource.vue";
 	import Resources from ".././components/Topicpage/Resources.vue";
+	// import EmptyContent from '.././components/EmptyContent.vue';
 	import costumFooter from ".././components/Footer.vue";
 	import { print } from 'graphql';
 	import gql from "graphql-tag";
@@ -50,6 +51,7 @@
 	  	SearchAndFilter,
 	  	AddResource,
 	  	Resources,
+	  	// EmptyContent,
 	  	costumFooter
 	  },
 	  data (){
