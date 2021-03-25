@@ -6,7 +6,7 @@
 		<br>
 		<br>
 		<!-- brs -->
-		<h1 class="text-left">About</h1>
+		<h1 class="text-left">How it Works</h1>
 		<!-- brs -->
 		<br>
 		<!-- brs -->
@@ -67,7 +67,7 @@
 	
 	export default {
 
-		name: 'About',
+		name: 'PrivacyPolicy',
 
 		components: {
 			costumHeader,

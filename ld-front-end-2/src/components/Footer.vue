@@ -5,26 +5,26 @@
 		</div>
 		<div class="list-one">
 			<ul class="lists">
-				<li>How it works?</li>
-				<li>About</li>
-				<li>Privacy& Policy</li>
-				<li>Terms of use</li>
+				<li><router-link to="/howitworks">How it works?</router-link></li>
+				<li><router-link to="/about">About</router-link></li>
+				<li><router-link to="/privacy">Privacy& Policy</router-link></li>
+				<li><router-link to="/">Terms of use</router-link></li>
 			</ul>
 		</div>
 		<div class="list-two">
 			<ul class="lists">
-				<li>Login</li>
-				<li>Contribute</li>
-				<li>Reset password</li>
+				<li><router-link to="/login">Login</router-link></li>
+				<li><router-link to="/register">Contribute</router-link></li>
+				<li><router-link to="/resetpassword">Reset password</router-link></li>
 				<!-- <li>Item</li> -->
 			</ul>
 		</div>
 		<div class="social-media">
 			<ul class="lists">
-				<li>Code available on Github!</li>
+				<li><a href="" target="_blank">Code available on Github!</a></li>
 			</ul>
 		</div>
-		<p class="cc text-white">Copyright 2021, by mouadTaoussi</p>
+		<p class="cc text-white">Copyright to devmt development 2021, by mouadTaoussi</p>
 	</section>
 </template>
 
@@ -81,5 +81,21 @@ export default {
 		position: absolute;
 		bottom: 20px;
 		right: 50px;
+	}
+	@media only screen and (max-width: 800px) {
+		.footer {
+			display: block;
+			height: auto;
+			background-color: black;
+			/*grid-template-columns: 300px 300px 300px 300px;*/
+			/*grid-gap: 5px;*/
+			/*padding: 50px 50px 0 50px;*/
+			/*font-family: "Poppins";*/
+		}
+		.cc {
+			position: static;
+			text-align: left;
+			margin: 0;
+		}
 	}
 </style>

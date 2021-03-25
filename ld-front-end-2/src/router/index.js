@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import PrivacyPolicy from "../views/PrivacyPolicy.vue";
+import HowItWorks from "../views/HowItWorks.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import ResetPassword from "../views/ResetPassword.vue";
@@ -15,6 +17,16 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home
+  },
+  {
+    path: "/privacy",
+    name: "PrivacyPolicy",
+    component: PrivacyPolicy
+  },
+  {
+    path: "/howitworks",
+    name: "HowItWorks",
+    component: HowItWorks
   },
   {
     path: "/login",
