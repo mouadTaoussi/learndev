@@ -18,6 +18,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.upvoteResolver = exports.projectIdeaResolver = exports.articleResolver = exports.courseResolver = exports.docsResolver = exports.topicInfoResolver = exports.topicResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const Topics_objecttypes_1 = require("./Topics.objecttypes");
+const Topics_models_1 = require("../.././Topics/Topics.models");
 const middlewares_graphql_1 = require("../middlewares.graphql");
 const Topics_service_1 = __importDefault(require("../.././Topics/Topics.service"));
 const _topicservice = new Topics_service_1.default();
@@ -146,7 +147,7 @@ let topicResolver = class topicResolver {
     }
     async deleteTopic(topic_id, context) {
         const user_id = context.req.user.id;
-        return "Deleted Successfully!";
+        return true;
         console.log(context.session);
     }
 };
@@ -173,7 +174,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], topicResolver.prototype, "addTopic", null);
 __decorate([
-    type_graphql_1.Mutation(returns => String, { description: "This query deletes a topic" }),
+    type_graphql_1.Mutation(returns => Boolean, { description: "This query deletes a topic" }),
     type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('topic_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
@@ -202,7 +203,14 @@ let docsResolver = class docsResolver {
     }
     async deleteDocs(docs_id, context) {
         const user_id = context.req.user.id;
-        return "Deleted Successfully!";
+        const docs = await Topics_models_1.DocsModel.find({ _id: docs_id });
+        if (user_id == docs._id) {
+            const deleteDoc = await _topicservice.deleteDocs(docs_id);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 };
 __decorate([
@@ -214,7 +222,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], docsResolver.prototype, "addDocs", null);
 __decorate([
-    type_graphql_1.Mutation(returns => String, { description: "This query deletes a docs" }),
+    type_graphql_1.Mutation(returns => Boolean, { description: "This query deletes a docs" }),
     type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('docs_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
@@ -243,7 +251,14 @@ let courseResolver = class courseResolver {
     }
     async deleteCourse(course_id, context) {
         const user_id = context.req.user.id;
-        return "Deleted Successfully!";
+        const course = await Topics_models_1.CourseModel.find({ _id: course_id });
+        if (user_id == course._id) {
+            const deleteCourse = await _topicservice.deleteCourse(course_id);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 };
 __decorate([
@@ -255,7 +270,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], courseResolver.prototype, "addCourse", null);
 __decorate([
-    type_graphql_1.Mutation(returns => String, { description: "This query deletes a course" }),
+    type_graphql_1.Mutation(returns => Boolean, { description: "This query deletes a course" }),
     type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('course_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
@@ -284,7 +299,14 @@ let articleResolver = class articleResolver {
     }
     async deleteArticle(article_id, context) {
         const user_id = context.req.user.id;
-        return "Deleted Successfully!";
+        const article = await Topics_models_1.ArticleModel.find({ _id: article_id });
+        if (user_id == article._id) {
+            const deleteArticle = await _topicservice.deleteArticle(article_id);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 };
 __decorate([
@@ -296,7 +318,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], articleResolver.prototype, "addArticle", null);
 __decorate([
-    type_graphql_1.Mutation(returns => String, { description: "This query deletes a course" }),
+    type_graphql_1.Mutation(returns => Boolean, { description: "This query deletes a course" }),
     type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('article_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
@@ -325,7 +347,14 @@ let projectIdeaResolver = class projectIdeaResolver {
     }
     async deleteProjectIdea(project_idea_id, context) {
         const user_id = context.req.user.id;
-        return "Deleted Successfully!";
+        const projectIdea = await Topics_models_1.ProjectIdeaModel.find({ _id: project_idea_id });
+        if (user_id == projectIdea._id) {
+            const deleteProjectIdea = await _topicservice.deleteProjectIdea(project_idea_id);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 };
 __decorate([
@@ -337,7 +366,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], projectIdeaResolver.prototype, "addProjectIdea", null);
 __decorate([
-    type_graphql_1.Mutation(returns => String, { description: "This query deletes a Project Idea" }),
+    type_graphql_1.Mutation(returns => Boolean, { description: "This query deletes a Project Idea" }),
     type_graphql_1.UseMiddleware(middlewares_graphql_1.Authenticated),
     __param(0, type_graphql_1.Arg('project_idea_id')), __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),

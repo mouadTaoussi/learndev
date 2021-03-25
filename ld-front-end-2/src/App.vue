@@ -12,6 +12,7 @@
     --primary-- :  #0652DD;
     --bootstrap--primary-- : #2962FF;
     --font--    :'Changa', sans-serif;
+    --margin-between-sections-in-homepage-- : 100px;
 }
 .btn {
     font-family: var(--font--);

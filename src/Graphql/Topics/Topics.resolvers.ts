@@ -4,6 +4,7 @@ import {
 	Topic,      Docs,      Course,      Article,      ProjectIdea, Upvote,
 	TopicArgs, DocsArgs, CourseArgs, ArticleArgs, ProjectIdeaArgs, LoadMoreRules, TopicInfo
 } from './Topics.objecttypes';
+import { TopicModel, DocsModel, ArticleModel, CourseModel, ProjectIdeaModel } from "../.././Topics/Topics.models";
 import { Authenticated }  from '../middlewares.graphql';
 import TopicService from "../.././Topics/Topics.service";
 
@@ -176,7 +177,7 @@ class topicResolver implements topicResolver {
 		// return "Something went wrong!";
 	}
 
-	@Mutation(returns => String, { description: "This query deletes a topic" })
+	@Mutation(returns => Boolean, { description: "This query deletes a topic" })
 	@UseMiddleware(Authenticated)
 	public async deleteTopic(@Arg('topic_id') topic_id: string, @Ctx() context : any) : Promise<any> {
 
@@ -185,7 +186,7 @@ class topicResolver implements topicResolver {
 
 		// Check if the user owns the target topic
 
-		return "Deleted Successfully!";
+		return true;
 		console.log(context.session)
 	}
 
@@ -231,15 +232,26 @@ class docsResolver implements docsResolver {
 		return newDoc.data;
 	}
 
-	@Mutation(returns => String, { description: "This query deletes a docs" })
+	@Mutation(returns => Boolean, { description: "This query deletes a docs" })
 	@UseMiddleware(Authenticated)
 	public async deleteDocs(@Arg('docs_id') docs_id: string, @Ctx() context : any) : Promise<any> {
 		
 	 	// User
 	 	const user_id = context.req.user.id
 
+		// Find that article
+	 	const docs = await DocsModel.find({ _id:docs_id });
+
 		// Check if the user owns the target topic
-		return "Deleted Successfully!";
+		if (user_id == docs._id) {
+
+			const deleteDoc = await _topicservice.deleteDocs(docs_id);
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }
@@ -284,15 +296,26 @@ class courseResolver implements courseResolver {
 		return newCourse.data;
 	}
 
-	@Mutation(returns => String, { description: "This query deletes a course" })
+	@Mutation(returns => Boolean, { description: "This query deletes a course" })
 	@UseMiddleware(Authenticated)
 	public async deleteCourse(@Arg('course_id') course_id: string, @Ctx() context : any) : Promise<any> {
 		
 	 	// User
 	 	const user_id = context.req.user.id
 
+		// Find that article
+	 	const course = await CourseModel.find({ _id:course_id });
+
 		// Check if the user owns the target topic
-		return "Deleted Successfully!";
+		if (user_id == course._id) {
+
+			const deleteCourse = await _topicservice.deleteCourse(course_id);
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }
@@ -337,15 +360,26 @@ class articleResolver implements articleResolver {
 		return newArticle.data;
 	}
 
-	@Mutation(returns => String, { description: "This query deletes a course" })
+	@Mutation(returns => Boolean, { description: "This query deletes a course" })
 	@UseMiddleware(Authenticated)
 	public async deleteArticle(@Arg('article_id') article_id: string, @Ctx() context : any) : Promise<any> {
 		
 	 	// User
 	 	const user_id = context.req.user.id
+	 	// Find that article
+	 	const article = await ArticleModel.find({ _id:article_id });
 
 		// Check if the user owns the target topic
-		return "Deleted Successfully!";
+		if (user_id == article._id) {
+
+			const deleteArticle = await _topicservice.deleteArticle(article_id);
+
+			return true;
+		}
+		else {
+			return false;
+		}
+
 	}
 
 }
@@ -391,15 +425,26 @@ class projectIdeaResolver implements projectIdeaResolver {
 		return projectIdea.data;
 	}
 
-	@Mutation(returns => String, { description: "This query deletes a Project Idea" })
+	@Mutation(returns => Boolean, { description: "This query deletes a Project Idea" })
 	@UseMiddleware(Authenticated)
 	public async deleteProjectIdea(@Arg('project_idea_id') project_idea_id: string, @Ctx() context : any) : Promise<any> {
 		
 		// User
 	 	const user_id = context.req.user.id
 
+	 	// Find that article
+	 	const projectIdea = await ProjectIdeaModel.find({ _id:project_idea_id });
+
 		// Check if the user owns the target topic
-		return "Deleted Successfully!";
+		if (user_id == projectIdea._id) {
+
+			const deleteProjectIdea = await _topicservice.deleteProjectIdea(project_idea_id);
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

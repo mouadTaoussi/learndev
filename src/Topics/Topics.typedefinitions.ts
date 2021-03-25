@@ -38,7 +38,7 @@ type Docs = {
 	topic_id     : string,
 	title        : string,
 	level        : string,
-	docs_link    : string,
+	link         : string,
 	upvotes_count: number,
 	upvotes      : number[],
 	// tags         : string[]
@@ -49,7 +49,7 @@ type Course = {
 	topic_id     : string,
 	title        : string,
 	level        : string,
-	course_link  : string,
+	link         : string,
 	upvotes_count: number,
 	upvotes      : number[],
 	// tags         : string[]
@@ -60,7 +60,7 @@ type Article = {
 	topic_id     : string,
 	title        : string,
 	level        : string,
-	article_link : string,
+	link         : string,
 	upvotes_count: number,
 	upvotes      : number[],
 	// tags         : string[]
