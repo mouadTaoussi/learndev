@@ -37,14 +37,14 @@
 
 	  methods : {
 	  	deleteTopic : function(topic_id){	
-	  		alert('Topic:'+ topic_id + " has been deleted!")
+	  		const confirmed = confirm('Are you sure you wanted to delete that topic?');
+			if (!confirmed) return;
 
 			const REMOVE_TOPIC = gql`
 				mutation( $topic_id: String! ){
 					deleteTopic(topic_id: $topic_id)
 				}
 			`
-
 	  		this.$http({
    				url : apihost.api_domain + "/graphql",
    				method: "POST",
@@ -55,15 +55,22 @@
    				data: {
    					query: print(REMOVE_TOPIC),
 					variables: {
-						topic_id: this.newresource.topic_id,
+						topic_id: this.topic_id,
 					},
    				}
    			})
    			.then((res)=>{
-   				console.log(res);
+   				if (res.data.data.deleteTopic) {
+   					alert('deleted');
+   					this.$emit('reFetchTopics',true)
+
+   				}
+   				else {
+   					alert('not deleted');
+   				}
    			})
    			.catch((err)=>{
-   				console.log(err);
+   				alert('not deleted');
    			})
    		}
 	  }

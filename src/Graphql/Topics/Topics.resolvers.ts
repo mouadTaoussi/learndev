@@ -184,10 +184,20 @@ class topicResolver implements topicResolver {
 		// User
 	 	const user_id = context.req.user.id
 
-		// Check if the user owns the target topic
+		// Find that article
+	 	const topic = await TopicModel.findOne({ _id:topic_id });
+			console.log(topic)
+			// console.log(user_id == topic.user_id)
 
-		return true;
-		console.log(context.session)
+		// Check if the user owns the target topic
+		if (user_id == topic.user_id) {
+			const deleteTopic = await _topicservice.deleteTopic(topic_id);
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

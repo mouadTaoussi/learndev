@@ -147,8 +147,15 @@ let topicResolver = class topicResolver {
     }
     async deleteTopic(topic_id, context) {
         const user_id = context.req.user.id;
-        return true;
-        console.log(context.session);
+        const topic = await Topics_models_1.TopicModel.findOne({ _id: topic_id });
+        console.log(topic);
+        if (user_id == topic.user_id) {
+            const deleteTopic = await _topicservice.deleteTopic(topic_id);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 };
 __decorate([

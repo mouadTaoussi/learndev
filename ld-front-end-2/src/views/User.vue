@@ -39,6 +39,7 @@
 						v-bind:topic_id="topic._id" 
 						v-bind:img="topic.background_image" 
 						v-bind:title="topic.title"
+						v-on:reFetchTopics="refreachTopics"
 					></Topic>
 				</div>
 				<div 
@@ -428,6 +429,18 @@
 		  	})
 		  	.catch((err)=>{
 		  		
+		  	})
+		},
+		refreachTopics : function(deleted){
+			this.$http({
+		  		method : "GET",
+		  		url    : apihost.api_domain + '/auth/getuser',
+		  	})
+		  	.then((res)=>{
+		  		this.topics = res.data.topics;
+		  	})
+		  	.catch((err)=>{
+		  		this.$router.push({ path: '/login' })
 		  	})
 		},
 		toggleSaveChanges : function(){
