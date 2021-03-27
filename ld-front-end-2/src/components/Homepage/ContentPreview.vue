@@ -2,12 +2,13 @@
 	<section class="previewapp">
 		<div class="container">
 			<div class="content">
-				<h1 class="text-white text-left">Hello World</h1>
+				<p class="first-title text-left text-white">- Explore -</p>
+				<h1 class="text-white text-left">The resources are more clear to navigate</h1>
 				<p class="text-white text-left">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 				</p>
 			</div>
-			<iframe src="http://localhost:8080/topic/605a004f6e42e12bb8844fd7" class="iframe"></iframe>
+			<iframe src="http://localhost:8080/topic/605a004f6e42e12bb8844fd7" class="shadow iframe"></iframe>
 		</div>
 	</section>
 </template>
@@ -26,6 +27,12 @@ export default {
 </script>
 
 <style lang="css" scoped>
+	.first-title {
+		margin: 0;
+		padding: 0;
+		font-family: "Poppins";
+		font-size: 17px;
+	}
 	.previewapp {
 		background-image: url('../.././assets/backgroundForPreviewApp.svg');
 		background-size: contain;
@@ -37,7 +44,7 @@ export default {
 		margin-bottom: var(--margin-between-sections-in-homepage--);
 	}
 	.container {
-		padding-top: 50px;
+		padding-top: 40px;
 		display: grid;
 		grid-template-columns: 2fr 3fr;
 		grid-gap: 20px;
@@ -46,10 +53,11 @@ export default {
 	}
 	.iframe {
 		width: 100%;
-		height: 90%;
+		height: 100%;
 	    /*overflow:hidden!important;*/
 	    overflow-x:hidden!important;
 		overflow-Y:hidden!important;
+		border: 0;
 	}
 	.content {
 		font-family: var(--font--);

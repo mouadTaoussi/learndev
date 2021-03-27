@@ -3,7 +3,8 @@
 		<div class="card-area">
 			<div class="svg-child"></div>
 			<div class="content-child">
-				<h2 class="text-left">Hello World</h2>
+				<p class="first-title text-left text-primary">- Explore -</p>
+				<h2 class="text-left">The resources are more clear to navigate</h2>
 				<p class="text-left">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 				</p>
@@ -27,6 +28,12 @@
 </script>
 
 <style lang="css" scoped>
+	.first-title {
+		margin: 0;
+		padding: 0;
+		font-family: "Poppins";
+		font-size: 17px;
+	}
 
 	.card-area {
 		display: grid;

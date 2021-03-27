@@ -34,23 +34,28 @@
 
 			<!-- Tabs pages -->
 			<section class='tabs-pages-topics'>
-				<div v-for="topic in topics">
-					<Topic 
-						v-bind:topic_id="topic._id" 
-						v-bind:img="topic.background_image" 
-						v-bind:title="topic.title"
-						v-on:reFetchTopics="refreachTopics"
-					></Topic>
+				<div v-if="topics.length > 0" class="tabs-pages-topics-grid">
+					<div v-for="topic in topics">
+						<Topic 
+							v-bind:topic_id="topic._id" 
+							v-bind:img="topic.background_image" 
+							v-bind:title="topic.title"
+							v-on:reFetchTopics="refreachTopics"
+						></Topic>
+					</div>
 				</div>
+				<!-- EmptyContent -->
+				<EmptyContent v-if="topics.length == 0"></EmptyContent>
+				<!-- EmptyContent -->
 				<div 
 					data-toggle="modal" 
 					data-target="#addNewTopic"
-					class="shadow bg-primary btn text-white mr-2"
-				>Add new Topic +</div>
+					class="addTopic-btn shadow bg-primary btn text-white mr-2"
+				>✏</div>
 			</section>
 
 			<section class='tabs-pages-upvoted tab-hidden'>
-				<div v-for="upvoted in upvoted_content">
+				<div v-if="upvoted_content.length > 0" v-for="upvoted in upvoted_content">
 					<Resource 
 						v-bind:id="upvoted._id"
 						v-bind:title="upvoted.title" 
@@ -61,10 +66,10 @@
 						v-bind:level="upvoted.level" 
 						v-bind:user_id="upvoted.user_id"
 					></Resource>
-					<!-- EmptyContent -->
-					<EmptyContent></EmptyContent>
-					<!-- EmptyContent -->
 				</div>
+				<!-- EmptyContent -->
+				<EmptyContent v-if="upvoted_content.length == 0"></EmptyContent>
+				<!-- EmptyContent -->
 			</section>
 
 			<section class='tabs-pages-userprofile py-4 tab-hidden'>	
@@ -343,11 +348,14 @@
 					document.querySelector('.add-topic-btn').innerHTML = "Added👍";
 					document.querySelector('.add-topic-btn').classList.add('btn-success');
 					document.querySelector('.add-topic-btn').classList.remove('btn-primary');
+
 				})
 				.catch((err)=>{
 					this.showAlert('error', 'something went wrong!, Try again!', null);
 				})
 				// Add topic to the Page
+				// Refreach topics 
+				this.refreachTopics("res.data.data.addTopic");
 			}
 		},
 		updateProfile : function(){
@@ -389,8 +397,7 @@
 			})
 		},
 		changePassword : function(){
-			console.log(this.current_password) /// Errorrrrrrrrrrrrrrrrrrrrrrr!!!!!!
-			if (this.current_password.at_provider_id != null) {
+			if (this.current_user.at_provider_id != null) {
 				this.showAlert('error','Your are not allowed to set password',"null");
 				return;
 			}
@@ -536,12 +543,26 @@
 
 <style lang="css" scoped>
 	.tabs-pages-topics {
+	}
+	.tabs-pages-topics-grid {
 		display: grid;
 		grid-template-columns: 2fr 2fr 2fr;
 		grid-row-gap: 20px;
 		grid-column-gap: 20px;
 		margin-top: 20px;
 		z-index: -1;
+
+	}
+	.addTopic-btn {
+		position: absolute;
+		bottom: 50px;
+		right: 50px;
+		position: fixed;
+		z-index: 999;
+		border-radius: 50%;
+		width: 50px;
+		height: 50px;
+		font-size: 25px;
 	}
 	.title {
 		font-family: var(--font--);
