@@ -113,6 +113,22 @@
 	  mounted (){
 	  	window.scrollTo(0, 0);
 
+	  	// if the user is logged in from Oauth then we need to store an indicator in localstorage
+	  	if (this.$route.query.Oauth = true) {
+	  		this.$http({
+		  		method : "GET",
+		  		url    : apihost.api_domain + '/auth/getuser',
+		  	})
+		  	.then((res)=>{
+		  		console.log("ggggggggggggggggggggggg")
+		  		console.log(res.data.user.user_name)
+		  		// Set a localstorage value to know whether the user already logged in or not
+				localStorage.setItem('user_name',res.data.user.user_name);
+		  	})
+		  	.catch((err)=>{
+		  	})
+	  	}
+
 	  	const GET_TOPICS = gql`
 		  	query ($limit:Float!,$skip:Float!) {
 			  	getTopics(limit:$limit,skip:$skip){

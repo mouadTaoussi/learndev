@@ -389,6 +389,11 @@
 			})
 		},
 		changePassword : function(){
+			console.log(this.current_password) /// Errorrrrrrrrrrrrrrrrrrrrrrr!!!!!!
+			if (this.current_password.at_provider_id != null) {
+				this.showAlert('error','Your are not allowed to set password',"null");
+				return;
+			}
 			if ( this.passwords.current_password == "" || this.passwords.current_password == null ) {
 				this.showAlert('error','Fill the inputs',"null");
 				return;
