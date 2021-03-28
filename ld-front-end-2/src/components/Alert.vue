@@ -26,8 +26,10 @@ export default {
 <style lang="css">
 	.local-alert {
 		position: absolute;
-		top : 100px;
-		right: 50px;
+		/*top : 100px;
+		right: 50px;*/
+		top: 10px;
+		right: 10px;
 		background-color: red!important;
 		width: 300px;
 		text-align: left;

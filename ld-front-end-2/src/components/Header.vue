@@ -4,16 +4,38 @@
 	 		<div class="brand-child">
 		 		<router-link to="/">
 					<!-- <p class="logo text-dark">.learnDev()</p> -->
-					<div class="logo logo-blue"></div>
+					<div class="logo logo-light"></div>
 				</router-link>
 			</div>
 			<div class="list-child">
-				<router-link tag="a" class="list-item" to="/topics">Discover Topics</router-link>
-				<router-link v-if="!user_name" tag="a" class="list-item" to="/login">Log in</router-link>
-				<router-link v-if="user_name" tag="a" class="list-item" to="/user">{{ user_name }}</router-link>
-				<p v-if="user_name" class="list-item text-danger" v-on:click='logout()'>Log out</p>
-				<router-link v-if="!user_name" tag="button" class="shadow list-item btn btn-primary" to="/register">Contribute</router-link>
-
+				<router-link 
+					tag="p" 
+					class="list-item" 
+					to="/topics"
+				>Discover Topics</router-link>
+				<router-link 
+					v-if="!user_name" 
+					tag="p" 
+					class="list-item" 
+					to="/login"
+				>Log in</router-link>
+				<router-link 
+					v-if="user_name" 
+					tag="p" 
+					class="list-item" 
+					to="/user"
+				>{{ user_name }}</router-link>
+				<p 
+					v-if="user_name" 
+					class="list-item text-danger" 
+					v-on:click='logout()'
+				>Log out</p>
+				<router-link 
+					v-if="!user_name" 
+					tag="button" 
+					class="shadow list-item btn btn-primary" 
+					to="/register"
+				>Contribute</router-link>
 			</div>
 		</header>
 	</section>
@@ -83,9 +105,14 @@
 		justify-self: start;
 	}
 	.list-child {
-		padding-top: 5px;
+		padding-top: 12px;
 		padding-right: 30px;	
 		justify-self: end;
+	}
+	.list-child p {
+		color: var(--list-color--);
+		font-family: 'Poppins';
+		cursor: pointer;
 	}
 	.text-danger {
 		cursor: pointer;

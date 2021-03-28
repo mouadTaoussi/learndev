@@ -1,0 +1,43 @@
+#app {
+  background-color: var(--dark-mode--);
+  color: white!important;
+}
+
+.logo {
+  background-image: url('./assets/logoblue.svg')!important;
+}
+p,h1,h2,h3,h4,h5,h6, strong {
+  color: white!important;
+}
+h2 {
+  color: white!important;
+}
+.modal-content {
+  background-color: var(--darkless-mode--)!important;
+  color: white!important;
+  padding: 30px;
+}
+section {
+  background-color: var(--dark-mode--)!important;
+  color: white!important;
+}
+header {
+  background-color: var(--dark-mode--)!important;
+  color: white!important;
+}
+#resource-card , .resource-area  {
+  background-color: var(--darkless-mode--)!important;
+  color: white!important;
+  border-color: transparent!important;
+}
+.upvote-btn {
+  color: white!important;
+}
+.description-hidden {
+  border-color: transparent!important;
+}
+input, option {
+  background-color: var(--darkless-mode--)!important;
+  color: white!important;
+  border-color: rgba(255,255,255,.0)!important;
+}

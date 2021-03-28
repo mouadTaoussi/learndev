@@ -40,6 +40,11 @@
 </script>
 
 <style lang="css" scoped>
+	/* Dont apply dark mode classes */
+	section, div {
+		background-color: transparent!important;
+	}
+	/**/
 	.showcase-area {
 		background-image: url('../.././assets/pexels-neo-2653362.jpg');
 		background-repeat: no-repeat;

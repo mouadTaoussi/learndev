@@ -5,7 +5,7 @@
 				<img v-bind:src="img">
 			</router-link>
 
-			<h2 class="topic-title text-dark">{{ title }}</h2>
+			<h2 class="topic-title">{{ title }}</h2>
 
 			<button 
 				v-on:click="deleteTopic(topic_id)" 
@@ -105,6 +105,7 @@
 		font-family: var(--font--);
 		text-align: left;
 		margin: 10px;
+		color: black;
 	}
 
 	@media only screen and (max-width: 800px) {

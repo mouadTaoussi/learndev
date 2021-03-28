@@ -56,7 +56,7 @@ window.setInterval(()=>{
 		// document.querySelector('.header-landingpage').classList.add('border');
 
 		document.querySelectorAll('.list-item').forEach((item)=>{
-			item.style.color = "black";
+			item.style.color = "var(--list-color--)";
 		})
 
 		document.querySelector('.logo').classList.add('logo-light');
