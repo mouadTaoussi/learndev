@@ -1,5 +1,5 @@
 <template>
-	<section class="bg-light">
+	<section class="">
 		<!-- <costumHeader></costumHeader> -->
 		<!-- Alert Message -->
 		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
@@ -144,7 +144,7 @@
 	section {
 		height: 100vh;
 		padding-top: 120px;
-		background-color: var(--primary--);
+		background-color: white;
 		font-family: var(--font--);
 	}
 	.logo {

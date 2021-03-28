@@ -97,6 +97,7 @@
 		height: 80px;
 	}
 	.list-item {
+		color:white;
 		display: inline;
 		margin-left: 18px;
 	}

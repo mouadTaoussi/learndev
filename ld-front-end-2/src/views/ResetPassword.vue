@@ -98,7 +98,7 @@
 	section {
 		height: 100vh;
 		padding-top: 120px;
-		background-color: var(--primary--);
+		background-color: white;
 		font-family: var(--font--);
 	}
 	.logo {
