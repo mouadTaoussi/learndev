@@ -84,7 +84,7 @@ export default {
 	}
 	@media only screen and (max-width: 800px) {
 		.footer {
-			display: block;
+			display: none;
 			height: auto;
 			background-color: black;
 			/*grid-template-columns: 300px 300px 300px 300px;*/

@@ -18,10 +18,10 @@
   background-image: url()!important;
   background-color: var(--darkless-mode--)!important;
 }
-/* logo and texts to be white */
-/*.logo {
-  background-image: url('./img/logoblue.svg')!important
-}*/
+/* logo texts to be white */
+.logo {
+  background-image: url('./assets/logoblue.svg')!important;
+}
 p,h1,h2,h3,h4,h5,h6, strong {
   color: white!important;
 }

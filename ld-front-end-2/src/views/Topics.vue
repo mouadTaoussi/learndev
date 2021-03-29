@@ -19,7 +19,7 @@
 		<!-- EmptyContent -->
 		<EmptyContent v-else></EmptyContent>
 		<!-- EmptyContent -->
-		<button v-on:click="loadMore" class="btn btn-light shadow mt-4 mb-4">Load more</button>
+		<button v-on:click="loadMore" class="btn btn-primary btn-sm shadow mt-4 mb-4">Load more</button>
 		<!-- Custom Footer -->
 		<costumFooter></costumFooter>
 		<!-- Custom Footer -->

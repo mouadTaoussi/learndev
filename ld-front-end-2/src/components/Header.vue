@@ -30,10 +30,13 @@
 					class="list-item text-danger" 
 					v-on:click='logout()'
 				>Log out</p>
+				<p class="list-item">
+					<DarkMode></DarkMode>
+				</p>
 				<router-link 
 					v-if="!user_name" 
 					tag="button" 
-					class="shadow list-item btn btn-primary" 
+					class="shadow btn-sm list-item btn btn-primary" 
 					to="/register"
 				>Contribute</router-link>
 			</div>
@@ -43,11 +46,14 @@
 
 <script>
 	const  apihost = require('../.././api.config.js');
+	import DarkMode from "./DarkMode.vue";
 
 	export default {
 
 	  name: 'costumHeader',
-
+	  components: {
+		DarkMode
+	  },
 	  data () {
 	    return {
 	    	user_name : localStorage.getItem('user_name')

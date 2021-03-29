@@ -21,7 +21,7 @@
 					v-bind:projectideas="projectIdeas"
 				></Resources>
 				<!-- Resources -->
-				<button v-on:click="loadMore" class="btn btn-light shadow mt-4 mb-4">Load more</button>
+				<button v-on:click="loadMore" class="btn btn-primary btn-sm shadow mt-4 mb-4">Load more</button>
 			</div>
 		</section>
 		<!-- Custom Footer -->
