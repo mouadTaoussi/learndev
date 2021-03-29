@@ -1,9 +1,9 @@
 <template>
 	<section class="container">
-		<div class="card-area light shadow bg-light">
+		<div class="single-card shadow bg-light">
 			<div>
-				<h2 class="text-dark text-left">Save time to focus on what matters</h2>
-				<p class="text-dark text-left">
+				<h2 class="text-left">Save time to focus on what matters</h2>
+				<p class="text-left">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 				</p>
 			</div>
@@ -26,13 +26,14 @@
 </script>
 
 <style lang="css" scoped>
-	.card-area {
+	.single-card {
 		display: grid;
 		grid-template-columns: 2fr 1fr;
 		grid-gap: 20px;
 		/*background-color: ;*/
 		padding: 40px;
 		position: relative;
+		color: black;
 	}
 	p, h2 {
 		font-family: var(--font--);
@@ -42,7 +43,7 @@
 		top: 40%;
 	}
 	@media only screen and (max-width: 800px) {
-		.card-area {
+		.single-card {
 			display: grid;
 			grid-template-columns: 100%;
 		}

@@ -79,7 +79,7 @@
 		background-repeat: no-repeat;
 		background-position: center;
 		width: 150px;
-		height: 48px;
+		height: 38px;
 	}
 	.btn {
 		color: white!important;
@@ -106,7 +106,7 @@
 		justify-self: start;
 	}
 	.list-child {
-		padding-top: 12px;
+		padding-top: 8px;
 		padding-right: 30px;	
 		justify-self: end;
 	}

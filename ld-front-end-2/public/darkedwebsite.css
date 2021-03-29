@@ -3,9 +3,13 @@
   background-color: var(--dark-mode--);
   color: white!important;
 }
+.single-card {
+  background-color: var(--darkless-mode--)!important;
+  color: white!important;
+}
 /* auth pages to be dark */
 .login-components, .register-components, .resetpassword-components  {
-  background-color: var(--darkless-mode--)!important;
+  background-color: var(--darken-mode--)!important;
 }
 .login-components a, .register-components a, .resetpassword-components a {
   color: white!important;
@@ -15,15 +19,16 @@
   background-color: var(--darkless-mode--)!important;
 }
 /* logo and texts to be white */
-.logo {
-  background-image: url('./assets/logoblue.svg')!important;
-}
+/*.logo {
+  background-image: url('./img/logoblue.svg')!important
+}*/
 p,h1,h2,h3,h4,h5,h6, strong {
   color: white!important;
 }
-h2 {
+h2, .title-preview-topics {
   color: white!important;
 }
+
 /* modal background */
 .modal {
   background-color: rgba(0,0,0,.7);
@@ -44,7 +49,7 @@ section {
   color: white!important;
 }
 header {
-  background-color: var(--dark-mode--)!important;
+  background-color: var(--darkless-mode--)!important;
   color: white!important;
 }
 /* set to darkless at resource cards */

@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<div class="empty-area"></div>
-		<p class="text-center text-dark">Nothing for now to show you!</p>
+		<p class="text-center">Nothing for now to show you!</p>
 	</section>
 </template>
 
@@ -22,6 +22,7 @@ export default {
 	section {
 		margin-top: 70px;
 		margin-bottom: 70px;
+		color: black;
 	}
 	section p {
 		font-family: 'Poppins'

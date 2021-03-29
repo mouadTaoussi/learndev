@@ -7,7 +7,7 @@
     <SecondShowCase></SecondShowCase>
     <ContentPreview></ContentPreview>
     <div class="topics-section container">
-      <h1 class="text-left text-dark my-4">Powerful topics to see:</h1>
+      <h1 class="text-left my-4 title-preview-topics">Powerful topics to see:</h1>
       <div class="topics-exemples">
         <Topic 
           img="https://images.pexels.com/photos/360591/pexels-photo-360591.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
