@@ -51,7 +51,7 @@ export default {
 				}
 				/* logo texts to be white */
 				.logo {
-				  /*background-image: url('./img/logoblue2031a2b9.svg')!important;*/
+				  background-image: url('https://raw.githubusercontent.com/mouadTaoussi/learndev/b9559ebdabe0a5eac45c728a00cc2d01a551a09f/ld-front-end-2/src/assets/logoblue.svg')!important;
 				}
 				p,h1,h2,h3,h4,h5,h6, strong {
 				  color: white!important;

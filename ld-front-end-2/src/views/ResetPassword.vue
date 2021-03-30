@@ -1,5 +1,5 @@
 <template>
-	<section class="bg-light">
+	<section class="">
 		<!-- <costumHeader></costumHeader> -->
 		<!-- Alert -->
 		<Alert v-bind:type="alert.type" v-bind:message="alert.message"></Alert>
