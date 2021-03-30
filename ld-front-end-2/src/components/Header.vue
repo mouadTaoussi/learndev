@@ -118,7 +118,7 @@
 	}
 	.list-child p {
 		color: var(--list-color--);
-		font-family: 'Poppins';
+		/*font-family: 'Poppins';*/
 		cursor: pointer;
 	}
 	.text-danger {

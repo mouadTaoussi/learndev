@@ -1,5 +1,5 @@
 <template>
-	<button v-on:click="mode" class="btn shadow btn-sm btn-info">Mode</button>
+	<button id="btn" v-on:click="mode" class="darkmode-btn shadow btn-sm btn-light">Light</button>
 </template>
 
 <script>
@@ -9,6 +9,8 @@ export default {
 	data() {
 		return {};
 	},
+	mounted (){//
+	},//
 	methods: {
 		mode: function() {
 			// const style = document.createElement("style");
@@ -20,10 +22,15 @@ export default {
 			if (localStorage.getItem("mode") == "dark") {
 				style.innerHTML = "";
 				localStorage.setItem("mode", "light");
+
+				// Change btn 
+				document.querySelector('#btn').classList.remove('btn-light','text-dark');
+				document.querySelector('#btn').classList.add('btn-dark-mode','text-white');
+				document.querySelector('#btn').innerHTML = "Dark";
 			} else {
 				style.innerHTML = `
 			   /* Darkmore started */
-				#app {
+				body, html {
 				  background-color: var(--dark-mode--);
 				  color: white!important;
 				}
@@ -44,7 +51,7 @@ export default {
 				}
 				/* logo texts to be white */
 				.logo {
-				  background-image: url('./assets/logoblue.svg')!important;
+				  /*background-image: url('./img/logoblue2031a2b9.svg')!important;*/
 				}
 				p,h1,h2,h3,h4,h5,h6, strong {
 				  color: white!important;
@@ -55,7 +62,7 @@ export default {
 
 				/* modal background */
 				.modal {
-				  background-color: rgba(0,0,0,.7);
+				  background-color: rgba(0,0,0,.1);
 				}
 				/* modal to be dark and bigger by padding */
 				.modal-content {
@@ -108,6 +115,11 @@ export default {
 			`;
 
 				localStorage.setItem("mode", "dark");
+
+				// Change btn 
+				document.querySelector('#btn').classList.add('btn-light','text-dark');
+				document.querySelector('#btn').classList.remove('btn-dark-mode','text-white');
+				document.querySelector('#btn').innerHTML = "Light";
 			}
 
 			// append the style to the DOM in <head> section
@@ -117,4 +129,15 @@ export default {
 };
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+	.darkmode-btn {
+		border:0;
+		border-radius: 3px;
+	}
+	.btn-light {
+		color: black!important; 
+	}
+	.btn-dark-mode {
+		background-color: var(--darkless-mode--);
+	}
+</style>

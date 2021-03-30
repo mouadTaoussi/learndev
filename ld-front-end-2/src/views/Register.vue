@@ -195,7 +195,7 @@
 			this.alert.message = message
 			this.alert.type = type
 	  		// Show alert
-			document.querySelector('.local-alert').style.opacity = "10";
+			document.querySelector('.local-alert').style.display = "block";
 			
 			// Determine where
 			if (target !== null) {
@@ -203,8 +203,8 @@
 			}
 
 			window.setTimeout(()=>{
-				document.querySelector('.local-alert').style.opacity = "0";				
-			},5000)
+				document.querySelector('.local-alert').style.display = "none";				
+			},5000);
 	  	}
 	  }
 	}

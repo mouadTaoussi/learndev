@@ -34,7 +34,7 @@ export default {
 		width: 300px;
 		text-align: left;
 		color: white;
-		opacity: 0;
+		display: none;
 		transition: all .2s ease-out;
 		position: fixed;
 		z-index: 999;

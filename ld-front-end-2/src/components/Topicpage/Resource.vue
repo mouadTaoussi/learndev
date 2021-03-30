@@ -230,4 +230,12 @@
  		transform: scaleY(1);
  		transition: all .1s ease-in!important;
  	}
+ 	@media only screen and (max-width: 800px) {
+ 		.title {
+	 		font-size: 17px;
+	 	}
+	 	.creator_name {
+	 		font-size: 8px;
+	 	}
+ 	}
 </style>

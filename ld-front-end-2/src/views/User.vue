@@ -74,21 +74,21 @@
 
 			<section class='tabs-pages-userprofile py-4 tab-hidden'>	
 				<!-- <img v-bind:src='current_user.avatar' width="200" height="200" class=""><br> -->
-				<p class="text-left text-dark">Full name</p>
+				<p class="text-left">Full name</p>
 				<input
 					v-on:change="toggleSaveChanges()" 
 					class="current_user form-control my-2" 
 					type="text" 
 					v-model="current_user.fullname" 
 					placeholder="fullname" >
-				<p class="text-left text-dark">User name</p>
+				<p class="text-left">User name</p>
 				<input
 					v-on:change="toggleSaveChanges()" 
 					class="current_user form-control my-2" 
 					type="text" 
 					v-model="current_user.user_name" 
 					placeholder="user_name" >
-				<p class="text-left text-dark">Email</p>
+				<p class="text-left">Email</p>
 				<input 
 					v-on:change="toggleSaveChanges()"
 					class="current_user form-control my-2" 
@@ -100,7 +100,7 @@
 					style="cursor: pointer"
 					data-toggle="modal" 
 					data-target="#changePassword"
-					class="text-left text-dark"
+					class="text-left"
 					>Change Password</p>
 				<button 
 					v-on:click="updateProfile()" 
@@ -526,7 +526,7 @@
 			this.alert.message = message
 			this.alert.type = type
 	  		// Show alert
-			document.querySelector('.local-alert').style.opacity = "10";
+			document.querySelector('.local-alert').style.display = "block";
 			
 			// Determine where
 			if (target !== null) {
@@ -534,7 +534,7 @@
 			}
 
 			window.setTimeout(()=>{
-				document.querySelector('.local-alert').style.opacity = "0";				
+				document.querySelector('.local-alert').style.display = "none";				
 			},5000)
 	  	}
 	  }
@@ -616,10 +616,10 @@
 	}
 	@media only screen and (max-width: 800px) {
 		.tabs-pages-topics {
-			display: grid;
-			grid-template-columns: 100%;
-			grid-gap: 20px;
-			width: 100%;
+			display: block;
+			/*grid-template-columns: 1fr;*/
+			/*grid-gap: 10px;*/
+			/*width: 100%;*/
 		}
 		.tab-title {
 			display: none;

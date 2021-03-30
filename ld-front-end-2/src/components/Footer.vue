@@ -24,7 +24,7 @@
 				<li><a href="" target="_blank">Code available on Github!</a></li>
 			</ul>
 		</div>
-		<p class="cc text-white">Copyright to devmt development 2021, by mouadTaoussi</p>
+		<p class="cc text-white">Copyright 2021, by mouadTaoussi</p>
 	</section>
 </template>
 

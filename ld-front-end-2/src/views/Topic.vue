@@ -223,4 +223,12 @@
 	.creator_name {
 		margin-bottom: 20px;
 	}
+	@media only screen and (max-width: 800px) {
+		.title {
+			font-size: 30px;
+		}
+		.creator_name {
+			font-size: 12px;
+		}
+	}
 </style>

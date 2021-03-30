@@ -38,4 +38,13 @@ export default {
 		width: 400px;
 		height: 230px;
 	}
+	@media only screen and (max-width: 800px)  {
+		.empty-area {
+			width: 220px;
+			height: 180px;		
+		}
+		section p {
+			font-size: 12px;
+		}
+	}
 </style>
