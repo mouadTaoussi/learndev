@@ -615,11 +615,15 @@
 		font-weight: bolder;
 	}
 	@media only screen and (max-width: 800px) {
-		.tabs-pages-topics {
+		.tabs-pages-topics-grid {
 			display: block;
 			/*grid-template-columns: 1fr;*/
 			/*grid-gap: 10px;*/
-			/*width: 100%;*/
+			width: 100%;
+		}
+		.topic-container {
+			margin-right: 0!important;
+			width: 100;
 		}
 		.tab-title {
 			display: none;

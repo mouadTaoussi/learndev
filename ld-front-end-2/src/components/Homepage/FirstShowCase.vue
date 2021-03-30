@@ -5,7 +5,7 @@
 				<p class="first-title text-left text-primary">- learning -</p>
 				<h2 class="text-left">Learn programming by finding the right resources for you!</h2>
 				<p class="text-left">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					You can get acces to thousands of resources appropriate to your path, by getting specific content shared by other developers!
 				</p>
 			</div>
 			<div class="svg-child"></div>

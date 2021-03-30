@@ -1,5 +1,5 @@
 <template>
-	<button id="btn" v-on:click="mode" class="darkmode-btn shadow btn-sm btn-light">Light</button>
+	<button id="btn" v-on:click="mode" class="darkmode-btn shadow btn-sm btn-dark-mode text-white">Dark</button>
 </template>
 
 <script>

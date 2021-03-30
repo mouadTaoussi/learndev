@@ -1,5 +1,11 @@
 <template>
 	<section class="header">
+<!-- 		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		  Hello! Help us grow this platform by contributing and sharing best resources that helped you being a good programmer! and help others!
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div> -->
 	 	<header class="header-landingpage">
 	 		<div class="brand-child">
 		 		<router-link to="/">
@@ -80,6 +86,14 @@
 </script>
 
 <style lang="css" scoped>
+	.header {
+		position: fixed;
+		width: 100%;
+		z-index: 999;
+	}
+	.alert {
+		margin: 0;
+	}
 	.logo {
 		background-size: contain;
 		background-repeat: no-repeat;
@@ -96,9 +110,9 @@
 		grid-template-columns: 1fr 2fr;
 		grid-gap: 20px;
 		padding: 20px;
-		position: fixed;
+	/*	position: fixed;
 		width: 100%;
-		z-index: 999;
+		z-index: 999;*/
 		transform: all .2s ease-out;
 		height: 80px;
 	}

@@ -4,9 +4,9 @@
 			<div class="svg-child"></div>
 			<div class="content-child">
 				<p class="first-title text-left text-primary">- Explore -</p>
-				<h2 class="text-left">The resources are more clear to navigate</h2>
+				<h2 class="text-left">A development lab for you</h2>
 				<p class="text-left">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					as a beginner , you'll be able to find a learning resource for you to accelerate and learn stuff!
 				</p>
 			</div>
 		</div>

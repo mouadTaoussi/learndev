@@ -4,10 +4,10 @@
 			<div>
 				<h2 class="text-left">Save time to focus on what matters</h2>
 				<p class="text-left">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					Instead of being stuck to learn something, here you'll find paths of learning for you
 				</p>
 			</div>
-			<div><button class='btn  btn-primary'>Explore now!</button></div>
+			<div><router-link to="/topics"><button class='btn  btn-primary'>Explore now!</button></router-link></div>
 		</div>
 	</section>
 </template>

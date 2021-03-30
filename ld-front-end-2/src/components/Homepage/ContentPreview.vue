@@ -5,7 +5,7 @@
 				<p class="first-title text-left text-white">- Explore -</p>
 				<h1 class="text-white text-left">The resources are more clear to navigate</h1>
 				<p class="text-white text-left">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					No need to spend time finding the good resource to you to learn, with LearnDev you can get specific resources that match your needs! 
 				</p>
 			</div>
 			<iframe src="http://localhost:8080/topic/605a004f6e42e12bb8844fd7" class="shadow iframe"></iframe>
