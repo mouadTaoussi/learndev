@@ -10,7 +10,7 @@
 	 		<div class="brand-child">
 		 		<router-link to="/">
 					<!-- <p class="logo text-dark">.learnDev()</p> -->
-					<div class="logo logo-light"></div>
+					<div class="logo logo-blue"></div>
 				</router-link>
 			</div>
 			<div class="list-child">

@@ -5,10 +5,10 @@
 		</div>
 		<div class="list-one">
 			<ul class="lists">
-				<li><router-link to="/howitworks">How it works?</router-link></li>
+				<!-- <li><router-link to="/howitworks">How it works?</router-link></li> -->
 				<li><router-link to="/about">About</router-link></li>
 				<li><router-link to="/privacy">Privacy& Policy</router-link></li>
-				<li><router-link to="/">Terms of use</router-link></li>
+				<!-- <li><router-link to="/">Terms of use</router-link></li> -->
 			</ul>
 		</div>
 		<div class="list-two">

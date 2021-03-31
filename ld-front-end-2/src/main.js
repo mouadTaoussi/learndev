@@ -125,6 +125,8 @@ if (localStorage.getItem("mode") !== "dark") {
 	}
 	.empty-area {
 		background-image: url('https://raw.githubusercontent.com/mouadTaoussi/learndev/794f9925ed9afe9e618e2e04b0e6c6ed61164891/ld-front-end-2/src/assets/undraw_No_data_re_kwbl.svg')!important;
+		margin-top :30px; 
+		margin-bottom :30px; 
 	}
 	/* logo texts to be white */
 	.logo {

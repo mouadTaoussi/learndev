@@ -43,8 +43,8 @@
 					<span class="level badge badge-danger ml-2">{{ level }}</span>
 				</div>
 			</div>
-			<div v-bind:id="'a'+id" class="description-hidden border shadow p-4">
-				<p class="text-left text-dark">{{description}}</p>
+			<div v-bind:id="'a'+id" class="description-hidden shadow p-4">
+				<p class="description-text text-left">{{description}}</p>
 			</div>
 	</section>
 </template>
