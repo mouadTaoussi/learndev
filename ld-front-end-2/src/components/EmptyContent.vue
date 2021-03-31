@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<div class="empty-area"></div>
+		<div class="empty-area no-content"></div>
 		<p class="text-center">Nothing for now to show you!</p>
 	</section>
 </template>
@@ -27,8 +27,10 @@ export default {
 	section p {
 		font-family: 'Poppins'
 	}
-	.empty-area {
+	.no-content {
 		background-image: url('.././assets/undraw_empty_street_sfxm.svg');
+	}
+	.empty-area {
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: contain;
