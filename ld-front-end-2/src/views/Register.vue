@@ -83,7 +83,9 @@
 				class="form-control mb-4" 
 				type="password" 
 				placeholder="Confirm your password">
-
+			<p class="text-left">
+				By creating new account you are automatically accepted our <router-link class="text-primary" tag="a" to="/privacy">Privacy policy</router-link>
+			</p>
 			<button @click="register()" class='register-btns mb-2 btn btn-primary shadow'>Register</button>
 			<button class='register-btns mb-4 btn btn-dark shadow'>
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">

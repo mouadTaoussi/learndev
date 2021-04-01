@@ -35,8 +35,6 @@
 
 		</p> -->
 		<!-- brs -->
-		<br>
-		<br>
 		<!-- brs -->
 		<h4 class="text-left">where your data is stored?</h4>
 		<p class="text-left">
