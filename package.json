@@ -4,8 +4,8 @@
   "description": "learning lab for developers",
   "main": "index.js",
   "scripts": {
-    "start": "node ./dist/index.js",
-    "dev": "nodemon ./dist/index.js",
+    "start": "node ./moon/index.js",
+    "dev": "nodemon ./moon/index.js",
     "compile": "tsc -p . --watch"
   },
   "keywords": [
