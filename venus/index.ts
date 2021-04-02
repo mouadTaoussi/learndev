@@ -98,7 +98,7 @@ async function runapp (){
 }
 runapp();
 
-const PORT : string | undefined = process.env.PORT_DEV || process.env.PORT;
+const PORT : string | undefined = process.env.PORT || process.env.PORT_DEV;
 const MODE : string | undefined = process.env.MODE;
 
 app.listen(PORT);

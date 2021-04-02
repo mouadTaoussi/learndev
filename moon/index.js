@@ -73,6 +73,6 @@ async function runapp() {
     app.use('/auth', Authentication_routes_1.default);
 }
 runapp();
-const PORT = process.env.PORT_DEV || process.env.PORT;
+const PORT = process.env.PORT || process.env.PORT_DEV;
 const MODE = process.env.MODE;
 app.listen(PORT);
