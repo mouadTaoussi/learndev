@@ -42,7 +42,7 @@ app.use(express_session_1.default({
     resave: true,
     saveUninitialized: false,
     store: new RedisStore({
-        host: process.env.redis_host,
+        host: main_config_1.default.redis_host,
         port: main_config_1.default.redis_port,
         client: redisClient
     }),
@@ -64,7 +64,7 @@ async function runapp() {
         playground: true
     });
     apollo.applyMiddleware({ app, cors: {
-            origin: "http://localhost:8080",
+            origin: main_config_1.default.front_end_origin,
             credentials: true,
             methods: ["POST", "OPTIONS"],
         } });
@@ -73,6 +73,6 @@ async function runapp() {
     app.use('/auth', Authentication_routes_1.default);
 }
 runapp();
-const PORT = process.env.PORT || process.env.PORT_DEV;
-const MODE = process.env.MODE;
+const PORT = main_config_1.default.port || main_config_1.default.port_dev;
+const MODE = main_config_1.default.mode;
 app.listen(PORT);

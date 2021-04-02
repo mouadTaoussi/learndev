@@ -7,6 +7,7 @@ interface config {
 	email   : string,
 	pass    : string,
 	port    : string,
+	port_dev: string,
 	mode    : string,
 	github_public_key   : string,
 	github_private_key  : string,
@@ -14,13 +15,15 @@ interface config {
 	redis_host          : string,
 	redis_port          : string,
 	redis_password      : string,
+	front_end_origin    : string
 }
 
 const main_config : config = {
 	mongodb : process.env.MONGO_CONNECTION!,
 	email   : process.env.EMAIL!,
 	pass    : process.env.PASS!,
-	port    : process.env.PORT_DEV!,
+	port    : process.env.PORT!, // Added by heroku !!
+	port_dev: process.env.PORT_DEV!,
 	mode    : process.env.MODE!,
 	github_public_key   : process.env.GITHUB_PUBLIC_KEY!,
 	github_private_key  : process.env.GITHUB_PRIVATE_KEY!,
@@ -28,6 +31,7 @@ const main_config : config = {
 	redis_host          : process.env.REDIS_LABS_HOST!,
 	redis_port          : process.env.REDIS_LABS_PORT!,
 	redis_password      : process.env.REDIS_LABS_PASSWORD!,
+	front_end_origin    : "https://learndevelopment.vercel.app"
 }
 
 export default main_config;
