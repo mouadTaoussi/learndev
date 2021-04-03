@@ -30,7 +30,7 @@ router.post('/register', auth.register);
 
 router.get('/Oauth/login',    passport.authenticate('github',{ scope: ["profile","email"] }));
 router.get('/Oauth/callback', passport.authenticate('github',{
-	failureRedirect: main_config.front_end_origin + '/login', successRedirect: main_config.front_end_origin + '/topics?Oauth=true"
+	failureRedirect:  `${main_config.front_end_origin}/login`, successRedirect: `${main_config.front_end_origin}/topics?Oauth=true`
 }));
 
 router.post  ('/resetPassword', auth.resetPassword);
