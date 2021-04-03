@@ -55,7 +55,7 @@ app.use(express_session({
 		port: main_config.redis_port, 
 		client: redisClient 
 	}),
-	// cookie: { secure: true, maxAge : 60000 }
+	cookie: { secure: true, sameSite : "none" }
 }))
 
 // Ïnit passport app and routes
