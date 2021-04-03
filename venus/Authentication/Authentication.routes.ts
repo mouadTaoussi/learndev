@@ -1,6 +1,7 @@
 import { Request,Response, Router } from "express";
 import passport from 'passport';
 import Authentication from './Authentication.controller';
+import main_config from ".././main.config";
 // import __UserService__ from "./Authentication.service";
 
 const router = Router();
@@ -29,7 +30,7 @@ router.post('/register', auth.register);
 
 router.get('/Oauth/login',    passport.authenticate('github',{ scope: ["profile","email"] }));
 router.get('/Oauth/callback', passport.authenticate('github',{
-	failureRedirect:'http://localhost:8080/login', successRedirect:"http://localhost:8080/topics?Oauth=true"
+	failureRedirect: main_config.front_end_origin + '/login', successRedirect: main_config.front_end_origin + '/topics?Oauth=true"
 }));
 
 router.post  ('/resetPassword', auth.resetPassword);
