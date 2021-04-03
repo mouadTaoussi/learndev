@@ -13,6 +13,6 @@ const main_config = {
     redis_host: process.env.REDIS_LABS_HOST,
     redis_port: process.env.REDIS_LABS_PORT,
     redis_password: process.env.REDIS_LABS_PASSWORD,
-    front_end_origin: "http://localhost:8080"
+    front_end_origin: "https://learndevelopment.vercel.app"
 };
 exports.default = main_config;
