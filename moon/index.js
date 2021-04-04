@@ -46,7 +46,7 @@ app.use(express_session_1.default({
         port: main_config_1.default.redis_port,
         client: redisClient
     }),
-    cookie: { secure: true, domain: main_config_1.default.front_end_origin }
+    cookie: { domain: main_config_1.default.front_end_origin }
 }));
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
