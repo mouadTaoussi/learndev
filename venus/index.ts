@@ -55,7 +55,7 @@ app.use(express_session({
 		port: main_config.redis_port, 
 		client: redisClient 
 	}),
-	// cookie: { secure: true, sameSite : "none" } // Error here !!!
+	cookie: { secure: true, /*sameSite : "none",*/ domain : main_config.front_end_origin } // Error here !!!
 }))
 
 // Ïnit passport app and routes
