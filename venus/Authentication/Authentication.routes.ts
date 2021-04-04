@@ -27,15 +27,15 @@ router.get ('/getuser',  auth.getUser);
 router.post('/login',    auth.login);
 router.get ('/logout',    auth.logout);
 router.post('/register', auth.register);
-
+// Error here !!
 router.get('/Oauth/login',    passport.authenticate('github',{ scope: ["profile","email"] }));
 router.get('/Oauth/callback', passport.authenticate('github',{
 	failureRedirect:  `${main_config.front_end_origin}/login`, successRedirect: `${main_config.front_end_origin}/topics?Oauth=true`
 }));
 
-router.post  ('/resetPassword', auth.resetPassword);
-router.post  ('/changePassword', auth.changePassword);
+router.post   ('/resetPassword', auth.resetPassword);
+router.post   ('/changePassword', auth.changePassword);
 router.post   ('/updateUser', auth.updateProfile);
-router.delete('/deleteUser', auth.deleteAccount);
+router.delete ('/deleteUser', auth.deleteAccount);
 
 export default router;

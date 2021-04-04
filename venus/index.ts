@@ -44,7 +44,7 @@ const redisClient: unknown = redis.createClient({
 	password : main_config.redis_password
 });
 
-app.set('trustproxy', true);
+app.set('trustproxy', 1);
 app.use(express_session({
 	name  : "GGHH",
 	secret: 'IDFVBHNIOVFFBUE',
@@ -55,7 +55,7 @@ app.use(express_session({
 		port: main_config.redis_port, 
 		client: redisClient 
 	}),
-	cookie: { secure: true,sameSite : "none" }
+	cookie: { secure: true, sameSite : "none" } // Error here !!!
 }))
 
 // Ïnit passport app and routes
