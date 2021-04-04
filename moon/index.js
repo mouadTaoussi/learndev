@@ -35,7 +35,7 @@ const redisClient = redis_1.default.createClient({
     port: main_config_1.default.redis_port,
     password: main_config_1.default.redis_password
 });
-app.set('trustproxy', true);
+app.set('trustproxy', 1);
 app.use(express_session_1.default({
     name: "GGHH",
     secret: 'IDFVBHNIOVFFBUE',
