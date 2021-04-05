@@ -56,7 +56,7 @@ app.use(express_session({
 		client: redisClient 
 	}),
 	cookie: { 
-		/*secure: true, /*sameSite : "none", */domain : "learndevelopment.vercel.app"
+		/*secure: true, /*sameSite : "none", */domain : ".vercel.app"
 	 } // Error here !!!
 }))
 
