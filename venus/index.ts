@@ -55,7 +55,9 @@ app.use(express_session({
 		port: main_config.redis_port, 
 		client: redisClient 
 	}),
-	cookie: { /*secure: true, /*sameSite : "none",*/ /*domain : "learndevelopment.vercel.app"*/ } // Error here !!!
+	cookie: { 
+		/*secure: true, /*sameSite : "none", */domain : "learndevelopment.vercel.app"
+	 } // Error here !!!
 }))
 
 // Ïnit passport app and routes
