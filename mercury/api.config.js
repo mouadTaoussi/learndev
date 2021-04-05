@@ -1,5 +1,5 @@
 module.exports = {
-	api_domain : "https://learndev-backend.herokuapp.com"
+	api_domain : "https://learndevelopment.herokuapp.com"
 	// api_domain : "http://localhost:8000"
 }
 
