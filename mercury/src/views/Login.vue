@@ -100,7 +100,7 @@
 					// push to topics page
 					this.$router.push({ path: '/topics' });
 
-					console.log(res.headers['set-cookie']);
+					console.log(res.headers);
 				})
 				.catch((err)=>{
 					if ( err.message == "Request failed with status code 404" ) {
