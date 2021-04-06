@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/mouadTaoussi/learndev/blob/main/mercury/src/assets/Logosection.jpg"/>
+  <img src="https://github.com/mouadTaoussi/learndev/blob/main/mercury/src/assets/logo.jpg"/>
 </p>
 <!-- <p align="center">
   <img src="https://github.com/mouadTaoussi/learndev/blob/main/mercury/src/assets/Logopresentation.jpg"/>
