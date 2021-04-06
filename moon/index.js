@@ -47,7 +47,7 @@ app.use(express_session_1.default({
         client: redisClient
     }),
     cookie: {
-        secure: true, sameSite: "none"
+        secure: false, sameSite: "none"
     }
 }));
 app.use(passport_1.default.initialize());
