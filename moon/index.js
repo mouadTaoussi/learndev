@@ -47,7 +47,7 @@ app.use(express_session_1.default({
         client: redisClient
     }),
     cookie: {
-        domain: ".vercel.app"
+        secure: true, sameSite: "none"
     }
 }));
 app.use(passport_1.default.initialize());
