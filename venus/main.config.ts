@@ -15,6 +15,7 @@ interface config {
 	redis_host          : string,
 	redis_port          : string,
 	redis_password      : string,
+	jwt_secret          : string,
 	front_end_origin    : string
 }
 
@@ -31,6 +32,7 @@ const main_config : config = {
 	redis_host          : process.env.REDIS_LABS_HOST!,
 	redis_port          : process.env.REDIS_LABS_PORT!,
 	redis_password      : process.env.REDIS_LABS_PASSWORD!,
+	jwt_secret          : "string",
 	front_end_origin    : "https://learndevelopment.vercel.app"  //https://learndevelopment.vercel.app
 }
 

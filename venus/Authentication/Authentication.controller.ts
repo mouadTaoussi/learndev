@@ -3,6 +3,7 @@ import __TopicService__ from ".././Topics/Topics.service";
 import { UserService, AuthenticationInt, UserBody } from './Authentication.typedefinitions';
 import { Request, Response } from "express";
 import { genSalt, hash, compare } from "bcrypt";
+import { sign, verify, decode } from 'jsonwebtoken';
 import { createTransport } from "nodemailer";
 import main_config from ".././main.config";
 import { v4 } from "uuid";
@@ -14,6 +15,7 @@ class Authentication implements AuthenticationInt {
 	public async getUser(req:Request,res:Response) :Promise<void>{
 		// const user = req.session.passport;
 		const auth = !!req.session.passport;
+		// JWT
 
 		if (auth){  
 			const user = req.session.passport
@@ -68,7 +70,15 @@ class Authentication implements AuthenticationInt {
 				id:userExists.user._id, name: userExists.user.user_name, email: userExists.user.email, at_provider_id: null 
 			}
 			
-			res.status(userExists.status).send({ loggedin : true, message : "Logged in!", user: userExists});
+			// sign a token
+			const user_token:string = sign({
+				id:userExists.user._id, name: userExists.user.user_name, email: userExists.user.email, at_provider_id: null
+			}, main_config.jwt_secret!);
+
+			// send it back to the frontend
+			res.status(userExists.status).send({ 
+				loggedin : true, message : "Logged in!", user: userExists, token: user_token
+			});
 		}
 	}
 	public async logout(req: Request,res:Response) :Promise<void>{
@@ -118,8 +128,15 @@ class Authentication implements AuthenticationInt {
 			req.session.passport = {};
 			req.session.passport.user = { id:new_user.user._id, name : body.user_name,  email: body.email, at_provider_id: null };
 
+			// sign a token
+			const user_token:string = sign({
+				id:new_user.user._id, name : body.user_name, email: body.email, at_provider_id: null 
+			}, main_config.jwt_secret!);
+
 			// send it back to the frontend			
-			res.status(200).send({ registered : true, message: "Registered successfully!",user: new_user.user})
+			res.status(200).send({ 
+				registered : true, message: "Registered successfully!",user: new_user.user, token: user_token
+			})
 
 		}
 		else {		
@@ -245,9 +262,15 @@ class Authentication implements AuthenticationInt {
 					id:updating.user._id, name: updating.user.name, email: updating.user.email, at_provider_id: null 
 				}
 
+				// sign a token
+				const user_token:string = sign({
+					id:updating.user._id, name: updating.user.user_name, email: updating.user.email, at_provider_id: null 
+				}, main_config.jwt_secret!);
+
 				res.status(200).send({
 					updated : updating.updated,
-					message : updating.message
+					message : updating.message, 
+					token: user_token
 				})
 			}
 			else {
@@ -267,9 +290,15 @@ class Authentication implements AuthenticationInt {
 				id:updating.user._id, name: updating.user.user_name, email: updating.user.email, at_provider_id: null 
 			}
 			
+			// sign a token
+			const user_token:string = sign({
+				id:updating.user._id, name: updating.user.user_name, email: updating.user.email, at_provider_id: null 
+			}, main_config.jwt_secret!);
+
 			res.status(200).send({
 				updated : updating.updated,
-				message : updating.message
+				message : updating.message, 
+				token: user_token
 			})
 		}
 	}

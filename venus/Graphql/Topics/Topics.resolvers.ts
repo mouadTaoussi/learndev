@@ -1,4 +1,3 @@
-
 import { Resolver, Query, Mutation, Arg, Args, Ctx, UseMiddleware } from 'type-graphql';
 import { 
 	Topic,      Docs,      Course,      Article,      ProjectIdea, Upvote,

@@ -1,22 +1,16 @@
-import { MiddlewareFn } from "type-graphql";
+import  { Request, Response, NextFunction } from 'express';
 import { sign, verify, decode } from 'jsonwebtoken';
 import main_config from ".././main.config";
 
-export const Authenticated: MiddlewareFn<any> = async ({context,info}:{context:any,info:any},next) => {
-	const authenticated_user = context.req.session.passport;
-	const { token }          = context.req.query;
+export async function Authenticated(req:Request, res:Response, next:NextFunction) :Promise<void> {
+	// Get the user by its session
+	const authenticated_user = req.session.passport;
+	const { token }          = req.query;
 
-	// console.log(context.req.session)
-	// if (authenticated_user){ context.req.user = context.req.session.passport.user; await next() }
-
-	// else { throw new Error('Not Authenticated') }
-
-	// JWT
-	// await next();
 	// if there is token but no session
 	if (!token && authenticated_user !== undefined) {
 		// attach that to the user object
-		context.req.user = authenticated_user.user;
+		req.user = authenticated_user.user;
 		// Call next function
 		next();
 	}
@@ -25,7 +19,7 @@ export const Authenticated: MiddlewareFn<any> = async ({context,info}:{context:a
 		// Find the appropriate user that owns this token
 		const user = await verify(token,main_config.jwt_secret!);
 		// attach that to the user object
-		context.req.user = user;
+		req.user = user;
 		// Call next function
 		next();
 	}
@@ -34,7 +28,7 @@ export const Authenticated: MiddlewareFn<any> = async ({context,info}:{context:a
 		// Find the appropriate user that owns this token
 		const user = await verify(token,main_config.jwt_secret!);
 		// attach that to the user object
-		context.req.user = user;
+		req.user = user;
 		// Call next function
 		next();
 	}
@@ -42,5 +36,4 @@ export const Authenticated: MiddlewareFn<any> = async ({context,info}:{context:a
 	if (!token && authenticated_user == undefined){
 		res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end(); return
 	}
-
-};
+}
