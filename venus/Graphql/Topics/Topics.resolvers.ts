@@ -145,7 +145,7 @@ class topicResolver implements topicResolver {
 	public async addTopic(@Args() { title, background_image } : TopicArgs, @Ctx() context : any) : Promise<any> {
 
 		// User
-	 	const user_id = context.req.user.id
+	 	const user = context.req.user
 
 		const new_topic :{
 			user_id          :string,
@@ -153,8 +153,8 @@ class topicResolver implements topicResolver {
 			title      :string,
 			background_image :string
 		} = {
-			user_id          : context.req.user.id,
-			creator_name     : context.req.user.name,
+			user_id          : user.id,
+			creator_name     : user.name,
 			title      : title,
 			background_image : background_image
 		}
@@ -181,15 +181,13 @@ class topicResolver implements topicResolver {
 	public async deleteTopic(@Arg('topic_id') topic_id: string, @Ctx() context : any) : Promise<any> {
 
 		// User
-	 	const user_id = context.req.user.id
+	 	const user = context.req.user
 
 		// Find that article
 	 	const topic = await TopicModel.findOne({ _id:topic_id });
-			console.log(topic)
-			// console.log(user_id == topic.user_id)
 
 		// Check if the user owns the target topic
-		if (user_id == topic.user_id) {
+		if (user.id == topic.user_id) {
 			const deleteTopic = await _topicservice.deleteTopic(topic_id);
 
 			return true;
@@ -214,7 +212,7 @@ class docsResolver implements docsResolver {
 	public async addDocs(@Args() { topic_id, title, level, link }: DocsArgs, @Ctx() context : any) : Promise<any> {
 
 		// User
-	 	const user_id = context.req.user.id
+	 	const user = context.req.user
 
 	 	const new_doc : {
 			user_id	     : string,
@@ -226,8 +224,8 @@ class docsResolver implements docsResolver {
 			upvotes_count: number,
 			upvotes      : number[]
 		} = {
-			user_id      : context.req.user.id,
-			creator_name : context.req.user.name,
+			user_id      : user.id,
+			creator_name : user.name,
 			topic_id     : topic_id,
 			title   : title,
 			level        : level,
@@ -246,13 +244,13 @@ class docsResolver implements docsResolver {
 	public async deleteDocs(@Arg('docs_id') docs_id: string, @Ctx() context : any) : Promise<any> {
 		
 	 	// User
-	 	const user_id = context.req.user.id
+	 	const user = context.req.user
 
 		// Find that article
 	 	const docs = await DocsModel.find({ _id:docs_id });
 
 		// Check if the user owns the target topic
-		if (user_id == docs._id) {
+		if (user.id == docs._id) {
 
 			const deleteDoc = await _topicservice.deleteDocs(docs_id);
 
@@ -278,7 +276,7 @@ class courseResolver implements courseResolver {
 	public async addCourse(@Args() { topic_id, title, level, link }: CourseArgs, @Ctx() context : any) : Promise<any> {
 		
 		// User
-	 	const user_id = context.req.user.id
+	 	const user = context.req.user
 
 	 	const new_course : {
 			user_id	     : string,
@@ -290,8 +288,8 @@ class courseResolver implements courseResolver {
 			upvotes_count: number,
 			upvotes      : number[]
 		} = {
-			user_id      : context.req.user.id,
-			creator_name : context.req.user.name,
+			user_id      : user.id,
+			creator_name : user.name,
 			topic_id     : topic_id,
 			title : title,
 			level        : level,
@@ -310,13 +308,13 @@ class courseResolver implements courseResolver {
 	public async deleteCourse(@Arg('course_id') course_id: string, @Ctx() context : any) : Promise<any> {
 		
 	 	// User
-	 	const user_id = context.req.user.id
+	 	const user = context.req.user
 
 		// Find that article
 	 	const course = await CourseModel.find({ _id:course_id });
 
 		// Check if the user owns the target topic
-		if (user_id == course._id) {
+		if (user.id == course._id) {
 
 			const deleteCourse = await _topicservice.deleteCourse(course_id);
 
@@ -342,7 +340,7 @@ class articleResolver implements articleResolver {
 	public async addArticle(@Args() {topic_id,title,level,link}: ArticleArgs, @Ctx() context : any) : Promise<any> {
 		
 	 	// User
-	 	const user_id = context.req.user.id
+	 	const user = context.req.user
 
 		const new_article : {
 			user_id	      : string,
@@ -354,8 +352,8 @@ class articleResolver implements articleResolver {
 			upvotes_count : number,
 			upvotes       : number[]
 		} = {
-			user_id       : context.req.user.id,
-			creator_name  : context.req.user.name,
+			user_id       : user.id,
+			creator_name  : user.name,
 			topic_id      : topic_id,
 			title : title,
 			level         : level,
@@ -374,12 +372,12 @@ class articleResolver implements articleResolver {
 	public async deleteArticle(@Arg('article_id') article_id: string, @Ctx() context : any) : Promise<any> {
 		
 	 	// User
-	 	const user_id = context.req.user.id
+	 	const user = context.req.user
 	 	// Find that article
 	 	const article = await ArticleModel.find({ _id:article_id });
 
 		// Check if the user owns the target topic
-		if (user_id == article._id) {
+		if (user.id == article._id) {
 
 			const deleteArticle = await _topicservice.deleteArticle(article_id);
 
@@ -407,7 +405,7 @@ class projectIdeaResolver implements projectIdeaResolver {
 	 : Promise<any> {
 
 	 	// User
-	 	const user_id = context.req.user.id
+	 	const user = context.req.user
 
 		const project_idea : {
 			user_id	      : string,
@@ -419,8 +417,8 @@ class projectIdeaResolver implements projectIdeaResolver {
 			upvotes_count : number,
 			upvotes       : number[]
 		} = {
-			user_id       : context.req.user.id,
-			creator_name  : context.req.user.name,
+			user_id       : user.id,
+			creator_name  : user.name,
 			topic_id      : topic_id,
 			title : title,
 			level         : level,
@@ -439,13 +437,13 @@ class projectIdeaResolver implements projectIdeaResolver {
 	public async deleteProjectIdea(@Arg('project_idea_id') project_idea_id: string, @Ctx() context : any) : Promise<any> {
 		
 		// User
-	 	const user_id = context.req.user.id
+	 	const user = context.req.user
 
 	 	// Find that article
 	 	const projectIdea = await ProjectIdeaModel.find({ _id:project_idea_id });
 
 		// Check if the user owns the target topic
-		if (user_id == projectIdea._id) {
+		if (user.id == projectIdea._id) {
 
 			const deleteProjectIdea = await _topicservice.deleteProjectIdea(project_idea_id);
 

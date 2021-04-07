@@ -125,10 +125,10 @@ let topicResolver = class topicResolver {
         return topic.data;
     }
     async addTopic({ title, background_image }, context) {
-        const user_id = context.req.user.id;
+        const user = context.req.user;
         const new_topic = {
-            user_id: context.req.user.id,
-            creator_name: context.req.user.name,
+            user_id: user.id,
+            creator_name: user.name,
             title: title,
             background_image: background_image
         };
@@ -146,10 +146,9 @@ let topicResolver = class topicResolver {
         };
     }
     async deleteTopic(topic_id, context) {
-        const user_id = context.req.user.id;
+        const user = context.req.user;
         const topic = await Topics_models_1.TopicModel.findOne({ _id: topic_id });
-        console.log(topic);
-        if (user_id == topic.user_id) {
+        if (user.id == topic.user_id) {
             const deleteTopic = await _topicservice.deleteTopic(topic_id);
             return true;
         }
@@ -194,10 +193,10 @@ topicResolver = __decorate([
 exports.topicResolver = topicResolver;
 let docsResolver = class docsResolver {
     async addDocs({ topic_id, title, level, link }, context) {
-        const user_id = context.req.user.id;
+        const user = context.req.user;
         const new_doc = {
-            user_id: context.req.user.id,
-            creator_name: context.req.user.name,
+            user_id: user.id,
+            creator_name: user.name,
             topic_id: topic_id,
             title: title,
             level: level,
@@ -209,9 +208,9 @@ let docsResolver = class docsResolver {
         return newDoc.data;
     }
     async deleteDocs(docs_id, context) {
-        const user_id = context.req.user.id;
+        const user = context.req.user;
         const docs = await Topics_models_1.DocsModel.find({ _id: docs_id });
-        if (user_id == docs._id) {
+        if (user.id == docs._id) {
             const deleteDoc = await _topicservice.deleteDocs(docs_id);
             return true;
         }
@@ -242,10 +241,10 @@ docsResolver = __decorate([
 exports.docsResolver = docsResolver;
 let courseResolver = class courseResolver {
     async addCourse({ topic_id, title, level, link }, context) {
-        const user_id = context.req.user.id;
+        const user = context.req.user;
         const new_course = {
-            user_id: context.req.user.id,
-            creator_name: context.req.user.name,
+            user_id: user.id,
+            creator_name: user.name,
             topic_id: topic_id,
             title: title,
             level: level,
@@ -257,9 +256,9 @@ let courseResolver = class courseResolver {
         return newCourse.data;
     }
     async deleteCourse(course_id, context) {
-        const user_id = context.req.user.id;
+        const user = context.req.user;
         const course = await Topics_models_1.CourseModel.find({ _id: course_id });
-        if (user_id == course._id) {
+        if (user.id == course._id) {
             const deleteCourse = await _topicservice.deleteCourse(course_id);
             return true;
         }
@@ -290,10 +289,10 @@ courseResolver = __decorate([
 exports.courseResolver = courseResolver;
 let articleResolver = class articleResolver {
     async addArticle({ topic_id, title, level, link }, context) {
-        const user_id = context.req.user.id;
+        const user = context.req.user;
         const new_article = {
-            user_id: context.req.user.id,
-            creator_name: context.req.user.name,
+            user_id: user.id,
+            creator_name: user.name,
             topic_id: topic_id,
             title: title,
             level: level,
@@ -305,9 +304,9 @@ let articleResolver = class articleResolver {
         return newArticle.data;
     }
     async deleteArticle(article_id, context) {
-        const user_id = context.req.user.id;
+        const user = context.req.user;
         const article = await Topics_models_1.ArticleModel.find({ _id: article_id });
-        if (user_id == article._id) {
+        if (user.id == article._id) {
             const deleteArticle = await _topicservice.deleteArticle(article_id);
             return true;
         }
@@ -338,10 +337,10 @@ articleResolver = __decorate([
 exports.articleResolver = articleResolver;
 let projectIdeaResolver = class projectIdeaResolver {
     async addProjectIdea({ topic_id, title, level, description }, context) {
-        const user_id = context.req.user.id;
+        const user = context.req.user;
         const project_idea = {
-            user_id: context.req.user.id,
-            creator_name: context.req.user.name,
+            user_id: user.id,
+            creator_name: user.name,
             topic_id: topic_id,
             title: title,
             level: level,
@@ -353,9 +352,9 @@ let projectIdeaResolver = class projectIdeaResolver {
         return projectIdea.data;
     }
     async deleteProjectIdea(project_idea_id, context) {
-        const user_id = context.req.user.id;
+        const user = context.req.user;
         const projectIdea = await Topics_models_1.ProjectIdeaModel.find({ _id: project_idea_id });
-        if (user_id == projectIdea._id) {
+        if (user.id == projectIdea._id) {
             const deleteProjectIdea = await _topicservice.deleteProjectIdea(project_idea_id);
             return true;
         }

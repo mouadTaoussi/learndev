@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Authentication_service_1 = __importDefault(require("./Authentication.service"));
 const Topics_service_1 = __importDefault(require(".././Topics/Topics.service"));
 const bcrypt_1 = require("bcrypt");
+const jsonwebtoken_1 = require("jsonwebtoken");
 const nodemailer_1 = require("nodemailer");
 const main_config_1 = __importDefault(require(".././main.config"));
 const uuid_1 = require("uuid");
@@ -53,7 +54,12 @@ class Authentication {
             req.session.passport.user = {
                 id: userExists.user._id, name: userExists.user.user_name, email: userExists.user.email, at_provider_id: null
             };
-            res.status(userExists.status).send({ loggedin: true, message: "Logged in!", user: userExists });
+            const user_token = jsonwebtoken_1.sign({
+                id: userExists.user._id, name: userExists.user.user_name, email: userExists.user.email, at_provider_id: null
+            }, main_config_1.default.jwt_secret);
+            res.status(userExists.status).send({
+                loggedin: true, message: "Logged in!", user: userExists, token: user_token
+            });
         }
     }
     async logout(req, res) {
@@ -96,7 +102,12 @@ class Authentication {
         if (new_user.saved == true) {
             req.session.passport = {};
             req.session.passport.user = { id: new_user.user._id, name: body.user_name, email: body.email, at_provider_id: null };
-            res.status(200).send({ registered: true, message: "Registered successfully!", user: new_user.user });
+            const user_token = jsonwebtoken_1.sign({
+                id: new_user.user._id, name: body.user_name, email: body.email, at_provider_id: null
+            }, main_config_1.default.jwt_secret);
+            res.status(200).send({
+                registered: true, message: "Registered successfully!", user: new_user.user, token: user_token
+            });
         }
         else {
             res.status(200).send({
@@ -138,14 +149,9 @@ class Authentication {
         }
     }
     async changePassword(req, res) {
-        const authenticated_user = req.session.passport;
+        const authenticated_user = req.user;
         const body = req.body;
-        if (authenticated_user == undefined) {
-            res.status(401).send({ loggedin: false, message: "you are not authorized!" });
-            res.end();
-            return;
-        }
-        const current_user = await _user.findUser({ id: authenticated_user.user.id });
+        const current_user = await _user.findUser({ id: authenticated_user.id });
         const matched = await bcrypt_1.compare(body.current_password, current_user.user.password);
         if (matched != true) {
             res.status(200).send({ loggedin: false, message: "credentials aren't correct!" });
@@ -153,7 +159,7 @@ class Authentication {
         else {
             const salt = await bcrypt_1.genSalt(10);
             const hashed_password = await bcrypt_1.hash(body.new_password, salt);
-            const changePassword = await _user.changePassword(authenticated_user.user.id, hashed_password);
+            const changePassword = await _user.changePassword(authenticated_user.id, hashed_password);
             if (!changePassword.changed) {
                 res.status(200).send({ changed: false, message: "The password was not changed!" });
                 return;
@@ -162,23 +168,22 @@ class Authentication {
         }
     }
     async updateProfile(req, res) {
-        const authenticated_user = req.session.passport;
-        if (authenticated_user == undefined) {
-            res.status(401).send({ loggedin: false, message: "you are not authorized!" });
-            res.end();
-            return;
-        }
+        const authenticated_user = req.user;
         const body = req.body;
         const userEmail = await _user.findUser({ email: body.email });
         if (userEmail.found == true) {
-            if (authenticated_user.user.email == body.email) {
-                const updating = await _user.updateUser(authenticated_user.user.id, body);
+            if (authenticated_user.email == body.email) {
+                const updating = await _user.updateUser(authenticated_user.id, body);
                 req.session.passport.user = {
                     id: updating.user._id, name: updating.user.name, email: updating.user.email, at_provider_id: null
                 };
+                const user_token = jsonwebtoken_1.sign({
+                    id: updating.user._id, name: updating.user.user_name, email: updating.user.email, at_provider_id: null
+                }, main_config_1.default.jwt_secret);
                 res.status(200).send({
                     updated: updating.updated,
-                    message: updating.message
+                    message: updating.message,
+                    token: user_token
                 });
             }
             else {
@@ -189,30 +194,29 @@ class Authentication {
             }
         }
         else {
-            const updating = await _user.updateUser(authenticated_user.user.id, body);
+            const updating = await _user.updateUser(authenticated_user.id, body);
             req.session.passport.user = {
                 id: updating.user._id, name: updating.user.user_name, email: updating.user.email, at_provider_id: null
             };
+            const user_token = jsonwebtoken_1.sign({
+                id: updating.user._id, name: updating.user.user_name, email: updating.user.email, at_provider_id: null
+            }, main_config_1.default.jwt_secret);
             res.status(200).send({
                 updated: updating.updated,
-                message: updating.message
+                message: updating.message,
+                token: user_token
             });
         }
     }
     async deleteAccount(req, res) {
-        const authenticated_user = req.session.passport;
-        if (authenticated_user == undefined) {
-            res.status(401).send({ loggedin: false, message: "you are not authorized!" });
-            res.end();
-            return;
-        }
+        const authenticated_user = req.user;
         const { password } = req.query;
         if (!password) {
             res.status(200).send({ message: "no password provided!" });
             res.end();
         }
         ;
-        const user = await _user.findUser({ email: authenticated_user.user.email });
+        const user = await _user.findUser({ email: authenticated_user.email });
         if (user.found == true) {
             const matched = await bcrypt_1.compare(password, user.user.password);
             if (matched) {
