@@ -18,7 +18,6 @@ export const Authenticated: MiddlewareFn<any> = async ({context,info}:{context:a
 	if (!token && authenticated_user !== undefined) {
 		// attach that to the user object
 		context.req.user = authenticated_user.user;
-		console.log(1)
 		// Call next function
 		await next();
 
@@ -29,7 +28,6 @@ export const Authenticated: MiddlewareFn<any> = async ({context,info}:{context:a
 		const user = await verify(token,main_config.jwt_secret!);
 		// attach that to the user object
 		context.req.user = user;
-		console.log(2)
 		// Call next function
 		await next();
 
@@ -40,7 +38,6 @@ export const Authenticated: MiddlewareFn<any> = async ({context,info}:{context:a
 		const user = await verify(token,main_config.jwt_secret!);
 		// attach that to the user object
 		context.req.user = user;
-		console.log(3)
 		// Call next function
 		await next();
 

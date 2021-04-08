@@ -30,8 +30,11 @@ router.post('/register', auth.register);
 // Error here !!
 router.get('/Oauth/login',    passport.authenticate('github',{ scope: ["profile","email"] }));
 router.get('/Oauth/callback', passport.authenticate('github',{
-	failureRedirect:  `${main_config.front_end_origin}/login`, successRedirect: `${main_config.front_end_origin}/topics?Oauth=true`
-}));
+	failureRedirect:  `${main_config.front_end_origin}/login`
+}),function(req:Request,res:Response){
+	console.log(req.user)
+	res.redirect(`${main_config.front_end_origin}/topics?Oauth=true`);
+});
 
 router.post   ('/resetPassword', auth.resetPassword);
 router.post   ('/changePassword', auth.changePassword);

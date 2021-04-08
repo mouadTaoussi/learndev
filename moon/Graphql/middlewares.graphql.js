@@ -12,19 +12,16 @@ const Authenticated = async ({ context, info }, next) => {
     console.log(authenticated_user);
     if (!token && authenticated_user !== undefined) {
         context.req.user = authenticated_user.user;
-        console.log(1);
         await next();
     }
     if (token && authenticated_user == undefined) {
         const user = await jsonwebtoken_1.verify(token, main_config_1.default.jwt_secret);
         context.req.user = user;
-        console.log(2);
         await next();
     }
     if (token && authenticated_user !== undefined) {
         const user = await jsonwebtoken_1.verify(token, main_config_1.default.jwt_secret);
         context.req.user = user;
-        console.log(3);
         await next();
     }
     if (!token && authenticated_user == undefined) {

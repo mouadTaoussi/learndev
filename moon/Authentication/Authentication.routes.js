@@ -16,8 +16,11 @@ router.get('/logout', auth.logout);
 router.post('/register', auth.register);
 router.get('/Oauth/login', passport_1.default.authenticate('github', { scope: ["profile", "email"] }));
 router.get('/Oauth/callback', passport_1.default.authenticate('github', {
-    failureRedirect: `${main_config_1.default.front_end_origin}/login`, successRedirect: `${main_config_1.default.front_end_origin}/topics?Oauth=true`
-}));
+    failureRedirect: `${main_config_1.default.front_end_origin}/login`
+}), function (req, res) {
+    console.log(req.user);
+    res.redirect(`${main_config_1.default.front_end_origin}/topics?Oauth=true`);
+});
 router.post('/resetPassword', auth.resetPassword);
 router.post('/changePassword', auth.changePassword);
 router.post('/updateUser', auth.updateProfile);
