@@ -390,7 +390,9 @@
 				else {
 					document.querySelector('.save_changes_btn').innerHTML = "Changed👍";
 					document.querySelector('.save_changes_btn').classList.add('btn-success');
-					document.querySelector('.save_changes_btn').classList.remove('btn-primary');	
+					document.querySelector('.save_changes_btn').classList.remove('btn-primary');
+					// update token	
+					localStorage.setItem('user_token',res.data.token);
 				}
 			})
 			.catch((err)=>{

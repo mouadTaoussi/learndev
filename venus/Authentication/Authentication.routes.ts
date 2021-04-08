@@ -2,6 +2,7 @@ import { Request,Response, Router } from "express";
 import passport from 'passport';
 import Authentication from './Authentication.controller';
 import main_config from ".././main.config";
+import { sign, verify, decode } from 'jsonwebtoken';
 // import __UserService__ from "./Authentication.service";
 
 const router = Router();
@@ -32,7 +33,9 @@ router.get('/Oauth/login',    passport.authenticate('github',{ scope: ["profile"
 router.get('/Oauth/callback', passport.authenticate('github',{
 	failureRedirect:  `${main_config.front_end_origin}/login`
 }),function(req:Request,res:Response){
-	console.log(req.user)
+	// sign a token
+	const user_token:string = sign(req.user!, main_config.jwt_secret!);
+	// Redirect with the token
 	res.redirect(`${main_config.front_end_origin}/topics?Oauth=true`);
 });
 

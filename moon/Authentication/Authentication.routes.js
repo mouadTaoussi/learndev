@@ -7,6 +7,7 @@ const express_1 = require("express");
 const passport_1 = __importDefault(require("passport"));
 const Authentication_controller_1 = __importDefault(require("./Authentication.controller"));
 const main_config_1 = __importDefault(require(".././main.config"));
+const jsonwebtoken_1 = require("jsonwebtoken");
 const router = express_1.Router();
 const auth = new Authentication_controller_1.default();
 router.get('/login', (req, res) => { res.json(req.session); console.log(req.session); });
@@ -18,7 +19,7 @@ router.get('/Oauth/login', passport_1.default.authenticate('github', { scope: ["
 router.get('/Oauth/callback', passport_1.default.authenticate('github', {
     failureRedirect: `${main_config_1.default.front_end_origin}/login`
 }), function (req, res) {
-    console.log(req.user);
+    const user_token = jsonwebtoken_1.sign(req.user, main_config_1.default.jwt_secret);
     res.redirect(`${main_config_1.default.front_end_origin}/topics?Oauth=true`);
 });
 router.post('/resetPassword', auth.resetPassword);

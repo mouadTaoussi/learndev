@@ -173,6 +173,7 @@
 	  				if (res.data.registered) {
 	  					// Set a localstorage value to know whether the user already logged in or not
 						localStorage.setItem('user_name',res.data.user.user_name);
+						localStorage.setItem('user_token',res.data.token);
 						// push to topics page
 						this.$router.push({ path: '/topics' });
 	  				} 
