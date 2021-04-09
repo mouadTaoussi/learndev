@@ -1,11 +1,17 @@
 <template>
 	<section class="header">
-<!-- 		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
 		  Hello! Help us grow this platform by contributing and sharing best resources that helped you being a good programmer! and help others!
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		    <span aria-hidden="true">&times;</span>
 		  </button>
 		</div> -->
+		<div class="alert alert-info alert-dismissible fade show" role="alert">
+		  {{ad}}
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
 	 	<header class="header-landingpage">
 	 		<div class="brand-child">
 		 		<router-link to="/">
@@ -62,10 +68,12 @@
 	  },
 	  data () {
 	    return {
-	    	user_name : localStorage.getItem('user_name')
+	    	user_name : localStorage.getItem('user_name'),
+	    	ad : "The app is still under development! you might face some issues that are gonna be fixed!"
 	    }
 	  },
-	  mounted(){
+	  created(){
+	  	  
 	  },
 	  methods : {
 	  	logout: function(){
@@ -77,6 +85,7 @@
 			.then((res)=>{
 				// Set a localstorage value to know whether the user already logged in or not
 				localStorage.removeItem('user_name');
+				localStorage.removeItem('user_token');
 				// push to topics page
 				this.$router.push({ path: '/' });
 			})

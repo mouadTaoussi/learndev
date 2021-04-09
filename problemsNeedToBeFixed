@@ -1,7 +1,10 @@
-- Sessions doesn't get saved in the local authentication
-- Test update and delete account
 - Create blog or community
-- WithCredentials set to false! so sessions are no longer be set and sent between the server and the client
+- issues with performance of the loading
+- working with error messages from graphQL in front-end
+- deleting resource
+- make the website responsive
+- load more on suggestions
+- setting up adsense
 
 !!!! Problmes above are fixed !!!!
 

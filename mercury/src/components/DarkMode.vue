@@ -84,7 +84,7 @@ export default {
 				  background-color: var(--dark-mode--)!important;
 				  color: white!important;
 				}
-				header {
+				header, .footer {
 				  background-color: var(--darkless-mode--)!important;
 				  color: white!important;
 				}

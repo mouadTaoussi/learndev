@@ -68,25 +68,6 @@ window.setInterval(()=>{
 	}
 },10)
 
-
-
-
-// const F = `
-// 	query { 
-// 	  getTopic (topic_id: "mytopicid") { 
-// 	    user_id 
-// 	    background_image 
-// 	    title
-// 	    articles { 
-// 	      user_id 
-// 	      topic_id 
-// 	      article_link 
-// 	      title 
-// 	    }
-// 	  }
-// 	}
-// `
-
 // Dark Mode check
 const style = document.querySelector('#mode');
 // add CSS styles
@@ -158,7 +139,7 @@ if (localStorage.getItem("mode") !== "dark") {
 	  background-color: var(--dark-mode--)!important;
 	  color: white!important;
 	}
-	header {
+	header, .footer {
 	  background-color: var(--darkless-mode--)!important;
 	  color: white!important;
 	}

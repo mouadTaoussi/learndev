@@ -292,10 +292,12 @@
 
 	  	this.$http({
 	  		method : "GET",
+	  		headers : {
+	  			user_token : localStorage.getItem('user_token')
+	  		},
 	  		url    : apihost.api_domain + '/auth/getuser',
 	  	})
 	  	.then((res)=>{
-	  		console.log(res)
 	  		this.current_user = res.data.user;
 	  		// if (!this.current_user){ this.$router.push({ path: '/login' }); return };
 
@@ -334,6 +336,7 @@
 	   				headers: {
 						// 'Content-Type': 'application/json',
 				        // 'Accept'      : `application/json`
+				        user_token : localStorage.getItem('user_token')
 					},
 	   				data: {
 	   					query: print(ADD_TOPIC),
@@ -376,6 +379,9 @@
 			this.$http({
 				url : apihost.api_domain + "/auth/updateUser",
 				method : "POST",
+				headers : {
+					user_token : localStorage.getItem('user_token')
+				},
 				data : {
 					fullname: this.current_user.fullname,
 					user_name: this.current_user.user_name, 
@@ -425,6 +431,9 @@
 			this.$http({
 		  		method : "POST",
 		  		url    : apihost.api_domain + '/auth/changePassword',
+		  		headers : {
+		  			user_token : localStorage.getItem('user_token')
+		  		},
 		  		data : { 
 		  			current_password: this.passwords.current_password,
 		  			new_password: this.passwords.new_password 

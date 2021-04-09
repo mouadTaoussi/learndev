@@ -8,7 +8,7 @@ function cors(request, response, next) {
     response.header("Access-Control-Allow-Origin", main_config_1.default.front_end_origin);
     response.header("Access-Control-Allow-Credentials", true);
     response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    response.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,Content-Type,Authorization,Set-Cookie');
+    response.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,Content-Type,Authorization,Set-Cookie,user_token');
     next();
 }
 exports.default = cors;

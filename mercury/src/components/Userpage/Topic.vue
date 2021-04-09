@@ -51,6 +51,7 @@
    				headers: {
 					// 'Content-Type': 'application/json',
 			        // 'Accept'      : `application/json`
+			        user_token : localStorage.getItem('user_token')
 				},
    				data: {
    					query: print(REMOVE_TOPIC),
