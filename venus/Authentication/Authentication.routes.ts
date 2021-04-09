@@ -1,7 +1,7 @@
 import { Request,Response, Router } from "express";
 import passport from 'passport';
 import Authentication from './Authentication.controller';
-import { Authenticated } from './Authentication.middleware';
+import Authenticated from './Authentication.middleware';
 import main_config from ".././main.config";
 import { sign, verify, decode } from 'jsonwebtoken';
 // import __UserService__ from "./Authentication.service";

@@ -2,7 +2,7 @@ import  { Request, Response, NextFunction } from 'express';
 import { sign, verify, decode } from 'jsonwebtoken';
 import main_config from ".././main.config";
 
-export async function Authenticated(req:Request, res:Response, next:NextFunction) :Promise<void> {
+export default async function Authenticated(req:Request, res:Response, next:NextFunction) :Promise<void> {
 	// Get the user by its session
 	const session     : any   = req.session.passport;
 	const { user_token } : any   = req.query;
