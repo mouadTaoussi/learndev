@@ -13,28 +13,20 @@ const _topic = new __TopicService__();
 
 class Authentication implements AuthenticationInt {
 	public async getUser(req:Request,res:Response) :Promise<void>{
-		// const user = req.session.passport;
-		const auth = !!req.session.passport;
-		// JWT
 
-		if (auth){  
-			const user = req.session.passport
-			const user_id = user.user.id; 
-			// Get user
-			const current_user = await _user.findUser({id:user_id});
-			// Get his topics
-			const topics = await _topic.getUserTopics(user_id);
-			// Get his upvoted content
-			const upvoted_content = await _topic.getUpvotedContent(user_id);
+		const user_id : any = req.user.id; 
+		// Get user
+		const current_user = await _user.findUser({id:user_id});
+		// Get his topics
+		const topics = await _topic.getUserTopics(user_id);
+		// Get his upvoted content
+		const upvoted_content = await _topic.getUpvotedContent(user_id);
 
-			res.status(200).send({
-				user : current_user.user,
-				topics : topics.data,
-				upvoted_content : upvoted_content.data
-			})
-		}
-
-		else { res.status(404).send({message:"Not Authenticated"}) } 
+		res.status(200).send({
+			user : current_user.user,
+			topics : topics.data,
+			upvoted_content : upvoted_content.data
+		})
 	}
 	public async login(req: Request, res: Response) :Promise<void>{
 		// Check if the user is alreay logged in

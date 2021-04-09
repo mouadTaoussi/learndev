@@ -1,6 +1,7 @@
 import { Request,Response, Router } from "express";
 import passport from 'passport';
 import Authentication from './Authentication.controller';
+import { Authenticated } from './Authentication.middleware';
 import main_config from ".././main.config";
 import { sign, verify, decode } from 'jsonwebtoken';
 // import __UserService__ from "./Authentication.service";
@@ -24,9 +25,9 @@ const auth = new Authentication();
 /////////////////////////////////////
 
 router.get ('/login',    (req: Request,res: Response)=>{ res.json(req.session);console.log(req.session) });
-router.get ('/getuser',  auth.getUser);
+router.get ('/getuser',  Authenticated, auth.getUser);
 router.post('/login',    auth.login);
-router.get ('/logout',    auth.logout);
+router.get ('/logout',   auth.logout);
 router.post('/register', auth.register);
 // Error here !!
 router.get('/Oauth/login',    passport.authenticate('github',{ scope: ["profile","email"] }));
@@ -39,9 +40,9 @@ router.get('/Oauth/callback', passport.authenticate('github',{
 	res.redirect(`${main_config.front_end_origin}/topics?Oauth=true`);
 });
 
-router.post   ('/resetPassword', auth.resetPassword);
-router.post   ('/changePassword', auth.changePassword);
-router.post   ('/updateUser', auth.updateProfile);
-router.delete ('/deleteUser', auth.deleteAccount);
+router.post   ('/resetPassword',  auth.resetPassword);
+router.post   ('/changePassword', Authenticated, auth.changePassword);
+router.post   ('/updateUser',     Authenticated, auth.updateProfile);
+router.delete ('/deleteUser',     Authenticated, auth.deleteAccount);
 
 export default router;
