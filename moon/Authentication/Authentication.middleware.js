@@ -8,26 +8,24 @@ const main_config_1 = __importDefault(require(".././main.config"));
 async function Authenticated(req, res, next) {
     const session = req.session.passport;
     const { user_token } = req.headers;
-    if (!!user_token == false && !!session == true) {
+    if (!user_token && session) {
         console.log(1);
         req.user = session.user;
         next();
     }
-    if (!!user_token == true && !!session == false) {
-        console.log(user_token);
-        console.log(!!user_token);
-        console.log(!!user_token == true);
+    if (user_token && !session) {
+        console.log(111);
         const user = await jsonwebtoken_1.verify(user_token, main_config_1.default.jwt_secret);
         req.user = user;
         next();
     }
-    if (!!user_token == true && !!session == true) {
+    if (user_token && session) {
         console.log(3);
         const user = await jsonwebtoken_1.verify(user_token, main_config_1.default.jwt_secret);
         req.user = user;
         next();
     }
-    if (!!user_token == false && !!session == false) {
+    if (!user_token && !session) {
         console.log(4);
         res.status(401).send({ loggedin: false, message: "you are not authorized!" });
         res.end();

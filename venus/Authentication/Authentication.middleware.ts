@@ -8,7 +8,7 @@ export default async function Authenticated(req:Request, res:Response, next:Next
 	const { user_token } : any   = req.headers;
 
 	// if there is no user_token but there is a session
-	if (!!user_token == false && !!session == true) {
+	if (!user_token && session) {
 		console.log(1)
 		// attach that to the user object
 		req.user = session.user;
@@ -16,10 +16,9 @@ export default async function Authenticated(req:Request, res:Response, next:Next
 		next();
 	}
 	// if there is user_token but there is no session
-	if (!!user_token == true && !!session == false) {
-		console.log(user_token)
-		console.log(!!user_token)
-		console.log(!!user_token == true)
+	if (user_token && !session) {
+		
+		console.log(111)
 		// Find the appropriate user that owns this user_token
 		const user = await verify(user_token,main_config.jwt_secret!);
 		// attach that to the user object
@@ -28,7 +27,7 @@ export default async function Authenticated(req:Request, res:Response, next:Next
 		next();
 	}
 	// if there is user_token but there is session
-	if (!!user_token == true && !!session == true) {
+	if (user_token && session) {
 		console.log(3)
 		// Find the appropriate user that owns this user_token
 		const user = await verify(user_token,main_config.jwt_secret!);
@@ -38,7 +37,7 @@ export default async function Authenticated(req:Request, res:Response, next:Next
 		next();
 	}
 	// if there is no user_token and no session
-	if (!!user_token == false && !!session == false){
+	if (!user_token && !session){
 		console.log(4)
 		res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end();
 	}
