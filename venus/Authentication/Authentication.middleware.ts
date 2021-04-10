@@ -19,6 +19,7 @@ export default async function Authenticated(req:Request, res:Response, next:Next
 	if (!!user_token == true && !!session == false) {
 		console.log(user_token)
 		console.log(!!user_token)
+		console.log(!!user_token == true)
 		// Find the appropriate user that owns this user_token
 		const user = await verify(user_token,main_config.jwt_secret!);
 		// attach that to the user object
