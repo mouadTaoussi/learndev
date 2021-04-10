@@ -10,27 +10,21 @@ const Authenticated = async ({ context, info }, next) => {
     const session = context.req.session.passport;
     const { user_token } = context.req.headers;
     console.log(context.req.headers);
-    if (!!user_token == false && !!session == true) {
+    if (!!user_token == false || user_token == 'null' && !!session == true) {
         context.req.user = session.user;
-        console.log(1);
-        console.log(context.req.user);
         await next();
     }
-    if (!!user_token == true && !!session == false) {
+    if (!!user_token == true || user_token !== 'null' && !!session == false) {
         const user = await jsonwebtoken_1.verify(user_token, main_config_1.default.jwt_secret);
         context.req.user = user;
-        console.log(2);
-        console.log(context.req.user);
         await next();
     }
-    if (!!user_token == true && !!session == true) {
+    if (!!user_token == true || user_token !== 'null' && !!session == true) {
         const user = await jsonwebtoken_1.verify(user_token, main_config_1.default.jwt_secret);
         context.req.user = user;
-        console.log(3);
-        console.log(context.req.user);
         await next();
     }
-    if (!!user_token == false && !!session == false) {
+    if (!!user_token == false || user_token == 'null' && !!session == false) {
         throw new Error('Not Authenticated');
     }
 };

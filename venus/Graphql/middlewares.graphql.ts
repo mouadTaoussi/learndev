@@ -14,39 +14,33 @@ export const Authenticated: MiddlewareFn<any> = async ({context,info}:{context:a
 	// JWT
 	// await next();
 	// if there is no user_token but there is a session
-	if (!!user_token == false && !!session == true) {
+	if (!!user_token == false || user_token == 'null' && !!session == true) {
 		// attach that to the user object
 		context.req.user = session.user;
-		console.log(1)
-		console.log(context.req.user)
 		// Call next function
 		await next();
 
 	}
 	// if there is user_token but there is no session
-	if (!!user_token == true && !!session == false) {
+	if (!!user_token == true || user_token !== 'null' && !!session == false) {
 		// Find the appropriate user that owns this user_token
 		const user = await verify(user_token,main_config.jwt_secret!);
 		// attach that to the user object
 		context.req.user = user;
-		console.log(2)
-		console.log(context.req.user)
 		// Call next function
 		await next();
 	}
 	// if there is user_token but there is session
-	if (!!user_token == true && !!session == true) {
+	if (!!user_token == true || user_token !== 'null' && !!session == true) {
 		// Find the appropriate user that owns this user_token
 		const user = await verify(user_token,main_config.jwt_secret!);
 		// attach that to the user object
 		context.req.user = user;
-		console.log(3)
-		console.log(context.req.user)
 		// Call next function
 		await next();
 	}
 	// if there is no user_token and no session
-	if (!!user_token == false && !!session == false){
+	if (!!user_token == false || user_token == 'null' && !!session == false){
 		throw new Error('Not Authenticated');
 	}
 
