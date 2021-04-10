@@ -8,6 +8,7 @@ const main_config_1 = __importDefault(require(".././main.config"));
 async function Authenticated(req, res, next) {
     const session = req.session.passport;
     const { user_token } = req.headers;
+    console.log(typeof user_token);
     console.log(user_token == null);
     console.log(user_token == undefined);
     if (!user_token && session) {

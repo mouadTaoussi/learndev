@@ -6,6 +6,7 @@ export default async function Authenticated(req:Request, res:Response, next:Next
 	// Get the user by its session
 	const session     : any   = req.session.passport;
 	const { user_token } : any   = req.headers;
+	console.log(typeof user_token)
 	console.log(user_token == null)
 	console.log(user_token == undefined)
 	// if there is no user_token but there is a session
