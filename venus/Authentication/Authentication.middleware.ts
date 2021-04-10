@@ -17,7 +17,7 @@ export default async function Authenticated(req:Request, res:Response, next:Next
 	}
 	// if there is user_token but there is no session
 	if (!!user_token == true && !!session == false) {
-		console.log(2)
+		console.log(!!user_token)
 		// Find the appropriate user that owns this user_token
 		const user = await verify(user_token,main_config.jwt_secret!);
 		// attach that to the user object
