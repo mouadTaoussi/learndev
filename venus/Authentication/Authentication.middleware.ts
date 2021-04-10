@@ -6,9 +6,10 @@ export default async function Authenticated(req:Request, res:Response, next:Next
 	// Get the user by its session
 	const session     : any   = req.session.passport;
 	const { user_token } : any   = req.headers;
-	console.log(user_token);
+
 	// if there is no user_token but there is a session
 	if (!!user_token == false && !!session == true) {
+		console.log(1)
 		// attach that to the user object
 		req.user = session.user;
 		// Call next function
@@ -16,6 +17,7 @@ export default async function Authenticated(req:Request, res:Response, next:Next
 	}
 	// if there is user_token but there is no session
 	if (!!user_token == true && !!session == false) {
+		console.log(2)
 		// Find the appropriate user that owns this user_token
 		const user = await verify(user_token,main_config.jwt_secret!);
 		// attach that to the user object
@@ -25,6 +27,7 @@ export default async function Authenticated(req:Request, res:Response, next:Next
 	}
 	// if there is user_token but there is session
 	if (!!user_token == true && !!session == true) {
+		console.log(3)
 		// Find the appropriate user that owns this user_token
 		const user = await verify(user_token,main_config.jwt_secret!);
 		// attach that to the user object
@@ -34,6 +37,7 @@ export default async function Authenticated(req:Request, res:Response, next:Next
 	}
 	// if there is no user_token and no session
 	if (!!user_token == false && !!session == false){
-		res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end(); return
+		console.log(4)
+		res.status(401).send({ loggedin : false, message: "you are not authorized!" }); res.end();
 	}
 }
