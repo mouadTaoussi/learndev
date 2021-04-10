@@ -64,6 +64,7 @@
 	  },
 	  data () {
 	    return {
+	    	user_token : localStorage.getItem('user_token') == null ? undefined : localStorage.getItem('user_token'),
 	    	id               : this.id,
 	    	type             : this.type,
 	    	user_id          : this.user_id,
@@ -145,7 +146,7 @@
    				headers: {
 					// 'Content-Type': 'application/json',
 			        // 'Accept'      : `application/json`
-			        user_token : localStorage.getItem('user_token')
+			        user_token : this.user_token
 				},
    				data: {
    					query: print(UPVOTE),

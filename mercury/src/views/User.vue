@@ -34,8 +34,8 @@
 
 			<!-- Tabs pages -->
 			<section class='tabs-pages-topics'>
-				<div v-if="topics.length > 0" class="tabs-pages-topics-grid">
-					<div v-for="topic in topics">
+				<div v-if="topics != null" class="tabs-pages-topics-grid">
+					<div v-if="topics.length > 0" v-for="topic in topics">
 						<Topic 
 							v-bind:topic_id="topic._id" 
 							v-bind:img="topic.background_image" 
@@ -43,9 +43,12 @@
 							v-on:reFetchTopics="refreachTopics"
 						></Topic>
 					</div>
+					<!-- EmptyContent -->
+					<EmptyContent v-if="topics.length == 0"></EmptyContent>
+					<!-- EmptyContent -->
 				</div>
 				<!-- EmptyContent -->
-				<EmptyContent v-if="topics.length == 0"></EmptyContent>
+				<EmptyContent v-if="topics == null"></EmptyContent>
 				<!-- EmptyContent -->
 				<div 
 					data-toggle="modal" 
@@ -55,59 +58,69 @@
 			</section>
 
 			<section class='tabs-pages-upvoted tab-hidden'>
-				<div v-if="upvoted_content.length > 0" v-for="upvoted in upvoted_content">
-					<Resource 
-						v-bind:id="upvoted._id"
-						v-bind:title="upvoted.title" 
-						v-bind:upvotes="upvoted.upvotes_count" 
-						v-bind:upvoted="true"
-						v-bind:type="'nooo'"
-						v-bind:creator_name="upvoted.creator_name" 
-						v-bind:level="upvoted.level" 
-						v-bind:user_id="upvoted.user_id"
-					></Resource>
+				<div v-if="upvoted_content != null">
+					<div v-if="upvoted_content.length > 0" v-for="upvoted in upvoted_content">
+						<Resource 
+							v-bind:id="upvoted._id"
+							v-bind:title="upvoted.title" 
+							v-bind:upvotes="upvoted.upvotes_count" 
+							v-bind:upvoted="true"
+							v-bind:type="'nooo'"
+							v-bind:creator_name="upvoted.creator_name" 
+							v-bind:level="upvoted.level" 
+							v-bind:user_id="upvoted.user_id"
+						></Resource>
+					</div>
+					<!-- EmptyContent -->
+					<EmptyContent v-if="upvoted_content.length == 0"></EmptyContent>
+					<!-- EmptyContent --> 
 				</div>
 				<!-- EmptyContent -->
-				<EmptyContent v-if="upvoted_content.length == 0"></EmptyContent>
-				<!-- EmptyContent -->
+				<EmptyContent v-if="upvoted_content == null"></EmptyContent>
+				<!-- EmptyContent --> 
 			</section>
 
 			<section class='tabs-pages-userprofile py-4 tab-hidden'>	
 				<!-- <img v-bind:src='current_user.avatar' width="200" height="200" class=""><br> -->
-				<p class="text-left">Full name</p>
-				<input
-					v-on:change="toggleSaveChanges()" 
-					class="current_user form-control my-2" 
-					type="text" 
-					v-model="current_user.fullname" 
-					placeholder="fullname" >
-				<p class="text-left">User name</p>
-				<input
-					v-on:change="toggleSaveChanges()" 
-					class="current_user form-control my-2" 
-					type="text" 
-					v-model="current_user.user_name" 
-					placeholder="user_name" >
-				<p class="text-left">Email</p>
-				<input 
-					v-on:change="toggleSaveChanges()"
-					class="current_user form-control my-2" 
-					type="text" 
-					v-model="current_user.email"
-					placeholder="Email"
-					>
-				<p  
-					style="cursor: pointer"
-					data-toggle="modal" 
-					data-target="#changePassword"
-					class="text-left"
-					>Change Password</p>
-				<button 
-					v-on:click="updateProfile()" 
-					id="saveChanges" 
-					disabled
-					class="save_changes_btn btn btn-info float-left"
-				>Save Changes</button>
+				<div v-if="current_user !== null">
+					<p class="text-left">Full name</p>
+					<input
+						v-on:change="toggleSaveChanges()" 
+						class="current_user form-control my-2" 
+						type="text" 
+						v-model="current_user.fullname" 
+						placeholder="fullname" >
+					<p class="text-left">User name</p>
+					<input
+						v-on:change="toggleSaveChanges()" 
+						class="current_user form-control my-2" 
+						type="text" 
+						v-model="current_user.user_name" 
+						placeholder="user_name" >
+					<p class="text-left">Email</p>
+					<input 
+						v-on:change="toggleSaveChanges()"
+						class="current_user form-control my-2" 
+						type="text" 
+						v-model="current_user.email"
+						placeholder="Email"
+						>
+					<p  
+						style="cursor: pointer"
+						data-toggle="modal" 
+						data-target="#changePassword"
+						class="text-left"
+						>Change Password</p>
+					<button 
+						v-on:click="updateProfile()" 
+						id="saveChanges" 
+						disabled
+						class="save_changes_btn btn btn-info float-left"
+					>Save Changes</button>
+				</div>
+				<!-- EmptyContent -->
+				<EmptyContent v-if="current_user == null"></EmptyContent>
+				<!-- EmptyContent --> 
 			</section>
 
 			<section class='tabs-pages-projectideas tab-hidden'>	
@@ -262,6 +275,7 @@
 	  
 	  data () {
 	    return {
+	    	user_token : localStorage.getItem('user_token') == null ? undefined : localStorage.getItem('user_token'),
 	    	current_user : null,
 	    	topics : null,
 	    	upvoted_content : null,
@@ -293,7 +307,7 @@
 	  	this.$http({
 	  		method : "GET",
 	  		headers : {
-	  			user_token : localStorage.getItem('user_token')
+	  			user_token : this.user_token
 	  		},
 	  		url    : apihost.api_domain + '/auth/getuser',
 	  	})
@@ -305,7 +319,7 @@
 	  		this.upvoted_content = res.data.upvoted_content;
 	  	})
 	  	.catch((err)=>{
-	  		this.$router.push({ path: '/login' })
+	  		// this.$router.push({ path: '/login' })
 	  	})
 	  },
 	   methods : {
@@ -336,7 +350,7 @@
 	   				headers: {
 						// 'Content-Type': 'application/json',
 				        // 'Accept'      : `application/json`
-				        user_token : localStorage.getItem('user_token')
+				        user_token : this.user_token
 					},
 	   				data: {
 	   					query: print(ADD_TOPIC),
@@ -380,7 +394,7 @@
 				url : apihost.api_domain + "/auth/updateUser",
 				method : "POST",
 				headers : {
-					user_token : localStorage.getItem('user_token')
+					user_token : this.user_token
 				},
 				data : {
 					fullname: this.current_user.fullname,
@@ -432,7 +446,7 @@
 		  		method : "POST",
 		  		url    : apihost.api_domain + '/auth/changePassword',
 		  		headers : {
-		  			user_token : localStorage.getItem('user_token')
+		  			user_token : this.user_token
 		  		},
 		  		data : { 
 		  			current_password: this.passwords.current_password,

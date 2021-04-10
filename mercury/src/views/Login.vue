@@ -68,6 +68,8 @@
 	  	if (!!localStorage.getItem('user_name') == true){
 	  		this.$router.push({ path: '/topics' });
 	  	}
+	  	const is = localStorage.getItem('user_token') == null ? undefined : true;
+	  	console.log(is)
 	  },
 	  methods : {
 		login : function(){

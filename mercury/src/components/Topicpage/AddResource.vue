@@ -123,6 +123,7 @@
 
 	  data () {
 	    return {
+	    	user_token : localStorage.getItem('user_token') == null ? undefined : localStorage.getItem('user_token'),
 	    	newresource : {
 	    		type     : "docs",
 	    		topic_id : this.$route.params.id,
@@ -242,7 +243,7 @@
    				headers: {
 					// 'Content-Type': 'application/json',
 			        // 'Accept'      : `application/json`
-			        user_token : localStorage.getItem('user_token')
+			        user_token : this.user_token
 				},
    				data: {
    					query: print(ADD_RESOURCE),

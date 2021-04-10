@@ -8,23 +8,26 @@ const jsonwebtoken_1 = require("jsonwebtoken");
 const main_config_1 = __importDefault(require(".././main.config"));
 const Authenticated = async ({ context, info }, next) => {
     const session = context.req.session.passport;
-    const { user_token } = context.req.headers;
-    console.log(context.req.headers);
-    if (!!user_token == false || user_token == 'null' && !!session == true) {
+    let { user_token } = context.req.headers;
+    if (user_token == "undefined")
+        user_token = undefined;
+    if (user_token == "null")
+        user_token = null;
+    if (!!user_token == false && !!session == true) {
         context.req.user = session.user;
         await next();
     }
-    if (!!user_token == true || user_token !== 'null' && !!session == false) {
+    if (!!user_token == true && !!session == false) {
         const user = await jsonwebtoken_1.verify(user_token, main_config_1.default.jwt_secret);
         context.req.user = user;
         await next();
     }
-    if (!!user_token == true || user_token !== 'null' && !!session == true) {
+    if (!!user_token == true && !!session == true) {
         const user = await jsonwebtoken_1.verify(user_token, main_config_1.default.jwt_secret);
         context.req.user = user;
         await next();
     }
-    if (!!user_token == false || user_token == 'null' && !!session == false) {
+    if (!!user_token == false && !!session == false) {
         throw new Error('Not Authenticated');
     }
 };
