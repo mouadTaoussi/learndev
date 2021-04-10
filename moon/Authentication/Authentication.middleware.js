@@ -14,6 +14,7 @@ async function Authenticated(req, res, next) {
         next();
     }
     if (!!user_token == true && !!session == false) {
+        console.log(user_token);
         console.log(!!user_token);
         const user = await jsonwebtoken_1.verify(user_token, main_config_1.default.jwt_secret);
         req.user = user;
