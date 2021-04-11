@@ -66,7 +66,8 @@
 	  		search_query : null,
 	  		skip : 0,
 	  		limit: 10,
-	  		isLoggedIn : !!localStorage.getItem('user_name')
+	  		isLoggedIn : !!localStorage.getItem('user_name'),
+	  		user_token : localStorage.getItem('user_token') == null ? undefined : localStorage.getItem('user_token')
 	  	}
 	  },
 	  mounted (){
@@ -105,6 +106,7 @@
 				headers: {
 				// 'Content-Type': 'application/json',
 		        // 'Accept'      : `application/json`
+		        user_token : this.user_token
 			},
 			data: {
 				query: print(TOPIC_QUERY),
@@ -177,6 +179,7 @@
 					headers: {
 					// 'Content-Type': 'application/json',
 			        // 'Accept'      : `application/json`
+			        user_token : this.user_token
 				},
 				data: {
 					query: print(SEARCH_CONTENT),

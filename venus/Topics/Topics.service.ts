@@ -202,7 +202,7 @@ class TopicService implements TopicServiceInt {
 			const courses_to_be_sent       = sortByUpvotes(courses);
 			const articles_to_be_sent      = sortByUpvotes(articles);
 			const project_ideas_to_be_sent = sortByUpvotes(projectIdeas);
-			
+
 			if( current_user !== null ) {
 				// Check if the user upvoted some of the content in each resource // if logged in
 				// if true then set upvoted to true

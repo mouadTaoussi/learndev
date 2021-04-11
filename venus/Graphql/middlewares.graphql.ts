@@ -9,13 +9,6 @@ export const Authenticated: MiddlewareFn<any> = async ({context,info}:{context:a
 	if (user_token == "undefined") user_token = undefined; 
 	if (user_token == "null") user_token = null;
 
-	// console.log(user_token)
-	// console.log(context.req.session)
-	// if (session){ context.req.user = context.req.session.passport.user; await next() }
-
-	// else { throw new Error('Not Authenticated') }
-	// JWT
-	// await next();
 	// if there is no user_token but there is a session
 	if (!!user_token == false && !!session == true) {
 		// attach that to the user object
@@ -55,14 +48,7 @@ export const LoggedInUser: MiddlewareFn<any> = async ({context,info}:{context:an
 
 	if (user_token == "undefined") user_token = undefined; 
 	if (user_token == "null") user_token = null;
-
-	// console.log(user_token)
-	// console.log(context.req.session)
-	// if (session){ context.req.user = context.req.session.passport.user; await next() }
-
-	// else { throw new Error('Not Authenticated') }
-	// JWT
-	// await next();
+	
 	// if there is no user_token but there is a session
 	if (!!user_token == false && !!session == true) {
 		// attach that to the user object
@@ -95,3 +81,11 @@ export const LoggedInUser: MiddlewareFn<any> = async ({context,info}:{context:an
 		await next();
 	}
 }
+
+// console.log(user_token)
+// console.log(context.req.session)
+// if (session){ context.req.user = context.req.session.passport.user; await next() }
+
+// else { throw new Error('Not Authenticated') }
+// JWT
+// await next();

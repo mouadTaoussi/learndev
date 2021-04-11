@@ -65,11 +65,9 @@
 	    }
 	  },
 	  mounted (){
-	  	if (!!localStorage.getItem('user_name') == true){
+	  	if (!!localStorage.getItem('user_name') == true || !!localStorage.getItem('user_token') == true){
 	  		this.$router.push({ path: '/topics' });
 	  	}
-	  	const is = localStorage.getItem('user_token') == null ? undefined : true;
-	  	console.log(is)
 	  },
 	  methods : {
 		login : function(){
