@@ -69,7 +69,6 @@ export const LoggedInUser: MiddlewareFn<any> = async ({context,info}:{context:an
 		context.req.user = session.user;
 		// Call next function
 		await next();
-
 	}
 	// if there is user_token but there is no session
 	if (!!user_token == true && !!session == false) {

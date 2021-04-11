@@ -51,7 +51,7 @@ class TopicService {
             const articles_to_be_sent = Topics_functions_1.sortByUpvotes(articles_need_to_be_unduplicated);
             const project_ideas_to_be_sent = Topics_functions_1.sortByUpvotes(project_ideas_need_to_be_unduplicated);
             if (current_user !== null) {
-                const user_id = current_user.user.id;
+                const user_id = current_user.id;
                 for (var i = 0; docs_to_be_sent.length > i; i++) {
                     if (docs_to_be_sent[i].upvotes.includes(user_id)) {
                         docs_to_be_sent[i].upvoted = true;
@@ -130,7 +130,7 @@ class TopicService {
             const articles_to_be_sent = Topics_functions_1.sortByUpvotes(articles);
             const project_ideas_to_be_sent = Topics_functions_1.sortByUpvotes(projectIdeas);
             if (current_user !== null) {
-                const user_id = current_user.user.id;
+                const user_id = current_user.id;
                 for (var i = 0; docs_to_be_sent.length > i; i++) {
                     if (docs_to_be_sent[i].upvotes.includes(user_id)) {
                         docs_to_be_sent[i].upvoted = true;

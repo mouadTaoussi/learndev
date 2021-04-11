@@ -83,7 +83,7 @@ class TopicService implements TopicServiceInt {
 			if( current_user !== null ) {
 				// Check if the user upvoted some of the content in each resource // if logged in
 				// if true then set upvoted to true
-				const user_id: string = current_user.user.id;
+				const user_id: string = current_user.id;
 
 				for ( var i = 0; docs_to_be_sent.length > i; i++ ) {
 
@@ -206,7 +206,7 @@ class TopicService implements TopicServiceInt {
 			if( current_user !== null ) {
 				// Check if the user upvoted some of the content in each resource // if logged in
 				// if true then set upvoted to true
-				const user_id: string = current_user.user.id;
+				const user_id: string = current_user.id;
 				// Check in the docs
 				for ( var i = 0; docs_to_be_sent.length > i; i++ ) {
 

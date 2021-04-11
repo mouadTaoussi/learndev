@@ -127,6 +127,7 @@ class topicResolver implements topicResolver {
 	public async getTopic(@Arg('topic_id') topic_id: string,@Args() {limit,skip}: LoadMoreRules, @Ctx() context : any) : Promise<any> {
 
 		const user = context.req.user;
+		
 		const topic = await _topicservice.getTopic(topic_id, user, limit, skip);
 		// Get content of the topic
 		return topic.data;
