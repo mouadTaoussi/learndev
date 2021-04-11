@@ -14,13 +14,14 @@ const _topic = new __TopicService__();
 class Authentication implements AuthenticationInt {
 	public async getUser(req:Request,res:Response) :Promise<void>{
 
-		const user_id : any = req.user.id; 
+		// const user_id : any = req.user.id; 
+		const user : any = req.user; 
 		// Get user
-		const current_user = await _user.findUser({id:user_id});
+		const current_user = await _user.findUser({id:user.id});
 		// Get his topics
-		const topics = await _topic.getUserTopics(user_id);
+		const topics = await _topic.getUserTopics(user.id);
 		// Get his upvoted content
-		const upvoted_content = await _topic.getUpvotedContent(user_id);
+		const upvoted_content = await _topic.getUpvotedContent(user.id);
 
 		res.status(200).send({
 			user : current_user.user,

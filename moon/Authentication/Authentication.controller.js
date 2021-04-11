@@ -14,10 +14,10 @@ const _user = new Authentication_service_1.default();
 const _topic = new Topics_service_1.default();
 class Authentication {
     async getUser(req, res) {
-        const user_id = req.user.id;
-        const current_user = await _user.findUser({ id: user_id });
-        const topics = await _topic.getUserTopics(user_id);
-        const upvoted_content = await _topic.getUpvotedContent(user_id);
+        const user = req.user;
+        const current_user = await _user.findUser({ id: user.id });
+        const topics = await _topic.getUserTopics(user.id);
+        const upvoted_content = await _topic.getUpvotedContent(user.id);
         res.status(200).send({
             user: current_user.user,
             topics: topics.data,

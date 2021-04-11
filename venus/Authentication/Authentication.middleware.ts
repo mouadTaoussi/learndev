@@ -4,7 +4,7 @@ import main_config from ".././main.config";
 
 export default async function Authenticated(req:Request, res:Response, next:NextFunction) :Promise<void> {
 	// Get the user by its session
-	const session     : any   = req.session.passport;
+	const session      : any   = req.session.passport;
 	let { user_token } : any   = req.headers;
 
 	// Check for user_token false value
