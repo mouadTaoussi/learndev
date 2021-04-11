@@ -45,7 +45,7 @@ class TopicService implements TopicServiceInt {
 			}
 		}
 	}
-	public async searchContentInTopic(query: string[], topic_id:string | null, user_session: any, limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
+	public async searchContentInTopic(query: string[], topic_id:string | null, current_user: any, limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 			
 		try {
 			// .find({'$and': [{'Name': {'$in': ['Chris', 'David']}, 'Marks': {'$in': [34,89]}}]});
@@ -80,10 +80,10 @@ class TopicService implements TopicServiceInt {
 			const articles_to_be_sent      = sortByUpvotes(articles_need_to_be_unduplicated);
 			const project_ideas_to_be_sent = sortByUpvotes(project_ideas_need_to_be_unduplicated);
 
-			if( user_session !== null ) {
+			if( current_user !== null ) {
 				// Check if the user upvoted some of the content in each resource // if logged in
 				// if true then set upvoted to true
-				const user_id: string = user_session.user.id;
+				const user_id: string = current_user.user.id;
 
 				for ( var i = 0; docs_to_be_sent.length > i; i++ ) {
 
@@ -180,7 +180,7 @@ class TopicService implements TopicServiceInt {
 		}
 
 	}
-	public async getTopic (item_id: string, user_session: any, limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
+	public async getTopic (item_id: string, current_user: any, limit: number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
 			const topic = await TopicModel.findById(item_id);
 
@@ -203,10 +203,10 @@ class TopicService implements TopicServiceInt {
 			const articles_to_be_sent      = sortByUpvotes(articles);
 			const project_ideas_to_be_sent = sortByUpvotes(projectIdeas);
 			
-			if( user_session !== null ) {
+			if( current_user !== null ) {
 				// Check if the user upvoted some of the content in each resource // if logged in
 				// if true then set upvoted to true
-				const user_id: string = user_session.user.id;
+				const user_id: string = current_user.user.id;
 				// Check in the docs
 				for ( var i = 0; docs_to_be_sent.length > i; i++ ) {
 

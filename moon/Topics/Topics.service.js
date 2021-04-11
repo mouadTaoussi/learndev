@@ -32,7 +32,7 @@ class TopicService {
             };
         }
     }
-    async searchContentInTopic(query, topic_id, user_session, limit, skip) {
+    async searchContentInTopic(query, topic_id, current_user, limit, skip) {
         try {
             const docs = await Topics_models_1.DocsModel.find();
             const courses = await Topics_models_1.CourseModel.find();
@@ -50,8 +50,8 @@ class TopicService {
             const courses_to_be_sent = Topics_functions_1.sortByUpvotes(courses_need_to_be_unduplicated);
             const articles_to_be_sent = Topics_functions_1.sortByUpvotes(articles_need_to_be_unduplicated);
             const project_ideas_to_be_sent = Topics_functions_1.sortByUpvotes(project_ideas_need_to_be_unduplicated);
-            if (user_session !== null) {
-                const user_id = user_session.user.id;
+            if (current_user !== null) {
+                const user_id = current_user.user.id;
                 for (var i = 0; docs_to_be_sent.length > i; i++) {
                     if (docs_to_be_sent[i].upvotes.includes(user_id)) {
                         docs_to_be_sent[i].upvoted = true;
@@ -118,7 +118,7 @@ class TopicService {
             };
         }
     }
-    async getTopic(item_id, user_session, limit, skip) {
+    async getTopic(item_id, current_user, limit, skip) {
         try {
             const topic = await Topics_models_1.TopicModel.findById(item_id);
             const docs = await Topics_models_1.DocsModel.find({ topic_id: item_id });
@@ -129,8 +129,8 @@ class TopicService {
             const courses_to_be_sent = Topics_functions_1.sortByUpvotes(courses);
             const articles_to_be_sent = Topics_functions_1.sortByUpvotes(articles);
             const project_ideas_to_be_sent = Topics_functions_1.sortByUpvotes(projectIdeas);
-            if (user_session !== null) {
-                const user_id = user_session.user.id;
+            if (current_user !== null) {
+                const user_id = current_user.user.id;
                 for (var i = 0; docs_to_be_sent.length > i; i++) {
                     if (docs_to_be_sent[i].upvotes.includes(user_id)) {
                         docs_to_be_sent[i].upvoted = true;

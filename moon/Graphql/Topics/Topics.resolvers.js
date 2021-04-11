@@ -85,7 +85,7 @@ topicInfoResolver = __decorate([
 exports.topicInfoResolver = topicInfoResolver;
 let topicResolver = class topicResolver {
     async searchContentInTopic(search_term, topic_id, { limit, skip }, context) {
-        const user = context.req.session.passport || null;
+        const user = context.req.user;
         const query_to_search = search_term.split(' ');
         const linking_words = ["how", "to", "and", "in", "by", "the", "on", "with", "which", "while", "all", "for"];
         for (let io = 0; io < query_to_search.length; io++) {
@@ -98,17 +98,6 @@ let topicResolver = class topicResolver {
         }
         const topic = await _topicservice.getTopic(topic_id, user, 1, 0);
         const content_in_topic = await _topicservice.searchContentInTopic(query_to_search, topic_id, user, limit, skip);
-        console.log({
-            _id: topic.data._id,
-            user_id: topic.data.user_id,
-            creator_name: topic.data.creator_name,
-            title: topic.data.title,
-            background_image: topic.data.background_image,
-            docs: content_in_topic.data.docs,
-            courses: content_in_topic.data.courses,
-            articles: content_in_topic.data.articles,
-            project_idea: content_in_topic.data.project_idea,
-        });
         return {
             _id: topic.data._id,
             user_id: topic.data.user_id,
@@ -122,7 +111,7 @@ let topicResolver = class topicResolver {
         };
     }
     async getTopic(topic_id, { limit, skip }, context) {
-        const user = context.req.session.passport || null;
+        const user = context.req.user;
         const topic = await _topicservice.getTopic(topic_id, user, limit, skip);
         return topic.data;
     }
@@ -160,6 +149,7 @@ let topicResolver = class topicResolver {
     }
 };
 __decorate([
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.LoggedInUser),
     type_graphql_1.Query(returns => Topics_objecttypes_1.Topic, { description: "This query returns the contents in the topic by the search item" }),
     __param(0, type_graphql_1.Arg('search_term')), __param(1, type_graphql_1.Arg('topic_id')), __param(2, type_graphql_1.Args()), __param(3, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
@@ -168,6 +158,7 @@ __decorate([
 ], topicResolver.prototype, "searchContentInTopic", null);
 __decorate([
     type_graphql_1.Query(returns => Topics_objecttypes_1.Topic, { description: "This query returns a topic" }),
+    type_graphql_1.UseMiddleware(middlewares_graphql_1.LoggedInUser),
     __param(0, type_graphql_1.Arg('topic_id')), __param(1, type_graphql_1.Args()), __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Topics_objecttypes_1.LoadMoreRules, Object]),

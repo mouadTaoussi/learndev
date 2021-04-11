@@ -4,7 +4,7 @@ import {
 	TopicArgs, DocsArgs, CourseArgs, ArticleArgs, ProjectIdeaArgs, LoadMoreRules, TopicInfo
 } from './Topics.objecttypes';
 import { TopicModel, DocsModel, ArticleModel, CourseModel, ProjectIdeaModel } from "../.././Topics/Topics.models";
-import { Authenticated }  from '../middlewares.graphql';
+import { Authenticated, LoggedInUser }  from '../middlewares.graphql';
 import TopicService from "../.././Topics/Topics.service";
 
 const _topicservice = new TopicService();
@@ -84,11 +84,11 @@ interface topicResolver {
 
 @Resolver(of => Topic)
 class topicResolver implements topicResolver {
-
+	@UseMiddleware(LoggedInUser)
 	@Query(returns => Topic, { description : "This query returns the contents in the topic by the search item"})
 	public async searchContentInTopic(@Arg('search_term') search_term : string, @Arg('topic_id') topic_id : string, @Args() {limit,skip}: LoadMoreRules, @Ctx() context : any)  {
 		// User if authenticated 
-		const user = context.req.session.passport || null;
+		const user = context.req.user;
 		// Get the query and topic_id
 		// Split the query to array
 		const query_to_search :string[] = search_term.split(' ');
@@ -108,17 +108,7 @@ class topicResolver implements topicResolver {
 		const topic = await _topicservice.getTopic(topic_id ,user, 1, 0);
 		// Find the right documents
 		const content_in_topic  = await _topicservice.searchContentInTopic(query_to_search, topic_id, user, limit, skip);
-		console.log({
-			_id              : topic.data._id,
-			user_id          : topic.data.user_id,
-			creator_name     : topic.data.creator_name,
-			title            : topic.data.title,
-			background_image : topic.data.background_image,
-			docs          : content_in_topic.data.docs,
-			courses       : content_in_topic.data.courses,
-			articles      : content_in_topic.data.articles,
-			project_idea   : content_in_topic.data.project_idea,
-		})
+		
 		return {
 			_id              : topic.data._id,
 			user_id          : topic.data.user_id,
@@ -133,9 +123,10 @@ class topicResolver implements topicResolver {
 	}
 
 	@Query(returns => Topic, { description: "This query returns a topic" })
+	@UseMiddleware(LoggedInUser)
 	public async getTopic(@Arg('topic_id') topic_id: string,@Args() {limit,skip}: LoadMoreRules, @Ctx() context : any) : Promise<any> {
 
-		const user = context.req.session.passport || null;
+		const user = context.req.user;
 		const topic = await _topicservice.getTopic(topic_id, user, limit, skip);
 		// Get content of the topic
 		return topic.data;

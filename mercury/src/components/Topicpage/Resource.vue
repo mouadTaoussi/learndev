@@ -32,7 +32,7 @@
 				<div class="content">
 				
 						<a class="text-dark"  
-							v-bind:href='"http://localhost"' target="_blank"
+							v-bind:href='link' target="_blank"
 							v-on:click="showDescription($event,id,link,description)" 
 							>
 							<h5 class="title">{{ title }}</h5>
