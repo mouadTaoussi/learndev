@@ -10,17 +10,17 @@
       <h1 class="text-left my-4 title-preview-topics">Powerful topics to see:</h1>
       <div class="topics-exemples">
         <Topic 
-          img="https://images.pexels.com/photos/360591/pexels-photo-360591.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
+          img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallup.net%2Fwp-content%2Fuploads%2F2017%2F11%2F22%2F407978-programming-PHP-programming_language-syntax_highlighting-minified-knowledge-coding-code-HTML-computer-pixels-Computer_screen-logic.jpg&f=1&nofb=1" 
           title="HTML" 
-          topic_id="6059ff5d6e42e12bb8844fd3" ></Topic>
+          topic_id="6070db54021b36001518db81" ></Topic>
         <Topic 
-          img="https://images.pexels.com/photos/374563/pexels-photo-374563.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-          title="CSS" 
+          img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs3.amazonaws.com%2Fmedia-p.slid.es%2Fuploads%2F573039%2Fimages%2F4409450%2Ftypescript-intro-background.png&f=1&nofb=1" 
+          title="Typescript" 
           topic_id="6059fed36e42e12bb8844fd1" ></Topic>
         <Topic 
-          img="https://images.pexels.com/photos/3888149/pexels-photo-3888149.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-          title="React Native" 
-          topic_id="6059fff46e42e12bb8844fd5" ></Topic>
+          img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.wallpapersafari.com%2F48%2F51%2FJjyohW.jpg&f=1&nofb=1" 
+          title="NodeJS" 
+          topic_id="60736525fa40cb001562d384" ></Topic>
       </div>
     </div>
     <Card></Card>

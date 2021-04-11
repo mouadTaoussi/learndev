@@ -71,7 +71,6 @@
 	  	}
 	  },
 	  mounted (){
-	  	console.log(this.isLoggedIn)
 	  	window.scrollTo(0, 0);
 	  	// Fetch Topic within 
 	  	// - Docs (Check upvoted ones)

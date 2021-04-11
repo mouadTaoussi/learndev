@@ -8,7 +8,7 @@
 					No need to spend time finding the good resource to you to learn, with LearnDev you can get specific resources that match your needs! 
 				</p>
 			</div>
-			<iframe src="http://localhost:8080/topic/605a004f6e42e12bb8844fd7" class="shadow iframe"></iframe>
+			<iframe src="https://learndevelopment.vercel.app/topic/60736525fa40cb001562d384" class="shadow iframe"></iframe>
 		</div>
 	</section>
 </template>
