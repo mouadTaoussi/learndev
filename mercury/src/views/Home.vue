@@ -16,7 +16,7 @@
         <Topic 
           img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs3.amazonaws.com%2Fmedia-p.slid.es%2Fuploads%2F573039%2Fimages%2F4409450%2Ftypescript-intro-background.png&f=1&nofb=1" 
           title="Typescript" 
-          topic_id="6059fed36e42e12bb8844fd1" ></Topic>
+          topic_id="60736576fa40cb001562d385" ></Topic>
         <Topic 
           img="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.wallpapersafari.com%2F48%2F51%2FJjyohW.jpg&f=1&nofb=1" 
           title="NodeJS" 
