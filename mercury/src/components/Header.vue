@@ -58,8 +58,30 @@
 				>Contribute</router-link>
 			</div>
 		</header>
-		<aside class="header-smaller-devices shadow"></aside>
-			
+		<aside class="header-smaller-devices shadow">
+			<router-link 
+				tag="p" 
+				class="list-item-sm" 
+				to="/login">Log in</router-link>
+			<router-link 
+				tag="p" 
+				class="list-item-sm" 
+				to="/register">Contribute</router-link>
+			<router-link 
+				tag="p" 
+				class="list-item-sm" 
+				to="/topics">Discover Topics</router-link>
+			<router-link 
+				tag="p" 
+				class="list-item-sm" 
+				to="/user" 
+				v-if="!user_name">{{ user_name }}</router-link>
+			<router-link 
+				tag="p" 
+				class="list-item-sm" 
+				to="/" 
+				v-if="user_name" 
+				v-on:click='logout()'>Logout</router-link>
 		</aside>
 	</section>
 </template>
@@ -187,6 +209,10 @@
 		position: absolute;
 		right: -300px;
 		transition: all .2s ease-out;
+		padding-top: 50px;
+	}
+	.list-item-sm {
+		color: white;
 	}
 	@media only screen and (max-width: 800px) {
 		/*.list-item-to-be-hidden {
