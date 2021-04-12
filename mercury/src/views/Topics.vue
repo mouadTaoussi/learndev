@@ -273,5 +273,8 @@
 			grid-gap: 20px;
 			width: 100%;
 		}
+		.title {
+			font-size: 30px;	
+		}
 	}
 </style>

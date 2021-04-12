@@ -6,12 +6,12 @@
 		    <span aria-hidden="true">&times;</span>
 		  </button>
 		</div> -->
-		<div class="alert alert-info alert-dismissible fade show" role="alert">
+		<!-- <div class="alert alert-info alert-dismissible fade show" role="alert">
 		  {{ad}}
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		    <span aria-hidden="true">&times;</span>
 		  </button>
-		</div>
+		</div> -->
 	 	<header class="header-landingpage">
 	 		<div class="brand-child">
 		 		<router-link to="/">
@@ -20,11 +20,16 @@
 				</router-link>
 			</div>
 			<div class="list-child">
+				<div v-on:click="toggleMenu()" class="menu-for-smaller-devices">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+					  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+					</svg>
+				</div>
 				<router-link 
 					tag="p" 
 					class="list-item" 
 					to="/topics"
-				>Discover Topics</router-link>
+				>Discover</router-link>
 				<router-link 
 					v-if="!user_name" 
 					tag="p" 
@@ -34,7 +39,7 @@
 				<router-link 
 					v-if="user_name" 
 					tag="p" 
-					class="list-item" 
+					class="list-item list-item-to-be-hidden" 
 					to="/user"
 				>{{ user_name }}</router-link>
 				<p 
@@ -48,11 +53,14 @@
 				<router-link 
 					v-if="!user_name" 
 					tag="button" 
-					class="shadow btn-sm list-item btn btn-primary" 
+					class="shadow btn-sm list-item btn btn-primary list-item-to-be-hidden" 
 					to="/register"
 				>Contribute</router-link>
 			</div>
 		</header>
+		<aside class="header-smaller-devices shadow"></aside>
+			
+		</aside>
 	</section>
 </template>
 
@@ -89,6 +97,17 @@
 				// push to topics page
 				this.$router.push({ path: '/' });
 			})
+	  	},
+	  	toggleMenu : function(){
+	  		const header = document.querySelector('.header-smaller-devices');
+	  		console.log(header.style)
+	  		console.log(header.style.right)
+	  		if (header.style.right == "0px"){
+	  			header.style.right = "-300px"
+	  		}
+	  		else {
+	  			header.style.right = "0px"	
+	  		}
 	  	}
 	  }
 	}
@@ -157,7 +176,28 @@
 	.logo-blue {
 		background-image: url('.././assets/logoblue.svg');
 	}
+	.menu-for-smaller-devices {
+		display: none;
+	}
+	.header-smaller-devices {
+		width: 300px;
+		height: 100vh;
+		position: fixed;
+		background-color: var(--primary--);
+		position: absolute;
+		right: -300px;
+		transition: all .2s ease-out;
+	}
 	@media only screen and (max-width: 800px) {
+		/*.list-item-to-be-hidden {
+			display: none;
+		}
+		.list-item {
+			font-size: 13px;
+		}*/
+		.menu-for-smaller-devices {
+			display: block;
+		}
 		.list-item {
 			display: none;
 		}

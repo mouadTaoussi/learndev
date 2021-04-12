@@ -95,6 +95,12 @@
 	}
 
 	@media only screen and (max-width: 800px) {
-
+		.content-area {
+			padding: 20px;
+		}
+		.main-title {
+			font-family: var(--font--);
+			font-size: 30px;
+		}
 	}
 </style>
