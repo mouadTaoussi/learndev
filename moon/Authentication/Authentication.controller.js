@@ -167,6 +167,7 @@ class Authentication {
         if (userEmail.found == true) {
             if (authenticated_user.email == body.email) {
                 const updating = await _user.updateUser(authenticated_user.id, body);
+                req.session.passport = {};
                 req.session.passport.user = {
                     id: updating.user._id, name: updating.user.name, email: updating.user.email, at_provider_id: null
                 };
