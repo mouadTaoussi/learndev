@@ -244,6 +244,9 @@ class Authentication implements AuthenticationInt {
 				const updating: { 
 					status:number,updated:boolean,message:string,user:any } = await _user.updateUser(authenticated_user.id,body);
 
+				// sign a session
+				req.session.passport = {};
+				
 				// Response backend
 				req.session.passport.user = { 
 					id:updating.user._id, name: updating.user.name, email: updating.user.email, at_provider_id: null 
