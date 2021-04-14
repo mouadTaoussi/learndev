@@ -65,7 +65,7 @@
 			projectIdeas : [],
 	  		search_query : null,
 	  		skip : 0,
-	  		limit: 10,
+	  		limit: 20,
 	  		isLoggedIn : !!localStorage.getItem('user_name'),
 	  		user_token : localStorage.getItem('user_token') == null ? undefined : localStorage.getItem('user_token')
 	  	}
