@@ -8,7 +8,6 @@
 
 !!!! Problmes above are fixed !!!!
 
-* Layout between front and backend with errors sharing!!!!!
 * skip && limit problom for search 
 * sort content by upvotes
 * recommendation algorithm
@@ -21,8 +20,8 @@
     
     get topics by recomed
       - get topics 
-      - sort by user interests
-      - skip and limit
+      - sort by user interests (upvotes)
+      - dont skip and limit
     
     get topics by search
       - filter by search keywords
@@ -31,9 +30,9 @@
       - skip and limit 
     
     get content by recomend
-      -  get topics 
+      - get topics 
       - sort by user interests
-      - skip and limit
+      - dont skip and limit
     
     get content by search
       - filter by search keywords

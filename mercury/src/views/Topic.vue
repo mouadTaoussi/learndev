@@ -4,7 +4,7 @@
 		<costumHeader user_name="" user_id=""></costumHeader>
 		<!-- Custom Header -->
 		<section class="container">
-			<div class="search-and-filter-container">
+			<div class="content">
 				<h1 class="text-left title">{{ title }}</h1>
 				<p class="creator_name text-left">by {{ creator_name }}</p>
 				<!-- Search And Filter -->
@@ -22,6 +22,9 @@
 				></Resources>
 				<!-- Resources -->
 				<button v-on:click="loadMore" class="btn btn-primary btn-sm shadow mt-4 mb-4">Load more</button>
+			</div>
+			<div class="ad">
+				<img class="ad-section" src="">
 			</div>
 		</section>
 		<!-- Custom Footer -->
@@ -214,7 +217,12 @@
 </script>
 
 <style lang="css" scoped>
-	.search-and-filter-container {
+	.container  {
+		display: grid;
+		grid-template-columns: 4fr 1fr;
+		grid-gap: 20px;
+	}
+	.content {
 		padding-top: 100px;
 	}
 	.title {
@@ -225,7 +233,18 @@
 	.creator_name {
 		margin-bottom: 20px;
 	}
+	.ad-section {
+		padding-top: 165px;
+		width: 100%;
+		height: 250px;
+		/*position: sticky;*/
+		/*top: 0;*/
+	}
 	@media only screen and (max-width: 800px) {
+		.container  {
+			/*display: grid;*/
+			grid-template-columns: 100%;
+		}
 		.title {
 			font-size: 30px;
 		}
