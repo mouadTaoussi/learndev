@@ -23,8 +23,31 @@
 				<!-- Resources -->
 				<button v-on:click="loadMore" class="btn btn-primary btn-sm shadow mt-4 mb-4">Load more</button>
 			</div>
-			<div class="ad">
+			<!-- <div class="ad">
 				<img class="ad-section" src="">
+			</div> -->
+			<div class="other-topics">
+				<h5 class="text-left">Topics you might like</h5>
+				<aside class='topic shadow'>
+					<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Po2093NQhOs70WCOV5eBtQHaEK%26pid%3DApi&f=1">
+					<p></p>
+					<h2 class="topic-title text-white">CSS</h2>
+				</aside>
+				<aside class='topic shadow'>
+					<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Po2093NQhOs70WCOV5eBtQHaEK%26pid%3DApi&f=1">
+					<p></p>
+					<h2 class="topic-title text-white">CSS</h2>
+				</aside>
+				<aside class='topic shadow'>
+					<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Po2093NQhOs70WCOV5eBtQHaEK%26pid%3DApi&f=1">
+					<p></p>
+					<h2 class="topic-title text-white">CSS</h2>
+				</aside>
+				<aside class='topic shadow'>
+					<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Po2093NQhOs70WCOV5eBtQHaEK%26pid%3DApi&f=1">
+					<p></p>
+					<h2 class="topic-title text-white">CSS</h2>
+				</aside>
 			</div>
 		</section>
 		<!-- Custom Footer -->
@@ -233,12 +256,32 @@
 	.creator_name {
 		margin-bottom: 20px;
 	}
-	.ad-section {
-		padding-top: 165px;
+	.other-topics {
+		margin-top: 165px;
 		width: 100%;
 		height: 250px;
 		/*position: sticky;*/
 		/*top: 0;*/
+	}
+	.topic {
+		width: 220px;
+		height: 120px;
+		position: relative;
+		border-radius: 3px;
+		cursor: pointer;
+		margin-top: 15px;
+	}
+	.topic img {
+		width: 220px;
+		height: 120px;
+		border-radius: 3px;
+	}
+	.topic-title {
+		font-family: var(--font--);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 	}
 	@media only screen and (max-width: 800px) {
 		.container  {
