@@ -112,7 +112,6 @@ let topicResolver = class topicResolver {
     }
     async getTopic(topic_id, { limit, skip }, context) {
         const user = context.req.user;
-        console.log(user);
         const topic = await _topicservice.getTopic(topic_id, user, limit, skip);
         return topic.data;
     }

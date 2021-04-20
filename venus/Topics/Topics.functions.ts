@@ -38,7 +38,43 @@ export function removeDuplicates( items_to_be_processed: any ) :unknown | any {
 
 
 export function sortByUpvotes ( items_to_be_processed: any ) :unknown | any {
+	// Cannot pass this block
+	for (var i = 0; i < items_to_be_processed.length ; i++) {
+		if (items_to_be_processed[i].upvotes_count > items_to_be_processed[i+1].upvotes_count){
+			console.log(0)
+			const smallerValue = items_to_be_processed[i+1];
+			const greaterValue = items_to_be_processed[i];
+			// Swap the two elements
+			items_to_be_processed[i]   = smallerValue;
+			items_to_be_processed[i+1] = greaterValue;
+			console.log("////////////////////////////////////////////")
+			console.log(items_to_be_processed[i])
+			console.log(items_to_be_processed[i]+1)
+		}
+		else {
+			console.log(2222222222)
+			// continue
+		}
+	}
+		console.log("2")
+	// Check if it is sorted
+	let isSorted = true;
 
-	return items_to_be_processed;
+	for(var j = 0 ; j < items_to_be_processed.length - 1 ; j++){
 
+		if(items_to_be_processed[j].upvotes_count > items_to_be_processed[j+1].upvotes_count) {
+			isSorted = false;
+			break;
+		}
+	}
+	if (isSorted == false) {
+		console.log("3")
+		// Resort the array
+		sortByUpvotes(items_to_be_processed)
+	}
+	console.log("4")
+	// dont resort it and return the finale results
+	return items_to_be_processed
+	
+	console.log(items_to_be_processed)
 }
