@@ -282,21 +282,7 @@ class TopicService implements TopicServiceInt {
 			// @TODO Skip and Limit function
 			// @TODO Skip and Limit function
 			// @TODO Skip and Limit function
-			console.log({
-					_id : topic._id,
-					user_id : topic.user_id,
-					creator_name : topic.creator_name,
-					title : topic.title,
-					background_image : topic.background_image,
-					// docs
-					docs : docs_to_be_sent.slice(skip, skip + limit),
-					// courses
-					courses : courses_to_be_sent.slice(skip, skip + limit),
-					// articels
-					articles : articles_to_be_sent.slice(skip, skip + limit),
-					// projectIdeas
-					project_idea : project_ideas_to_be_sent.slice(skip, skip + limit)
-				})
+	
 			return {
 				message : null,
 				found : false,

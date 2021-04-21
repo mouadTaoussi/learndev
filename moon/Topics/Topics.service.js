@@ -178,17 +178,6 @@ class TopicService {
                     project_ideas_to_be_sent[i].upvoted = false;
                 }
             }
-            console.log({
-                _id: topic._id,
-                user_id: topic.user_id,
-                creator_name: topic.creator_name,
-                title: topic.title,
-                background_image: topic.background_image,
-                docs: docs_to_be_sent.slice(skip, skip + limit),
-                courses: courses_to_be_sent.slice(skip, skip + limit),
-                articles: articles_to_be_sent.slice(skip, skip + limit),
-                project_idea: project_ideas_to_be_sent.slice(skip, skip + limit)
-            });
             return {
                 message: null,
                 found: false,

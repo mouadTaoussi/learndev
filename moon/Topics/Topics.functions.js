@@ -32,35 +32,37 @@ function removeDuplicates(items_to_be_processed) {
 }
 exports.removeDuplicates = removeDuplicates;
 function sortByUpvotes(items_to_be_processed) {
-    for (var i = 0; i < items_to_be_processed.length; i++) {
-        if (items_to_be_processed[i].upvotes_count > items_to_be_processed[i + 1].upvotes_count) {
-            console.log(0);
-            const smallerValue = items_to_be_processed[i + 1];
-            const greaterValue = items_to_be_processed[i];
-            items_to_be_processed[i] = smallerValue;
-            items_to_be_processed[i + 1] = greaterValue;
-            console.log("////////////////////////////////////////////");
-            console.log(items_to_be_processed[i]);
-            console.log(items_to_be_processed[i] + 1);
+    for (var i = 0; i < items_to_be_processed.length - 1; i++) {
+        const one_step_index = i + 1;
+        if (items_to_be_processed[i].upvotes_count > items_to_be_processed[one_step_index].upvotes_count) {
+            continue;
         }
         else {
-            console.log(2222222222);
+            const smallerValue = items_to_be_processed[i];
+            const greaterValue = items_to_be_processed[one_step_index];
+            items_to_be_processed[i] = greaterValue;
+            items_to_be_processed[one_step_index] = smallerValue;
+            console.log('8888888888');
         }
     }
-    console.log("2");
+    console.log('hhhalf');
     let isSorted = true;
     for (var j = 0; j < items_to_be_processed.length - 1; j++) {
-        if (items_to_be_processed[j].upvotes_count > items_to_be_processed[j + 1].upvotes_count) {
+        const one_step_index = j + 1;
+        if (items_to_be_processed[j].upvotes_count > items_to_be_processed[one_step_index].upvotes_count) {
+            console.log("Sorted");
+            continue;
+        }
+        else {
+            console.log("not");
             isSorted = false;
             break;
         }
     }
     if (isSorted == false) {
-        console.log("3");
         sortByUpvotes(items_to_be_processed);
+        console.log("not worted");
     }
-    console.log("4");
     return items_to_be_processed;
-    console.log(items_to_be_processed);
 }
 exports.sortByUpvotes = sortByUpvotes;

@@ -24,13 +24,9 @@ export function removeDuplicates( items_to_be_processed: any ) :unknown | any {
 			if ( items_to_be_processed[i]._id == items_to_be_processed[next]._id) {
 				items_to_be_processed.splice(next, 1);
 			}
-			else {
-				continue
-			}
+			else { continue }
 		}
-		else {
-			continue
-		}
+		else { continue }
 	}
 	// // Return 
 	return items_to_be_processed;
@@ -39,42 +35,49 @@ export function removeDuplicates( items_to_be_processed: any ) :unknown | any {
 
 export function sortByUpvotes ( items_to_be_processed: any ) :unknown | any {
 	// Cannot pass this block
-	for (var i = 0; i < items_to_be_processed.length ; i++) {
-		if (items_to_be_processed[i].upvotes_count > items_to_be_processed[i+1].upvotes_count){
-			console.log(0)
-			const smallerValue = items_to_be_processed[i+1];
-			const greaterValue = items_to_be_processed[i];
-			// Swap the two elements
-			items_to_be_processed[i]   = smallerValue;
-			items_to_be_processed[i+1] = greaterValue;
-			console.log("////////////////////////////////////////////")
-			console.log(items_to_be_processed[i])
-			console.log(items_to_be_processed[i]+1)
+	for (var i = 0; i < items_to_be_processed.length - 1 ; i++) {
+		// one_step_index
+		const one_step_index = i + 1;
+
+		if (items_to_be_processed[i].upvotes_count > items_to_be_processed[one_step_index].upvotes_count){
+			// The array is sorted from greater to smaller values
+			continue;
 		}
 		else {
-			console.log(2222222222)
-			// continue
+			// ERRRR!!!
+			// Reverse the two elemnets
+			const smallerValue = items_to_be_processed[i]; // SMALLER VALUE IS BEFORE THE GREATER ONE
+			const greaterValue = items_to_be_processed[one_step_index]; // GREATER VALUE ID AFTER THE SMALLER ONE
+			// Swap the two elements
+			items_to_be_processed[i]   = greaterValue; // <<< SWAP THE GRATER VALUE LEFT OF THE ARRAY <<<
+			items_to_be_processed[one_step_index] =  smallerValue; // >>> SWAP THE SMALLER VALUE RIGHT OF THE ARRAY >>>
+			console.log('8888888888')
 		}
 	}
-		console.log("2")
+	console.log('hhhalf')
 	// Check if it is sorted
 	let isSorted = true;
 
 	for(var j = 0 ; j < items_to_be_processed.length - 1 ; j++){
+		// one_step_index
+		const one_step_index = j + 1; 
 
-		if(items_to_be_processed[j].upvotes_count > items_to_be_processed[j+1].upvotes_count) {
+		if(items_to_be_processed[j].upvotes_count > items_to_be_processed[one_step_index].upvotes_count) {
+			console.log("Sorted")
+			continue;
+		}else {
+			console.log("not")
 			isSorted = false;
 			break;
 		}
 	}
 	if (isSorted == false) {
-		console.log("3")
-		// Resort the array
+		// Resort the array // recursive function
 		sortByUpvotes(items_to_be_processed)
+		console.log("not worted")
 	}
-	console.log("4")
+
 	// dont resort it and return the finale results
 	return items_to_be_processed
 	
-	console.log(items_to_be_processed)
 }
