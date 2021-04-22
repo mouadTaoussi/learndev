@@ -29,24 +29,32 @@
 			<div class="other-topics">
 				<h5 class="text-left">Topics you might like</h5>
 				<aside class='topic shadow'>
-					<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Po2093NQhOs70WCOV5eBtQHaEK%26pid%3DApi&f=1">
-					<p></p>
-					<h2 class="topic-title text-white">CSS</h2>
+					<a href="https://learndevelopment.vercel.app/topic/6070db2d021b36001518db80">
+						<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdm0qx8t0i9gc9.cloudfront.net%2Fthumbnails%2Fvideo%2FcW5lDBG%2Fglowing-light-blue-abstract-programming-code-background-on-dark-software-or-script-development-concept_rgg0rnttyl_thumbnail-1080_01.png&f=1&nofb=1">
+						<p></p>
+						<h2 class="topic-title text-white">Javascript</h2>
+					</a>
 				</aside>
 				<aside class='topic shadow'>
-					<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Po2093NQhOs70WCOV5eBtQHaEK%26pid%3DApi&f=1">
-					<p></p>
-					<h2 class="topic-title text-white">CSS</h2>
+					<a href="https://learndevelopment.vercel.app/topic/6076c8eee9ad1a00153f1d46">
+						<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp7733009.jpg&f=1&nofb=1">
+						<p></p>
+						<h2 class="topic-title text-white">Angular</h2>
+					</a>
 				</aside>
 				<aside class='topic shadow'>
-					<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Po2093NQhOs70WCOV5eBtQHaEK%26pid%3DApi&f=1">
-					<p></p>
-					<h2 class="topic-title text-white">CSS</h2>
+					<a href="https://learndevelopment.vercel.app/topic/60760aa540e46e0015b266d8">
+						<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs3.amazonaws.com%2Frevue%2Fitems%2Fimages%2F001%2F916%2F326%2Fmail%2Fvue-wallpaper.jpg%3F1493155295&f=1&nofb=1">
+						<p></p>
+						<h2 class="topic-title text-white">VueJS</h2>
+					</a>
 				</aside>
 				<aside class='topic shadow'>
-					<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Po2093NQhOs70WCOV5eBtQHaEK%26pid%3DApi&f=1">
-					<p></p>
-					<h2 class="topic-title text-white">CSS</h2>
+					<a href="https://learndevelopment.vercel.app/topic/607609b240e46e0015b266d3">
+						<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperplay.com%2Fwalls%2Ffull%2F6%2F6%2F2%2F99686.jpg&f=1&nofb=1">
+						<p></p>
+						<h2 class="topic-title text-white">C++</h2>
+					</a>
 				</aside>
 			</div>
 		</section>
