@@ -51,22 +51,18 @@ export function sortByUpvotes ( items_to_be_processed: any ) :unknown | any {
 			// Swap the two elements
 			items_to_be_processed[i]   = greaterValue; // <<< SWAP THE GRATER VALUE LEFT OF THE ARRAY <<<
 			items_to_be_processed[one_step_index] =  smallerValue; // >>> SWAP THE SMALLER VALUE RIGHT OF THE ARRAY >>>
-			console.log('8888888888')
 		}
 	}
-	console.log('hhhalf')
 	// Check if it is sorted
 	let isSorted = true;
 
-	for(var j = 0 ; j < items_to_be_processed.length - 1 ; j++){
+	for(var io = 0 ; io < items_to_be_processed.length - 1 ; io++){
 		// one_step_index
-		const one_step_index = j + 1; 
+		const one_step_index = io + 1; 
 
-		if(items_to_be_processed[j].upvotes_count > items_to_be_processed[one_step_index].upvotes_count) {
-			console.log("Sorted")
+		if(items_to_be_processed[io].upvotes_count >= items_to_be_processed[one_step_index].upvotes_count) {
 			continue;
 		}else {
-			console.log("not")
 			isSorted = false;
 			break;
 		}
@@ -74,7 +70,6 @@ export function sortByUpvotes ( items_to_be_processed: any ) :unknown | any {
 	if (isSorted == false) {
 		// Resort the array // recursive function
 		sortByUpvotes(items_to_be_processed)
-		console.log("not worted")
 	}
 
 	// dont resort it and return the finale results

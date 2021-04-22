@@ -42,26 +42,21 @@ function sortByUpvotes(items_to_be_processed) {
             const greaterValue = items_to_be_processed[one_step_index];
             items_to_be_processed[i] = greaterValue;
             items_to_be_processed[one_step_index] = smallerValue;
-            console.log('8888888888');
         }
     }
-    console.log('hhhalf');
     let isSorted = true;
-    for (var j = 0; j < items_to_be_processed.length - 1; j++) {
-        const one_step_index = j + 1;
-        if (items_to_be_processed[j].upvotes_count > items_to_be_processed[one_step_index].upvotes_count) {
-            console.log("Sorted");
+    for (var io = 0; io < items_to_be_processed.length - 1; io++) {
+        const one_step_index = io + 1;
+        if (items_to_be_processed[io].upvotes_count >= items_to_be_processed[one_step_index].upvotes_count) {
             continue;
         }
         else {
-            console.log("not");
             isSorted = false;
             break;
         }
     }
     if (isSorted == false) {
         sortByUpvotes(items_to_be_processed);
-        console.log("not worted");
     }
     return items_to_be_processed;
 }
