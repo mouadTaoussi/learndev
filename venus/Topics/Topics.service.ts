@@ -314,7 +314,7 @@ class TopicService implements TopicServiceInt {
 	}
 	public async getTopics (limit:number,skip:number) :Promise<{message: string|null,found:boolean,data:any}>{
 		try {
-			const topics = await TopicModel.find().skip(skip).limit(limit).exec();
+			const topics = await TopicModel.find();
 			//
 
 			// Filter topics by user interests // Later
@@ -327,7 +327,7 @@ class TopicService implements TopicServiceInt {
 			return {
 				message : null,
 				found : false,
-				data : topics_recommended
+				data : topics_recommended.slice(skip, skip + limit);
 			}
 		}
 		catch(err){

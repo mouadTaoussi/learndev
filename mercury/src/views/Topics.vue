@@ -212,14 +212,18 @@
 	  	loadMore: function(){
 
 	  		const SEARCH_QUERY = gql`
-	  		query ($limit:Float!, $skip:Float!, $search_term:String!) {
-	  			searchTopic(limit:$limit, skip:$skip, search_term:$search_term){
-					_id
-					title
-					background_image
-				}
-	  		}
+		  		query ($limit:Float!, $skip:Float!, $search_term:String!) {
+		  			searchTopic(limit:$limit, skip:$skip, search_term:$search_term){
+						_id
+						title
+						background_image
+					}
+		  		}
 	  		`
+
+	  		// Or load more on the recommended topics
+	  		const TOPICS = gql``;
+
 	  		this.$http({
    				url : apihost.api_domain + "/graphql",
    				method: "POST",

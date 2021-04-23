@@ -237,11 +237,38 @@
 			})
 	  	},
 	  	loadMore : function() {
-	  		// Get content
+
 	  		// push to docs + courses + articels + projectIdeas
 
+	  		// Or load more on the recommended topics
+	  		const RESOURCES = gql``;
+	  		
+	  		// Get content
+	  		this.$http({
+   				url : apihost.api_domain + "/graphql",
+   				method: "POST",
+   				headers: {
+					// 'Content-Type': 'application/json',
+			        // 'Accept'      : `application/json`
+				},
+   				data: {
+   					query: print(SEARCH_QUERY),
+					variables: {
+						limit: this.limit,
+						skip: this.skip,
+						search_term: this.search_query,
+						// tags : this.newTopic.tags
+					},
+   				}
+   			})
+   			.then((res)=>{
+   				
+	   			// Increment the skip 
+	   			this.skip += this.limit;
+   			})
+
 	  		// Increment skip
-	  		this.skip += this.limit;
+	  		// this.skip += this.limit;
 	  	}
 	  }
 	}
