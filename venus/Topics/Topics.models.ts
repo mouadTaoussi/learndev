@@ -10,6 +10,9 @@ const TopicSchema = new Schema({
 	title : {
 		type : String, required : true
 	},
+	upvotes_count : {
+		type : String, required : true	
+	},
 	// Search trough the web about an image that relevents to that topic
 	background_image : {
 		type : String, required : true

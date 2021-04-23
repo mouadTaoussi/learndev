@@ -26,7 +26,7 @@ class TopicService implements TopicServiceInt {
 				return {
 					message : null,
 					found : true,
-					data : topics_to_be_sent.slice(skip, skip + limit)
+					data : topics_need_to_be_unduplicated.slice(skip, skip + limit)
 				}
 			}
 			else {
@@ -317,9 +317,9 @@ class TopicService implements TopicServiceInt {
 			const topics = await TopicModel.find().skip(skip).limit(limit).exec();
 			//
 
-			// Filter topics by user interests
-			// Filter topics by users interests
-			// Filter topics by content volume 
+			// Filter topics by user interests // Later
+			// Filter topics by content volume // working on it
+
 
 			// @TODO Skip and Limit function
 
@@ -635,7 +635,9 @@ class TopicService implements TopicServiceInt {
 			if (isOnArticles) { resource = isOnArticles; }
 			if (isOnProjectIdeas) { resource = isOnProjectIdeas; }
 		}
-
+		// Find the topic that the resource belongs to
+		const topic = await TopicModel.findOne({_id : resource.topic_id});
+		
 		// Check if the user upvoted
 		if (resource.upvotes.includes(user_id)) {
 			
@@ -648,6 +650,7 @@ class TopicService implements TopicServiceInt {
 
 			// Decrease upvotes_count 
 			resource.upvotes_count--;
+			topic.upvotes_count--;
 
 			await resource.save();
 
@@ -659,8 +662,9 @@ class TopicService implements TopicServiceInt {
 			// Upvote the resource and save user id to the upvotes array if not upvoted
 			resource.upvotes.push(user_id);
 
-			// Increase upvotes_count 
+			// Increase upvotes_count  
 			resource.upvotes_count++;
+			topic.upvotes_count++;
 
 			await resource.save();
 			
