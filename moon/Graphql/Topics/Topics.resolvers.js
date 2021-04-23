@@ -25,8 +25,6 @@ const _topicservice = new Topics_service_1.default();
 let upvoteResolver = class upvoteResolver {
     async upvote(resource_id, type, context) {
         const user_id = context.req.user.id;
-        console.log('upvote');
-        console.log(user_id);
         const upvote = await _topicservice.upvote(user_id, type, resource_id);
         return {
             upvoted: upvote

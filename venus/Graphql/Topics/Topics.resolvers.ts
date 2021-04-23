@@ -21,8 +21,6 @@ class upvoteResolver implements upvoteResolver{
 	@UseMiddleware(Authenticated)
 	public async upvote(@Arg('resource_id') resource_id:string, @Arg('type') type: string, @Ctx() context:any) :Promise<any>{
 		const user_id = context.req.user.id
-		console.log('upvote')
-		console.log(user_id)
 		const upvote: boolean = await _topicservice.upvote(user_id, type, resource_id);
 
 		return {

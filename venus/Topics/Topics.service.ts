@@ -318,7 +318,8 @@ class TopicService implements TopicServiceInt {
 			//
 
 			// Filter topics by user interests // Later
-			// Filter topics by content volume // working on it
+			// Filter topics by upvotes // working on it
+			const topics_recommended : any = sortByUpvotes(topics)
 
 
 			// @TODO Skip and Limit function
@@ -326,7 +327,7 @@ class TopicService implements TopicServiceInt {
 			return {
 				message : null,
 				found : false,
-				data : topics
+				data : topics_recommended
 			}
 		}
 		catch(err){
@@ -637,7 +638,7 @@ class TopicService implements TopicServiceInt {
 		}
 		// Find the topic that the resource belongs to
 		const topic = await TopicModel.findOne({_id : resource.topic_id});
-		
+
 		// Check if the user upvoted
 		if (resource.upvotes.includes(user_id)) {
 			
@@ -653,6 +654,7 @@ class TopicService implements TopicServiceInt {
 			topic.upvotes_count--;
 
 			await resource.save();
+			await topic.save();
 
 			// false means that the user removed the upvoted
 			return false
@@ -667,6 +669,7 @@ class TopicService implements TopicServiceInt {
 			topic.upvotes_count++;
 
 			await resource.save();
+			await topic.save();
 			
 			// true means that the user is upvoted
 			return true;

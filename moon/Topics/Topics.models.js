@@ -12,6 +12,9 @@ const TopicSchema = new mongoose_1.Schema({
     title: {
         type: String, required: true
     },
+    upvotes_count: {
+        type: Number, default: 0, required: false
+    },
     background_image: {
         type: String, required: true
     },

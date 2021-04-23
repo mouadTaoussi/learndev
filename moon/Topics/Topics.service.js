@@ -13,7 +13,7 @@ class TopicService {
                 return {
                     message: null,
                     found: true,
-                    data: topics_to_be_sent.slice(skip, skip + limit)
+                    data: topics_need_to_be_unduplicated.slice(skip, skip + limit)
                 };
             }
             else {
@@ -205,10 +205,11 @@ class TopicService {
     async getTopics(limit, skip) {
         try {
             const topics = await Topics_models_1.TopicModel.find().skip(skip).limit(limit).exec();
+            const topics_recommended = Topics_functions_1.sortByUpvotes(topics);
             return {
                 message: null,
                 found: false,
-                data: topics
+                data: topics_recommended
             };
         }
         catch (err) {
@@ -477,17 +478,22 @@ class TopicService {
                 resource = isOnProjectIdeas;
             }
         }
+        const topic = await Topics_models_1.TopicModel.findOne({ _id: resource.topic_id });
         if (resource.upvotes.includes(user_id)) {
             const index_of_upvote = resource.upvotes.indexOf(user_id);
             resource.upvotes.splice(index_of_upvote, 1);
             resource.upvotes_count--;
+            topic.upvotes_count--;
             await resource.save();
+            await topic.save();
             return false;
         }
         else {
             resource.upvotes.push(user_id);
             resource.upvotes_count++;
+            topic.upvotes_count++;
             await resource.save();
+            await topic.save();
             return true;
         }
     }
