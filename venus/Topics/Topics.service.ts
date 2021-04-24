@@ -155,11 +155,6 @@ class TopicService implements TopicServiceInt {
 				}
 			}
 
-			// @TODO Skip and Limit function
-			// @TODO Skip and Limit function
-			// @TODO Skip and Limit function
-			// @TODO Skip and Limit function
-
 			return {
 				message : null,
 				found : false,
@@ -173,9 +168,7 @@ class TopicService implements TopicServiceInt {
 		}
 		catch(err){
 			return {
-				message : null,
-				found : false,
-				data : null
+				message : null, found : false, data : null
 			}
 		}
 
@@ -278,11 +271,6 @@ class TopicService implements TopicServiceInt {
 				}
 			}
 
-			// @TODO Skip and Limit function
-			// @TODO Skip and Limit function
-			// @TODO Skip and Limit function
-			// @TODO Skip and Limit function
-	
 			return {
 				message : null,
 				found : false,
@@ -321,13 +309,10 @@ class TopicService implements TopicServiceInt {
 			// Filter topics by upvotes // working on it
 			const topics_recommended : any = sortByUpvotes(topics)
 
-
-			// @TODO Skip and Limit function
-
 			return {
 				message : null,
 				found : false,
-				data : topics_recommended.slice(skip, skip + limit);
+				data : topics_recommended.slice(skip, skip + limit)
 			}
 		}
 		catch(err){

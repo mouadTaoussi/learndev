@@ -222,7 +222,18 @@
 	  		`
 
 	  		// Or load more on the recommended topics
-	  		const TOPICS = gql``;
+	  		const TOPICS = gql`
+		  		query ($limit:Float!,$skip:Float!) {
+				  	getTopics(limit:$limit,skip:$skip){
+				    	_id
+				    	title
+				    	background_image
+					}
+			  	}
+	  		`;
+
+	  		// Deciding which query should be sent
+	  		const query_sends_to_server = this.search_query == null ? TOPICS : SEARCH_QUERY;
 
 	  		this.$http({
    				url : apihost.api_domain + "/graphql",
@@ -232,7 +243,7 @@
 			        // 'Accept'      : `application/json`
 				},
    				data: {
-   					query: print(SEARCH_QUERY),
+   					query: print(query_sends_to_server),
 					variables: {
 						limit: this.limit,
 						skip: this.skip,
@@ -243,8 +254,15 @@
    			})
    			.then((res)=>{
    				// Push new content to the topics
-   				for (var i = 0; i < res.data.data.searchTopic.length; i++) {
-   					this.topics.push(res.data.data.searchTopic[i])
+   				if(  !!res.data.data.getTopics ) {
+   					for (var i = 0; i < res.data.data.getTopics.length; i++) {
+	   					this.topics.push(res.data.data.getTopics[i])
+	   				}	
+   				}
+   				else if ( !!res.data.data.searchTopic ) {
+	   				for (var i = 0; i < res.data.data.searchTopic.length; i++) {
+	   					this.topics.push(res.data.data.searchTopic[i])
+	   				}
    				}
 	   			// Increment the skip 
 	   			this.skip += this.limit;

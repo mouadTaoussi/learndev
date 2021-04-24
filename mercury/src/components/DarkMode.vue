@@ -85,7 +85,7 @@ export default {
 				  color: white!important;
 				}
 				header, .footer {
-				  background-color: var(--darkless-mode--)!important;
+				  background-color: var(--dark-mode--)!important;
 				  color: white!important;
 				}
 				/* set to darkless at resource cards */

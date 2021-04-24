@@ -28,33 +28,12 @@
 			</div> -->
 			<div class="other-topics">
 				<h5 class="text-left">Topics you might like</h5>
-				<aside class='topic shadow'>
-					<a href="https://learndevelopment.vercel.app/topic/6070db2d021b36001518db80">
-						<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdm0qx8t0i9gc9.cloudfront.net%2Fthumbnails%2Fvideo%2FcW5lDBG%2Fglowing-light-blue-abstract-programming-code-background-on-dark-software-or-script-development-concept_rgg0rnttyl_thumbnail-1080_01.png&f=1&nofb=1">
+				<aside v-for="topic in recommended_topics" class='topic shadow'>
+					<router-link v-bind:to="'/topic/' +topic._id">
+						<img v-bind:src="topic.background_image">
 						<p></p>
-						<h2 class="topic-title text-white">Javascript</h2>
-					</a>
-				</aside>
-				<aside class='topic shadow'>
-					<a href="https://learndevelopment.vercel.app/topic/6076c8eee9ad1a00153f1d46">
-						<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp7733009.jpg&f=1&nofb=1">
-						<p></p>
-						<h2 class="topic-title text-white">Angular</h2>
-					</a>
-				</aside>
-				<aside class='topic shadow'>
-					<a href="https://learndevelopment.vercel.app/topic/60760aa540e46e0015b266d8">
-						<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs3.amazonaws.com%2Frevue%2Fitems%2Fimages%2F001%2F916%2F326%2Fmail%2Fvue-wallpaper.jpg%3F1493155295&f=1&nofb=1">
-						<p></p>
-						<h2 class="topic-title text-white">VueJS</h2>
-					</a>
-				</aside>
-				<aside class='topic shadow'>
-					<a href="https://learndevelopment.vercel.app/topic/607609b240e46e0015b266d3">
-						<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperplay.com%2Fwalls%2Ffull%2F6%2F6%2F2%2F99686.jpg&f=1&nofb=1">
-						<p></p>
-						<h2 class="topic-title text-white">C++</h2>
-					</a>
+						<h2 class="topic-title text-white">{{ topic.title }}</h2>
+					</router-link>
 				</aside>
 			</div>
 		</section>
@@ -97,6 +76,7 @@
 			courses      : [],
 			articles     : [],
 			projectIdeas : [],
+			recommended_topics : [],
 	  		search_query : null,
 	  		skip : 0,
 	  		limit: 20,
@@ -132,7 +112,17 @@
 				}
 		  	}
 	  	`;
+	  	const RECOMMENDED_TOPICS = gql`
+	  		query ($limit:Float!,$skip:Float!) {
+			  	getTopics(limit:$limit,skip:$skip){
+			    	_id
+			    	title
+			    	background_image
+				}
+		  	}
+  		`;
 
+  		// Topic resources
 	  	this.$http({
 				url : apihost.api_domain + "/graphql",
 				method: "POST",
@@ -168,11 +158,35 @@
 
 		})
 
+		// Recommended topics 
+		this.$http({
+				url : apihost.api_domain + "/graphql",
+				method: "POST",
+				headers: {
+				// 'Content-Type': 'application/json',
+		        // 'Accept'      : `application/json`
+		        user_token : this.user_token
+			},
+			data: {
+				query: print(RECOMMENDED_TOPICS),
+				variables: {
+					limit: 4,
+					skip: 0,
+					// tags : this.newTopic.tags
+				}
+			}
+		})
+		.then((res)=>{
+			this.recommended_topics = res.data.data.getTopics;
+		})
+		.catch((err)=>{
+
+		})
+
 	  },
 	  methods : { 
 	  	// Search
 	  	search : function(item_query){
-	  		console.log(item_query)
 	  		// back to 0 beacuse we search new one
 	  		this.skip = 0;
 
@@ -206,7 +220,7 @@
 					}
 				}
 			`
-				this.$http({
+			this.$http({
 					url : apihost.api_domain + "/graphql",
 					method: "POST",
 					headers: {
@@ -239,9 +253,53 @@
 	  	loadMore : function() {
 
 	  		// push to docs + courses + articels + projectIdeas
+	  		const SEARCH_CONTENT = gql`
+				query ($topic_id:String!, $search_term: String!, $limit: Float!, $skip: Float!) {
+					searchContentInTopic (topic_id:$topic_id, search_term:$search_term, limit:$limit, skip:$skip) {
+						user_id
+						creator_name
+						title
+						docs {
+							_id topic_id creator_name title link level user_id upvotes_count upvoted
+						}
+						courses {
+							_id topic_id creator_name title link level user_id upvotes_count upvoted
+						}
+						articles {
+							_id topic_id creator_name title link level user_id upvotes_count upvoted
+						}
+						project_idea {
+							_id topic_id creator_name title description user_id upvotes_count upvoted
+						}
+					}
+				}
+			`
 
 	  		// Or load more on the recommended topics
-	  		const RESOURCES = gql``;
+	  		const RESOURCES = gql`
+		  		query ($topic_id:String!,$limit:Float!,$skip:Float!){
+				  	getTopic(topic_id:$topic_id,limit:$limit,skip:$skip) {
+						_id 
+						creator_name 
+						title
+						docs {
+							_id topic_id creator_name title link level user_id upvotes_count upvoted
+						}
+						courses {
+							_id topic_id creator_name title link level user_id upvotes_count upvoted
+						}
+						articles {
+							_id topic_id creator_name title link level user_id upvotes_count upvoted
+						}
+						project_idea {
+							_id topic_id creator_name title description user_id upvotes_count upvoted
+						}
+					}
+			  	}
+	  		`;
+
+	  		// Deciding which query should be sent
+	  		const query_sends_to_server = this.search_query == null ? RESOURCES : SEARCH_CONTENT;
 	  		
 	  		// Get content
 	  		this.$http({
@@ -252,17 +310,52 @@
 			        // 'Accept'      : `application/json`
 				},
    				data: {
-   					query: print(SEARCH_QUERY),
+   					query: print(query_sends_to_server),
 					variables: {
 						limit: this.limit,
 						skip: this.skip,
+						topic_id: this.topic_id,
 						search_term: this.search_query,
 						// tags : this.newTopic.tags
 					},
    				}
    			})
    			.then((res)=>{
-   				
+   				// Push to the current content
+   				if (!!res.data.data.getTopic) {
+					for (var i = 0; i < res.data.data.getTopic.docs.length; i++) { 
+						this.docs.push(res.data.data.getTopic.docs[i]);
+					}
+					for (var i = 0; i < res.data.data.getTopic.courses.length; i++) { 
+						this.courses.push(res.data.data.getTopic.courses[i]);
+					}
+
+					for (var i = 0; i < res.data.data.getTopic.articles.length; i++) { 
+						this.articles.push(res.data.data.getTopic.articles[i]);
+					}
+
+					for (var i = 0; i < res.data.data.getTopic.project_idea.length; i++) { 
+						this.projectIdeas.push(res.data.data.getTopic.project_idea[i]);
+					}
+
+   				}else if (!!res.data.data.searchContentInTopic){
+   					for (var i = 0; i < res.data.data.searchContentInTopic.docs.length; i++) { 
+						this.docs.push(res.data.data.searchContentInTopic.docs[i]);
+					}
+					for (var i = 0; i < res.data.data.searchContentInTopic.courses.length; i++) { 
+						this.courses.push(res.data.data.searchContentInTopic.courses[i]);
+					}
+
+					for (var i = 0; i < res.data.data.searchContentInTopic.articles.length; i++) { 
+						this.articles.push(res.data.data.searchContentInTopic.articles[i]);
+					}
+
+					for (var i = 0; i < res.data.data.searchContentInTopic.project_idea.length; i++) { 
+						this.projectIdeas.push(res.data.data.searchContentInTopic.project_idea[i]);
+					}
+
+   				}
+
 	   			// Increment the skip 
 	   			this.skip += this.limit;
    			})
@@ -295,8 +388,8 @@
 		margin-top: 165px;
 		width: 100%;
 		height: 250px;
-		/*position: sticky;*/
-		/*top: 0;*/
+		position: sticky;
+		top: 80px;
 	}
 	.topic {
 		width: 220px;
@@ -317,6 +410,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
+		font-size: 20px;
 	}
 	@media only screen and (max-width: 800px) {
 		.container  {
@@ -328,6 +422,27 @@
 		}
 		.creator_name {
 			font-size: 12px;
+		}
+		.other-topics {
+			margin-top: 25px;
+			width: 100%;
+			
+		}
+		.topic {
+			width: 100%;
+			height: 220px;
+			position: relative;
+		}
+		.topic img {
+			width: 100%;
+			height: 220px;
+		}
+		.topic-title {
+			font-family: var(--font--);
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
 		}
 	}
 </style>

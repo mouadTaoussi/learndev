@@ -112,9 +112,7 @@ class TopicService {
         }
         catch (err) {
             return {
-                message: null,
-                found: false,
-                data: null
+                message: null, found: false, data: null
             };
         }
     }
@@ -204,12 +202,12 @@ class TopicService {
     }
     async getTopics(limit, skip) {
         try {
-            const topics = await Topics_models_1.TopicModel.find().skip(skip).limit(limit).exec();
+            const topics = await Topics_models_1.TopicModel.find();
             const topics_recommended = Topics_functions_1.sortByUpvotes(topics);
             return {
                 message: null,
                 found: false,
-                data: topics_recommended
+                data: topics_recommended.slice(skip, skip + limit)
             };
         }
         catch (err) {
