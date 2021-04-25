@@ -56,6 +56,10 @@ export default {
     costumFooter
   },
   mounted (){
+    if (!!localStorage.getItem('user_name') == true || !!localStorage.getItem('user_token') == true){
+      this.$router.push({ path: '/topics' });
+    }
+    
     window.scrollTo(0, 0);
   }
 };
