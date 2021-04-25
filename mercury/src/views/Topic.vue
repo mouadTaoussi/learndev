@@ -139,6 +139,14 @@
 					topic_id: this.topic_id,
 					// tags : this.newTopic.tags
 				},
+			},
+			onUploadProgress : function(progressEvent) {
+				const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+
+                if (totalLength !== null) {
+                    const progress_status = Math.round( (progressEvent.loaded * 100) / totalLength );
+                }
+
 			}
 		})
 		.then((res)=>{

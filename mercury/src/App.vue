@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <!-- Prograss bar -->
+    <div class="progress"></div>
+    <!-- Prograss bar -->
     <router-view />
   </div>
 </template>
@@ -8,17 +11,24 @@
   @import url('https://fonts.googleapis.com/css2?family=Hind:wght@500&display=swap');
   /*@import url("https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css");*/
 
-
   :root {
       --primary-- :  #0652DD;
       --bootstrap--primary-- : #2962FF;
       --dark-mode--             : #031f30;
       --darkless-mode--      : #053552;
       --darken-mode--    : #092e50;
-      /*--font--    :'Changa', sans-serif;*/
-      --font--    :'Hind', sans-serif;
+      --font--    :'Changa', sans-serif;
+      /*--font--    :'Hind', sans-serif;*/
       --margin-between-sections-in-homepage-- : 100px;
       --list-color--              : rgba(0,0,0,.8);
+  }
+  .progress {
+    height: 2px;
+    background-color: var(--bootstrap--primary--);
+    position : fixed;
+    z-index: 9991!important;
+    width: 100%;
+    transition: all .2s ease-out;
   }
   .btn {
       font-family: var(--font--);
