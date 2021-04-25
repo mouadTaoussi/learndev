@@ -310,6 +310,21 @@
 	  			user_token : this.user_token
 	  		},
 	  		url    : apihost.api_domain + '/auth/getuser',
+	  		onUploadProgress : function(progressEvent) {
+				const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+
+                if (totalLength !== null) {
+                    const progress_status = Math.round( (progressEvent.loaded * 100) / totalLength );
+                    // Display progress bar
+                    document.querySelector('.progress').style.width = progress_status + "%";
+                    // Hide progress bar
+                    window.setTimeout(function(){
+	                    document.querySelector('.progress').style.width = 0 + "%";
+                    },1200)
+
+                }
+
+			}
 	  	})
 	  	.then((res)=>{
 	  		this.current_user = res.data.user;
@@ -359,7 +374,22 @@
 							background_image: this.newTopic.background_image,
 							// tags : this.newTopic.tags
 						},
-	   				}
+	   				},
+	   				onUploadProgress : function(progressEvent) {
+						const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+
+		                if (totalLength !== null) {
+		                    const progress_status = Math.round( (progressEvent.loaded * 100) / totalLength );
+		                    // Display progress bar
+		                    document.querySelector('.progress').style.width = progress_status + "%";
+		                    // Hide progress bar
+		                    window.setTimeout(function(){
+			                    document.querySelector('.progress').style.width = 0 + "%";
+		                    },1200)
+
+		                }
+
+					}
 	   			})
 				.then(function(res){
 					document.querySelector('.add-topic-btn').innerHTML = "Added👍";
@@ -400,6 +430,21 @@
 					fullname: this.current_user.fullname,
 					user_name: this.current_user.user_name, 
 					email: this.current_user.email 
+				},
+				onUploadProgress : function(progressEvent) {
+					const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+
+	                if (totalLength !== null) {
+	                    const progress_status = Math.round( (progressEvent.loaded * 100) / totalLength );
+	                    // Display progress bar
+	                    document.querySelector('.progress').style.width = progress_status + "%";
+	                    // Hide progress bar
+	                    window.setTimeout(function(){
+		                    document.querySelector('.progress').style.width = 0 + "%";
+	                    },1200)
+
+	                }
+
 				}
 			})
 			.then((res)=>{
@@ -451,7 +496,22 @@
 		  		data : { 
 		  			current_password: this.passwords.current_password,
 		  			new_password: this.passwords.new_password 
-		  		}
+		  		},
+		  		onUploadProgress : function(progressEvent) {
+					const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+
+	                if (totalLength !== null) {
+	                    const progress_status = Math.round( (progressEvent.loaded * 100) / totalLength );
+	                    // Display progress bar
+	                    document.querySelector('.progress').style.width = progress_status + "%";
+	                    // Hide progress bar
+	                    window.setTimeout(function(){
+		                    document.querySelector('.progress').style.width = 0 + "%";
+	                    },1200)
+
+	                }
+
+				}
 		  	})
 		  	.then((res)=>{
 
@@ -472,6 +532,21 @@
 			this.$http({
 		  		method : "GET",
 		  		url    : apihost.api_domain + '/auth/getuser',
+		  		onUploadProgress : function(progressEvent) {
+					const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+
+	                if (totalLength !== null) {
+	                    const progress_status = Math.round( (progressEvent.loaded * 100) / totalLength );
+	                    // Display progress bar
+	                    document.querySelector('.progress').style.width = progress_status + "%";
+	                    // Hide progress bar
+	                    window.setTimeout(function(){
+		                    document.querySelector('.progress').style.width = 0 + "%";
+	                    },1200)
+
+	                }
+
+				}
 		  	})
 		  	.then((res)=>{
 		  		this.topics = res.data.topics;

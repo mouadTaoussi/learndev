@@ -17,18 +17,19 @@
       --dark-mode--             : #031f30;
       --darkless-mode--      : #053552;
       --darken-mode--    : #092e50;
-      --font--    :'Changa', sans-serif;
-      /*--font--    :'Hind', sans-serif;*/
+      /*--font--    :'Changa', sans-serif;*/
+      --font--    :'Hind', sans-serif;
       --margin-between-sections-in-homepage-- : 100px;
       --list-color--              : rgba(0,0,0,.8);
   }
   .progress {
-    height: 2px;
+    height: 3px;
     background-color: var(--bootstrap--primary--);
     position : fixed;
     z-index: 9991!important;
-    width: 100%;
+    width: 0%;
     transition: all .2s ease-out;
+    /*box-shadow: 2px 2px 5px var(--bootstrap--primary--); */
   }
   .btn {
       font-family: var(--font--);

@@ -150,6 +150,21 @@
 					limit: this.limit,
 					skip: this.skip,
 				},
+			},
+			onUploadProgress : function(progressEvent) {
+				const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
+
+                if (totalLength !== null) {
+                    const progress_status = Math.round( (progressEvent.loaded * 100) / totalLength );
+                    // Display progress bar
+                    document.querySelector('.progress').style.width = progress_status + "%";
+                    // Hide progress bar
+                    window.setTimeout(function(){
+	                    document.querySelector('.progress').style.width = 0 + "%";
+                    },1200)
+
+                }
+
 			}
 		})
 		.then((res)=>{

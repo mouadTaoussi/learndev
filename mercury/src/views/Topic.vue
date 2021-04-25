@@ -29,11 +29,13 @@
 			<div class="other-topics">
 				<h5 class="text-left">Topics you might like</h5>
 				<aside v-for="topic in recommended_topics" class='topic shadow'>
-					<router-link v-bind:to="'/topic/' +topic._id">
-						<img v-bind:src="topic.background_image">
-						<p></p>
-						<h2 class="topic-title text-white">{{ topic.title }}</h2>
-					</router-link>
+					<a v-bind:href="'http://localhost:8080/topic/'+topic._id">
+						<!-- <router-link v-bind:to="'/topic/' +topic._id"> -->
+							<img v-bind:src="topic.background_image">
+							<p></p>
+							<h2 class="topic-title text-white">{{ topic.title }}</h2>
+						<!-- </router-link> -->
+					</a>
 				</aside>
 			</div>
 		</section>
@@ -145,8 +147,14 @@
 
                 if (totalLength !== null) {
                     const progress_status = Math.round( (progressEvent.loaded * 100) / totalLength );
-                }
+                    // Display progress bar
+                    document.querySelector('.progress').style.width = progress_status + "%";
+                    // Hide progress bar
+                    window.setTimeout(function(){
+	                    document.querySelector('.progress').style.width = 0 + "%";
+                    },1200)
 
+                }
 			}
 		})
 		.then((res)=>{
