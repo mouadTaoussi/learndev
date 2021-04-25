@@ -29,7 +29,7 @@
 			<div class="other-topics">
 				<h5 class="text-left">Topics you might like</h5>
 				<aside v-for="topic in recommended_topics" class='topic shadow'>
-					<a v-bind:href="'http://localhost:8080/topic/'+topic._id">
+					<a v-bind:href="'https://learndevelopment.vercel.app/topic/'+topic._id">
 						<!-- <router-link v-bind:to="'/topic/' +topic._id"> -->
 							<img v-bind:src="topic.background_image">
 							<p></p>
