@@ -17,7 +17,7 @@ export default {
 
 <style lang="css" scoped>
 	section {
-		background-image: url('../../assets/announcement.svg');
+		background-image: url('../../assets/announcements/announcement.svg');
 		background-position: center;
 		background-size: contain;
 		background-repeat: no-repeat;

@@ -11,9 +11,9 @@
 		</section>
 		<section v-if="topics" class="container topics-container">
 			<Topic 
-				img="../assets/announcement.svg" 
+				img="../assets/announcements/announcement_smaller.jpg" 
 				title="  " 
-				topic_id="hhh"></Topic>
+				topic_id="ad"></Topic>
 			<Topic 
 				v-for='topic in topics'
 				v-bind:img="topic.background_image" 
