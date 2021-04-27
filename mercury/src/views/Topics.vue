@@ -11,6 +11,10 @@
 		</section>
 		<section v-if="topics" class="container topics-container">
 			<Topic 
+				img="https://github.com/mouadTaoussi/learndev/blob/main/mercury/src/assets/announcement.svg" 
+				title="  " 
+				topic_id="hhh"></Topic>
+			<Topic 
 				v-for='topic in topics'
 				v-bind:img="topic.background_image" 
 				v-bind:title="topic.title" 
