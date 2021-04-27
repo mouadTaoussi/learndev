@@ -23,7 +23,7 @@
       --list-color--              : rgba(0,0,0,.8);
   }
   .progress {
-    height: 3px;
+    height: 4px;
     background-color: var(--bootstrap--primary--);
     position : fixed;
     z-index: 9991!important;
