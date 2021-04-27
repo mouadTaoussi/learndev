@@ -4,6 +4,7 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
     <landingpage></landingpage>
     <FirstShowCase></FirstShowCase>
+    <announcements></announcements>
     <SecondShowCase></SecondShowCase>
     <ContentPreview></ContentPreview>
     <div class="topics-section container">
@@ -35,6 +36,7 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import costumHeader from '.././components/Header.vue';
 import landingpage from ".././components/Homepage/landingpage.vue";
+import announcements from ".././components/Homepage/announcements.vue";
 import FirstShowCase from ".././components/Homepage/FirstShowCase.vue";
 import SecondShowCase from ".././components/Homepage/SecondShowCase.vue";
 import ContentPreview from ".././components/Homepage/ContentPreview.vue";
@@ -48,6 +50,7 @@ export default {
     HelloWorld,
     costumHeader,
     landingpage,
+    announcements,
     FirstShowCase,
     SecondShowCase,
     ContentPreview,
