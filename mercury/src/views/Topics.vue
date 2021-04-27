@@ -11,7 +11,7 @@
 		</section>
 		<section v-if="topics" class="container topics-container">
 			<Topic 
-				img="https://github.com/mouadTaoussi/learndev/blob/main/mercury/src/assets/announcement.svg" 
+				img="../assets/announcement.svg" 
 				title="  " 
 				topic_id="hhh"></Topic>
 			<Topic 
