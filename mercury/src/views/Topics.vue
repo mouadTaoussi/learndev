@@ -10,10 +10,8 @@
 			<!-- Search And Filter -->
 		</section>
 		<section v-if="topics" class="container topics-container">
-			<Topic 
-				img="../assets/announcements/announcement_smaller.jpg" 
-				title="  " 
-				topic_id="ad"></Topic>
+			<announcements 
+				img=".././assets/announcements/announcement_smaller.jpg"></announcements>
 			<Topic 
 				v-for='topic in topics'
 				v-bind:img="topic.background_image" 
@@ -32,6 +30,7 @@
 
 <script>
 	import costumHeader from ".././components/Header.vue";
+	import announcements from ".././components/Topicspage/announcements.vue";
 	import Topic from ".././components/Topicspage/Topic.vue";
 	import SearchAndFilter from ".././components/Topicspage/SearchAndFilter.vue";
 	import EmptyContent from '.././components/EmptyContent.vue';
@@ -47,6 +46,7 @@
 	  components: {
 	  	costumHeader,
 	  	SearchAndFilter,
+	  	announcements,
 	  	Topic,
 	  	EmptyContent,
 	  	costumFooter
