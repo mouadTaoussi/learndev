@@ -406,7 +406,7 @@
 				})
 				// Add topic to the Page
 				// Refreach topics 
-				// this.refreachTopics("res.data.data.addTopic");
+				this.refreachTopics("res.data.data.addTopic");
 			}
 		},
 		updateProfile : function(){
