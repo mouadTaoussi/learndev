@@ -116,7 +116,7 @@
 
 	  mounted (){
 	  	window.scrollTo(0, 0);
-
+	  	console.log(this.$route.query)
 	  	// if the user is logged in from Oauth then we need to store an indicator in localstorage
 	  	if (this.$route.query.Oauth = true && this.$route.query.user_token) {
 	  		this.$http({

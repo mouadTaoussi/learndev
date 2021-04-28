@@ -237,9 +237,9 @@
 				}
 			`
 			this.$http({
-					url : apihost.api_domain + "/graphql",
-					method: "POST",
-					headers: {
+				url : apihost.api_domain + "/graphql",
+				method: "POST",
+				headers: {
 					// 'Content-Type': 'application/json',
 			        // 'Accept'      : `application/json`
 			        user_token : this.user_token
