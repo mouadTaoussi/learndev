@@ -118,7 +118,7 @@
 	  	window.scrollTo(0, 0);
 
 	  	// if the user is logged in from Oauth then we need to store an indicator in localstorage
-	  	if (this.$route.query.Oauth = true) {
+	  	if (this.$route.query.Oauth = true && this.$route.query.user_token) {
 	  		this.$http({
 		  		method : "GET",
 		  		url    : apihost.api_domain + '/auth/getuser',
@@ -129,6 +129,7 @@
 		  	.then((res)=>{
 		  		// Set a localstorage value to know whether the user already logged in or not
 				localStorage.setItem('user_name',res.data.user.user_name);
+				localStorage.setItem('user_token',this.$route.query.user_token);
 		  	})
 		  	.catch((err)=>{
 		  	})
