@@ -11,7 +11,7 @@
 		</section>
 		<section v-if="topics" class="container topics-container">
 			<announcements 
-				img="https://raw.githubusercontent.com/mouadTaoussi/learndev/9998f2ff32d9db5add939510ceb829029bbf9c4b/mercury/src/assets/announcements/announcement_smaller.svg"></announcements>
+				img="https://raw.githubusercontent.com/mouadTaoussi/learndev/a53c485da1c8abe7ab6ef2d2306fc72e4c6ece86/mercury/src/assets/announcements/announcement_smaller.svg"></announcements>
 			<Topic 
 				v-for='topic in topics'
 				v-bind:img="topic.background_image" 
