@@ -536,6 +536,9 @@
 			this.$http({
 		  		method : "GET",
 		  		url    : apihost.api_domain + '/auth/getuser',
+		  		headers : {
+		  			user_token : this.user_token
+		  		},
 		  		onUploadProgress : function(progressEvent) {
 					const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
 

@@ -122,6 +122,9 @@
 	  		this.$http({
 		  		method : "GET",
 		  		url    : apihost.api_domain + '/auth/getuser',
+		  		headers : {
+		  			user_token : this.user_token
+		  		},
 		  	})
 		  	.then((res)=>{
 		  		// Set a localstorage value to know whether the user already logged in or not
