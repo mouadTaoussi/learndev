@@ -149,7 +149,7 @@
 								<strong>Enter topic title</strong>
 							</p>
 							<input
-								id="email"
+								id="topic_title"
 								v-model="newTopic.title" 
 								class="form-control my-2" 
 								placeholder="Enter the topic title">
@@ -158,7 +158,7 @@
 								<strong>Provide a link about an image</strong>
 							</p>
 							<input
-								id="password"
+								id="background_image"
 								v-model="newTopic.background_image" 
 								class="form-control my-2" 
 								placeholder="Provide us an image link">
@@ -341,10 +341,10 @@
 	   	addNewTopic : function(){
 			// Check the values
 			if (this.newTopic.title == null || this.newTopic.title == "") {
-				document.querySelector('#email').classList.add('is-invalid');
+				document.querySelector('#topic_title').classList.add('is-invalid');
 			}
 			else if (this.newTopic.background_image == null || this.newTopic.background_image == ""){
-	   			document.querySelector('#password').classList.add('is-invalid');
+	   			document.querySelector('#background_image').classList.add('is-invalid');
 			}
 	   		else {
 
@@ -406,7 +406,7 @@
 				})
 				// Add topic to the Page
 				// Refreach topics 
-				this.refreachTopics("res.data.data.addTopic");
+				// this.refreachTopics("res.data.data.addTopic");
 			}
 		},
 		updateProfile : function(){
