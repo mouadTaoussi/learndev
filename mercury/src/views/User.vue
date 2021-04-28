@@ -230,7 +230,7 @@
 
 								v-on:click="changePassword()" 
 								type="button" 
-								class="change_password_btn btn add-topic-btn btn-primary">Change it
+								class="change_password_btn btn change-password-btn btn-primary">Change it
 							</button>
 						</div>
 							
@@ -520,9 +520,9 @@
 		  			return;
 		  		}
 
-		  		document.querySelector('.change_password_btn').innerHTML = "Changed👍";
-				document.querySelector('.change_password_btn').classList.add('btn-success');
-				document.querySelector('.change_password_btn').classList.remove('btn-primary');
+		  		document.querySelector('.change-password-btn').innerHTML = "Changed👍";
+				document.querySelector('.change-password-btn').classList.add('btn-success');
+				document.querySelector('.change-password-btn').classList.remove('btn-primary');
 		  	})
 		  	.catch((err)=>{
 		  		
