@@ -37,7 +37,8 @@ router.get('/Oauth/callback', passport.authenticate('github',{
 	// sign a token
 	const user_token:string = sign(req.user!, main_config.jwt_secret!);
 	// Redirect with the token
-	res.redirect(`${main_config.front_end_origin}/topics?Oauth=true`);
+	// res.set('token', user_token);
+	res.redirect(`${main_config.front_end_origin}/topics?Oauth=true&user_token=${user_token}`);
 });
 
 router.post   ('/resetPassword',  auth.resetPassword);

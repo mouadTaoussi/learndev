@@ -21,7 +21,7 @@ router.get('/Oauth/callback', passport_1.default.authenticate('github', {
     failureRedirect: `${main_config_1.default.front_end_origin}/login`
 }), function (req, res) {
     const user_token = jsonwebtoken_1.sign(req.user, main_config_1.default.jwt_secret);
-    res.redirect(`${main_config_1.default.front_end_origin}/topics?Oauth=true`);
+    res.redirect(`${main_config_1.default.front_end_origin}/topics?Oauth=true&user_token=${user_token}`);
 });
 router.post('/resetPassword', auth.resetPassword);
 router.post('/changePassword', Authentication_middleware_1.default, auth.changePassword);
