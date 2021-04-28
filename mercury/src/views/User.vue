@@ -230,7 +230,7 @@
 
 								v-on:click="changePassword()" 
 								type="button" 
-								class="change_password_btn btn change-password-btn btn-primary">Change it
+								class="btn change-password-btn btn-primary">Change it
 							</button>
 						</div>
 							
@@ -358,6 +358,10 @@
 						}
 					}
 				`
+
+				//
+				document.querySelector('.add-topic-btn').innerHTML = "Please wait...";
+
 	   			// add
 	   			this.$http({
 	   				url : apihost.api_domain + "/graphql",
@@ -391,7 +395,7 @@
 
 					}
 	   			})
-				.then(function(res){
+				.then((res)=>{
 					document.querySelector('.add-topic-btn').innerHTML = "Added👍";
 					document.querySelector('.add-topic-btn').classList.add('btn-success');
 					document.querySelector('.add-topic-btn').classList.remove('btn-primary');
@@ -485,7 +489,7 @@
 				this.showAlert('error','Confirm your password',"#confirmation_password");
 				return;
 			}
-			document.querySelector('.change_password_btn').innerHTML = "Please wait...";
+			document.querySelector('.change-password-btn').innerHTML = "Please wait...";
 
 			this.$http({
 		  		method : "POST",
@@ -514,7 +518,7 @@
 				}
 		  	})
 		  	.then((res)=>{
-
+		  		//
 		  		if (!res.data.changed) {
 		  			this.showAlert('#error',res.data.message,null);
 		  			return;
