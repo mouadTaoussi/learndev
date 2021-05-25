@@ -4,7 +4,7 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
     <landingpage></landingpage>
     <FirstShowCase></FirstShowCase>
-    <announcements></announcements>
+    <!-- <announcements></announcements> -->
     <SecondShowCase></SecondShowCase>
     <ContentPreview></ContentPreview>
     <div class="topics-section container">

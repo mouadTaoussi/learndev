@@ -8,7 +8,7 @@
 					No need to spend time finding the good resource to you to learn, with LearnDev you can get specific resources that match your needs! 
 				</p>
 			</div>
-			<iframe src="https://learndevelopment.vercel.app/topic/60736525fa40cb001562d384" class="shadow iframe"></iframe>
+			<iframe src="https://learndevelopment.vercel.app/topic/60736525fa40cb001562d384" class="border shadow iframe"></iframe>
 		</div>
 	</section>
 </template>
@@ -44,7 +44,7 @@ export default {
 		margin-bottom: var(--margin-between-sections-in-homepage--);
 	}
 	.container {
-		padding-top: 40px;
+		padding-top: 00px;
 		display: grid;
 		grid-template-columns: 2fr 3fr;
 		grid-gap: 20px;
@@ -61,16 +61,22 @@ export default {
 	}
 	.content {
 		font-family: var(--font--);
-		margin-top: 140px;
+		margin-top: 150px;
 	}
 	@media only screen and (max-width: 800px) {
-	.container{
-		display: grid;
-		grid-template-columns: 2fr;
-		grid-gap:10px;
-	}	
-	.iframe {
-		display: none;
-	}	
-} 
+		.container{
+			display: grid;
+			grid-template-columns: 2fr;
+			grid-gap:10px;
+		}	
+		.iframe {
+			display: none;
+			/*height: 1000px;*/
+		}	
+		.previewapp { 
+			background-color: var(--primary--);
+			background-image: url(); 
+			height: auto;
+		}
+	} 
 </style>
