@@ -34,7 +34,7 @@
     "nodemailer": "^6.4.17",
     "passport": "^0.4.1",
     "passport-github2": "^0.1.12",
-    "redis": "^3.0.2",
+    "redis": "^3.1.1",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
     "uuid": "^8.3.2",
