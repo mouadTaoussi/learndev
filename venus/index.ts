@@ -95,6 +95,7 @@ async function runapp (){
 	app.use(helmet());
 	app.use(bodyParser.json());
 
+	// app.use('/',express.static(  __dirname + "/../mercury/dist"));
 	app.use('/auth', AuthenticationRoutes);
 
 }

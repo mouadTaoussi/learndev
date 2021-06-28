@@ -1,6 +1,6 @@
-// import dotenv from "dotenv";
+import dotenv from "dotenv";
 
-// dotenv.config({path:'.env'});
+dotenv.config({path:'.env'});
 
 interface config {
 	mongodb : string,
@@ -33,7 +33,9 @@ const main_config : config = {
 	redis_port          : process.env.REDIS_LABS_PORT!,
 	redis_password      : process.env.REDIS_LABS_PASSWORD!,
 	jwt_secret          : process.env.JWT_TOKEN!,
-	// front_end_origin    : "http://localhost:8080" //http://localhost:8080 //https://learndevelopment.vercel.app
-	front_end_origin    : "https://learndevelopment.vercel.app" //http://localhost:8080 //https://learndevelopment.vercel.app
+	// front_end_origin    : "http://localhost:8080",  // <-- if you running the app in the local env
+	front_end_origin    : "https://learndevelopment.vercel.app" // <-- if you deployed the front-end app in different host
+	// front_end_origin    : "/", // <-- if your front-end and the back-end are in the same host
+	// front_end_origin    : "*", // <--if you allowed all origins accecing your back-end server
 }
 export default main_config;
