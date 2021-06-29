@@ -1,5 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config({ path: '.env' });
 const main_config = {
     mongodb: process.env.MONGO_CONNECTION,
     email: process.env.EMAIL,
@@ -14,6 +19,6 @@ const main_config = {
     redis_port: process.env.REDIS_LABS_PORT,
     redis_password: process.env.REDIS_LABS_PASSWORD,
     jwt_secret: process.env.JWT_TOKEN,
-    front_end_origin: "https://learndevelopment.vercel.app"
+    front_end_origin: "http://localhost:8080",
 };
 exports.default = main_config;
