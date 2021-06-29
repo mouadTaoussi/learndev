@@ -1,9 +1,9 @@
 <p align="center">
   <img src="https://github.com/mouadTaoussi/learndev/blob/main/mercury/src/assets/logo.jpg"/>
 </p>
-<h2 align="center">
+<h6 align="center">
 	<strong>An app that allow developers to find the right resources for learning 😎</strong>
-</h2>
+</h6>
 
 #  Get Up and running in local env
 
