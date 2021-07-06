@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/mouadTaoussi/learndev/blob/main/mercury/src/assets/logo.jpg"/>
+  <img src="https://github.com/mouadTaoussi/learndev/blob/main/mercury/src/assets/LogoReadme.svg"/>
 </p>
 <h6 align="center">
 	<strong>An app that allow developers to find the right resources for learning 😎</strong>
