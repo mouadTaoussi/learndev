@@ -1,3 +1,6 @@
+<br>
+<br>
+<br>
 <p align="center">
   <img src="https://github.com/mouadTaoussi/learndev/blob/main/mercury/src/assets/LogoReadme.svg"/>
 </p>
