@@ -19,7 +19,7 @@
 
 ### What is Learndev ?
 A community platform that let developers share their best resources learning programming for beginners to learn the technology in the right place!
-the popularity of resources in the platform depends on the upvotes volume! so they would be ranked at the top when any search any resource, the popular ones are gonna be good for him to choose!
+the popularity of resources in the platform depends on the upvotes volume! so they would be ranked at the top when any search any resource, the popular ones at the top are gonna be good for him to choose!
 
 ### Technologies
 #### Back-End side
