@@ -23,20 +23,20 @@ the popularity of resources in the platform depends on the upvotes volume! so th
 
 ### Technologies
 #### Back-End side
-- Typecript
-- NodeJS
-- GraphQL / Apollo
-- ExpressJS
-- MongoDB / Mongoose / RedisLab
-- JSON Web Tokens
-- PassportJS
-- Nodemailer
+- **Typecript** : Back-end main language
+- **NodeJS** : Back-end runtime
+- **GraphQL / Apollo** : Main API Stack
+- **ExpressJS** : Used for Authentication
+- **MongoDB / Mongoose / RedisLab** : Data storage / Auth cookies
+- **JSON Web Tokens** : Authentication
+- **PassportJS** : Authentication
+- **Nodemailer** : Reset Password
 
 #### Front-End side
-- VueJS
-- Bootstrap
-- Webpack
-- Apollo
+- **VueJS** : Front-end SPA
+- **Bootstrap** : Initial styles
+- **Webpack** : Front-end bundle
+- **Apollo** : GraphQL API Client
 
 ### Contributing
 If you found yourself about to give something to the project (eg: more orianted to open source, improve the app...) we are welcoming you! 😊<br />
