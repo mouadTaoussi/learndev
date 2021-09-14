@@ -1,3 +1,11 @@
+# Files structure 
+
+| Website&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Description |
+| ----------------------- | ------------------ |
+| [mercury](https://github.com/mouadTaoussi/learndev/tree/main/mercury)| Front-end SPA of the app, Written in VueJS|
+| [venus](https://github.com/mouadTaoussi/learndev/tree/main/venus)| Back-end API, Written in Typescript |
+| [moon](https://github.com/mouadTaoussi/learndev/tree/main/moon)| Compiled code to Javascript of  the API server |
+
 # Init the project in local env
 
 ## Note : Front-end and the Back-end are deployed separately (vercel-heroku).
