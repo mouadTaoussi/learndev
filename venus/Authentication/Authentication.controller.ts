@@ -29,7 +29,7 @@ class Authentication implements AuthenticationInt {
 			upvoted_content : upvoted_content.data
 		})
 	}
-	public async login(req: Request, res: Response) :Promise<void>{
+	public async login(req: Request | any, res: Response) :Promise<void>{
 		// Check if the user is alreay logged in
 		// Get body data
 		const { email, password } : { email:string, password: string } = req.body;
@@ -79,7 +79,7 @@ class Authentication implements AuthenticationInt {
 			res.status(200).send({message:"logged out!"})
 		})
 	}
-	public async register(req: Request, res: Response) :Promise<void>{
+	public async register(req: Request  | any, res: Response) :Promise<void>{
 		// Check if the user is alreay logged in
 		// Get user inputs
 		const body : UserBody = req.body;
@@ -225,7 +225,7 @@ class Authentication implements AuthenticationInt {
 			res.status(200).send({changed: true, message:"Password changed!"})
 		}
 	}
-	public async updateProfile(req: Request, res: Response) :Promise<void>{
+	public async updateProfile(req: Request  | any, res: Response) :Promise<void>{
 		// Get the user by its session
 		const authenticated_user : any = req.user;
 
@@ -292,7 +292,7 @@ class Authentication implements AuthenticationInt {
 			})
 		}
 	}
-	public async deleteAccount(req: Request, res: Response) :Promise<void>{
+	public async deleteAccount(req: Request  | any, res: Response) :Promise<void>{
 		// Get the user by its session
 		const authenticated_user : any = req.user;
 

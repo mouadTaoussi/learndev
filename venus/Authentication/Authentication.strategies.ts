@@ -61,10 +61,10 @@ passport.use(new GitHubStrategy({
 ));
 
 passport.serializeUser((user, done) => {
-    done(null, user)
+    done(null, user!)
 });
 passport.deserializeUser(function(user, done) {
-	done(null, user)
+	done(null, user!)
 });
 // export 
 

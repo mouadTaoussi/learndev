@@ -96,6 +96,9 @@ async function runapp (){
 	app.use(bodyParser.json());
 
 	// app.use('/',express.static(  __dirname + "/../mercury/dist"));
+	app.get('/',(req:Request, res:Response)=>{
+		res.redirect('https://learndevelopment.vercel.app');
+	});
 	app.use('/auth', AuthenticationRoutes);
 
 }

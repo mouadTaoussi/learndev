@@ -71,6 +71,9 @@ async function runapp() {
         } });
     app.use(helmet_1.default());
     app.use(body_parser_1.default.json());
+    app.get('/', (req, res) => {
+        res.redirect('https://learndevelopment.vercel.app');
+    });
     app.use('/auth', Authentication_routes_1.default);
 }
 runapp();
