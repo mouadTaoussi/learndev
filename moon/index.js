@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const express_session_1 = __importDefault(require("express-session"));
-const redis_1 = __importDefault(require("redis"));
 const RedisStore = require('connect-redis')(express_session_1.default);
 const body_parser_1 = __importDefault(require("body-parser"));
 const helmet_1 = __importDefault(require("helmet"));
@@ -30,22 +29,12 @@ mongoose_1.connect(main_config_1.default.mongodb, { useNewUrlParser: true, useUn
     }
 });
 app.use(main_cors_1.default);
-const redisClient = redis_1.default.createClient({
-    host: main_config_1.default.redis_host,
-    port: main_config_1.default.redis_port,
-    password: main_config_1.default.redis_password
-});
 app.set('trustproxy', 1);
 app.use(express_session_1.default({
     name: "GGHH",
     secret: 'IDFVBHNIOVFFBUE',
     resave: true,
     saveUninitialized: false,
-    store: new RedisStore({
-        host: main_config_1.default.redis_host,
-        port: main_config_1.default.redis_port,
-        client: redisClient
-    }),
     cookie: {}
 }));
 app.use(passport_1.default.initialize());
@@ -79,4 +68,6 @@ async function runapp() {
 runapp();
 const PORT = main_config_1.default.port || main_config_1.default.port_dev;
 const MODE = main_config_1.default.mode;
-app.listen(PORT);
+app.listen(PORT, () => {
+    console.log('Server uo and running!');
+});

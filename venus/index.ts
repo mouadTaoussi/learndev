@@ -38,11 +38,11 @@ connect(main_config.mongodb,
 app.use(main_cors);
 
 // Redis connection
-const redisClient: unknown = redis.createClient({
-	host : main_config.redis_host,
-	port : main_config.redis_port,
-	password : main_config.redis_password
-});
+// const redisClient: unknown = redis.createClient({
+// 	host : main_config.redis_host,
+// 	port : main_config.redis_port,
+// 	password : main_config.redis_password
+// });
 
 app.set('trustproxy', 1);
 app.use(express_session({
@@ -50,11 +50,11 @@ app.use(express_session({
 	secret: 'IDFVBHNIOVFFBUE',
 	resave: true,
 	saveUninitialized: false,
-	store : new RedisStore({ 
-		host: main_config.redis_host, 
-		port: main_config.redis_port, 
-		client: redisClient 
-	}),
+	// store : new RedisStore({ 
+	// 	host: main_config.redis_host, 
+	// 	port: main_config.redis_port, 
+	// 	client: redisClient 
+	// }),
 	cookie: { 
 		 // sameSite : "none", secure: true,/*domain : ".vercel.app"*/
 	 } // Error here !!!
@@ -107,7 +107,9 @@ runapp();
 const PORT : string | undefined = main_config.port || main_config.port_dev;
 const MODE : string | undefined = main_config.mode;
 
-app.listen(PORT);
+app.listen(PORT, ()=>{
+	console.log('Server uo and running!')
+});
 
 
 // Init cookie cookie-session
