@@ -34,9 +34,9 @@ connect(main_config.mongodb,
 		console.log('Database up and running!');
 	}
 });
-
+ 
 app.use(main_cors);
-
+ 
 // Redis connection
 // const redisClient: unknown = redis.createClient({
 // 	host : main_config.redis_host,

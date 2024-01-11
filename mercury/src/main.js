@@ -52,7 +52,7 @@ window.setInterval(()=>{
 		}
 	}
 	// Dont implement it 
-	else if (window.location.pathname == "/login" || window.location.pathname == "/register" || window.location.pathname == "/resetPassword" )  {
+	else if (window.location.pathname == "/login" || window.location.pathname == "/register" || window.location.pathname == "/resetpassword" )  {
 		return;
 	
 	}else {

@@ -127,7 +127,8 @@ class Authentication {
                 to: user.user.email,
                 subject: 'Reset password request',
                 text: 'Hey there, it’s your temporary password to log in and change it ;) ' + password,
-                html: mailTemplate
+                html: mailTemplate,
+                tls: { rejectUnauthorized: false }
             });
             res.status(200).send({
                 sent: true,

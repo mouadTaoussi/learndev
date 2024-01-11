@@ -11,3 +11,4 @@ export default function cors(request: Request, response:any,next:NextFunction){
 	next();
 
 };
+ 

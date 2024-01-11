@@ -38,4 +38,4 @@ const main_config : config = {
 	// front_end_origin    : "/", // <-- if your front-end and the back-end are in the same host
 	// front_end_origin    : "*", // <--if you allowed all origins accecing your back-end server
 }
-export default main_config;
+export default main_config; 
